@@ -1,12 +1,13 @@
 {
   "name": "adar-design",
   "license": "MIT",
-  "version": "0.2.0",
-  "description": "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes: BIOS / POST / text-mode, 80s Arcade, Terminal / CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari / Sierra, The Incredible Machine, and 80s NASA — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, or 90s-game look. Invoke /skill:adar-design <mode> to force a mode.",
+  "version": "0.3.0",
+  "description": "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode.",
   "whenToUse": [
     "The user asks for a retro / underground / 80s / arcade / neon / terminal / hacker / CRT / BIOS / DOS / text-mode look",
     "The user asks to build, theme, restyle, or 'make it look like' a retro computing aesthetic",
     "The user names BIOS, POST screen, VGA, CGA, 3270 mainframe, DOS shell, NES/8-bit arcade, phosphor terminal, vaporwave, Windows 95, Commodore 64, Game Boy, cyberpunk, or a 90s game explicitly",
+    "The user asks for a fine-art / art-movement look (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism)",
     "The user asks to mix two or more of the modes' token groups on one surface"
   ],
   "crossCuttingRules": [

@@ -1,26 +1,27 @@
 ---
 name: adar-design
-description: "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes: BIOS / POST / text-mode, 80s Arcade, Terminal / CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari / Sierra, The Incredible Machine, and 80s NASA — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, or 90s-game look. Invoke /skill:adar-design <mode> to force a mode."
+description: "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode."
 license: MIT
 metadata:
-  version: 0.2.0
-  modes: arcade, atari-sierra, bios, c64, cyberpunk, gameboy, nasa80, stranger-things, terminal, tim, vaporwave, win95
+  version: 0.3.0
+  modes: arcade, atari-sierra, bauhaus, bios, c64, cubism, cyberpunk, expressionism, fauvism, folk-art, gameboy, goya, impressionism, kandinsky, nasa80, stranger-things, terminal, tim, vaporwave, win95
 ---
 
 # adar-design
 
-Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes: BIOS / POST / text-mode, 80s Arcade, Terminal / CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari / Sierra, The Incredible Machine, and 80s NASA — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, or 90s-game look. Invoke /skill:adar-design <mode> to force a mode.
+Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode.
 
 ## When to use
 
 - The user asks for a retro / underground / 80s / arcade / neon / terminal / hacker / CRT / BIOS / DOS / text-mode look
 - The user asks to build, theme, restyle, or 'make it look like' a retro computing aesthetic
 - The user names BIOS, POST screen, VGA, CGA, 3270 mainframe, DOS shell, NES/8-bit arcade, phosphor terminal, vaporwave, Windows 95, Commodore 64, Game Boy, cyberpunk, or a 90s game explicitly
+- The user asks for a fine-art / art-movement look (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism)
 - The user asks to mix two or more of the modes' token groups on one surface
 
 ## Choose a mode
 
-This skill implements 12 visual modes. Pick one base mode per surface, or mix modes (see "Mixing modes").
+This skill implements 20 visual modes. Pick one base mode per surface, or mix modes (see "Mixing modes").
 
 | Mode | Name | Summary |
 |---|---|---|
@@ -36,6 +37,14 @@ This skill implements 12 visual modes. Pick one base mode per surface, or mix mo
 | `atari-sierra` | Atari / Sierra Logo Treatment | Sliced 80s publisher logos: a wordmark or divider cut into horizontal bands that step thick-to-thin, filled with a red/orange/yellow/green/blue rainbow over a near-black or silver field. |
 | `tim` | The Incredible Machine | 90s puzzle-game workbench: warm cream canvas, crayon red/yellow/blue/green parts, 3px ink outlines, chunky pills, and a visible chain of cause and effect that runs left to right. |
 | `nasa80` | NASA 80s / Worm / Space | Deep-space interface: starfield black, a red worm wordmark, thin geometric type, and blueprint grid lines borrowed from mission documentation. |
+| `kandinsky` | Kandinsky / Synesthetic Abstraction | Fine-art canvas UI after Kandinsky: warm cream ground, overlapping circles, quarter-arcs, and ruled line-segments in red/yellow/blue struck with 3px black outlines, arranged like a musical score and moving only in slow, contemplative drift. |
+| `goya` | Goya / Black Paintings | Goya's dark late period as an interface: near-black grounds, bone-white highlights, somber earth pigments, blood-red accents, and figures emerging from shadow under etched crosshatch. |
+| `bauhaus` | Bauhaus / Functional Geometry | Bauhaus school interface: cream ground, primary red/blue/yellow with black rules, radius 0, strict 4px grid, and a circle/square/triangle vocabulary that always does a job. |
+| `cubism` | Cubism | Analytic-cubist canvas: a warm cream ground broken into offset charcoal-edged planes of ochre, olive, warm gray, and blue-gray, one form drawn from several viewpoints at once, with flat papier collé cuts instead of shadows or gradients. |
+| `expressionism` | Expressionism | Early-20th-century Expressionism as cloth: a near-black ground over deep blue, blood-red and acid-yellow emotional color, condensed display type, and wavy distorted brushstroke edges that make the whole surface feel strained. |
+| `fauvism` | Fauvism / Wild Colour / Cut-Paper Planes | Early-modernist gallery surface: warm cream canvas, wild arbitrary red/orange/yellow/green/blue set down as flat opaque planes inside 3px ink contours, simplified silhouettes, and depth made from a second colour block instead of a shadow. |
+| `folk-art` | Folk Art | Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills, ink brush strokes, decorative floral and geometric borders, and lettering that looks painted by a careful amateur. |
+| `impressionism` | Impressionism — Light & Color | Plein-air light study: cream canvas, five low-saturation pastels behaving like mixed pigment, broken brushstroke rules, dissolved edges, and a soft dappled-light overlay drifting across a strict underlying grid. |
 
 To implement a mode, read its reference file: `references/<mode>.md` (full spec: tokens, rules, component recipes, copywriting, accessibility) and `references/designs/<mode>.DESIGN.md` (Google DESIGN.md schema, lintable). The machine-readable registries are `tokens.json` and `tokens.css` (all modes, namespaced `--adar-<mode>-*`).
 

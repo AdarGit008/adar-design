@@ -46,6 +46,29 @@
   --adar-atari-sierra-shadow-glow: 0 0 6px rgba(47,127,224,0.45);
 }
 
+/* Bauhaus / Functional Geometry */
+:root {
+  --adar-bauhaus-background: #f2efe6;
+  --adar-bauhaus-surface: #ffffff;
+  --adar-bauhaus-foreground: #141414;
+  --adar-bauhaus-muted: #5f5a50;
+  --adar-bauhaus-primary: #e23c2e;
+  --adar-bauhaus-accent: #1b5fa8;
+  --adar-bauhaus-danger: #b3241b;
+  --adar-bauhaus-warning: #f2c014;
+  --adar-bauhaus-success: #123f70;
+  --adar-bauhaus-font-display: "Archivo", "Josefin Sans", "Helvetica Neue", "Arial", "system-ui", "sans-serif";
+  --adar-bauhaus-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-bauhaus-space-xs: 4px;
+  --adar-bauhaus-space-sm: 8px;
+  --adar-bauhaus-space-md: 16px;
+  --adar-bauhaus-space-lg: 32px;
+  --adar-bauhaus-space-xl: 64px;
+  --adar-bauhaus-radius: 0;
+  --adar-bauhaus-shadow-hard: 8px 8px 0 #141414;
+  --adar-bauhaus-shadow-glow: none;
+}
+
 /* BIOS / POST / Text-mode */
 :root {
   --adar-bios-background: #0000a8;
@@ -92,6 +115,29 @@
   --adar-c64-shadow-glow: 0 0 6px #8080ff;
 }
 
+/* Cubism */
+:root {
+  --adar-cubism-background: #efe9dc;
+  --adar-cubism-surface: #f5f1e8;
+  --adar-cubism-foreground: #2a2a28;
+  --adar-cubism-muted: #8a7f6f;
+  --adar-cubism-primary: #b08d57;
+  --adar-cubism-accent: #5b6b7a;
+  --adar-cubism-danger: #8f3b2f;
+  --adar-cubism-warning: #9a7b2e;
+  --adar-cubism-success: #6b6b3e;
+  --adar-cubism-font-display: "Archivo Black", "Archivo", "Arial Narrow", "system-ui", "sans-serif";
+  --adar-cubism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-cubism-space-xs: 4px;
+  --adar-cubism-space-sm: 8px;
+  --adar-cubism-space-md: 16px;
+  --adar-cubism-space-lg: 24px;
+  --adar-cubism-space-xl: 40px;
+  --adar-cubism-radius: 0;
+  --adar-cubism-shadow-hard: 6px 6px 0 #8a7f6f;
+  --adar-cubism-shadow-glow: none;
+}
+
 /* Cyberpunk / Neon Noir */
 :root {
   --adar-cyberpunk-background: #0a0a0f;
@@ -115,6 +161,75 @@
   --adar-cyberpunk-shadow-glow: 0 0 12px rgba(255,0,255,0.55), 0 0 24px rgba(0,255,255,0.30);
 }
 
+/* Expressionism */
+:root {
+  --adar-expressionism-background: #14141a;
+  --adar-expressionism-surface: #1b2a4a;
+  --adar-expressionism-foreground: #e8e4dc;
+  --adar-expressionism-muted: #9aa3b8;
+  --adar-expressionism-primary: #b22222;
+  --adar-expressionism-accent: #e6c229;
+  --adar-expressionism-danger: #c0392b;
+  --adar-expressionism-warning: #e6c229;
+  --adar-expressionism-success: #4f7a6f;
+  --adar-expressionism-font-display: "Oswald", "Archivo Black", "Anton", "system-ui", "sans-serif";
+  --adar-expressionism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-expressionism-space-xs: 5px;
+  --adar-expressionism-space-sm: 11px;
+  --adar-expressionism-space-md: 19px;
+  --adar-expressionism-space-lg: 31px;
+  --adar-expressionism-space-xl: 47px;
+  --adar-expressionism-radius: 2px;
+  --adar-expressionism-shadow-hard: 8px 8px 0 #14141a;
+  --adar-expressionism-shadow-glow: 0 0 0 3px #e6c229;
+}
+
+/* Fauvism / Wild Colour / Cut-Paper Planes */
+:root {
+  --adar-fauvism-background: #f5efe2;
+  --adar-fauvism-surface: #fbf6ec;
+  --adar-fauvism-foreground: #221e1b;
+  --adar-fauvism-muted: #6f6a63;
+  --adar-fauvism-primary: #d7263d;
+  --adar-fauvism-accent: #26408b;
+  --adar-fauvism-danger: #a4161a;
+  --adar-fauvism-warning: #f2c14e;
+  --adar-fauvism-success: #2a9d8f;
+  --adar-fauvism-font-display: "Fredoka", "Montserrat", "system-ui", "sans-serif";
+  --adar-fauvism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-fauvism-space-xs: 4px;
+  --adar-fauvism-space-sm: 8px;
+  --adar-fauvism-space-md: 16px;
+  --adar-fauvism-space-lg: 32px;
+  --adar-fauvism-space-xl: 48px;
+  --adar-fauvism-radius: 6px;
+  --adar-fauvism-shadow-hard: none — elevation is an offset colour plane (transform: translate(10px, 10px) on a ::before block), never a box-shadow;
+  --adar-fauvism-shadow-glow: none;
+}
+
+/* Folk Art */
+:root {
+  --adar-folk-art-background: #f7f0e1;
+  --adar-folk-art-surface: #fffcf3;
+  --adar-folk-art-foreground: #2b2b2b;
+  --adar-folk-art-muted: #8b7c66;
+  --adar-folk-art-primary: #c0392b;
+  --adar-folk-art-accent: #2c5f8a;
+  --adar-folk-art-danger: #a32e22;
+  --adar-folk-art-warning: #e8b32a;
+  --adar-folk-art-success: #4f7a4a;
+  --adar-folk-art-font-display: "Fredoka", "Baloo 2", "Chewy", "system-ui", "sans-serif";
+  --adar-folk-art-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-folk-art-space-xs: 4px;
+  --adar-folk-art-space-sm: 8px;
+  --adar-folk-art-space-md: 16px;
+  --adar-folk-art-space-lg: 28px;
+  --adar-folk-art-space-xl: 44px;
+  --adar-folk-art-radius: 18px;
+  --adar-folk-art-shadow-hard: 4px 4px 0 #2b2b2b;
+  --adar-folk-art-shadow-glow: 0 0 0 4px #e8b32a;
+}
+
 /* Game Boy LCD */
 :root {
   --adar-gameboy-background: #9bbc0f;
@@ -136,6 +251,75 @@
   --adar-gameboy-radius: 0;
   --adar-gameboy-shadow-hard: 4px 4px 0 #306230;
   --adar-gameboy-shadow-glow: 0 0 6px #8bac0f;
+}
+
+/* Goya / Black Paintings */
+:root {
+  --adar-goya-background: #0d0b09;
+  --adar-goya-surface: #16120e;
+  --adar-goya-foreground: #e8dcc8;
+  --adar-goya-muted: #8a7a63;
+  --adar-goya-primary: #a56a2e;
+  --adar-goya-accent: #6e1414;
+  --adar-goya-danger: #8f2222;
+  --adar-goya-warning: #a56a2e;
+  --adar-goya-success: #6b7f5e;
+  --adar-goya-font-display: "Playfair Display", "Cormorant", "Cormorant Garamond", "Georgia", "serif";
+  --adar-goya-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-goya-space-xs: 4px;
+  --adar-goya-space-sm: 8px;
+  --adar-goya-space-md: 16px;
+  --adar-goya-space-lg: 28px;
+  --adar-goya-space-xl: 48px;
+  --adar-goya-radius: 2px;
+  --adar-goya-shadow-hard: 0 0 0 1px #2a2a28;
+  --adar-goya-shadow-glow: 0 0 48px rgba(232,220,200,.05);
+}
+
+/* Impressionism — Light & Color */
+:root {
+  --adar-impressionism-background: #f7f2e6;
+  --adar-impressionism-surface: #fdfaf2;
+  --adar-impressionism-foreground: #3a3a3a;
+  --adar-impressionism-muted: #8a8478;
+  --adar-impressionism-primary: #a8d0e6;
+  --adar-impressionism-accent: #b8a7d6;
+  --adar-impressionism-danger: #b5546a;
+  --adar-impressionism-warning: #d9a441;
+  --adar-impressionism-success: #6f9f78;
+  --adar-impressionism-font-display: "Cormorant", "Playfair Display", "EB Garamond", "Georgia", "serif";
+  --adar-impressionism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-impressionism-space-xs: 4px;
+  --adar-impressionism-space-sm: 8px;
+  --adar-impressionism-space-md: 16px;
+  --adar-impressionism-space-lg: 24px;
+  --adar-impressionism-space-xl: 40px;
+  --adar-impressionism-radius: 10px;
+  --adar-impressionism-shadow-hard: undefined;
+  --adar-impressionism-shadow-glow: inset 0 0 32px rgba(246,231,178,.35);
+}
+
+/* Kandinsky / Synesthetic Abstraction */
+:root {
+  --adar-kandinsky-background: #f7f2e8;
+  --adar-kandinsky-surface: #fdfaf3;
+  --adar-kandinsky-foreground: #111111;
+  --adar-kandinsky-muted: #6f6a60;
+  --adar-kandinsky-primary: #d62828;
+  --adar-kandinsky-accent: #1d4ed8;
+  --adar-kandinsky-danger: #a81f1f;
+  --adar-kandinsky-warning: #f4b400;
+  --adar-kandinsky-success: #2a7d4f;
+  --adar-kandinsky-font-display: "Montserrat", "Archivo", "Futura", "system-ui", "sans-serif";
+  --adar-kandinsky-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-kandinsky-space-xs: 4px;
+  --adar-kandinsky-space-sm: 8px;
+  --adar-kandinsky-space-md: 16px;
+  --adar-kandinsky-space-lg: 32px;
+  --adar-kandinsky-space-xl: 64px;
+  --adar-kandinsky-radius: 0;
+  --adar-kandinsky-shadow-hard: 3px 3px 0 #111111;
+  --adar-kandinsky-shadow-glow: 0 0 0 3px #f4b400;
 }
 
 /* NASA 80s / Worm / Space */

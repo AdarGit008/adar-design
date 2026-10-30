@@ -1,6 +1,6 @@
 # adar-design
 
-A **Pi skill** that applies a retro design system to any website or UI. Twelve selectable visual modes:
+A **Pi skill** that applies a retro + fine-art design system to any website or UI. Twenty selectable visual modes:
 
 | Mode | Aesthetic | Signature |
 |------|-----------|-----------|
@@ -16,6 +16,14 @@ A **Pi skill** that applies a retro design system to any website or UI. Twelve s
 | `atari-sierra` | Atari / Sierra logo — horizontal-slice thickness gradient | The horizontal-slice thickness-gradient divider |
 | `tim` | The Incredible Machine — whimsical Rube-Goldberg, crayon colors | The machine-contraption motifs + crayon palette |
 | `nasa80` | 80s NASA / space — worm red, starfield, blueprint grid | The red "worm" wordmark + starfield |
+| `kandinsky` | Kandinsky — abstract circles/arcs, synesthetic color | The overlapping circles-and-arcs composition |
+| `goya` | Goya — chiaroscuro, etched crosshatch | The bone-lit figure emerging from darkness |
+| `bauhaus` | Bauhaus — geometric grid, red/blue/yellow | The circle + square + triangle on a strict grid |
+| `cubism` | Cubism — fragmented planes, multiple viewpoints | The fractured plane showing two viewpoints |
+| `expressionism` | Expressionism — emotional distortion, rough brushwork | The wavy brushstroke band + emotional color |
+| `fauvism` | Fauvism — wild arbitrary color planes | The flat bold arbitrary-color plane |
+| `folk-art` | Folk art — naive hand-painted charm | The hand-painted decorative border |
+| `impressionism` | Impressionism — broken brushstrokes, dappled light | The broken-brushstroke dappled light |
 
 Each mode ships a full token set (colors, fonts, spacing, radius, shadow, motion, effects), work-style rules, component recipes, copywriting voice, do/don't lists, and accessibility notes — plus a lint-clean Google [`DESIGN.md`](https://github.com/google-labs-code/design.md) schema file and machine-readable `tokens.json` / `tokens.css`.
 
@@ -79,4 +87,4 @@ npx @google/design.md lint skills/adar-design/references/designs/*.DESIGN.md
 
 ## Sources & licensing
 
-Skill code is **MIT**. Design tokens are sourced from: [NovusGFX/retro-design-system](https://github.com/NovusGFX/retro-design-system) (MIT), [BOOTSTRA.386](https://github.com/kristopolous/BOOTSTRA.386) (Apache-2.0), [NES.css](https://github.com/nostalgic-css/NES.css) (MIT), [retro-terminal](https://claude-design-skills.convoke.software/styles/retro-terminal) (MIT), [tui-designer](https://github.com/ckorhonen/claude-skills) (MIT), [neo-terminal](https://github.com/OneWave-AI/open-agent-stack) (MIT), the lospec ["Award BIOS" palette](https://lospec.com/palette-list/award-bios), and the [int10h.org Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/) (CC BY-SA 4.0). Fonts: Press Start 2P (OFL 1.1), VT323 (OFL), IBM Plex Mono (OFL). Pop-culture modes (`stranger-things`, `atari-sierra`, `tim`) are evocations only — no trademarked assets are reproduced.
+Skill code is **MIT**. Design tokens are sourced from: [NovusGFX/retro-design-system](https://github.com/NovusGFX/retro-design-system) (MIT), [BOOTSTRA.386](https://github.com/kristopolous/BOOTSTRA.386) (Apache-2.0), [NES.css](https://github.com/nostalgic-css/NES.css) (MIT), [retro-terminal](https://claude-design-skills.convoke.software/styles/retro-terminal) (MIT), [tui-designer](https://github.com/ckorhonen/claude-skills) (MIT), [neo-terminal](https://github.com/OneWave-AI/open-agent-stack) (MIT), the lospec ["Award BIOS" palette](https://lospec.com/palette-list/award-bios), and the [int10h.org Oldschool PC Font Pack](https://int10h.org/oldschool-pc-fonts/) (CC BY-SA 4.0). Fonts: Press Start 2P (OFL 1.1), VT323 (OFL), IBM Plex Mono (OFL). Pop-culture modes (`stranger-things`, `atari-sierra`, `tim`) and fine-art modes (Kandinsky through Impressionism) are evocations only — no trademarked or copyrighted assets are reproduced.

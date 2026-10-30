@@ -20,6 +20,14 @@ const modeFiles = fs
 
 const modes = modeFiles.map((f) => JSON.parse(fs.readFileSync(path.join(DATA, "modes", f), "utf8")));
 
+const MIXES_DIR = path.join(DATA, "mixes");
+const mixes = fs.existsSync(MIXES_DIR)
+  ? fs.readdirSync(MIXES_DIR)
+      .filter((f) => f.endsWith(".json") && f !== "_template.json")
+      .sort()
+      .map((f) => JSON.parse(fs.readFileSync(path.join(MIXES_DIR, f), "utf8")))
+  : [];
+
 // ---- validation -----------------------------------------------------------
 const REQUIRED = [
   "id", "name", "order", "aliases", "summary", "whenToUse",
@@ -38,6 +46,20 @@ for (const m of modes) {
   for (const role of ["background", "surface", "foreground", "primary", "accent"]) {
     if (m.colors && !/^#([0-9a-fA-F]{6})$/.test(m.colors[role] || ""))
       errors.push(`mode ${m.id}: colors.${role} must be a #RRGGBB hex`);
+  }
+}
+const GROUP_KEYS = (skill.mixing && skill.mixing.groups) || {};
+const modeById = Object.fromEntries(modes.map((m) => [m.id, m]));
+for (const mix of mixes) {
+  for (const k of ["id", "name", "order", "base", "overrides", "summary", "signatureElement"]) {
+    if (mix[k] === undefined) errors.push(`mix ${mix.id ?? "?"}: missing required key "${k}"`);
+  }
+  if (!/^[a-z0-9-]+$/.test(mix.id || "")) errors.push(`mix ${mix.id}: id must be lowercase-hyphen`);
+  if (!modeById[mix.base] && !mixes.some((x) => x.id === mix.base))
+    errors.push(`mix ${mix.id}: base "${mix.base}" is not a known mode or mix`);
+  for (const [group, src] of Object.entries(mix.overrides || {})) {
+    if (!(group in GROUP_KEYS)) errors.push(`mix ${mix.id}: unknown override group "${group}"`);
+    else if (!modeById[src]) errors.push(`mix ${mix.id}: override "${group}" -> "${src}" is not a known mode`);
   }
 }
 if (skill.description.length > 1024) errors.push("skill.description exceeds 1024 chars");
@@ -65,6 +87,39 @@ const modeIndex = modes
   .map((m) => `| \`${m.id}\` | ${esc(m.name)} | ${esc(m.summary)} |`)
   .join("\n");
 
+const mixIndex = mixes.length
+  ? mixes
+      .slice()
+      .sort((a, b) => a.order - b.order)
+      .map((x) => `| \`${x.id}\` | \`${x.base}\` | ${Object.entries(x.overrides || {}).map(([g, s]) => `\`${g}\`→\`${s}\``).join(", ") || "—"} | ${esc(x.summary)} |`)
+      .join("\n")
+  : "| — | — | — | no named mixes |";
+
+const mixingGroups = Object.entries(GROUP_KEYS)
+  .map(([g, keys]) => `- \`${g}\` → ${(Array.isArray(keys) ? keys : [keys]).map((k) => `\`${k}\``).join(", ")}`)
+  .join("\n");
+
+const mixingSection = `## Mixing modes
+
+${(skill.mixing && skill.mixing.intro) || "A mix keeps one base mode and overrides whole token groups from other modes."}
+
+Precedence: **overrides > base > cross-cutting rules**. Override whole groups only — never half a group. The base supplies the copywriting voice unless \`copywriting\` is overridden; one \`signatureElement\` wins (the base's, unless overridden). Every output states its mix (base + overrides). A mix may use another mix as its \`base\` (reuse); bases resolve transitively, cycles are invalid.
+
+**Override-able groups**
+
+${mixingGroups}
+
+**Mixing rules**
+
+${list((skill.mixing && skill.mixing.rules) || [])}
+
+**Named mixes**
+
+| Mix | Base | Overrides | Summary |
+|---|---|---|---|
+${mixIndex}
+`;
+
 const skillBody = `# ${skill.name}
 
 ${skill.description}
@@ -75,7 +130,7 @@ ${list(skill.whenToUse)}
 
 ## Choose a mode
 
-This skill implements three visual modes. Pick exactly one per surface.
+This skill implements ${modes.length} visual modes. Pick one base mode per surface, or mix modes (see "Mixing modes").
 
 | Mode | Name | Summary |
 |---|---|---|
@@ -86,6 +141,8 @@ To implement a mode, read its reference file: \`references/<mode>.md\` (full spe
 ## Work-style rules (all modes)
 
 ${list(skill.crossCuttingRules)}
+
+${mixingSection}
 
 ## Adding or editing a mode
 
@@ -188,6 +245,70 @@ ${m.attribution.map((a) => `- ${a.name} — ${a.url} (${a.license})`).join("\n")
   write(`references/designs/${m.id}.DESIGN.md`, designFm + "\n" + designBody);
 }
 
+// ---- mix resolution + references -------------------------------------------
+function mixToMode(id, seen = new Set()) {
+  if (seen.has(id)) return null;
+  seen.add(id);
+  if (modeById[id]) return modeById[id];
+  const mix = mixes.find((x) => x.id === id);
+  if (!mix) return null;
+  const base = mixToMode(mix.base, seen);
+  if (!base) return null;
+  const out = JSON.parse(JSON.stringify(base));
+  for (const [group, srcId] of Object.entries(mix.overrides || {})) {
+    const src = modeById[srcId];
+    if (!src) return null;
+    for (const k of (Array.isArray(GROUP_KEYS[group]) ? GROUP_KEYS[group] : [group])) {
+      out[k] = src[k];
+    }
+  }
+  return out;
+}
+
+for (const mix of mixes) {
+  const resolved = mixToMode(mix.id);
+  const overrides = Object.entries(mix.overrides || {}).map(([g, s]) => `- \`${g}\` ← \`${s}\``).join("\n") || "- none";
+  const sourceRows = Object.keys(GROUP_KEYS)
+    .map((g) => `| \`${g}\` | \`${(mix.overrides || {})[g] || mix.base}\` |`)
+    .join("\n");
+  const mixBody = `# ${mix.name} — mix
+
+${mix.summary}
+
+**Base:** \`${mix.base}\`
+
+**Overrides**
+
+${overrides}
+
+**Signature element:** ${mix.signatureElement}
+
+## Resolved groups
+
+| Group | Source |
+|---|---|
+${sourceRows}
+
+## Resolved tokens
+
+### Colors
+
+| Role | Value |
+|---|---|
+${Object.entries(resolved.colors).map(([k, v]) => `| \`${k}\` | \`${v}\` |`).join("\n")}
+
+### Type & shape
+
+- Display: ${quoteFonts(resolved.fonts.display)}
+- Mono: ${quoteFonts(resolved.fonts.mono)}
+- Radius: \`${resolved.radius}\`
+- Shadow hard: \`${resolved.shadow.hard}\`
+- Shadow glow: \`${resolved.shadow.glow}\`
+- Motion easing: \`${resolved.motion.easing}\`
+`;
+  write(`references/mixes/${mix.id}.md`, mixBody);
+}
+
 // ---- consolidated registries ----------------------------------------------
 const cssVars = [];
 const jsonModes = {};
@@ -200,10 +321,21 @@ for (const m of modes) {
   jsonModes[p] = { name: m.name, summary: m.summary, aliases: m.aliases, colors: m.colors, paletteVariants: m.paletteVariants, fonts: m.fonts, radius: m.radius, spacing: m.spacing, shadow: m.shadow, motion: m.motion, effects: m.effects };
 }
 
-write("tokens.css", `/* adar-design tokens — generated. Edit data/modes/*.json, run node scripts/generate.mjs */\n\n${cssVars.join("\n\n")}\n`);
-write("tokens.json", JSON.stringify({ name: skill.name, version: skill.version, description: skill.description, modes: jsonModes }, null, 2) + "\n");
+const jsonMixes = {};
+for (const mix of mixes) {
+  const r = mixToMode(mix.id);
+  const p = mix.id;
+  const colorVars = Object.entries(r.colors).map(([k, v]) => `  --adar-${p}-${k}: ${v};`).join("\n");
+  const fontVars = `  --adar-${p}-font-display: ${quoteFonts(r.fonts.display)};\n  --adar-${p}-font-mono: ${quoteFonts(r.fonts.mono)};`;
+  const spacingVars = Object.entries(r.spacing).map(([k, v]) => `  --adar-${p}-space-${k}: ${v};`).join("\n");
+  cssVars.push(`/* ${mix.name} (mix) */\n:root {\n${colorVars}\n${fontVars}\n${spacingVars}\n  --adar-${p}-radius: ${r.radius};\n  --adar-${p}-shadow-hard: ${r.shadow.hard};\n  --adar-${p}-shadow-glow: ${r.shadow.glow};\n}`);
+  jsonMixes[mix.id] = { name: mix.name, summary: mix.summary, base: mix.base, overrides: mix.overrides || {}, signatureElement: mix.signatureElement, resolved: { colors: r.colors, paletteVariants: r.paletteVariants, fonts: r.fonts, radius: r.radius, spacing: r.spacing, shadow: r.shadow, motion: r.motion, effects: r.effects } };
+}
+
+write("tokens.css", `/* adar-design tokens — generated. Edit data/ (modes + mixes), run node scripts/generate.mjs */\n\n${cssVars.join("\n\n")}\n`);
+write("tokens.json", JSON.stringify({ name: skill.name, version: skill.version, description: skill.description, modes: jsonModes, mixes: jsonMixes }, null, 2) + "\n");
 
 const tokensMd = `# Token registry — all modes\n\nMachine-readable sources: \`tokens.json\` (nested) and \`tokens.css\` (\`--adar-<mode>-*\` CSS variables).\n\n${modes.map((m) => `## ${m.name} (\`${m.id}\`)\n\n${Object.entries(m.colors).map(([k, v]) => `- \`${k}\`: \`${v}\``).join("\n")}\n`).join("\n")}`;
 write("references/tokens.md", tokensMd);
 
-console.log(`\nGenerated ${modes.length} mode(s): ${modes.map((m) => m.id).join(", ")}`);
+console.log(`\nGenerated ${modes.length} mode(s): ${modes.map((m) => m.id).join(", ")}${mixes.length ? ` · ${mixes.length} mix(es): ${mixes.map((x) => x.id).join(", ")}` : ""}`);

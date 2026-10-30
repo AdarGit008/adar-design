@@ -1,17 +1,45 @@
 {
   "name": "adar-design",
   "license": "MIT",
-  "version": "0.1.0",
-  "description": "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Three selectable visual modes: (1) BIOS / POST / text-mode — Award BIOS blue, VGA 16-color, IBM 3270 mainframe, DOS shell; (2) 80s Arcade — 8-bit neon, hard pixel borders, Press Start 2P; (3) Terminal / CRT — phosphor green, scanlines, VT323. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, or text-mode look. Invoke /skill:adar-design <bios|arcade|terminal> to force a mode.",
+  "version": "0.2.0",
+  "description": "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes: BIOS / POST / text-mode, 80s Arcade, Terminal / CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari / Sierra, The Incredible Machine, and 80s NASA — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, or 90s-game look. Invoke /skill:adar-design <mode> to force a mode.",
   "whenToUse": [
     "The user asks for a retro / underground / 80s / arcade / neon / terminal / hacker / CRT / BIOS / DOS / text-mode look",
     "The user asks to build, theme, restyle, or 'make it look like' a retro computing aesthetic",
-    "The user names BIOS, POST screen, VGA, CGA, 3270 mainframe, DOS shell, NES/8-bit arcade, or phosphor terminal explicitly"
+    "The user names BIOS, POST screen, VGA, CGA, 3270 mainframe, DOS shell, NES/8-bit arcade, phosphor terminal, vaporwave, Windows 95, Commodore 64, Game Boy, cyberpunk, or a 90s game explicitly",
+    "The user asks to mix two or more of the modes' token groups on one surface"
   ],
   "crossCuttingRules": [
-    "Pick exactly ONE mode per surface. Never blend modes (no arcade neon on a BIOS screen, no BIOS blue on a CRT terminal) unless the user explicitly asks to combine them.",
+    "Pick one base mode per surface. Mix modes only through whole-group overrides (see the Mixing section) — never blend half a group.",
     "Tokens are the source of truth. Read references/<mode>.md and tokens.json for exact values; never substitute a 'close enough' modern default (no rounded-2xl, no Inter, no ease-in-out, no soft drop shadows).",
     "Where a spec is silent, derive the treatment from the mode's tokens and Do/Don't rules — never fall back to generic Tailwind/Web defaults.",
-    "Every output must state which mode it is implementing."
-  ]
+    "Every output must state which mode (or mix) it is implementing."
+  ],
+  "mixing": {
+    "intro": "A mix keeps one base mode and overrides whole token groups from other modes — two or more modes' tokens active on one surface.",
+    "groups": {
+      "colors": ["colors"],
+      "paletteVariants": ["paletteVariants"],
+      "fonts": ["fonts"],
+      "radius": ["radius"],
+      "spacing": ["spacing"],
+      "shadow": ["shadow"],
+      "motion": ["motion"],
+      "effects": ["effects"],
+      "rules": ["rules", "do", "dont"],
+      "componentRecipes": ["componentRecipes"],
+      "copywriting": ["copywriting"],
+      "accessibility": ["accessibility"],
+      "signatureElement": ["signatureElement"]
+    },
+    "rules": [
+      "A mix has exactly one base mode and zero or more group overrides, written group: mode.",
+      "Override whole groups only; never blend within a group (no taking colors.primary from one mode and colors.accent from another).",
+      "Precedence: overrides > base > cross-cutting rules.",
+      "The base supplies the copywriting voice unless copywriting is overridden.",
+      "One signatureElement wins: the base's, unless the mix overrides it.",
+      "State the mix explicitly in every output: base plus each override.",
+      "A mix may use another mix as its base (reuse); bases resolve transitively, and cycles are invalid."
+    ]
+  }
 }

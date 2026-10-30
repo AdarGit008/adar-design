@@ -1,0 +1,12 @@
+{
+  "id": "mix-id",
+  "name": "Mix Name",
+  "order": 1,
+  "base": "arcade",
+  "overrides": {
+    "fonts": "terminal",
+    "effects": "terminal"
+  },
+  "signatureElement": "One sentence naming the single signature visual kept.",
+  "summary": "One-sentence description of the mix."
+}

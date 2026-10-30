@@ -1,0 +1,216 @@
+{
+  "id": "c64",
+  "name": "Commodore 64 / PETSCII",
+  "order": 6,
+  "aliases": [
+    "c64",
+    "commodore",
+    "commodore-64",
+    "petscii",
+    "breadbin",
+    "vic-ii",
+    "sid",
+    "c64-pro"
+  ],
+  "summary": "Commodore 64 home computer: a chunky 40x25 PETSCII screen of light-blue bitmap type on deep blue, wrapped in the bright blue border frame, with a locked 16-color hardware palette.",
+  "whenToUse": "When the user asks for Commodore 64, C64, PETSCII, breadbin-era home computer, BASIC/LOAD\"*\",8,1 screen, or a chunky blue 320x200 8-bit aesthetic.",
+  "colors": {
+    "background": "#0000aa",
+    "surface": "#2e2c9b",
+    "foreground": "#a0a0ff",
+    "muted": "#6a6ab8",
+    "primary": "#c6c6ff",
+    "accent": "#3f3fff",
+    "danger": "#c46c71",
+    "warning": "#edf171",
+    "success": "#a9ff9f"
+  },
+  "paletteVariants": {
+    "screen": {
+      "bg": "#0000aa",
+      "border": "#3f3fff",
+      "borderEdge": "#2f2fff",
+      "text": "#a0a0ff",
+      "textBright": "#c6c6ff",
+      "dim": "#6a6ab8",
+      "glow": "#8080ff",
+      "shadow": "#000066"
+    },
+    "petsciiChrome": {
+      "panel": "#2e2c9b",
+      "frame": "#a0a0ff",
+      "rule": "#3f3fff",
+      "selection": "#a0a0ff",
+      "selectionInk": "#0000aa",
+      "cursor": "#c6c6ff",
+      "label": "#6a6ab8",
+      "alert": "#c46c71"
+    },
+    "c64Pepto": {
+      "0": "#000000",
+      "1": "#ffffff",
+      "2": "#68372b",
+      "3": "#70a4b2",
+      "4": "#6f3d86",
+      "5": "#588d43",
+      "6": "#352879",
+      "7": "#b8c76f",
+      "8": "#6f4f25",
+      "9": "#433900",
+      "10": "#9a6759",
+      "11": "#444444",
+      "12": "#6c6c6c",
+      "13": "#9ad284",
+      "14": "#6c5eb5",
+      "15": "#959595"
+    }
+  },
+  "fonts": {
+    "display": [
+      "C64 Pro Mono",
+      "C64 Pro",
+      "Pet Me 64",
+      "VT323",
+      "Courier New",
+      "monospace"
+    ],
+    "mono": [
+      "C64 Pro Mono",
+      "Pet Me 64",
+      "IBM Plex Mono",
+      "Courier New",
+      "monospace"
+    ]
+  },
+  "radius": "0",
+  "spacing": {
+    "xs": "8px",
+    "sm": "16px",
+    "md": "24px",
+    "lg": "32px",
+    "xl": "40px"
+  },
+  "shadow": {
+    "hard": "8px 8px 0 #000066",
+    "glow": "0 0 6px #8080ff"
+  },
+  "motion": {
+    "easing": "steps(2, end)",
+    "cursor": "steps(2, jump-none) 1s infinite",
+    "durations": [
+      "0ms",
+      "100ms",
+      "300ms",
+      "1200ms"
+    ]
+  },
+  "effects": {
+    "scanlines": "repeating-linear-gradient(to bottom, rgba(0,0,0,0.14) 0 1px, transparent 1px 2px)",
+    "pixelate": "pixelated",
+    "vignette": "radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%)"
+  },
+  "rules": [
+    "The border frame is a load-bearing layout element, not decoration: wrap every screen in 24px–40px of bright blue #3f3fff with a 4px #2f2fff inner edge, then the #0000aa text field — a bare screen bleeding to the viewport edge is not C64.",
+    "Quantize to the 8x8 hardware cell: an 8px sub-step and 16px line-height, with spacing tokens 8/16/24/32/40px, so all type and blocks land on the 40-column by 25-row character grid.",
+    "Two-attribute color model: every component owns a foreground and a background attribute, and selection, hover, focus, and active states are always that pair inverted — never a tint, overlay, alpha wash, or a third highlight color.",
+    "Stay inside the 16-color Pepto palette (paletteVariants.c64Pepto); the chrome itself lives in the blue/light-blue ramp (#0000aa, #2e2c9b, #3f3fff, #a0a0ff, #c6c6ff), and red/yellow/green are only used as attribute signals, never as surface fills.",
+    "Type is bitmap: C64 Pro Mono at 16px or an integer multiple (16/32/48px), image-rendering: pixelated, no faux bold, no italic, no letter-spacing beyond 0.05em — the 8x8 cell must not shift.",
+    "Motion is discrete: block cursor blink at steps(2, jump-none) 1s, character-by-character print, border color cycling through palette entries at 300ms steps — no easing curves and no tweened opacity.",
+    "De-emphasize with the dim attribute (#6a6ab8) and with case, never with opacity or a gray filter — alpha produces colors outside the 16-entry set.",
+    "Every screen carries PETSCII chrome: a top line of the product name plus a rule, a bottom status/prompt line ending in a blinking block cursor, and reverse-video framing on any raised panel."
+  ],
+  "componentRecipes": {
+    "panel": "background: #0000aa; border: 4px solid #a0a0ff; border-radius: 0; padding: 16px 24px; color: #a0a0ff; font: 16px/16px 'C64 Pro Mono'; box-shadow: 0 0 0 4px #2f2fff, 8px 8px 0 #000066; — the title is a reverse-video run on the top edge: display:inline-block; background: #a0a0ff; color: #0000aa; padding: 0 8px; text-transform: uppercase; margin-top: -24px; and the panel sits inside the #3f3fff border frame, never flush to the viewport.",
+    "button": "font: 16px/16px 'C64 Pro Mono'; text-transform: uppercase; background: #a0a0ff; color: #0000aa; border: 4px solid #2f2fff; border-radius: 0; padding: 8px 16px; box-shadow: 4px 4px 0 #000066, 0 0 0 4px #0000aa; letter-spacing: 0.04em; transition: none; :hover { background: #c6c6ff; } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #000066, 0 0 0 4px #0000aa; } :focus-visible { outline: 4px solid #c6c6ff; outline-offset: 4px; } — secondary variant is the inverse pair: background: #0000aa; color: #a0a0ff; border-color: #a0a0ff.",
+    "input": "The field is a PETSCII cell run, not a modern box: background: #0000aa; color: #c6c6ff; font: 16px/16px 'C64 Pro Mono'; border: 4px solid #3f3fff; border-radius: 0; padding: 8px 16px; caret-color: transparent; box-shadow: inset 0 0 0 4px #2e2c9b; :placeholder { color: #6a6ab8; text-transform: uppercase; } :focus { border-color: #a0a0ff; outline: 4px solid #c6c6ff; outline-offset: 2px; } — draw the caret yourself as a one-cell 8x16 block in #c6c6ff animated steps(2, jump-none) 1s infinite; an invalid value keeps #c46c71 text and appends the literal ' ?SYNTAX ERROR' on the next line rather than recoloring the border alone.",
+    "statusbar": "A 24px footer strip in full reverse video: height: 24px; display: flex; align-items: center; gap: 24px; padding: 0 8px; background: #a0a0ff; color: #0000aa; border-top: 4px solid #2f2fff; border-radius: 0; font: 16px/16px 'C64 Pro Mono'; text-transform: uppercase; segments are 'READY.' then the memory readout ('38911 BASIC BYTES FREE') then the drive line ('DEVICE 8: OK'); the trailing cursor is an 8px wide #0000aa block on the light strip with steps(2, jump-none) 1s infinite.",
+    "menu": "Vertical PETSCII list, no bullets, no radius: item { display: block; font: 16px/16px 'C64 Pro Mono'; text-transform: uppercase; padding: 4px 16px 4px 32px; color: #a0a0ff; } the selected row is inverse video — background: #a0a0ff; color: #0000aa — with a '>' marker in the left gutter blinking steps(2, jump-none) 1s infinite, hover only brightens the text to #c6c6ff, and group breaks are a full-width run of '=' or a 4px #3f3fff rule, never a 1px hairline."
+  },
+  "copywriting": {
+    "voice": "BASIC-prompt machine voice: clipped, literal, uppercase, and slightly stubborn. It reports the device, the drive, and the byte count, then waits at READY. — no greeting, no apology, no marketing adjective, and no second-person chit-chat.",
+    "case": {
+      "headers": "UPPERCASE",
+      "commands": "UPPERCASE BASIC keywords (LOAD, RUN, LIST, SAVE)",
+      "body": "sentence case light-blue body copy; UPPERCASE for PETSCII labels, buttons, and status lines"
+    },
+    "prefixes": [
+      "READY.",
+      "SEARCHING",
+      "LOADING",
+      "RUN",
+      "?SYNTAX ERROR",
+      "?OUT OF MEMORY",
+      "PRESS PLAY ON TAPE"
+    ],
+    "verbs": {
+      "start": "RUN",
+      "stop": "STOP",
+      "save": "SAVE",
+      "load": "LOAD",
+      "delete": "SCRATCH"
+    },
+    "avoid": [
+      "corporate filler ('seamless', 'leverage', 'empower', 'solution')",
+      "greetings, apologies, and 'Oops'",
+      "emoji and modern flat iconography",
+      "mixed-case labels on buttons or in the status strip",
+      "exclamation stacks (!!!, ???) and exclamation marks in system copy",
+      "Press Start 2P, Chakra Petch, or any non-C64 display face"
+    ]
+  },
+  "do": [
+    "Wrap the screen in the bright blue border frame (#3f3fff with a 4px #2f2fff inner edge) and keep 24–40px of it visible on every viewport — the frame is what makes a blue page read as a Commodore, not a DOS screen.",
+    "Build on the 8x8 cell: 16px line-height, 8/16/24/32/40px spacing, and 8px-wide cursor blocks so type, rules, and images share one grid.",
+    "Invert the attribute pair for selection, hover, focus, and pressed states (#a0a0ff on #0000aa becomes #0000aa on #a0a0ff) instead of reaching for a tint or a lighter blue.",
+    "Keep chrome on screen: product-name header with a '=' rule, a bottom status strip printed in reverse video, and a blinking block cursor as the only animation.",
+    "Set display and body type in C64 Pro Mono at 16px or integer multiples, uppercase for headings, with image-rendering: pixelated on all pixel art and integer 2x/3x scaling.",
+    "Use the palette's attribute colors as signals — #c46c71 for errors, #edf171 for warnings, #a9ff9f for success — always accompanied by the literal word (ERROR, WARNING, OK)."
+  ],
+  "dont": [
+    "Don't ship the screen without its border frame, and don't run the text field edge-to-edge as a full-bleed background — that reads as DOS/VGA, not C64.",
+    "Don't add border-radius, soft/beveled shadows, glassmorphism, or gradient surfaces; depth is at most an 8px 8px 0 #000066 hard offset or a reversed panel.",
+    "Don't de-emphasize with opacity, rgba(), or filter: grayscale — use the dim attribute #6a6ab8 or the palette's grey entries.",
+    "Don't animate with ease-in-out, cubic-bezier, or tweened colors; the hardware could only step, so cursor blinks and border cycles use steps() at 0/100/300/1200ms.",
+    "Don't use fractional font sizes (13px, 1.2rem) or fractional scaling on pixel art — the 8x8 cell and bitmap glyphs break.",
+    "Don't introduce colors outside the 16-entry Pepto palette, and don't put red/yellow/green on large surfaces — they are attribute signals, not backgrounds."
+  ],
+  "accessibility": [
+    "The tested body pairing is #a0a0ff on #0000aa (about 5.7:1) and #c6c6ff on #0000aa (about 8.2:1); watch the tighter #a0a0ff on #2e2c9b panel (~4.6:1) and keep long text on the darker ground.",
+    "Never let color alone carry state: the C64 palette's #c46c71 and #3f3fff sit near or below 4.5:1 against blue, so pair them with literal words (ERROR, WARNING, OK, READY.) and use them for large bold type, borders, or non-text signal.",
+    "Keep all UI text at 16px or larger with 16px line-height, and let the C64 Pro Mono bitmap stack supply glyphs so PETSCII frames and block characters align; give every glyph-only control an accessible name (the '>' marker, the block cursor, the drive icon).",
+    "Respect prefers-reduced-motion: stop the cursor blink and any border color cycling, print text instantly, and render the pressed-state shadow collapse as an instant change — every screen must stay readable with all steps() animation removed."
+  ],
+  "signatureElement": "The bright blue border frame (#3f3fff with a #2f2fff inner edge) wrapping a 40x25 PETSCII screen of #a0a0ff bitmap type on #0000aa, closed out by a reverse-video status strip and a blinking block cursor",
+  "attribution": [
+    {
+      "name": "Pepto's Commodore 64 color palette (Philip 'Pepto' Timmermann)",
+      "url": "https://www.pepto.de/projects/colorvic/",
+      "license": "reference palette (factual color values, freely cited)"
+    },
+    {
+      "name": "C64 Pro Mono and Pet Me fonts (Kreative Korp / Rebecca Bettencourt)",
+      "url": "https://www.kreativekorp.com/software/fonts/c64/",
+      "license": "free for personal and commercial use (Kreative Korp font license)"
+    },
+    {
+      "name": "VICE Commodore emulator (palette and PETSCII reference)",
+      "url": "https://vice-emu.sourceforge.io/",
+      "license": "GPL-2.0"
+    },
+    {
+      "name": "Commodore 64 character set / PETSCII (c64-wiki)",
+      "url": "https://www.c64-wiki.com/wiki/PETSCII",
+      "license": "CC BY-SA 4.0"
+    }
+  ],
+  "prose": {
+    "overview": "This mode is a Commodore 64 powered on: a 40-column by 25-row PETSCII screen of light-blue bitmap characters on deep blue, surrounded by the machine's bright blue border. Everything quantizes to the 8x8 hardware cell, so type, rules, panels, and pixel art all share one grid instead of being optically nudged. The register is chunky, flat, and slightly awkward on purpose — a home computer, not a workstation. There is no gloss anywhere: color comes from sixteen fixed attributes, and depth comes from inverting them or from a hard offset block.",
+    "colors": "The ground is the classic C64 blue #0000aa with #a0a0ff light-blue text, #c6c6ff for bright values and the block cursor, and #6a6ab8 as the dim attribute; panels lift one step to #2e2c9b. The signature frame uses the bright blue #3f3fff with a #2f2fff inner edge, which is deliberately a non-text tone — it separates the screen from the page the way the VIC-II border does on the television. Red #c46c71, yellow #edf171, and green #a9ff9f exist only as attribute signals and never as surface fills, and every one of them comes from the sixteen-entry Pepto palette in paletteVariants.c64Pepto rather than from a modern hex.",
+    "typography": "C64 Pro Mono is the whole voice — headings, buttons, status lines, form values, and body copy — because the machine had exactly one character set and hierarchy came from color and case. Headings are UPPERCASE and may scale to 2x or 3x the 8x8 cell (16/32/48px) with image-rendering: pixelated, while body copy stays at 16px/16px to keep the glyph grid intact. No italic, faux bold, or wide tracking is faked: letter-spacing tops out at 0.05em so the cell never shifts. Pet Me 64, VT323, and Courier New are the degradation path, and the stack always ends in a generic monospace fallback.",
+    "layout": "Layout is a character grid: 40 columns by 25 rows, an 8px sub-step, 16px line-height, and spacing tokens of 8/16/24/32/40px. The screen sits inside the border frame with 24–40px of bright blue visible on all sides, and content inside the field starts after a header line and stops before the status and prompt line. Columns are fixed and labels align on a colon rule — 'DEVICE 8:  OK' — rather than flexbox gaps. Nothing floats: panels butt against cell edges behind a 4px light-blue frame, and the smallest gutter in the system is one cell.",
+    "elevation": "Depth is attribute-based, not lit: a raised panel is a 4px #a0a0ff frame with a reverse-video title run and at most a hard 8px 8px 0 #000066 offset, and a modal is simply an inverse-video block. Selection, hover, focus, and pressed states invert the foreground/background pair, which is the only 'lift' the hardware could express. The single tolerance is the 0 0 6px #8080ff glow, reserved for a focused field or a live readout, never for containers. Blurred drop shadows, bevels, and glass effects do not exist in this system.",
+    "shapes": "Every shape is a square-cornered rectangle on the cell grid: radius 0, 4px borders, 8px block cursors, and rules made of repeated '=' or '-' glyph runs. Icons and imagery are PETSCII or pixel art rendered with image-rendering: pixelated at integer 2x/3x/4x scale so no anti-aliased edge appears. Circles do not exist except as block-stacked approximations, and corners are chamfered by removing whole 8px blocks rather than rounding them.",
+    "components": "Panels are 4px light-blue frames with a reverse-video title; buttons are light-blue plates (#a0a0ff on ink #0000aa) with a bright blue border and a hard offset that translates away on :active; inputs are inset blue wells with a #3f3fff border and a hand-drawn 8x16 block caret. The status bar is a 24px full-inverse strip that reads 'READY. 38911 BASIC BYTES FREE DEVICE 8: OK', the menu is a vertical list whose selected row is inverse video with a blinking '>' in the gutter, and errors print as '?SYNTAX ERROR' on the following line instead of recoloring a border.",
+    "dosDonts": "Do keep the border frame around the screen, do invert attribute pairs instead of tinting, do stay on the 8x8 cell, and do let the blink be the only motion. Don't round a corner, don't blur a shadow, don't fade with opacity, don't run the blue field edge-to-edge without its frame, and don't introduce a color that is not one of the sixteen palette entries — the machine had no others."
+  }
+}

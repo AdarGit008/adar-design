@@ -1,0 +1,218 @@
+{
+  "id": "tim",
+  "name": "The Incredible Machine",
+  "order": 11,
+  "aliases": [
+    "tim",
+    "incredible-machine",
+    "rube-goldberg",
+    "contraption",
+    "puzzle-game",
+    "crayon",
+    "toy",
+    "sandbox",
+    "whimsical",
+    "90s-game"
+  ],
+  "summary": "90s puzzle-game workbench: warm cream canvas, crayon red/yellow/blue/green parts, 3px ink outlines, chunky pills, and a visible chain of cause and effect that runs left to right.",
+  "whenToUse": "When the user asks for The Incredible Machine, a 90s puzzle-game look, Rube Goldberg contraptions, whimsical machine motifs, cartoon crayon colors, a bright hand-drawn toy aesthetic, or a playful build-and-test sandbox UI.",
+  "colors": {
+    "background": "#f5efe0",
+    "surface": "#fffaf0",
+    "foreground": "#2b2b2b",
+    "muted": "#8a8175",
+    "primary": "#e63946",
+    "accent": "#2d7dd2",
+    "danger": "#c1121f",
+    "warning": "#ffd23f",
+    "success": "#52b788"
+  },
+  "paletteVariants": {
+    "crayon": {
+      "cream": "#f5efe0",
+      "paper": "#fffaf0",
+      "red": "#e63946",
+      "yellow": "#ffd23f",
+      "blue": "#2d7dd2",
+      "green": "#52b788",
+      "ink": "#2b2b2b",
+      "muted": "#8a8175",
+      "shadow": "#2b2b2b"
+    },
+    "crayonRamps": {
+      "red": "#f4a3a9/#e63946/#c1121f",
+      "yellow": "#ffe89a/#ffd23f/#e0a800",
+      "blue": "#93c1ee/#2d7dd2/#1b5591",
+      "green": "#a6dcbf/#52b788/#2d8059",
+      "ink": "#6b6b6b/#2b2b2b/#000000"
+    },
+    "machineParts": {
+      "canvas": "#f5efe0",
+      "ball": "#e63946",
+      "ramp": "#2d7dd2",
+      "lever": "#ffd23f",
+      "pulley": "#52b788",
+      "chute": "#8a8175",
+      "spring": "#c1121f",
+      "outline": "#2b2b2b"
+    }
+  },
+  "fonts": {
+    "display": [
+      "Fredoka",
+      "Baloo 2",
+      "Chewy",
+      "system-ui",
+      "sans-serif"
+    ],
+    "mono": [
+      "IBM Plex Mono",
+      "ui-monospace",
+      "monospace"
+    ]
+  },
+  "radius": "14px",
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "40px"
+  },
+  "shadow": {
+    "hard": "6px 6px 0 #2b2b2b",
+    "glow": "0 0 0 4px #ffd23f",
+    "soft": "0 8px 16px rgba(43,43,43,.10)"
+  },
+  "motion": {
+    "easing": "cubic-bezier(.34,1.56,.64,1)",
+    "cursor": "grab",
+    "durations": [
+      "0ms",
+      "120ms",
+      "240ms",
+      "600ms"
+    ]
+  },
+  "effects": {
+    "scanlines": "repeating-linear-gradient(45deg, rgba(43,43,43,.045) 0 2px, transparent 2px 6px)",
+    "pixelate": "auto",
+    "vignette": "radial-gradient(ellipse at 50% 0%, #fffaf0 0%, #f5efe0 70%)"
+  },
+  "rules": [
+    "Rig before you style: every screen is a small machine — put the trigger at the start, the outcome at the end, and draw one visible connector (dashed rail, chute, pulley line) that shows the path between them.",
+    "Crayon, not neon: fills come from the six-color crayon set only, every shape carries a 3px #2b2b2b ink stroke, and emphasis is a solid color block or a hand-drawn ring — never a gradient, blur, or glow.",
+    "Round the geometry: 14px radius on cards, wells, and media, full pills on buttons, badges, and lever tracks, because square corners read as modern minimalism rather than as a cut-out puzzle part.",
+    "Depth is stamped, not lit: 6px 6px 0 #2b2b2b hard offsets on cards and buttons, and pressing moves the element into its own shadow (translate(6px,6px) with the offset collapsed to 0 0 0) so clicks feel like pushing a physical part.",
+    "Set headings in Fredoka 700 Title Case at 20px and up with 1.2 line-height; body copy is Fredoka 400/500 at 16–18px/1.5 in sentence case, and IBM Plex Mono is reserved for machine data — part counts, coordinates, step logs, build ids.",
+    "Spend one crayon per role: red #e63946 for primary action, blue #2d7dd2 for links, secondary action, and focus ring, yellow #ffd23f for highlight and warning, green #52b788 for a passing test run, #c1121f for hard failure.",
+    "Animate short and springy: 120–240ms with cubic-bezier(.34,1.56,.64,1) so hover and press overshoot once before settling, and stagger chained machine steps by 120ms each so cause visibly precedes effect.",
+    "Stay evocation-only: no sprites, screenshots, logo, or copied level layouts from the game — the whimsy comes from the crayon palette and motif icons drawn from primitives (ball, ramp, lever, pulley, chute, spring)."
+  ],
+  "componentRecipes": {
+    "panel": "background: #fffaf0; border: 3px solid #2b2b2b; border-radius: 14px; padding: 24px; color: #2b2b2b; box-shadow: 6px 6px 0 #2b2b2b; — panels that are steps in a sequence get border-left: 8px dotted #2b2b2b and a 32px yellow #ffd23f circle holding the step number; the heading inside is Fredoka 700 24px Title Case with a 6px #ffd23f highlight block behind its last word; drop the hard shadow below 640px and keep the 3px ink border.",
+    "button": "font: 700 18px/1 'Fredoka', 'Baloo 2', system-ui, sans-serif; padding: 14px 24px; border-radius: 999px; background: #e63946; color: #f5efe0; border: 3px solid #2b2b2b; box-shadow: 6px 6px 0 #2b2b2b; transition: transform 120ms cubic-bezier(.34,1.56,.64,1), box-shadow 120ms cubic-bezier(.34,1.56,.64,1), background-color 120ms linear; :hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #2b2b2b; } :active { transform: translate(6px, 6px); box-shadow: 0 0 0 #2b2b2b; } :focus-visible { outline: 3px solid #2d7dd2; outline-offset: 3px; } — secondary variant: background #fffaf0, color #2b2b2b, box-shadow 6px 6px 0 #ffd23f; disabled: background #f5efe0, color #8a8175, shadow 0 0 0, no transform.",
+    "input": "font: 16px/1.5 'IBM Plex Mono', ui-monospace, monospace; color: #2b2b2b; background: #f5efe0; border: 3px solid #2b2b2b; border-radius: 14px; padding: 12px 16px; box-shadow: inset 0 3px 0 rgba(43,43,43,.12); :placeholder { color: #8a8175; font: 400 16px 'Fredoka', system-ui, sans-serif; } :focus { background: #fffaf0; outline: 3px solid #2d7dd2; outline-offset: 2px; } — invalid: border-color #c1121f plus a 16px Fredoka sentence below in #c1121f ('That part does not fit here.') so the error never relies on the red stroke alone.",
+    "statusbar": "height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 24px; background: #f5efe0; border-top: 3px solid #2b2b2b; border-radius: 14px 14px 0 0; font: 14px/1.4 'IBM Plex Mono', monospace; letter-spacing: 0.04em; color: #2b2b2b; left side is a machine log of entries each prefixed by a 10px crayon dot — #52b788 passed, #ffd23f warning, #c1121f failed, #8a8175 idle; right side holds a mono part counter and the single primary 'Test run' button; the entry currently executing pulses scale(1) → scale(1.08) over 600ms with cubic-bezier(.34,1.56,.64,1).",
+    "menu": "vertical part tray, no bullets, 8px gap: item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; font: 600 18px/1.3 'Fredoka', system-ui, sans-serif; color: #2b2b2b; background: #fffaf0; border: 3px solid #2b2b2b; border-radius: 14px; box-shadow: 4px 4px 0 #2b2b2b; } selected row fills #ffd23f with ink text, its drag-handle dots turn #e63946, and its icon swaps to the filled part; hover lifts transform: translate(-2px, -2px) with box-shadow 6px 6px 0 #2b2b2b; group headers are Fredoka 700 13px uppercase with letter-spacing 0.12em on the cream ground with no stroke.",
+    "toggle": "lever switch, 72px x 40px: track { background: #f5efe0; border: 3px solid #2b2b2b; border-radius: 999px; padding: 3px; box-shadow: inset 0 3px 0 rgba(43,43,43,.12); } knob is a 28px ball with a 3px ink stroke, #2d7dd2 when off and #52b788 when on, translating 32px over 240ms cubic-bezier(.34,1.56,.64,1); the track carries two 4px dotted #8a8175 rail marks so it reads as a machine part instead of a phone switch; label sits above in Fredoka 700 14px Title Case and the state is repeated as text ('On'/'Off') for screen readers."
+  },
+  "copywriting": {
+    "voice": "An enthusiastic tinkerer narrating the machine out loud: short, concrete, present tense, faintly absurd. Copy names the part and the consequence ('Drop the ball. The seesaw flips the ramp.') and celebrates the chain reaction rather than the software, so the reader feels they are rigging a contraption, not filing a ticket.",
+    "case": {
+      "headers": "Title Case",
+      "commands": "sentence case imperative ('Add a ramp', 'Run the test')",
+      "body": "sentence case"
+    },
+    "prefixes": [
+      "[RIG]",
+      "[RUN]",
+      "[CLUNK]",
+      "[SPROING]",
+      "[NICE]",
+      "[OOPS]"
+    ],
+    "verbs": {
+      "start": "ASSEMBLE",
+      "stop": "STOP THE MACHINE",
+      "save": "SAVE THE CONTRAPTION",
+      "load": "LOAD THE CONTRAPTION",
+      "delete": "SCRAP IT"
+    },
+    "avoid": [
+      "corporate filler ('seamless', 'leverage', 'empower', 'solution')",
+      "deadpan system errors ('Invalid input.', 'An error occurred')",
+      "sarcasm, insults, or scolding the user for a broken rig",
+      "ticket ids, hex hashes, and log noise in user-facing copy",
+      "emoji as bullets or inside headings",
+      "all-caps sentences longer than three words",
+      "any image, sprite, logo, character, or level name copied from the original game"
+    ]
+  },
+  "do": [
+    "Give every action a visible consequence somewhere else on the screen — a counter moves, a part drops, a line of the log turns green — so the interface always feels like a rigged machine.",
+    "Outline every shape with the same 3px #2b2b2b ink stroke and fill it with one flat crayon color, the way a shape is coloured in and cut out.",
+    "Keep the cream ground (#f5efe0, cards at #fffaf0) and let only the six crayon colors appear on top of it; a crayon color on white stops reading as crayon.",
+    "Use chunky pills and 14px radii with 6px hard ink shadows, and depress elements by exactly their own offset on :active.",
+    "Set headings in Fredoka 700 Title Case from 20px up and body in Fredoka 400/500 at 16–18px/1.5; keep IBM Plex Mono for machine data only.",
+    "Draw motif icons from primitives (ball = circle, ramp = wedge, lever = bar plus knob, pulley = circle plus cord, chute = arc, spring = coil) rather than shipping artwork from any existing game."
+  ],
+  "dont": [
+    "No game assets: no sprites, screenshots, logo, character art, or recreated level layouts — evocation through palette, motif, and layout only.",
+    "No gradients, glassmorphism, backdrop-blur, or semi-transparent overlays; a part is one opaque fill inside one ink stroke.",
+    "No blurred shadows beyond the single 0 8px 16px rgba(43,43,43,.10) floating-tray lift, and no neon glow on anything.",
+    "No 0-radius cards, no 1px hairlines, no hairline dividers — the smallest line weight in the system is 3px ink.",
+    "No second crayon color inside one component as decoration; one role color per part, plus ink for the stroke and text.",
+    "No long ease-in-out fades, no infinite bouncing, no more than one overshoot per interaction; and no more than three all-caps words in a row."
+  ],
+  "accessibility": [
+    "Ink #2b2b2b on cream #f5efe0 clears 4.5:1 comfortably, but red #e63946, yellow #ffd23f, and green #52b788 on cream do not — use those only as fills, borders, dots, or large bold labels, and set text inside them in ink rather than cream.",
+    "Fredoka and Baloo 2 stay at 16px minimum for body and 20px for headings with 1.4–1.5 line-height; Chewy is a display-only fallback and must never carry a paragraph or a form value.",
+    "Honor prefers-reduced-motion: drop the spring overshoot and the log-pulse, and advance chained machine steps as instant state changes so cause and effect remain legible without animation.",
+    "Never signal state with crayon color alone — pair each dot, lever, and border with a word ('Passed', 'Warning', 'Failed', 'On'/'Off') plus a visible 3px #2d7dd2 focus ring on every focusable element, and give motif-only buttons an accessible name."
+  ],
+  "signatureElement": "The contraption canvas: a dashed-rail workbench where cream cards, 3px ink-stroked crayon parts, and lever/ramp/ball/pulley motifs show one action visibly cranking the next",
+  "attribution": [
+    {
+      "name": "The Incredible Machine (Dynamix / Sierra, 1993) — aesthetic reference",
+      "url": "https://en.wikipedia.org/wiki/The_Incredible_Machine_(series)",
+      "license": "evocation only, no game assets reproduced",
+      "note": "Palette, motif, and pacing are inspired by the 90s puzzle-game workbench; no sprites, logo, character art, or level layouts are reproduced."
+    },
+    {
+      "name": "Crayon palette (cream #f5efe0, red #e63946, yellow #ffd23f, blue #2d7dd2, green #52b788, ink #2b2b2b) — derived by eye from 90s box art, not sampled from any game file",
+      "url": "https://lospec.com/palette-list",
+      "license": "palette/CC0 — evocation only, no game assets reproduced"
+    },
+    {
+      "name": "Fredoka (Hafontia / Milena Brandão)",
+      "url": "https://github.com/google/fonts/tree/main/ofl/fredoka",
+      "license": "OFL 1.1"
+    },
+    {
+      "name": "Baloo 2 (Ek Type)",
+      "url": "https://github.com/google/fonts/tree/main/ofl/baloo2",
+      "license": "OFL 1.1"
+    },
+    {
+      "name": "Chewy (Sideshow)",
+      "url": "https://github.com/google/fonts/tree/main/apache/chewy",
+      "license": "Apache-2.0"
+    },
+    {
+      "name": "IBM Plex Mono (IBM)",
+      "url": "https://github.com/google/fonts/tree/main/ofl/ibmplexmono",
+      "license": "OFL 1.1"
+    }
+  ],
+  "prose": {
+    "overview": "This mode stages the interface as a Rube Goldberg workbench: a warm cream canvas, crayon-bright parts, ink outlines, and a visible chain of cause and effect running left to right. Every panel is a step in the machine, every action throws a lever, and the reward for clicking is that something else moves. It is whimsical and hand-drawn-feeling, but the grid underneath is strict — the playfulness lives in color, motif, and springy motion, never in sloppy alignment. It should feel like a toy you are allowed to take apart, not a cartoon skin on a dashboard.",
+    "colors": "The ground is warm cream #f5efe0 with cards one shade lighter at #fffaf0, and ink #2b2b2b carries every outline and nearly all text. Six crayon colors do the talking: red #e63946 is the primary lever and the only color for the main call to action, blue #2d7dd2 is the secondary action, link, and focus ring, yellow #ffd23f is highlight and warning, green #52b788 means the test run passed, with #c1121f for hard failure and #8a8175 for muted labels and chutes. Nothing is layered with alpha or gradient — a part is one flat fill inside one ink stroke, exactly like a shape coloured in with a crayon, and the crayon ramps give each hue a light/base/dark triad for pressed and shaded states.",
+    "typography": "Fredoka leads, with Baloo 2 and Chewy as the playful fallbacks, at 700 weight in Title Case for headings from 20px up; its rounded terminals are the whole point, so a neutral grotesque is never a substitute. Body copy drops to Fredoka 400/500 at 16–18px with 1.5 line-height, and long paragraphs are rare by design — this is a machine, so most text is a part label, a step name, or a shout. IBM Plex Mono appears only for machine data: part counts, coordinates, step logs, and build ids, where its monospace rhythm makes the numbers feel instrument-like.",
+    "layout": "Layout is a workbench rail: a 4px spacing scale stepping 4/8/16/24/40px, a 12-column grid at 24px gutters, and a left-to-right flow with the trigger at the start and the outcome at the end, joined by visible connectors — a dashed rule, a chute, a pulley cord. Sequences stack vertically on narrow screens but keep their step numbers and dotted rail, so the order of operations never disappears. Every container snaps to the grid, and the whimsy is allowed in the motif that sits on the grid, never in a nudged box or an optical cheat.",
+    "elevation": "Depth is stamped on like rubber: 6px 6px 0 #2b2b2b hard offsets for cards, buttons, and tray rows, with no blur and no ambient shadow, plus one low soft lift (0 8px 16px rgba(43,43,43,.10)) permitted only for a floating tray or drag ghost. Pressing an element moves it into its own shadow — translate(6px,6px) with the offset collapsed to 0 0 0 — so interaction reads as a physical part being pushed rather than a button being styled. Internal depth is a single inset rule, inset 0 3px 0 rgba(43,43,43,.12), for wells like inputs; there are no glossy highlights, no bevel gradients, and no neon glow anywhere in the system.",
+    "shapes": "Everything is rounded and chunky: 14px radius on cards, media, and inputs, full pills on buttons, badges, and lever tracks, and a consistent 3px #2b2b2b ink stroke around every shape so parts look cut out and drawn around. Motif shapes are built from primitives — circles for balls and pulleys, wedges for ramps, a bar with a ball knob for levers, arcs for chutes, coils for springs — and are used as iconography with meaning, not as confetti. Square 0-radius cards, sub-3px hairlines, and glassy translucency have no place here, and the only perfect circles allowed to float free are the crayon status dots.",
+    "components": "Cards are cream panels with a 3px ink stroke, 14px radius, and a 6px hard shadow; when a card is a step in a sequence, an 8px dotted rail runs down its left edge and a yellow circle carries the step number. Buttons are ink-stroked pills in crayon red whose shadow collapses under the press, with a cream-filled secondary that keeps a yellow shadow so it still looks like a part rather than a ghost. Inputs are sunken cream wells set in IBM Plex Mono that switch to a lighter fill and a blue outline on focus, toggles are lever tracks with an ink-stroked ball knob that turns from blue to green, and the status bar is a machine log — mono, dot-prefixed green/yellow/red, with a part counter and the single 'Test run' button on the right.",
+    "dosDonts": "Do give every action a visible consequence elsewhere on the screen, do outline every shape in the same 3px ink, do keep one crayon per role, and do let motion overshoot exactly once before it settles. Don't copy the game's art, logo, character, or level layouts, don't put two crayon colors in one component as decoration, don't reach for neon, glass, or gradient depth, and don't trade grid alignment for a hand-drawn look."
+  }
+}

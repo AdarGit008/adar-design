@@ -1,0 +1,234 @@
+{
+  "id": "win95",
+  "name": "Windows 95 Desktop",
+  "order": 5,
+  "aliases": [
+    "win95",
+    "windows-95",
+    "windows95",
+    "win9x",
+    "classic-windows",
+    "bevel",
+    "outset",
+    "inset",
+    "skeuomorph",
+    "desktop-gui",
+    "mid-90s-office"
+  ],
+  "summary": "Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy #000080 title bars, black 11px system type, and the only beveled depth model in the system — 2px outset/inset, radius 0, no glow.",
+  "whenToUse": "When the user asks for Windows 95, classic Windows, Win9x, mid-90s office software, a silver-and-teal desktop GUI, or beveled/embossed skeuomorphic chrome.",
+  "colors": {
+    "background": "#008080",
+    "surface": "#c0c0c0",
+    "foreground": "#000000",
+    "muted": "#808080",
+    "primary": "#000080",
+    "accent": "#008080",
+    "danger": "#ff0000",
+    "warning": "#808000",
+    "success": "#008000"
+  },
+  "paletteVariants": {
+    "win95": {
+      "desktop": "#008080",
+      "face": "#c0c0c0",
+      "faceLight": "#dfdfdf",
+      "highlight": "#ffffff",
+      "shadow": "#808080",
+      "dark": "#000000",
+      "titleActive": "#000080",
+      "titleActiveText": "#ffffff",
+      "titleInactive": "#808080",
+      "titleInactiveText": "#c0c0c0",
+      "selection": "#000080",
+      "selectionText": "#ffffff",
+      "field": "#ffffff",
+      "fieldText": "#000000",
+      "disabledText": "#808080",
+      "tooltip": "#ffffe1",
+      "info": "#ffffe1",
+      "link": "#0000ff"
+    },
+    "system16": {
+      "black": "#000000",
+      "maroon": "#800000",
+      "green": "#008000",
+      "olive": "#808000",
+      "navy": "#000080",
+      "purple": "#800080",
+      "teal": "#008080",
+      "silver": "#c0c0c0",
+      "gray": "#808080",
+      "red": "#ff0000",
+      "lime": "#00ff00",
+      "yellow": "#ffff00",
+      "blue": "#0000ff",
+      "fuchsia": "#ff00ff",
+      "aqua": "#00ffff",
+      "white": "#ffffff"
+    },
+    "highContrast": {
+      "desktop": "#000000",
+      "face": "#000000",
+      "foreground": "#ffffff",
+      "titleActive": "#000080",
+      "titleActiveText": "#ffffff",
+      "titleInactive": "#808080",
+      "titleInactiveText": "#000000",
+      "highlight": "#ffffff",
+      "shadow": "#808080",
+      "selection": "#000080",
+      "selectionText": "#ffffff",
+      "field": "#000000",
+      "fieldText": "#ffffff",
+      "link": "#00ffff"
+    }
+  },
+  "fonts": {
+    "display": [
+      "W95FA",
+      "MS Sans Serif",
+      "Tahoma",
+      "Verdana",
+      "sans-serif"
+    ],
+    "mono": [
+      "Courier New",
+      "Lucida Console",
+      "monospace"
+    ]
+  },
+  "radius": "0",
+  "spacing": {
+    "xs": "2px",
+    "sm": "4px",
+    "md": "8px",
+    "lg": "12px",
+    "xl": "16px"
+  },
+  "shadow": {
+    "hard": "2px 2px 0 #000000",
+    "glow": "none"
+  },
+  "motion": {
+    "easing": "linear",
+    "cursor": "default",
+    "durations": [
+      "0ms",
+      "100ms",
+      "200ms"
+    ]
+  },
+  "effects": {
+    "scanlines": "none",
+    "pixelate": "none — keep image-rendering: auto and scale icons by integer factors only (16/32/48px)",
+    "vignette": "none"
+  },
+  "rules": [
+    "Bevel is the only depth in the system: every raised surface is a 2px outset — border-color: #ffffff #000000 #000000 #ffffff with box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080 — and every sunken well is the exact inverse (#808080/#ffffff/#000000 plus inset #000000 and #dfdfdf). There is no blur, no glow, and no other elevation token.",
+    "Press by swapping the bevel, not by translating: :active reverses highlight and shadow and shifts the label 1px right and 1px down via padding, so the control reads as physically depressed rather than animated.",
+    "Silver #c0c0c0 is the only chrome color — windows, toolbars, menus, buttons, scrollbars, and statusbars are all #c0c0c0 lit by #ffffff/#dfdfdf and shaded by #808080/#000000. Teal #008080 is the desktop field only and never appears inside a window.",
+    "Text is #000000 on #c0c0c0 or #ffffff, or #ffffff on #000080 navy — never grey body copy. Reserve #808080 for disabled labels, bevel shading, and grooves, and always flatten the bevel of a disabled control so grey means off.",
+    "Corners are square (radius 0) and type is 11px: hierarchy comes from bold, from the 18px title bar, and from 1px grooves, ridges, and group-box frames — never from tracking, italics, or large size jumps.",
+    "Window focus is a color swap: the active title bar is #000080 with #ffffff bold text, the inactive one #808080 with #c0c0c0 text. Never signal focus with a shadow, glow, or elevation change.",
+    "Selection and focus share the navy token: a selected row or run inverts to #000080 with #ffffff text, and the focused control adds a 1px dotted #000000 marquee inset 4px from its inner edge.",
+    "Layout is a packed 2px grid on 4/8/12/16 steps: 3px window edges, 18px title bars, 20px menu bars, 23px buttons, 21px inputs, 19px menu rows, 2px gaps, and never more than 8px of padding — the faintly cramped rhythm is the look."
+  ],
+  "componentRecipes": {
+    "panel": "background: #c0c0c0; border: 2px solid; border-color: #dfdfdf #000000 #000000 #dfdfdf; box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080; border-radius: 0; padding: 3px; color: #000000; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; — title bar: height: 18px; display: flex; align-items: center; justify-content: space-between; padding: 0 2px 0 4px; background: #000080; color: #ffffff; font-weight: 700; with 16px beveled Minimize/Maximize/Close buttons at the right (each: background: #c0c0c0; border: 1px solid; border-color: #ffffff #000000 #000000 #ffffff; box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;); client area: margin: 2px; background: #ffffff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf; — inactive window: title bar #808080 with #c0c0c0 text, nothing else changes.",
+    "button": "height: 23px; min-width: 75px; padding: 0 12px; background: #c0c0c0; color: #000000; font: 11px/1 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; border: 2px solid; border-color: #ffffff #000000 #000000 #ffffff; box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080; border-radius: 0; :active { border-color: #000000 #ffffff #ffffff #000000; box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #dfdfdf; padding: 1px 11px 0 13px; } :focus-visible { outline: 1px dotted #000000; outline-offset: -4px; } :disabled { color: #808080; text-shadow: 1px 1px 0 #ffffff; cursor: not-allowed; } — default button: repeat the same bevel inside a 1px #000000 outline at 1px offset.",
+    "input": "height: 21px; background: #ffffff; color: #000000; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; padding: 1px 3px; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf; border-radius: 0; caret-color: #000000; :focus { outline: none; } ::selection { background: #000080; color: #ffffff; } — read-only and disabled: background: #c0c0c0; color: #808080; the sunken bevel stays; there are no placeholders in this era — put a static black label to the left of the field instead.",
+    "statusbar": "a 22px strip docked at the bottom of the client area with three sunken segments: display: flex; gap: 2px; padding: 2px; background: #c0c0c0; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; color: #000000; each segment { height: 18px; padding: 1px 4px; border: 1px solid; border-color: #808080 #ffffff #ffffff #808080; } — content is static status text ('3 object(s)', '1.44MB free'), and the trailing 20px CAPS/NUM/SCRL indicator cells are sunken squares that show their 3-letter label in #000000 when on and #808080 when off.",
+    "menu": "menu bar: 20px strip directly under the title bar, background: #c0c0c0; display: flex; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; item { padding: 3px 6px; color: #000000; } with the mnemonic letter underlined (text-decoration: underline); hover or open inverts to background: #000080; color: #ffffff; the dropdown is a #c0c0c0 popup with the raised bevel (border: 2px solid; border-color: #dfdfdf #000000 #000000 #dfdfdf; box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080; padding: 2px), 19px rows, a 20px gutter for the bitmap check/radio glyph, accelerator keys right-aligned in #000000, submenu parents showing a right-pointing arrow, and separators as a groove (border-top: 1px solid #808080; border-bottom: 1px solid #ffffff)."
+  },
+  "copywriting": {
+    "voice": "Clerical, plain, and bureaucratic-polite: short noun labels, one sentence of helper text per dialog, and exactly one imperative verb on the primary button. The software states what happened and what to press; it never sells, jokes, or exclaims.",
+    "case": {
+      "headers": "Title Case for window, dialog, and group-box titles",
+      "commands": "Title Case (Save As…, Restart, Shut Down, OK, Cancel) with an ellipsis when a dialog follows",
+      "body": "sentence case"
+    },
+    "prefixes": [
+      "Windows",
+      "Warning",
+      "Error",
+      "Confirm",
+      "Tip of the Day"
+    ],
+    "verbs": {
+      "start": "Start",
+      "stop": "Shut Down",
+      "save": "Save As…",
+      "load": "Open",
+      "delete": "Delete"
+    },
+    "avoid": [
+      "exclamation marks and ALL-CAPS sentences in body copy",
+      "emoji, icon fonts, and modern flat glyph sets",
+      "marketing adjectives ('seamless', 'next-gen', 'delight', 'empower')",
+      "multi-paragraph helper text — one sentence per dialog",
+      "flat-modern verb labels ('Submit', 'Get Started', 'Continue') instead of OK/Save/Open",
+      "apologies and chatty asides ('Oops!', 'Hang tight')"
+    ]
+  },
+  "do": [
+    "Build every raised surface from the same four-shade bevel (#ffffff, #dfdfdf, #808080, #000000) and every recessed surface from its exact inverse, so all depth in the product comes from one gesture.",
+    "Give each window the full chrome: 2px outer bevel, 3px frame, 18px navy title bar with 16px beveled Minimize/Maximize/Close, 20px menu bar, white sunken client well, optional statusbar — a bare beveled panel is not a window.",
+    "Hold the era's fixed control heights (23px buttons, 21px inputs, 19px menu rows, 18px title bars, 2px gaps) and let the tight rhythm do the work.",
+    "Keep type at 11px black on silver or white, with bold reserved for title bars and dialog headings; put runnable or registry-style content in Courier New.",
+    "Signal focus twice: the 1px dotted #000000 marquee inside the control and the navy #000080 title bar or selection band — never a colored glow or shadow growth.",
+    "Stay inside integer px and the system16 palette; every color is #RRGGBB drawn from the classic 16, with no gradients, alpha washes, or fractional sizes."
+  ],
+  "dont": [
+    "No border-radius anywhere: buttons, inputs, windows, scrollbars, group boxes, and avatars are square-cornered.",
+    "No blur, glow, soft drop shadow, or layered z-depth — the 2px bevel and the opaque window edge are the entire elevation model.",
+    "No easing curves, scale or opacity fades, or slide transitions; state changes land in 0ms and the only motion is the 1px pressed shift and the blinking caret.",
+    "No grey or navy running text: body copy is #000000 on #c0c0c0/#ffffff, and navy is confined to title bars, selection, and focus.",
+    "No modern chrome: no flat icon sets, 16px+ body type, pill buttons, 8px+ breathing room, or dark mode as the default surface.",
+    "No teal inside a window and no silver on the desktop field — the #008080 / #c0c0c0 split is the identity of the mode."
+  ],
+  "accessibility": [
+    "#000000 on #c0c0c0 is about 9.4:1 and on #ffffff about 21:1, while #ffffff on #000080 is about 13:1 — keep those three pairings. #808080 on #c0c0c0 sits near 3.9:1, so it is for disabled labels and non-essential bevel shading only, and disabled controls must also say 'unavailable' rather than relying on grey.",
+    "Disabled and inactive states must change more than color: flatten the bevel, grey the label, set cursor: not-allowed, and add aria-disabled so the state survives greyscale and forced-colors.",
+    "Keep a real focus indicator: a 1px dotted #000000 outline at outline-offset: -4px inside buttons, inputs, and menu rows. The navy selection band alone is not sufficient, and outlines must never be removed without a 1:1 replacement.",
+    "Do not go below 11px, do not fake small caps or tight tracking, and honor prefers-reduced-motion by stopping the caret blink and rendering the pressed bevel swap as an instant state change."
+  ],
+  "signatureElement": "The beveled 2px button inside a navy #000080 title bar, sitting on the teal #008080 desktop",
+  "attribution": [
+    {
+      "name": "98.css (Jordan Scales) — Windows 9x UI recreated in CSS",
+      "url": "https://github.com/jdan/98.css",
+      "license": "MIT"
+    },
+    {
+      "name": "Microsoft Windows 95 classic theme — desktop, chrome, and title-bar colors",
+      "url": "https://en.wikipedia.org/wiki/Windows_95",
+      "license": "reference (classic desktop color values)"
+    },
+    {
+      "name": "System 16 palette (Windows 16-color VGA UI palette)",
+      "url": "https://en.wikipedia.org/wiki/List_of_software_palettes",
+      "license": "reference (factual palette values)"
+    },
+    {
+      "name": "W95FA — MS Sans Serif bitmap-era recreation (FontLibrary)",
+      "url": "https://fontlibrary.org/en/font/w95fa",
+      "license": "free font, see source page for terms"
+    },
+    {
+      "name": "Tahoma and Verdana (Microsoft Typography)",
+      "url": "https://learn.microsoft.com/en-us/typography/font-list/verdana",
+      "license": "proprietary Microsoft system fonts"
+    }
+  ],
+  "prose": {
+    "overview": "This mode is the 1995 desktop itself: a teal work area, silver window chrome, navy title bars, and controls that are engraved rather than drawn. Its depth model is the inverse of every other mode here — nothing glows, nothing floats, nothing is blurred; a surface is either raised by a 2px outset bevel or recessed by its exact inverse, and that single gesture carries every hierarchy decision. The result should feel like system software: dense, utilitarian, faintly cramped, and entirely certain about which 11px label goes inside which 23px control.",
+    "colors": "The field is teal #008080 with silver chrome #c0c0c0, and the split is absolute — teal only behind windows, #c0c0c0 only inside them. Bevels consume four fixed shades (#ffffff highlight, #dfdfdf light face, #808080 shadow, #000000 dark edge) and they are structural, not decorative, because dropping any one of them flattens the control. Signal is literal and sparse: navy #000080 for active title bars, selection, and focus; #ffffff for fields and wells; #808080 strictly for disabled labels and shading; and the classic 16-color system16 palette for the rare red, green, or yellow status glyph. There are no tints, no alpha washes, and no gradients — an inactive title bar is a flat #808080 band, not a dimmed navy one.",
+    "typography": "Type is W95FA (Tahoma and Verdana as the era's shipped fallbacks) at 11px — a bitmap-era face at its native size, never tracked out, never below 11px, with bold reserved for title bars, dialog headings, and column headers. Mono work such as registry editors, error logs, and DOS boxes uses Courier New at the same 11px. There is essentially no display size in this system: hierarchy comes from weight, from the 18px title bar, and from grooves and group-box frames, so a heading and a label differ by boldness and context rather than by 20px of size. Uppercase appears only where the era put it — menu bar labels, button captions, and the CAPS/NUM/SCRL indicators.",
+    "layout": "Layout is a packed 2px grid with 4/8/12/16 steps: 3px window edges, an 18px title bar, a 20px menu bar, 23px buttons, 21px inputs, 19px menu rows, 2px gaps, and never more than 8px of padding. Windows are opaque rectangles that sit on the teal field with the standard chrome — control menu, title, Minimize/Maximize/Close, menu bar, sunken client area, and optional statusbar — while modal dialogs centre on top with the same construction one level down. Alignment is strict and slightly tight: generous whitespace, optical centring, overlapping cards, and floating toolbars are all foreign to it.",
+    "elevation": "Elevation is a 2px bevel and nothing else. An up-light of #ffffff plus a 1px #dfdfdf inset against a down-shade of #000000 plus a 1px #808080 inset makes a raised control; reversing all four makes a sunken well. Pressing swaps the pairs and shifts the label 1px right and down through padding, which is the only depth animation in the system — no transform, no shadow growth, no blur. There is no drop shadow under windows and glow is explicitly none: a dialog is in front because it covers what is behind it, and the only 2px 2px 0 #000000 offset in the system is for detached tooltips and drag-proxies. Disabled controls flatten to a single #808080 edge and lose the highlight entirely.",
+    "shapes": "Radius is 0 everywhere: windows, buttons, inputs, scrollbars, group boxes, and statusbar cells are rectangles whose only ornament is a 1px or 2px bevel. Dividers are grooves (1px #808080 over 1px #ffffff) or ridges (the inverse), group boxes are a 1px #808080 frame with its label notched into the top edge, and the arrow, checkmark, and radio dot are 7-13px indexed bitmap glyphs snapped to the 2px grid. Icons are 16px, with 32px for large views and 48px for the desktop, scaled by integer factors only so no edge is ever resampled.",
+    "components": "Windows are the base component: a 2px outer bevel over a 3px frame, an 18px navy title bar with 16px beveled Minimize/Maximize/Close buttons, a 20px menu bar, and a white sunken client well. Buttons are 23px #c0c0c0 plates with the full four-shade bevel, a 75px minimum width, a dotted 1px focus marquee inset 4px, and a second outline for the default action; inputs are 21px white wells with the inverted bevel and a black 1px caret; menus invert hovered rows to navy in a raised #c0c0c0 popup with underlined mnemonics and grooved separators. The statusbar is a row of sunken segments, checkboxes are 13px sunken wells holding a bitmap check, radio buttons are 12px sunken circles with a 4px navy dot, and scrollbars are 16px #c0c0c0 tracks with beveled arrow buttons and a beveled thumb.",
+    "dosDonts": "Do build every raised surface from the same four-shade bevel, do swap rather than tint for press and selection, and do keep the chrome packed on a 2px rhythm with 11px black type. Don't round anything, don't blur or glow anything, don't put teal inside a window or silver on the desktop field, and don't modernize the controls into flat pills with generous padding — the faintly cramped bevel is the entire aesthetic."
+  }
+}

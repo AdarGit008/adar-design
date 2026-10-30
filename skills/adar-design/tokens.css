@@ -1,4 +1,4 @@
-/* adar-design tokens — generated. Edit data/modes/*.json, run node scripts/generate.mjs */
+/* adar-design tokens — generated. Edit data/ (modes + mixes), run node scripts/generate.mjs */
 
 /* 80s Arcade */
 :root {
@@ -21,6 +21,29 @@
   --adar-arcade-radius: 0;
   --adar-arcade-shadow-hard: 8px 8px 0 8px #7c1dfd;
   --adar-arcade-shadow-glow: 0 0 8px #00e5ff;
+}
+
+/* Atari / Sierra Logo Treatment */
+:root {
+  --adar-atari-sierra-background: #0a0a0d;
+  --adar-atari-sierra-surface: #16171c;
+  --adar-atari-sierra-foreground: #ececee;
+  --adar-atari-sierra-muted: #86878f;
+  --adar-atari-sierra-primary: #e8402a;
+  --adar-atari-sierra-accent: #f5c518;
+  --adar-atari-sierra-danger: #ff4b3e;
+  --adar-atari-sierra-warning: #f08a24;
+  --adar-atari-sierra-success: #52b545;
+  --adar-atari-sierra-font-display: "Audiowide", "Orbitron", "Space Grotesk", "sans-serif";
+  --adar-atari-sierra-font-mono: "Space Mono", "IBM Plex Mono", "monospace";
+  --adar-atari-sierra-space-xs: 4px;
+  --adar-atari-sierra-space-sm: 8px;
+  --adar-atari-sierra-space-md: 16px;
+  --adar-atari-sierra-space-lg: 24px;
+  --adar-atari-sierra-space-xl: 32px;
+  --adar-atari-sierra-radius: 0;
+  --adar-atari-sierra-shadow-hard: 6px 6px 0 #000000;
+  --adar-atari-sierra-shadow-glow: 0 0 6px rgba(47,127,224,0.45);
 }
 
 /* BIOS / POST / Text-mode */
@@ -46,6 +69,122 @@
   --adar-bios-shadow-glow: 0 0 4px currentColor;
 }
 
+/* Commodore 64 / PETSCII */
+:root {
+  --adar-c64-background: #0000aa;
+  --adar-c64-surface: #2e2c9b;
+  --adar-c64-foreground: #a0a0ff;
+  --adar-c64-muted: #6a6ab8;
+  --adar-c64-primary: #c6c6ff;
+  --adar-c64-accent: #3f3fff;
+  --adar-c64-danger: #c46c71;
+  --adar-c64-warning: #edf171;
+  --adar-c64-success: #a9ff9f;
+  --adar-c64-font-display: "C64 Pro Mono", "C64 Pro", "Pet Me 64", "VT323", "Courier New", "monospace";
+  --adar-c64-font-mono: "C64 Pro Mono", "Pet Me 64", "IBM Plex Mono", "Courier New", "monospace";
+  --adar-c64-space-xs: 8px;
+  --adar-c64-space-sm: 16px;
+  --adar-c64-space-md: 24px;
+  --adar-c64-space-lg: 32px;
+  --adar-c64-space-xl: 40px;
+  --adar-c64-radius: 0;
+  --adar-c64-shadow-hard: 8px 8px 0 #000066;
+  --adar-c64-shadow-glow: 0 0 6px #8080ff;
+}
+
+/* Cyberpunk / Neon Noir */
+:root {
+  --adar-cyberpunk-background: #0a0a0f;
+  --adar-cyberpunk-surface: #14141f;
+  --adar-cyberpunk-foreground: #e8e8f0;
+  --adar-cyberpunk-muted: #6b6b85;
+  --adar-cyberpunk-primary: #ff00ff;
+  --adar-cyberpunk-accent: #00ffff;
+  --adar-cyberpunk-danger: #ff0055;
+  --adar-cyberpunk-warning: #ffe600;
+  --adar-cyberpunk-success: #00ff9c;
+  --adar-cyberpunk-font-display: "Orbitron", "Rajdhani", "Chakra Petch", "sans-serif";
+  --adar-cyberpunk-font-mono: "Space Mono", "Share Tech Mono", "IBM Plex Mono", "Courier New", "monospace";
+  --adar-cyberpunk-space-xs: 4px;
+  --adar-cyberpunk-space-sm: 8px;
+  --adar-cyberpunk-space-md: 16px;
+  --adar-cyberpunk-space-lg: 32px;
+  --adar-cyberpunk-space-xl: 64px;
+  --adar-cyberpunk-radius: 2px;
+  --adar-cyberpunk-shadow-hard: 4px 4px 0 #000000;
+  --adar-cyberpunk-shadow-glow: 0 0 12px rgba(255,0,255,0.55), 0 0 24px rgba(0,255,255,0.30);
+}
+
+/* Game Boy LCD */
+:root {
+  --adar-gameboy-background: #9bbc0f;
+  --adar-gameboy-surface: #8bac0f;
+  --adar-gameboy-foreground: #0f380f;
+  --adar-gameboy-muted: #306230;
+  --adar-gameboy-primary: #0f380f;
+  --adar-gameboy-accent: #306230;
+  --adar-gameboy-danger: #0f380f;
+  --adar-gameboy-warning: #306230;
+  --adar-gameboy-success: #306230;
+  --adar-gameboy-font-display: "Press Start 2P", "VT323", "monospace";
+  --adar-gameboy-font-mono: "VT323", "IBM Plex Mono", "monospace";
+  --adar-gameboy-space-xs: 4px;
+  --adar-gameboy-space-sm: 8px;
+  --adar-gameboy-space-md: 16px;
+  --adar-gameboy-space-lg: 24px;
+  --adar-gameboy-space-xl: 32px;
+  --adar-gameboy-radius: 0;
+  --adar-gameboy-shadow-hard: 4px 4px 0 #306230;
+  --adar-gameboy-shadow-glow: 0 0 6px #8bac0f;
+}
+
+/* NASA 80s / Worm / Space */
+:root {
+  --adar-nasa80-background: #050510;
+  --adar-nasa80-surface: #0a1128;
+  --adar-nasa80-foreground: #e6e8f0;
+  --adar-nasa80-muted: #7d89a6;
+  --adar-nasa80-primary: #ff2038;
+  --adar-nasa80-accent: #2a6f97;
+  --adar-nasa80-danger: #ff2038;
+  --adar-nasa80-warning: #e8b23a;
+  --adar-nasa80-success: #4ec7a4;
+  --adar-nasa80-font-display: "Space Grotesk", "Orbitron", "Helvetica Neue", "Arial", "sans-serif";
+  --adar-nasa80-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-nasa80-space-xs: 4px;
+  --adar-nasa80-space-sm: 8px;
+  --adar-nasa80-space-md: 16px;
+  --adar-nasa80-space-lg: 24px;
+  --adar-nasa80-space-xl: 32px;
+  --adar-nasa80-space-xxl: 64px;
+  --adar-nasa80-radius: 0;
+  --adar-nasa80-shadow-hard: 8px 8px 0 #02030a;
+  --adar-nasa80-shadow-glow: 0 0 12px rgba(255, 32, 56, 0.45);
+}
+
+/* Red-Neon Serif / 80s Synth-Horror */
+:root {
+  --adar-stranger-things-background: #050505;
+  --adar-stranger-things-surface: #120b0b;
+  --adar-stranger-things-foreground: #e8e2d8;
+  --adar-stranger-things-muted: #8a7f76;
+  --adar-stranger-things-primary: #ff1a1a;
+  --adar-stranger-things-accent: #b30000;
+  --adar-stranger-things-danger: #ff4a3d;
+  --adar-stranger-things-warning: #e0a83a;
+  --adar-stranger-things-success: #6fbf8b;
+  --adar-stranger-things-font-display: "Cinzel", "Playfair Display", "Cormorant Garamond", "Georgia", "serif";
+  --adar-stranger-things-font-mono: "IBM Plex Mono", "JetBrains Mono", "Courier New", "monospace";
+  --adar-stranger-things-space-xs: 4px;
+  --adar-stranger-things-space-sm: 8px;
+  --adar-stranger-things-space-md: 16px;
+  --adar-stranger-things-space-lg: 32px;
+  --adar-stranger-things-space-xl: 56px;
+  --adar-stranger-things-radius: 2px;
+  --adar-stranger-things-shadow-hard: 6px 6px 0 #000000;
+  --adar-stranger-things-shadow-glow: 0 0 1px #ff6f61, 0 0 8px rgba(255, 26, 26, 0.9), 0 0 28px rgba(255, 26, 26, 0.6), 0 0 64px rgba(179, 0, 0, 0.45);
+}
+
 /* Terminal / CRT */
 :root {
   --adar-terminal-background: #0a0e0a;
@@ -67,4 +206,96 @@
   --adar-terminal-radius: 0;
   --adar-terminal-shadow-hard: 0 0 8px rgba(51,255,102,0.6);
   --adar-terminal-shadow-glow: inset 0 0 120px rgba(51,255,102,0.08);
+}
+
+/* The Incredible Machine */
+:root {
+  --adar-tim-background: #f5efe0;
+  --adar-tim-surface: #fffaf0;
+  --adar-tim-foreground: #2b2b2b;
+  --adar-tim-muted: #8a8175;
+  --adar-tim-primary: #e63946;
+  --adar-tim-accent: #2d7dd2;
+  --adar-tim-danger: #c1121f;
+  --adar-tim-warning: #ffd23f;
+  --adar-tim-success: #52b788;
+  --adar-tim-font-display: "Fredoka", "Baloo 2", "Chewy", "system-ui", "sans-serif";
+  --adar-tim-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-tim-space-xs: 4px;
+  --adar-tim-space-sm: 8px;
+  --adar-tim-space-md: 16px;
+  --adar-tim-space-lg: 24px;
+  --adar-tim-space-xl: 40px;
+  --adar-tim-radius: 14px;
+  --adar-tim-shadow-hard: 6px 6px 0 #2b2b2b;
+  --adar-tim-shadow-glow: 0 0 0 4px #ffd23f;
+}
+
+/* Vaporwave / Synthwave */
+:root {
+  --adar-vaporwave-background: #1a1038;
+  --adar-vaporwave-surface: #2a1b52;
+  --adar-vaporwave-foreground: #f7ecff;
+  --adar-vaporwave-muted: #9d8bd6;
+  --adar-vaporwave-primary: #ff6ec7;
+  --adar-vaporwave-accent: #00e5ff;
+  --adar-vaporwave-danger: #ff3b6b;
+  --adar-vaporwave-warning: #ffd300;
+  --adar-vaporwave-success: #35f0b0;
+  --adar-vaporwave-font-display: "Audiowide", "Orbitron", "Michroma", "sans-serif";
+  --adar-vaporwave-font-mono: "Space Mono", "IBM Plex Mono", "monospace";
+  --adar-vaporwave-space-xs: 4px;
+  --adar-vaporwave-space-sm: 8px;
+  --adar-vaporwave-space-md: 16px;
+  --adar-vaporwave-space-lg: 24px;
+  --adar-vaporwave-space-xl: 40px;
+  --adar-vaporwave-radius: 4px;
+  --adar-vaporwave-shadow-hard: 0 0 24px rgba(255,110,199,0.55), 0 0 64px rgba(255,108,66,0.25);
+  --adar-vaporwave-shadow-glow: 0 0 12px rgba(0,229,255,0.65), 0 0 48px rgba(0,229,255,0.3);
+}
+
+/* Windows 95 Desktop */
+:root {
+  --adar-win95-background: #008080;
+  --adar-win95-surface: #c0c0c0;
+  --adar-win95-foreground: #000000;
+  --adar-win95-muted: #808080;
+  --adar-win95-primary: #000080;
+  --adar-win95-accent: #008080;
+  --adar-win95-danger: #ff0000;
+  --adar-win95-warning: #808000;
+  --adar-win95-success: #008000;
+  --adar-win95-font-display: "W95FA", "MS Sans Serif", "Tahoma", "Verdana", "sans-serif";
+  --adar-win95-font-mono: "Courier New", "Lucida Console", "monospace";
+  --adar-win95-space-xs: 2px;
+  --adar-win95-space-sm: 4px;
+  --adar-win95-space-md: 8px;
+  --adar-win95-space-lg: 12px;
+  --adar-win95-space-xl: 16px;
+  --adar-win95-radius: 0;
+  --adar-win95-shadow-hard: 2px 2px 0 #000000;
+  --adar-win95-shadow-glow: none;
+}
+
+/* Neon Console (mix) */
+:root {
+  --adar-neon-console-background: #0b0b1e;
+  --adar-neon-console-surface: #1a1440;
+  --adar-neon-console-foreground: #e9e9ff;
+  --adar-neon-console-muted: #adafbc;
+  --adar-neon-console-primary: #ffd300;
+  --adar-neon-console-accent: #ff2d95;
+  --adar-neon-console-danger: #ff3b3b;
+  --adar-neon-console-warning: #f7d51d;
+  --adar-neon-console-success: #2bff88;
+  --adar-neon-console-font-display: "VT323", "Courier New", "monospace";
+  --adar-neon-console-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-neon-console-space-xs: 4px;
+  --adar-neon-console-space-sm: 8px;
+  --adar-neon-console-space-md: 16px;
+  --adar-neon-console-space-lg: 24px;
+  --adar-neon-console-space-xl: 32px;
+  --adar-neon-console-radius: 0;
+  --adar-neon-console-shadow-hard: 8px 8px 0 8px #7c1dfd;
+  --adar-neon-console-shadow-glow: 0 0 8px #00e5ff;
 }

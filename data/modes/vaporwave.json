@@ -1,0 +1,225 @@
+{
+  "id": "vaporwave",
+  "name": "Vaporwave / Synthwave",
+  "order": 4,
+  "aliases": [
+    "vaporwave",
+    "synthwave",
+    "outrun",
+    "retrowave",
+    "80s-neon",
+    "miami-vice",
+    "chrome",
+    "vhs",
+    "future-funk",
+    "sunset-grid"
+  ],
+  "summary": "Synthwave sunset: deep purple night ground, hot pink/cyan/yellow neon, a striped sunset sun over a cyan perspective grid, and a chrome-gradient wordmark.",
+  "whenToUse": "When the user asks for vaporwave, synthwave, outrun, retrowave, 80s Miami/neon, chrome wordmark, sunset gradient, or VHS-era retro-futurist aesthetics.",
+  "colors": {
+    "background": "#1a1038",
+    "surface": "#2a1b52",
+    "foreground": "#f7ecff",
+    "muted": "#9d8bd6",
+    "primary": "#ff6ec7",
+    "accent": "#00e5ff",
+    "danger": "#ff3b6b",
+    "warning": "#ffd300",
+    "success": "#35f0b0"
+  },
+  "paletteVariants": {
+    "sunset": {
+      "sky": "#1a1038",
+      "horizon": "#3b1b6b",
+      "pink": "#ff6ec7",
+      "orange": "#ff8c42",
+      "yellow": "#ffd300",
+      "sunCore": "#ffe79a",
+      "grid": "#00e5ff",
+      "fade": "#6b3fa8"
+    },
+    "chrome": {
+      "cap": "#ffffff",
+      "sky": "#7fd4ff",
+      "band": "#0b0620",
+      "crossing": "#2a1b52",
+      "low": "#c8a2ff",
+      "edge": "#f7ecff",
+      "ink": "#1a1038"
+    },
+    "neon": {
+      "pink": "#ff6ec7",
+      "cyan": "#00e5ff",
+      "yellow": "#ffd300",
+      "orange": "#ff8c42",
+      "purple": "#7b3ff2",
+      "mint": "#35f0b0",
+      "red": "#ff3b6b",
+      "white": "#ffffff"
+    },
+    "vhsRamp": {
+      "0": "#1a1038",
+      "1": "#2a1b52",
+      "2": "#6b3fa8",
+      "3": "#ff6ec7",
+      "4": "#ff8c42",
+      "5": "#ffd300",
+      "6": "#00e5ff",
+      "7": "#f7ecff"
+    }
+  },
+  "fonts": {
+    "display": [
+      "Audiowide",
+      "Orbitron",
+      "Michroma",
+      "sans-serif"
+    ],
+    "mono": [
+      "Space Mono",
+      "IBM Plex Mono",
+      "monospace"
+    ]
+  },
+  "radius": "4px",
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "40px"
+  },
+  "shadow": {
+    "hard": "0 0 24px rgba(255,110,199,0.55), 0 0 64px rgba(255,108,66,0.25)",
+    "glow": "0 0 12px rgba(0,229,255,0.65), 0 0 48px rgba(0,229,255,0.3)"
+  },
+  "motion": {
+    "easing": "cubic-bezier(0.22, 0.61, 0.36, 1)",
+    "cursor": "pulse 2.4s ease-in-out infinite",
+    "durations": [
+      "0ms",
+      "240ms",
+      "600ms",
+      "2400ms"
+    ]
+  },
+  "effects": {
+    "scanlines": "repeating-linear-gradient(to bottom, transparent 0 2px, rgba(255,110,199,0.05) 2px 3px, transparent 3px 4px)",
+    "pixelate": "none",
+    "vignette": "radial-gradient(ellipse at 50% 118%, rgba(255,140,66,0.35) 0%, transparent 52%), radial-gradient(ellipse at center, transparent 42%, rgba(11,6,32,0.78) 100%)"
+  },
+  "rules": [
+    "The sunset is the composition: one vertical pink→orange→yellow sky gradient (#ff6ec7 → #ff8c42 → #ffd300) anchored to the bottom of the hero surface, sitting on top of the deep purple night ground #1a1038 — never a full-page gradient behind body text, never inverted (yellow is always the low end).",
+    "Draw the horizon as a real element: a striped sun (six to nine horizontal ink bands #1a1038 cutting the disc) half-sunk on the horizon line, over a perspective floor built from cyan repeating-linear-gradient lines in a transform: perspective(320px) rotateX(62deg) plane — the grid recedes, it never sits flat.",
+    "Chrome is reserved for the wordmark and nothing else: a five-stop vertical gradient (#ffffff → #7fd4ff → #0b0620 → #c8a2ff → #ffffff) clipped to the text with a 1px #1a1038 text-shadow outline, tracking 0.04em–0.10em, uppercase — a second chrome element anywhere on the page cancels the first.",
+    "Glow is depth: every raised surface carries a pink bloom (0 0 24px rgba(255,110,199,0.55)) and every focused or live element carries a cyan one (shadow.glow); soft dark drop shadows are still banned — the night sky is the dark, so elevation reads as emission, not as shadow.",
+    "Spend one neon per surface: pink #ff6ec7 for primary action and the sun rim, cyan #00e5ff for focus, links, and grid lines, yellow #ffd300 for values and the sun's outer edge, orange #ff8c42 only as the gradient's middle stop.",
+    "Set Audiowide or Orbitron for headings, buttons, wordmarks, and labels — uppercase, tracking 0.04em–0.12em, and never for a sentence; all running copy, table cells, and input values belong to Space Mono at 14px–16px/1.6.",
+    "Gloss is allowed but must be flat-ish: 4px radius, 1px translucent edge (#f7ecff at 18%), inset top highlight — no glassmorphism blur, no backdrop-filter, no frost over the sunset.",
+    "Motion is a slow drift, never a stutter: 600ms easing for state changes, a 2.4s pulse for live glow, and an optional 24s linear scroll on the grid or scanline overlay — always disabled under prefers-reduced-motion."
+  ],
+  "componentRecipes": {
+    "panel": "background: linear-gradient(180deg, #2a1b52 0%, #1a1038 100%); color: #f7ecff; border: 1px solid rgba(247,236,255,0.18); border-radius: 4px; padding: 24px 40px; box-shadow: inset 0 1px 0 rgba(247,236,255,0.22), 0 0 24px rgba(255,110,199,0.35); backdrop-filter: none; — the top inset highlight is the glassy rim. Hero variant: give it a sunset footer strip (background: linear-gradient(180deg, #1a1038 0%, #3b1b6b 32%, #ff6ec7 62%, #ff8c42 82%, #ffd300 100%)) at least 160px tall with the striped sun centred and a cyan grid plane bleeding out below; overlay effects.scanlines at 100% cover with pointer-events: none, opacity 0.6.",
+    "button": "font: 700 14px/1 'Audiowide', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; background: linear-gradient(180deg, #ff6ec7 0%, #ff8c42 100%); color: #1a1038; border: 1px solid rgba(255,211,0,0.65); border-radius: 4px; padding: 12px 24px; box-shadow: 0 0 18px rgba(255,110,199,0.5), inset 0 1px 0 rgba(255,255,255,0.45); transition: box-shadow 240ms cubic-bezier(0.22,0.61,0.36,1), transform 240ms cubic-bezier(0.22,0.61,0.36,1); :hover { box-shadow: 0 0 28px rgba(255,110,199,0.75), 0 0 56px rgba(255,140,66,0.35), inset 0 1px 0 rgba(255,255,255,0.55); transform: translateY(-1px); } :active { transform: translateY(1px); box-shadow: 0 0 12px rgba(255,110,199,0.45), inset 0 2px 6px rgba(26,16,56,0.45); } :focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; } — secondary variant: transparent fill, 1px #00e5ff border, #00e5ff text, cyan glow on hover.",
+    "input": "background: rgba(26,16,56,0.85); color: #f7ecff; font: 15px/1.6 'Space Mono', monospace; border: 1px solid rgba(247,236,255,0.22); border-radius: 4px; padding: 10px 14px; caret-color: #00e5ff; box-shadow: inset 0 1px 0 rgba(247,236,255,0.12); transition: border-color 240ms, box-shadow 240ms; :placeholder { color: #9d8bd6; } :focus { border-color: #00e5ff; box-shadow: 0 0 12px rgba(0,229,255,0.65), 0 0 48px rgba(0,229,255,0.3), inset 0 1px 0 rgba(247,236,255,0.12); outline: none; } — invalid state: 1px #ff3b6b border plus a Space Mono message below prefixed 'SIGNAL LOST:', cyan caret retained so the field never goes fully red.",
+    "statusbar": "height: 36px; display: flex; align-items: center; gap: 24px; padding: 0 16px; background: linear-gradient(90deg, #1a1038 0%, #2a1b52 55%, #3b1b6b 100%); border-top: 1px solid rgba(255,110,199,0.45); border-radius: 0; font: 12px/1 'Space Mono', monospace; letter-spacing: 0.14em; text-transform: uppercase; color: #9d8bd6; — live values in #ffd300, links and clock in #00e5ff, warnings in #ffd300, failures in #ff3b6b; segments separated by a 1px rgba(247,236,255,0.14) rule; the trailing 'ON AIR' dot is an 8px #ff6ec7 circle animated with motion.cursor (pulse 2.4s ease-in-out infinite), removed under reduced motion.",
+    "menu": "horizontal bar over the ground: item { display: inline-block; font: 700 13px/1 'Audiowide'; text-transform: uppercase; letter-spacing: 0.1em; padding: 10px 16px; color: #9d8bd6; border-radius: 4px; transition: color 240ms, box-shadow 240ms; } hover { color: #f7ecff; text-shadow: 0 0 12px rgba(0,229,255,0.75); } selected { color: #1a1038; background: linear-gradient(180deg, #ff8c42 0%, #ffd300 100%); box-shadow: 0 0 18px rgba(255,140,66,0.6); } — dropdown is a panel at 4px radius with a 1px rgba(247,236,255,0.18) border, 36px rows, and a 2px #00e5ff left rule on the active row; group separators are 1px rgba(255,110,199,0.35) rules, never dashed."
+  },
+  "copywriting": {
+    "voice": "Late-night FM meets a 1984 car commercial: warm, confident, slightly wistful, addressed straight to the viewer as 'you'. Short declarative lines, present tense, one flourish per screen at most — it sells a feeling, not a feature list, and it never lapses into corporate SaaS voice.",
+    "case": {
+      "headers": "UPPERCASE with 0.08em tracking (Audiowide), or a single Title Case line when it carries the chrome gradient",
+      "commands": "UPPERCASE on buttons and labels",
+      "body": "sentence case"
+    },
+    "prefixes": [
+      "SIDE A ·",
+      "SIDE B ·",
+      "[ONLINE]",
+      "[OFFLINE]",
+      "⏵",
+      "//"
+    ],
+    "verbs": {
+      "start": "TUNE IN",
+      "stop": "SIGN OFF",
+      "save": "ARCHIVE",
+      "load": "CUE",
+      "delete": "ERASE"
+    },
+    "avoid": [
+      "corporate filler ('leverage', 'seamless', 'empower', 'solution', 'platform')",
+      "Please / Sorry / Oops and any apologetic loading copy",
+      "emoji, and more than one exclamation mark per screen",
+      "all-caps Space Mono paragraphs",
+      "ironic 80s misquotations and meme references",
+      "vaporwave text mangling (fullwidth ｖａｐｏｒ, zauberspruch) in body copy — accents only in decorative asides"
+    ]
+  },
+  "do": [
+    "Anchor the sunset to the bottom of the hero surface and let the top of the page stay #1a1038, so the composition reads as a horizon rather than a wash.",
+    "Build the signature scene from three layers in order: gradient sky, striped sun disc with horizontal ink bands, then the cyan perspective grid plane in front of the horizon line.",
+    "Keep the chrome gradient on the wordmark alone, five stops with the dark #0b0620 band at 48%–52% for the reflective break, plus a 1px ink outline so it survives on light and dark grounds.",
+    "Pair every glow with a real surface fill — pink bloom on #2a1b52 or #1a1038 — because neon on white reads as modern, not synthwave.",
+    "Set headings in Audiowide/Orbitron uppercase with 0.04em–0.12em tracking, and put every sentence, value, and label longer than a few words in Space Mono.",
+    "Use the scanline overlay and vignette at low opacity as a top layer with pointer-events: none, so type never loses contrast to the effect."
+  ],
+  "dont": [
+    "Don't run the sunset gradient behind body copy, buttons, or tables — the gradient lives in the sky band, the chrome wordmark, and one accent fill per screen.",
+    "Don't mix chrome typography with a second chrome element: no chrome icons, no chrome buttons, no chrome panel headers.",
+    "Don't add glassmorphism — no backdrop-filter, no 20px frosted blur, no translucent white cards over the sunset.",
+    "Don't use sharp 0px corners or hard-offset block shadows; the system is 4px radius with 1px translucent edges and emissive glow, not brutalist pixel plates.",
+    "Don't animate with steps(), stutter loops, or JPEG-crush/VHS jitter effects — drift and pulse only, and off entirely under reduced motion.",
+    "Don't wash the palette toward pastel or white: keep the ground at #1a1038/#2a1b52 and let pink, cyan, and yellow stay saturated against it."
+  ],
+  "accessibility": [
+    "Keep body copy at #f7ecff on #1a1038 or #2a1b52 (both clear 4.5:1), and reserve #ff6ec7, #00e5ff, and #ffd300 for large bold type, borders, icons, and glow — a pink-on-purple 14px paragraph does not pass.",
+    "Never place text directly on the sunset gradient; put it on a #1a1038 band or a panel with an opaque fill and use yellow #ffd300 or white #f7ecff above the orange, never ink #1a1038 on the dark end of the sky.",
+    "Hold Space Mono body copy at 14px minimum with 1.6 line-height, and Audiowide headings at 20px+ with 0.08em tracking — the wide geometric caps shred at small sizes.",
+    "Honor prefers-reduced-motion: stop the pulsing ON AIR dot, freeze the grid/scanline drift, and replace hover lift with a static glow change; keep a visible 2px #00e5ff focus outline at 3px offset on every focusable element.",
+    "Never signal state by neon alone — pair each color with a word (ON AIR, SIGNAL LOST, ARCHIVED) and keep effect overlays below the type layer with pointer-events: none."
+  ],
+  "signatureElement": "The sunset grid horizon — striped sun disc half-sunk on the horizon above a cyan perspective grid plane — crowned by the chrome-gradient wordmark",
+  "attribution": [
+    {
+      "name": "lospec vaporwave / synthwave palette collections",
+      "url": "https://lospec.com/palette-list/tag/vaporwave",
+      "license": "palette list (see individual palette pages)"
+    },
+    {
+      "name": "Audiowide (Astigmatic / Brian J. Bonislawsky)",
+      "url": "https://github.com/google/fonts/tree/main/ofl/audiowide",
+      "license": "OFL 1.1"
+    },
+    {
+      "name": "Orbitron (Matt McInerney)",
+      "url": "https://github.com/google/fonts/tree/main/ofl/orbitron",
+      "license": "OFL 1.1"
+    },
+    {
+      "name": "Space Mono (Colophon Foundry)",
+      "url": "https://github.com/google/fonts/tree/main/ofl/spacemono",
+      "license": "OFL 1.1"
+    },
+    {
+      "name": "fontsource (self-hosted Google Fonts packaging)",
+      "url": "https://github.com/fontsource/fontsource",
+      "license": "MIT"
+    },
+    {
+      "name": "NovusGFX retro-design-system",
+      "url": "https://github.com/NovusGFX/retro-design-system",
+      "license": "MIT"
+    }
+  ],
+  "prose": {
+    "overview": "Vaporwave / Synthwave is a horizon, not a texture: a deep purple night above, a pink-to-yellow sunset below, and a cyan grid floor receding into it. The interface borrows the visual grammar of a 1984 arcade flyer and a late-night car commercial — glow instead of shadow, gradient sky instead of flat fill, chrome lettering instead of a plain wordmark. It is allowed to be glossy and sentimental, but it is assembled from a fixed set of parts: sunset band, striped sun, grid plane, chrome wordmark, neon signals, and Space Mono body copy.",
+    "colors": "The night ground is #1a1038 with surfaces one step up at #2a1b52, body text in #f7ecff, and #9d8bd6 as the only muted tone. The sunset gradient supplies the emotional color — #ff6ec7 into #ff8c42 into #ffd300, always bottom-anchored and never behind text — while the working neons are pink #ff6ec7 for primary action and sun rim, cyan #00e5ff for focus, links, and grid lines, and yellow #ffd300 for values and the sun's edge. Orange #ff8c42 exists only as a gradient stop, danger #ff3b6b and success #35f0b0 stay rare, and no color is ever desaturated toward white.",
+    "typography": "Audiowide carries the display voice — wordmark, headings, buttons, menu labels — uppercase with 0.04em–0.12em tracking, with Orbitron and Michroma as substitutes when a squarer or wider cut is needed. Space Mono carries everything else at 14px–16px/1.6, which keeps the technical, terminal-adjacent undertone that stops the look from becoming a poster. The chrome gradient belongs to the wordmark alone, clipped to the glyphs with a 1px #1a1038 outline, and hierarchy comes from size, tracking, and case rather than from extra weights or italics.",
+    "layout": "Layout is a staged horizon with three horizontal bands: night sky at the top holding the wordmark and navigation, a mid field of panels on #2a1b52, and the sunset band with the striped sun and perspective grid closing the page. Panels sit on the 4/8/16/24/40 spacing scale with 24px–40px padding and generous vertical rhythm, because the aesthetic needs air around the glow. The grid plane is drawn with repeating-linear-gradient in a transform: perspective(320px) rotateX(62deg) element masked to fade out at the far edge, and it is decoration behind content — never a background for readable text.",
+    "elevation": "Elevation is emission: a raised surface glows pink (0 0 24px rgba(255,110,199,0.55)) and a focused or live one glows cyan, so nothing needs a dark drop shadow — the sky already is the dark. Panels get a 1px translucent #f7ecff edge at 18% plus an inset top highlight for the glassy rim, and buttons add a gradient fill that lightens on hover while the bloom widens. Depth is layered by z-order on the horizon (sky, sun, grid, content) rather than by blur, and backdrop-filter stays off so the sunset behind a panel is never frosted.",
+    "shapes": "Shapes are soft rectangles: 4px radius on panels, buttons, inputs, and dropdowns, 1px translucent edges instead of heavy borders, and circular geometry reserved for two things — the sun disc and status dots. The sun is a circle clipped by horizontal ink bands (#1a1038) whose spacing widens toward the bottom, imitating the classic striped sunset, and the grid is a single plane of 1px cyan lines at 96px spacing that scale with perspective. Icons are 1.5px–2px line strokes with rounded caps, never pixel art and never filled grey.",
+    "components": "The hero panel is the signature: a #2a1b52-to-#1a1038 body with the sunset footer band, striped sun, and cyan grid bleeding below, plus a chrome-gradient wordmark above it. Standard panels are quieter — gradient fill, translucent edge, pink bloom — and carry tables, forms, and cards. Buttons are pink-to-orange gradient plates with a pink bloom that widens on hover and a cyan 2px focus outline; inputs are dark wells in Space Mono that switch to a cyan border and glow on focus; the status bar is a 36px gradient strip with tracked Space Mono labels and a pulsing pink ON AIR dot; menus are Audiowide labels that invert into an orange-to-yellow gradient for the selected item, with a cyan left rule marking the active row in the dropdown.",
+    "dosDonts": "Do anchor the sunset to the bottom, do keep chrome for the wordmark alone, do let glow replace shadow, and do keep every paragraph in Space Mono on an opaque ground. Don't run gradients behind body copy, don't add a second chrome element, don't frost panels with backdrop-filter, don't use hard 0px pixel corners or block shadows, and don't drift toward pastel — the night has to stay dark for the neon to mean anything."
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "neon-console",
+  "name": "Neon Console",
+  "order": 1,
+  "base": "arcade",
+  "overrides": {
+    "fonts": "terminal",
+    "effects": "terminal",
+    "motion": "terminal"
+  },
+  "signatureElement": "Arcade pixel-border panels with a phosphor-green typewriter cursor.",
+  "summary": "Arcade neon geometry with terminal/CRT type, scanlines, and motion."
+}

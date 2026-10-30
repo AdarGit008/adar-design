@@ -54,6 +54,7 @@ const write = (rel, content) => {
   console.log("wrote", path.relative(ROOT, p));
 };
 const esc = (s) => String(s).replace(/\|/g, "\\|").replace(/\n/g, " ");
+const yq = (s) => `"${String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`; // YAML double-quoted scalar
 const list = (arr) => (arr || []).map((x) => `- ${x}`).join("\n");
 const quoteFonts = (fonts) => fonts.map((f) => `"${f}"`).join(", ");
 
@@ -91,7 +92,7 @@ ${list(skill.crossCuttingRules)}
 Modes are data, not code. Edit \`data/modes/<id>.json\` (see \`data/modes/_template.json\`) and run \`node scripts/generate.mjs\` to regenerate every file below. Add a new mode by dropping a new \`data/modes/<id>.json\` and rerunning.
 `;
 
-const fm = `---\nname: ${skill.name}\ndescription: ${skill.description}\nlicense: ${skill.license}\nmetadata:\n  version: ${skill.version}\n  modes: ${modes.map((m) => m.id).join(", ")}\n---\n`;
+const fm = `---\nname: ${skill.name}\ndescription: ${yq(skill.description)}\nlicense: ${skill.license}\nmetadata:\n  version: ${skill.version}\n  modes: ${modes.map((m) => m.id).join(", ")}\n---\n`;
 write("SKILL.md", fm + "\n" + skillBody + "\n");
 
 // ---- per-mode reference + Google DESIGN.md --------------------------------

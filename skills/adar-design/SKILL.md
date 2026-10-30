@@ -1,6 +1,6 @@
 ---
 name: adar-design
-description: Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Three selectable visual modes: (1) BIOS / POST / text-mode — Award BIOS blue, VGA 16-color, IBM 3270 mainframe, DOS shell; (2) 80s Arcade — 8-bit neon, hard pixel borders, Press Start 2P; (3) Terminal / CRT — phosphor green, scanlines, VT323. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, or text-mode look. Invoke /skill:adar-design <bios|arcade|terminal> to force a mode.
+description: "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Three selectable visual modes: (1) BIOS / POST / text-mode — Award BIOS blue, VGA 16-color, IBM 3270 mainframe, DOS shell; (2) 80s Arcade — 8-bit neon, hard pixel borders, Press Start 2P; (3) Terminal / CRT — phosphor green, scanlines, VT323. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, POST, DOS, VGA, or text-mode look. Invoke /skill:adar-design <bios|arcade|terminal> to force a mode."
 license: MIT
 metadata:
   version: 0.1.0

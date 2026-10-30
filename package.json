@@ -1,0 +1,13 @@
+{
+  "name": "adar-design",
+  "version": "0.1.0",
+  "description": "Pi skill: a retro design system with three selectable modes — BIOS/POST/text-mode, 80s arcade, and terminal/CRT — delivered as a Google DESIGN.md schema plus machine-readable tokens.",
+  "keywords": ["pi-package", "skill", "design-system", "design-tokens", "retro", "bios", "arcade", "terminal", "crt"],
+  "license": "MIT",
+  "scripts": {
+    "generate": "node scripts/generate.mjs"
+  },
+  "pi": {
+    "skills": ["./skills/adar-design"]
+  }
+}

@@ -1,0 +1,70 @@
+/* adar-design tokens — generated. Edit data/modes/*.json, run node scripts/generate.mjs */
+
+/* 80s Arcade */
+:root {
+  --adar-arcade-background: #0b0b1e;
+  --adar-arcade-surface: #1a1440;
+  --adar-arcade-foreground: #e9e9ff;
+  --adar-arcade-muted: #adafbc;
+  --adar-arcade-primary: #ffd300;
+  --adar-arcade-accent: #ff2d95;
+  --adar-arcade-danger: #ff3b3b;
+  --adar-arcade-warning: #f7d51d;
+  --adar-arcade-success: #2bff88;
+  --adar-arcade-font-display: "Press Start 2P", "VT323", "monospace";
+  --adar-arcade-font-mono: "VT323", "IBM Plex Mono", "monospace";
+  --adar-arcade-space-xs: 4px;
+  --adar-arcade-space-sm: 8px;
+  --adar-arcade-space-md: 16px;
+  --adar-arcade-space-lg: 24px;
+  --adar-arcade-space-xl: 32px;
+  --adar-arcade-radius: 0;
+  --adar-arcade-shadow-hard: 8px 8px 0 8px #7c1dfd;
+  --adar-arcade-shadow-glow: 0 0 8px #00e5ff;
+}
+
+/* BIOS / POST / Text-mode */
+:root {
+  --adar-bios-background: #0000a8;
+  --adar-bios-surface: #0000aa;
+  --adar-bios-foreground: #a8a8a8;
+  --adar-bios-muted: #555555;
+  --adar-bios-primary: #fcfc54;
+  --adar-bios-accent: #00a8a8;
+  --adar-bios-danger: #fc5454;
+  --adar-bios-warning: #a85400;
+  --adar-bios-success: #00aa00;
+  --adar-bios-font-display: "Web437 IBM VGA 9x16", "Px437 IBM VGA 9x16", "Perfect DOS VGA 437", "Fixedsys", "VT323", "Courier New", "monospace";
+  --adar-bios-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-bios-space-xs: 4px;
+  --adar-bios-space-sm: 8px;
+  --adar-bios-space-md: 16px;
+  --adar-bios-space-lg: 24px;
+  --adar-bios-space-xl: 32px;
+  --adar-bios-radius: 0;
+  --adar-bios-shadow-hard: 10px 10px 0 #000000;
+  --adar-bios-shadow-glow: 0 0 4px currentColor;
+}
+
+/* Terminal / CRT */
+:root {
+  --adar-terminal-background: #0a0e0a;
+  --adar-terminal-surface: #101710;
+  --adar-terminal-foreground: #33ff66;
+  --adar-terminal-muted: #1e9944;
+  --adar-terminal-primary: #ffb000;
+  --adar-terminal-accent: #33ff66;
+  --adar-terminal-danger: #ff3030;
+  --adar-terminal-warning: #ffb000;
+  --adar-terminal-success: #33ff66;
+  --adar-terminal-font-display: "VT323", "Courier New", "monospace";
+  --adar-terminal-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-terminal-space-xs: 8px;
+  --adar-terminal-space-sm: 16px;
+  --adar-terminal-space-md: 24px;
+  --adar-terminal-space-lg: 32px;
+  --adar-terminal-space-xl: 48px;
+  --adar-terminal-radius: 0;
+  --adar-terminal-shadow-hard: 0 0 8px rgba(51,255,102,0.6);
+  --adar-terminal-shadow-glow: inset 0 0 120px rgba(51,255,102,0.08);
+}

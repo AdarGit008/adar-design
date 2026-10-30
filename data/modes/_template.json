@@ -1,0 +1,58 @@
+{
+  "id": "bios",
+  "name": "BIOS / POST / Text-mode",
+  "order": 1,
+  "aliases": ["bios", "post", "dos", "vga", "cga", "3270", "mainframe", "text-mode"],
+  "summary": "One-sentence description of the aesthetic.",
+  "whenToUse": "When the user asks for ... (routing sentence).",
+  "colors": {
+    "background": "#0000a8",
+    "surface": "#0000aa",
+    "foreground": "#a8a8a8",
+    "muted": "#555555",
+    "primary": "#fcfc54",
+    "accent": "#00a8a8",
+    "danger": "#fc5454",
+    "warning": "#a85400",
+    "success": "#00aa00"
+  },
+  "paletteVariants": {
+    "post": {"background": "#0000a8", "foreground": "#a8a8a8", "bright": "#fcfcfc", "highlight": "#fcfc54", "info": "#00a8a8", "error": "#aa0000", "errorBright": "#fc5454", "warn": "#a85400", "black": "#000000"},
+    "vga16": {"0": "#000000", "1": "#0000aa", "2": "#00aa00", "3": "#00aaaa", "4": "#aa0000", "5": "#aa00aa", "6": "#aa5500", "7": "#aaaaaa", "8": "#555555", "9": "#5555ff", "10": "#55ff55", "11": "#55ffff", "12": "#ff5555", "13": "#ff55ff", "14": "#ffff55", "15": "#ffffff"}
+  },
+  "fonts": {
+    "display": ["Web437 IBM VGA 9x16", "Px437 IBM VGA 9x16", "Perfect DOS VGA 437", "monospace"],
+    "mono": ["IBM Plex Mono", "Courier New", "monospace"]
+  },
+  "radius": "0",
+  "spacing": {"xs": "4px", "sm": "8px", "md": "16px", "lg": "24px", "xl": "32px"},
+  "shadow": {"hard": "10px 10px 0 #000000", "glow": "0 0 4px currentColor"},
+  "motion": {"easing": "steps(2, end)", "cursor": "steps(2, jump-none) 1s infinite", "durations": ["0ms", "300ms", "1200ms"]},
+  "effects": {"scanlines": "repeating-linear-gradient(to bottom, transparent 0 1px, rgba(0,0,0,.18) 1px 2px)", "pixelate": "pixelated", "vignette": "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%)"},
+  "rules": ["Array of hard work-style rules, one string each."],
+  "componentRecipes": {"panel": "recipe", "button": "recipe", "input": "recipe", "statusbar": "recipe", "menu": "recipe"},
+  "copywriting": {
+    "voice": "terse, technical, authoritative",
+    "case": {"headers": "UPPERCASE", "commands": "lowercase", "body": "sentence case"},
+    "prefixes": ["[SYS]", "[USR]", "[INF]", "[ERR]", "[WRN]", "[NET]"],
+    "verbs": {"start": "INITIALIZE/BOOT", "stop": "HALT/TERMINATE", "save": "WRITE/COMMIT", "load": "READ/FETCH", "delete": "PURGE/WIPE"},
+    "avoid": ["Please", "Sorry", "Oops", "Just", "Maybe", "excessive !", "emoji"]
+  },
+  "do": ["Array of DO rules."],
+  "dont": ["Array of DON'T rules."],
+  "accessibility": ["Array of accessibility rules."],
+  "signatureElement": "The single bold element that defines the mode.",
+  "attribution": [
+    {"name": "source name", "url": "https://...", "license": "MIT"}
+  ],
+  "prose": {
+    "overview": "...",
+    "colors": "...",
+    "typography": "...",
+    "layout": "...",
+    "elevation": "...",
+    "shapes": "...",
+    "components": "...",
+    "dosDonts": "..."
+  }
+}

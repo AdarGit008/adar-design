@@ -8,7 +8,7 @@ Award BIOS blue POST screen, VGA 16-color attributes, IBM 3270 mainframe fields,
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Award BIOS blue POST screen, VGA 16-color attributes, IBM 3270 mainframe fields,
 | `danger` | `#fc5454` |
 | `warning` | `#a85400` |
 | `success` | `#00aa00` |
+| `border` | `#a8a8a8` |
+| `divider` | `#555555` |
+| `selection` | `#fcfc54` |
+| `overlay` | `#0000aa` |
+| `selection-text` | `#0000a8` |
+| `color-scheme` | `dark` |
 
 ### Variant: `post`
 
@@ -88,7 +94,17 @@ Award BIOS blue POST screen, VGA 16-color attributes, IBM 3270 mainframe fields,
 ### Typography
 
 - Display: "Web437 IBM VGA 9x16", "Px437 IBM VGA 9x16", "Perfect DOS VGA 437", "Fixedsys", "VT323", "Courier New", "monospace"
+- Body: "IBM Plex Mono", "Courier New", "monospace"
 - Mono: "IBM Plex Mono", "Courier New", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `16px` | 1.1 | — |
+| h2 | `16px` | 1.2 | — |
+| body | `16px` | 1.2 | — |
+| caption | `16px` | 1.2 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -119,8 +135,19 @@ Award BIOS blue POST screen, VGA 16-color attributes, IBM 3270 mainframe fields,
 ## Component recipes
 
 - **panel:** background:#0000aa; color:#a8a8a8; font:16px/16px 'Web437 IBM VGA 9x16',monospace; padding:16px; frame it in a <pre> at line-height:1 using ╔═╗║╚╝ drawn in #a8a8a8; the title sits in the top frame line as reverse video: background:#a8a8a8;color:#0000aa; text ' SYS CONFIG ' with one space of padding each side; no border property, no radius, no shadow.
+- **card:** background:#0000aa; color:#a8a8a8; font:16px/16px mono; padding:16px; frame it in a <pre> with ┌─┐│└┘ CP437 glyphs in #a8a8a8; the header line carries a reverse-video title (' CARD ' with background:#a8a8a8;color:#0000aa), the body is one or two lines of sentence-case text, and a footer action line reads '1Open 2Save' with the numerals in reverse video; no radius, no border property, no shadow.
 - **button:** height:32px (two 16px cells); background:#0000aa; color:#a8a8a8; border:0; border-radius:0; padding:0 8px; font:16px/16px mono; text-transform:uppercase; the trigger letter is a separate span in #fc5454; hover and active are inverse video (background:#a8a8a8;color:#0000aa); focus prefixes a solid one-cell block █ in #fcfc54; state changes land in 0ms, never transitioned.
 - **input:** The field is CP437 cells, not a CSS box: render in <pre> at line-height:1 as 'NAME....: [ value______ ]' with background:#0000a8, label in #a8a8a8, entered value in #fcfc54; the caret is a one-cell solid block █ with animation:steps(2,jump-none) 1s infinite; invalid input keeps the value in #fc5454 and appends ' << INVALID'; the active field runs a reverse-video band behind the value and no underline or outline exists.
+- **select:** Render as a 3270-style field list rather than a popover: a label run 'OPTION....: [ value______ ]' in #a8a8a8 with the value in #fcfc54 and a solid block caret; the open list is a single-line-double CP437 frame with the selected entry in inverse video and other entries dimmed to #555555; the trigger letter 'S' stays #fc5454 and the whole control lands in 0ms with no animation.
+- **checkbox:** Two-character cell pair drawn inline: '[' + (blank space when off, 'X' when on) + ']' at 16px/16px mono; the checked glyph uses #fcfc54 and the label keeps #a8a8a8; focus inverts the bracket pair to background:#a8a8a8;color:#0000aa, and the radio variant swaps 'X' for a solid one-cell block █; state is also spoken by the label text, never glyph alone.
+- **badge:** A two-cell attribute chip: display:inline-block; padding:0 4px; font:16px/16px mono; text-transform:uppercase; color:#0000aa; background:#a8a8a8; the role is carried by the background (#fcfc54 attention, #fc5454 failure, #00aa00 success, #555555 idle) with the word printed inside; never a rounded pill and never an icon-only badge.
+- **avatar:** A 2x2 cell (32px) bitmap block drawn as a bordered CP437 tile: 32px square, background:#0000aa, 1px inner glyph frame via '▒' cells, and the initial is a single #fcfc54 glyph centred inside; imagery, when present, is 32px pixel art with image-rendering: pixelated and a one-cell #a8a8a8 frame; no radius, no photo crop.
+- **nav:** Horizontal menubar of reverse-video words (background:#a8a8a8;color:#0000aa;font:16px/16px mono;padding:0 4px), each label prefixing its trigger letter in #fc5454; the active tab flips to background:#0000aa;color:#fcfc54; the vertical form is the existing menu dropdown — a single-line-double CP437 frame with one inverse row.
+- **table:** Build as a fixed-cell grid inside a <pre> at line-height:1: a header row of UPPERCASE #fcfc54 labels, then body rows of #a8a8a8 on #0000aa with '│' column rules and a '═' rule under the header; hover and the selected row are inverse video (background:#a8a8a8;color:#0000aa) and the selected row prefixes '>'; zebra striping is a single-cell #0000a8 band, never opacity.
+- **dialog:** A detached black box floating over #0000aa: background:#000000; color:#a8a8a8; frame it with ╔═╗║╚╝ glyphs in #a8a8a8 and a reverse-video title (' NOTICE '); the scrim is the solid #0000aa overlay token at full opacity (no alpha), a ─ confirm line with 1Yes/2No reverse-video actions sits at the bottom, and the box may carry a 10px 10px 0 #000000 offset; focus stays trapped inside.
+- **toast:** A single-line status message at the bottom right in a ┌─┐ CP437 frame: background:#000000; color:#a8a8a8; font:16px/16px mono; prefixed by '[ERR]'/'[WRN]'/'[OK]' in the role color (#fc5454/#a85400/#00aa00); auto-dismiss is a discrete counter that blanks the line at 1200ms, never a fade, and reduced motion shows it as a static line.
+- **code:** A preformatted block at line-height:1 in the mono stack: background:#0000a8; color:#a8a8a8; padding:16px; frame it with ╔═╗║╚╝ glyphs; keywords and commands print in #fcfc54, comments in #555555, and errors in #fc5454; no syntax-highlight gradients — only the 16-color attributes; whitespace is preserved and the block scrolls in whole cells.
+- **empty:** A centred CP437 panel with a two-line glyph illustration (e.g. a box outline ░▒▓ motif) above one message in #a8a8a8 and a single reverse-video CTA ('[ INITIALIZE ]'); the state word (EMPTY, NO DATA, READY) is printed in #fcfc54 and there is exactly one action, never a hero or illustration beyond the glyphs.
 - **statusbar:** A fixed footer strip exactly 16px tall: background:#a8a8a8; color:#0000a8; font:16px/16px mono; padding:0 4px; items separated by two spaces — '1Help  2Menu  3Save  4Load  10Quit' with each numeral in reverse video (#0000aa on #a8a8a8); on the 3270 variant swap to an OIA line: background:#000000; color:#00d4d4; 'X SYSTEM  SYS1  READY  24/80' with the X in #ff3030.
 - **menu:** A horizontal menubar of reverse-video words: background:#a8a8a8; color:#0000aa; font:16px/16px mono; padding:0 4px; each label prefixes its trigger glyph in #fc5454 ('F'ile, 'O'ptions); the active item flips back to background:#0000aa;color:#fcfc54; its dropdown is a single-line-double CP437 frame at line-height:1 with exactly one row in inverse video, no shadow, no radius, no open/close animation beyond 0ms.
 

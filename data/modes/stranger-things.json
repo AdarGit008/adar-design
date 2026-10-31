@@ -15,6 +15,13 @@
   ],
   "summary": "80s synth-horror title card: a high-contrast serif wordmark burning in red neon on near-black #050505, off-white mono copy, faint film grain and a heavy vignette.",
   "whenToUse": "When the user asks for a Stranger Things-style title treatment, red-neon serif wordmark, 80s synth-horror poster, VHS title card, or a dark cinematic landing page with a single glowing headline.",
+  "colorScheme": "dark",
+  "typeScale": {
+    "h1": { "fontSize": "48px", "lineHeight": 1.1 },
+    "h2": { "fontSize": "28px", "lineHeight": 1.2 },
+    "body": { "fontSize": "17px", "lineHeight": 1.6 },
+    "caption": { "fontSize": "12px", "lineHeight": 1.4 }
+  },
   "colors": {
     "background": "#050505",
     "surface": "#120b0b",
@@ -24,7 +31,11 @@
     "accent": "#b30000",
     "danger": "#ff4a3d",
     "warning": "#e0a83a",
-    "success": "#6fbf8b"
+    "success": "#6fbf8b",
+    "border": "#8a7f76",
+    "divider": "#8a7f76",
+    "selection": "#ff1a1a",
+    "overlay": "#050505"
   },
   "paletteVariants": {
     "title": {
@@ -69,6 +80,7 @@
       "Georgia",
       "serif"
     ],
+    "body": ["Playfair Display", "Cormorant Garamond", "Georgia", "serif"],
     "mono": [
       "IBM Plex Mono",
       "JetBrains Mono",
@@ -118,6 +130,17 @@
     "One glow per view: the wordmark or the single primary action owns the bloom, and everything else stays flat deep red #b30000 so the hierarchy never collapses into a red blur."
   ],
   "componentRecipes": {
+    "card": "background:#120b0b;color:#e8e2d8;border:1px solid rgba(179,0,0,0.45);border-radius:2px;padding:24px 32px;box-shadow:0 24px 60px rgba(0,0,0,0.75); title = Cinzel 24px uppercase #e8e2d8, body = IBM Plex Mono 15px/1.6 #e8e2d8; an optional 4% grain layer sits behind content; no white border, no red fill, radius ≤2px.",
+    "select": "A signal-window dropdown: trigger = IBM Plex Mono 16px field (background:#050505;border:1px solid rgba(179,0,0,0.5);border-bottom-color:#b30000;padding:12px 16px;color:#e8e2d8) with a red caret; the open list is a #050505 panel with 1px rgba(179,0,0,0.35) separators; active row = #e8e2d8 text with a 2px #ff1a1a left rule and 0 0 12px red bloom; hover fades to #e8e2d8 over 240ms.",
+    "checkbox": "A 20px square signal toggle: background:#050505;border:1px solid rgba(179,0,0,0.5);border-radius:2px; checked = 10px #ff1a1a core with text-shadow 0 0 6px rgba(255,26,26,0.55); radio = 8px #ff1a1a dot; label in IBM Plex Mono 14px uppercase #8a7f76 with 'ON'/'OFF'; focus-visible = 1px #e8e2d8 outline at 3px offset.",
+    "badge": "A 2px-radius signal chip: display:inline-flex;gap:8px;padding:4px 10px;background:#050505;border:1px solid;border-radius:2px;font:12px/1 'IBM Plex Mono';text-transform:uppercase;letter-spacing:0.14em; role = border+text (#6fbf8b success, #e0a83a warning, #ff4a3d danger, #b30000 neutral) with the word spelled out; a 0 0 10px bloom in the role hue; never a filled red bar.",
+    "avatar": "A 40px square film-frame tile: background:#120b0b;border:1px solid rgba(179,0,0,0.45);border-radius:2px;color:#e8e2d8;font:700 16px 'Cinzel',serif; initials or a two-letter mark; photo avatars get a 1px red hairline and no rounding past 2px; no bloom on the avatar itself.",
+    "nav": "A vertical signal rail (horizontal form also allowed): IBM Plex Mono 13px uppercase #8a7f76, letter-spacing 0.14em, padding 12px 16px; hover fades to #e8e2d8; active = #e8e2d8 with a 2px #ff1a1a left rule and 0 0 12px rgba(255,26,26,0.35) bloom on the rule only; group separators are 1px rgba(179,0,0,0.35) rules; the dropdown form reuses the existing menu.",
+    "table": "A signal grid: header = IBM Plex Mono 12px uppercase #8a7f76 over a 1px rgba(179,0,0,0.45) rule; body rows = IBM Plex Mono 15px #e8e2d8 separated by 1px rgba(232,226,216,0.12) rules; hover = #e8e2d8, selected row = rgba(179,0,0,0.18) fill with a 2px #ff1a1a left rule; values tabular, radius 2px.",
+    "dialog": "A film-frame modal: background:#120b0b;border:1px solid rgba(179,0,0,0.45);border-radius:2px;box-shadow:0 24px 60px rgba(0,0,0,0.75),0 0 40px rgba(255,26,26,0.06); scrim = color-mix(in srgb, var(--overlay) 70%, transparent); title = Cinzel uppercase #ff1a1a (no bloom on body), body = Plex Mono; actions = outlined red primary + secondary; entrance is a 600ms reveal.",
+    "toast": "A bottom-right signal line: background:#050505;border:1px solid rgba(179,0,0,0.45);padding:12px 16px;font:12px/1 'IBM Plex Mono';text-transform:uppercase;letter-spacing:0.14em; prefix 'LIVE'/'WARNING'/'SIGNAL LOST' in #6fbf8b/#e0a83a/#ff4a3d; auto-dismisses with a 240ms fade; reduced motion keeps it static.",
+    "code": "A monospace transmission block: background:#050505;border:1px solid rgba(179,0,0,0.5);border-radius:2px;padding:16px;font:14px/1.6 'IBM Plex Mono';color:#e8e2d8; preserve whitespace; comments #8a7f76, strings #b30000, errors #ff4a3d; no syntax gradients, no bloom on body text.",
+    "empty": "A centred film-frame panel: a faint red-neon glyph (a 1px outlined shape, no bloom) above one IBM Plex Mono message ('NO SIGNAL' / 'TAPE IS EMPTY') and a single outlined red CTA; the glyph is aria-hidden and the state is written in words.",
     "panel": "background: #120b0b; color: #e8e2d8; border: 1px solid rgba(179, 0, 0, 0.45); border-radius: 2px; padding: 24px 32px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.75), 0 0 40px rgba(255, 26, 26, 0.06); — the red hairline plus the deep ambient drop is the entire container. Optional grain layer from effects.grain at 4% opacity, positioned above the panel background and below its content, pointer-events: none. No backdrop-blur, no white border, no large red fill, no radius above 2px.",
     "wordmark": "The signature: font: 700 clamp(48px, 9vw, 120px)/0.95 'Cinzel', 'Playfair Display', 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; color: #ff1a1a; background: #050505; text-shadow: 0 0 1px #ff6f61, 0 0 8px rgba(255, 26, 26, 0.9), 0 0 28px rgba(255, 26, 26, 0.6), 0 0 64px rgba(179, 0, 0, 0.45); — sit it in the upper third with 32–56px beneath and a caption line in 13px #8a7f76 Plex Mono. The flicker keyframe dips opacity to 0.92 twice per 2400ms cycle, never below 0.9, and is disabled under prefers-reduced-motion.",
     "button": "font: 600 14px/1 'IBM Plex Mono', monospace; text-transform: uppercase; letter-spacing: 0.14em; background: transparent; color: #ff1a1a; border: 1px solid #b30000; border-radius: 2px; padding: 14px 24px; text-shadow: 0 0 6px rgba(255, 26, 26, 0.55); transition: color 240ms cubic-bezier(0.22, 0.61, 0.36, 1), border-color 240ms, box-shadow 240ms; :hover { color: #ff6f61; border-color: #ff1a1a; box-shadow: 0 0 12px rgba(255, 26, 26, 0.45), inset 0 0 18px rgba(255, 26, 26, 0.12); } :active { transform: translateY(1px); box-shadow: inset 0 0 24px rgba(255, 26, 26, 0.3); } :focus-visible { outline: 1px solid #e8e2d8; outline-offset: 3px; } — primary variant: background #b30000, color #e8e2d8, box-shadow 0 0 24px rgba(255, 26, 26, 0.4); it is the only element allowed a red fill, and only once per screen.",

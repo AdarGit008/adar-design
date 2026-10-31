@@ -1,14 +1,16 @@
 {
   "name": "adar-design",
   "license": "MIT",
-  "version": "0.3.0",
-  "description": "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode.",
+  "version": "0.4.0",
+  "description": "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable token-group mixes. Each mode is a finished app surface: a body typeface, four-tier type scale, light/dark scheme, 13-role colors, motion/effects tokens, and a 15-component vocabulary. Preview every mode in skills/adar-design/gallery.html. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode.",
   "whenToUse": [
     "The user asks for a retro / underground / 80s / arcade / neon / terminal / hacker / CRT / BIOS / DOS / text-mode look",
     "The user asks to build, theme, restyle, or 'make it look like' a retro computing aesthetic",
     "The user names BIOS, POST screen, VGA, CGA, 3270 mainframe, DOS shell, NES/8-bit arcade, phosphor terminal, vaporwave, Windows 95, Commodore 64, Game Boy, cyberpunk, or a 90s game explicitly",
     "The user asks for a fine-art / art-movement look (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism)",
-    "The user asks to mix two or more of the modes' token groups on one surface"
+    "The user asks to mix two or more of the modes' token groups on one surface",
+    "The user wants a finished, holistic app surface — full component set, type scale, light/dark scheme, and motion + effects tokens",
+    "The user wants to preview or compare every visual mode at once (open skills/adar-design/gallery.html or switch modes with ?mode=)"
   ],
   "crossCuttingRules": [
     "Pick one base mode per surface. Mix modes only through whole-group overrides (see the Mixing section) — never blend half a group.",
@@ -19,7 +21,8 @@
   "mixing": {
     "intro": "A mix keeps one base mode and overrides whole token groups from other modes — two or more modes' tokens active on one surface.",
     "groups": {
-      "colors": ["colors"],
+      "colors": ["colors", "colorScheme"],
+      "typeScale": ["typeScale"],
       "paletteVariants": ["paletteVariants"],
       "fonts": ["fonts"],
       "radius": ["radius"],

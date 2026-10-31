@@ -11,16 +11,40 @@
   --adar-arcade-danger: #ff3b3b;
   --adar-arcade-warning: #f7d51d;
   --adar-arcade-success: #2bff88;
-  --adar-arcade-font-display: "Press Start 2P", "VT323", "monospace";
-  --adar-arcade-font-mono: "VT323", "IBM Plex Mono", "monospace";
+  --adar-arcade-border: #e9e9ff;
+  --adar-arcade-divider: #adafbc;
+  --adar-arcade-selection: #ff2d95;
+  --adar-arcade-overlay: #0b0b1e;
+  --adar-arcade-selection-text: #0b0b1e;
+  --adar-arcade-color-scheme: dark;
+  --adar-arcade-font-display: "Press Start 2P", "VT323", monospace;
+  --adar-arcade-font-mono: "VT323", "IBM Plex Mono", monospace;
+  --adar-arcade-font-body: "VT323", "IBM Plex Mono", monospace;
   --adar-arcade-space-xs: 4px;
   --adar-arcade-space-sm: 8px;
   --adar-arcade-space-md: 16px;
   --adar-arcade-space-lg: 24px;
   --adar-arcade-space-xl: 32px;
   --adar-arcade-radius: 0;
-  --adar-arcade-shadow-hard: 8px 8px 0 8px #7c1dfd;
+  --adar-arcade-shadow-hard: 8px 8px 0 #7c1dfd;
   --adar-arcade-shadow-glow: 0 0 8px #00e5ff;
+  --adar-arcade-type-h1-size: 24px;
+  --adar-arcade-type-h1-line-height: 1.1;
+  --adar-arcade-type-h2-size: 16px;
+  --adar-arcade-type-h2-line-height: 1.2;
+  --adar-arcade-type-body-size: 16px;
+  --adar-arcade-type-body-line-height: 1.5;
+  --adar-arcade-type-caption-size: 14px;
+  --adar-arcade-type-caption-line-height: 1.4;
+  --adar-arcade-motion-easing: steps(8, end);
+  --adar-arcade-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-arcade-duration-instant: 0ms;
+  --adar-arcade-duration-fast: 150ms;
+  --adar-arcade-duration-base: 300ms;
+  --adar-arcade-duration-slow: 1500ms;
+  --adar-arcade-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(255,255,255,0.02) 2px 3px);
+  --adar-arcade-effects-vignette: radial-gradient(ellipse at top, #1a1440 0%, #0b0b1e 60%);
+  --adar-arcade-effects-pixelate: pixelated;
 }
 
 /* Atari / Sierra Logo Treatment */
@@ -34,8 +58,15 @@
   --adar-atari-sierra-danger: #ff4b3e;
   --adar-atari-sierra-warning: #f08a24;
   --adar-atari-sierra-success: #52b545;
-  --adar-atari-sierra-font-display: "Audiowide", "Orbitron", "Space Grotesk", "sans-serif";
-  --adar-atari-sierra-font-mono: "Space Mono", "IBM Plex Mono", "monospace";
+  --adar-atari-sierra-border: #ececee;
+  --adar-atari-sierra-divider: #86878f;
+  --adar-atari-sierra-selection: #f5c518;
+  --adar-atari-sierra-overlay: #0a0a0d;
+  --adar-atari-sierra-selection-text: #0a0a0d;
+  --adar-atari-sierra-color-scheme: dark;
+  --adar-atari-sierra-font-display: "Audiowide", "Orbitron", "Space Grotesk", sans-serif;
+  --adar-atari-sierra-font-mono: "Space Mono", "IBM Plex Mono", monospace;
+  --adar-atari-sierra-font-body: "Space Mono", "IBM Plex Mono", monospace;
   --adar-atari-sierra-space-xs: 4px;
   --adar-atari-sierra-space-sm: 8px;
   --adar-atari-sierra-space-md: 16px;
@@ -44,6 +75,25 @@
   --adar-atari-sierra-radius: 0;
   --adar-atari-sierra-shadow-hard: 6px 6px 0 #000000;
   --adar-atari-sierra-shadow-glow: 0 0 6px rgba(47,127,224,0.45);
+  --adar-atari-sierra-type-h1-size: 28px;
+  --adar-atari-sierra-type-h1-line-height: 1.1;
+  --adar-atari-sierra-type-h2-size: 18px;
+  --adar-atari-sierra-type-h2-line-height: 1.2;
+  --adar-atari-sierra-type-body-size: 16px;
+  --adar-atari-sierra-type-body-line-height: 1.5;
+  --adar-atari-sierra-type-caption-size: 12px;
+  --adar-atari-sierra-type-caption-line-height: 1.4;
+  --adar-atari-sierra-motion-easing: steps(5, end);
+  --adar-atari-sierra-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-atari-sierra-duration-instant: 0ms;
+  --adar-atari-sierra-duration-fast: 120ms;
+  --adar-atari-sierra-duration-base: 360ms;
+  --adar-atari-sierra-duration-slow: 900ms;
+  --adar-atari-sierra-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.22) 2px 3px);
+  --adar-atari-sierra-effects-vignette: radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(0,0,0,0.65) 100%);
+  --adar-atari-sierra-effects-pixelate: pixelated;
+  --adar-atari-sierra-effects-slice-stack: linear-gradient(to bottom, #e8402a 0 8px, #f08a24 8px 14px, #f5c518 14px 18px, #52b545 18px 21px, #2f7fe0 21px 23px, transparent 23px);
+  --adar-atari-sierra-effects-slice-stack-hairline: linear-gradient(to bottom, #e8402a 0 5px, #f08a24 5px 8px, #f5c518 8px 10px, #52b545 10px 11px, #2f7fe0 11px 12px, transparent 12px);
 }
 
 /* Bauhaus / Functional Geometry */
@@ -57,8 +107,15 @@
   --adar-bauhaus-danger: #b3241b;
   --adar-bauhaus-warning: #f2c014;
   --adar-bauhaus-success: #123f70;
-  --adar-bauhaus-font-display: "Archivo", "Josefin Sans", "Helvetica Neue", "Arial", "system-ui", "sans-serif";
-  --adar-bauhaus-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-bauhaus-border: #141414;
+  --adar-bauhaus-divider: #5f5a50;
+  --adar-bauhaus-selection: #1b5fa8;
+  --adar-bauhaus-overlay: #141414;
+  --adar-bauhaus-selection-text: #ffffff;
+  --adar-bauhaus-color-scheme: light;
+  --adar-bauhaus-font-display: "Archivo", "Josefin Sans", "Helvetica Neue", "Arial", system-ui, sans-serif;
+  --adar-bauhaus-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-bauhaus-font-body: "Archivo", "Helvetica Neue", "Arial", system-ui, sans-serif;
   --adar-bauhaus-space-xs: 4px;
   --adar-bauhaus-space-sm: 8px;
   --adar-bauhaus-space-md: 16px;
@@ -67,6 +124,24 @@
   --adar-bauhaus-radius: 0;
   --adar-bauhaus-shadow-hard: 8px 8px 0 #141414;
   --adar-bauhaus-shadow-glow: none;
+  --adar-bauhaus-type-h1-size: 48px;
+  --adar-bauhaus-type-h1-line-height: 1.1;
+  --adar-bauhaus-type-h2-size: 28px;
+  --adar-bauhaus-type-h2-line-height: 1.2;
+  --adar-bauhaus-type-body-size: 16px;
+  --adar-bauhaus-type-body-line-height: 1.5;
+  --adar-bauhaus-type-caption-size: 12px;
+  --adar-bauhaus-type-caption-line-height: 1.4;
+  --adar-bauhaus-motion-easing: cubic-bezier(0.2, 0, 0, 1);
+  --adar-bauhaus-motion-cursor: default;
+  --adar-bauhaus-duration-instant: 0ms;
+  --adar-bauhaus-duration-fast: 120ms;
+  --adar-bauhaus-duration-base: 200ms;
+  --adar-bauhaus-duration-slow: 400ms;
+  --adar-bauhaus-effects-scanlines: none;
+  --adar-bauhaus-effects-vignette: none;
+  --adar-bauhaus-effects-pixelate: auto;
+  --adar-bauhaus-effects-grid: linear-gradient(to right, rgba(20,20,20,0.06) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,20,0.06) 1px, transparent 1px);
 }
 
 /* BIOS / POST / Text-mode */
@@ -80,8 +155,15 @@
   --adar-bios-danger: #fc5454;
   --adar-bios-warning: #a85400;
   --adar-bios-success: #00aa00;
-  --adar-bios-font-display: "Web437 IBM VGA 9x16", "Px437 IBM VGA 9x16", "Perfect DOS VGA 437", "Fixedsys", "VT323", "Courier New", "monospace";
-  --adar-bios-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-bios-border: #a8a8a8;
+  --adar-bios-divider: #555555;
+  --adar-bios-selection: #fcfc54;
+  --adar-bios-overlay: #0000aa;
+  --adar-bios-selection-text: #0000a8;
+  --adar-bios-color-scheme: dark;
+  --adar-bios-font-display: "Web437 IBM VGA 9x16", "Px437 IBM VGA 9x16", "Perfect DOS VGA 437", "Fixedsys", "VT323", "Courier New", monospace;
+  --adar-bios-font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --adar-bios-font-body: "IBM Plex Mono", "Courier New", monospace;
   --adar-bios-space-xs: 4px;
   --adar-bios-space-sm: 8px;
   --adar-bios-space-md: 16px;
@@ -90,6 +172,22 @@
   --adar-bios-radius: 0;
   --adar-bios-shadow-hard: 10px 10px 0 #000000;
   --adar-bios-shadow-glow: 0 0 4px currentColor;
+  --adar-bios-type-h1-size: 16px;
+  --adar-bios-type-h1-line-height: 1.1;
+  --adar-bios-type-h2-size: 16px;
+  --adar-bios-type-h2-line-height: 1.2;
+  --adar-bios-type-body-size: 16px;
+  --adar-bios-type-body-line-height: 1.2;
+  --adar-bios-type-caption-size: 16px;
+  --adar-bios-type-caption-line-height: 1.2;
+  --adar-bios-motion-easing: steps(2, end);
+  --adar-bios-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-bios-duration-instant: 0ms;
+  --adar-bios-duration-fast: 300ms;
+  --adar-bios-duration-base: 1200ms;
+  --adar-bios-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 1px, rgba(0,0,0,.18) 1px 2px);
+  --adar-bios-effects-vignette: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%);
+  --adar-bios-effects-pixelate: pixelated;
 }
 
 /* Commodore 64 / PETSCII */
@@ -103,8 +201,15 @@
   --adar-c64-danger: #c46c71;
   --adar-c64-warning: #edf171;
   --adar-c64-success: #a9ff9f;
-  --adar-c64-font-display: "C64 Pro Mono", "C64 Pro", "Pet Me 64", "VT323", "Courier New", "monospace";
-  --adar-c64-font-mono: "C64 Pro Mono", "Pet Me 64", "IBM Plex Mono", "Courier New", "monospace";
+  --adar-c64-border: #a0a0ff;
+  --adar-c64-divider: #6a6ab8;
+  --adar-c64-selection: #c6c6ff;
+  --adar-c64-overlay: #0000aa;
+  --adar-c64-selection-text: #0000aa;
+  --adar-c64-color-scheme: dark;
+  --adar-c64-font-display: "C64 Pro Mono", "C64 Pro", "Pet Me 64", "VT323", "Courier New", monospace;
+  --adar-c64-font-mono: "C64 Pro Mono", "Pet Me 64", "IBM Plex Mono", "Courier New", monospace;
+  --adar-c64-font-body: "C64 Pro Mono", "Pet Me 64", "IBM Plex Mono", "Courier New", monospace;
   --adar-c64-space-xs: 8px;
   --adar-c64-space-sm: 16px;
   --adar-c64-space-md: 24px;
@@ -113,6 +218,23 @@
   --adar-c64-radius: 0;
   --adar-c64-shadow-hard: 8px 8px 0 #000066;
   --adar-c64-shadow-glow: 0 0 6px #8080ff;
+  --adar-c64-type-h1-size: 16px;
+  --adar-c64-type-h1-line-height: 1.1;
+  --adar-c64-type-h2-size: 16px;
+  --adar-c64-type-h2-line-height: 1.2;
+  --adar-c64-type-body-size: 16px;
+  --adar-c64-type-body-line-height: 1.2;
+  --adar-c64-type-caption-size: 16px;
+  --adar-c64-type-caption-line-height: 1.2;
+  --adar-c64-motion-easing: steps(2, end);
+  --adar-c64-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-c64-duration-instant: 0ms;
+  --adar-c64-duration-fast: 100ms;
+  --adar-c64-duration-base: 300ms;
+  --adar-c64-duration-slow: 1200ms;
+  --adar-c64-effects-scanlines: repeating-linear-gradient(to bottom, rgba(0,0,0,0.14) 0 1px, transparent 1px 2px);
+  --adar-c64-effects-vignette: radial-gradient(ellipse at center, transparent 55%, rgba(0,0,0,0.35) 100%);
+  --adar-c64-effects-pixelate: pixelated;
 }
 
 /* Cubism */
@@ -126,8 +248,15 @@
   --adar-cubism-danger: #8f3b2f;
   --adar-cubism-warning: #9a7b2e;
   --adar-cubism-success: #6b6b3e;
-  --adar-cubism-font-display: "Archivo Black", "Archivo", "Arial Narrow", "system-ui", "sans-serif";
-  --adar-cubism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-cubism-border: #2a2a28;
+  --adar-cubism-divider: #8a7f6f;
+  --adar-cubism-selection: #5b6b7a;
+  --adar-cubism-overlay: #2a2a28;
+  --adar-cubism-selection-text: #ffffff;
+  --adar-cubism-color-scheme: light;
+  --adar-cubism-font-display: "Archivo Black", "Archivo", "Arial Narrow", system-ui, sans-serif;
+  --adar-cubism-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-cubism-font-body: "Archivo", "Arial Narrow", system-ui, sans-serif;
   --adar-cubism-space-xs: 4px;
   --adar-cubism-space-sm: 8px;
   --adar-cubism-space-md: 16px;
@@ -136,6 +265,23 @@
   --adar-cubism-radius: 0;
   --adar-cubism-shadow-hard: 6px 6px 0 #8a7f6f;
   --adar-cubism-shadow-glow: none;
+  --adar-cubism-type-h1-size: 40px;
+  --adar-cubism-type-h1-line-height: 1.1;
+  --adar-cubism-type-h2-size: 24px;
+  --adar-cubism-type-h2-line-height: 1.2;
+  --adar-cubism-type-body-size: 16px;
+  --adar-cubism-type-body-line-height: 1.5;
+  --adar-cubism-type-caption-size: 12px;
+  --adar-cubism-type-caption-line-height: 1.4;
+  --adar-cubism-motion-easing: cubic-bezier(.4,0,.2,1);
+  --adar-cubism-motion-cursor: default;
+  --adar-cubism-duration-instant: 0ms;
+  --adar-cubism-duration-fast: 160ms;
+  --adar-cubism-duration-base: 240ms;
+  --adar-cubism-duration-slow: 480ms;
+  --adar-cubism-effects-scanlines: none;
+  --adar-cubism-effects-vignette: radial-gradient(ellipse at 30% 15%, transparent 55%, rgba(42,42,40,.06) 100%);
+  --adar-cubism-effects-pixelate: auto;
 }
 
 /* Cyberpunk / Neon Noir */
@@ -149,8 +295,15 @@
   --adar-cyberpunk-danger: #ff0055;
   --adar-cyberpunk-warning: #ffe600;
   --adar-cyberpunk-success: #00ff9c;
-  --adar-cyberpunk-font-display: "Orbitron", "Rajdhani", "Chakra Petch", "sans-serif";
-  --adar-cyberpunk-font-mono: "Space Mono", "Share Tech Mono", "IBM Plex Mono", "Courier New", "monospace";
+  --adar-cyberpunk-border: #00ffff;
+  --adar-cyberpunk-divider: #6b6b85;
+  --adar-cyberpunk-selection: #ff00ff;
+  --adar-cyberpunk-overlay: #0a0a0f;
+  --adar-cyberpunk-selection-text: #0a0a0f;
+  --adar-cyberpunk-color-scheme: dark;
+  --adar-cyberpunk-font-display: "Orbitron", "Rajdhani", "Chakra Petch", sans-serif;
+  --adar-cyberpunk-font-mono: "Space Mono", "Share Tech Mono", "IBM Plex Mono", "Courier New", monospace;
+  --adar-cyberpunk-font-body: "Space Mono", "Share Tech Mono", "IBM Plex Mono", monospace;
   --adar-cyberpunk-space-xs: 4px;
   --adar-cyberpunk-space-sm: 8px;
   --adar-cyberpunk-space-md: 16px;
@@ -159,6 +312,24 @@
   --adar-cyberpunk-radius: 2px;
   --adar-cyberpunk-shadow-hard: 4px 4px 0 #000000;
   --adar-cyberpunk-shadow-glow: 0 0 12px rgba(255,0,255,0.55), 0 0 24px rgba(0,255,255,0.30);
+  --adar-cyberpunk-type-h1-size: 28px;
+  --adar-cyberpunk-type-h1-line-height: 1.1;
+  --adar-cyberpunk-type-h2-size: 18px;
+  --adar-cyberpunk-type-h2-line-height: 1.2;
+  --adar-cyberpunk-type-body-size: 16px;
+  --adar-cyberpunk-type-body-line-height: 1.5;
+  --adar-cyberpunk-type-caption-size: 12px;
+  --adar-cyberpunk-type-caption-line-height: 1.4;
+  --adar-cyberpunk-motion-easing: cubic-bezier(0.16, 1, 0.3, 1);
+  --adar-cyberpunk-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-cyberpunk-duration-instant: 0ms;
+  --adar-cyberpunk-duration-fast: 80ms;
+  --adar-cyberpunk-duration-base: 160ms;
+  --adar-cyberpunk-duration-slow: 400ms;
+  --adar-cyberpunk-duration-slowest: 1200ms;
+  --adar-cyberpunk-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,255,255,0.06) 2px 3px);
+  --adar-cyberpunk-effects-vignette: radial-gradient(ellipse at 50% 40%, transparent 25%, rgba(5,5,10,0.88) 100%);
+  --adar-cyberpunk-effects-pixelate: pixelated;
 }
 
 /* Expressionism */
@@ -172,8 +343,15 @@
   --adar-expressionism-danger: #c0392b;
   --adar-expressionism-warning: #e6c229;
   --adar-expressionism-success: #4f7a6f;
-  --adar-expressionism-font-display: "Oswald", "Archivo Black", "Anton", "system-ui", "sans-serif";
-  --adar-expressionism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-expressionism-border: #e8e4dc;
+  --adar-expressionism-divider: #9aa3b8;
+  --adar-expressionism-selection: #e6c229;
+  --adar-expressionism-overlay: #14141a;
+  --adar-expressionism-selection-text: #14141a;
+  --adar-expressionism-color-scheme: dark;
+  --adar-expressionism-font-display: "Oswald", "Archivo Black", "Anton", system-ui, sans-serif;
+  --adar-expressionism-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-expressionism-font-body: "Oswald", system-ui, sans-serif;
   --adar-expressionism-space-xs: 5px;
   --adar-expressionism-space-sm: 11px;
   --adar-expressionism-space-md: 19px;
@@ -182,6 +360,23 @@
   --adar-expressionism-radius: 2px;
   --adar-expressionism-shadow-hard: 8px 8px 0 #14141a;
   --adar-expressionism-shadow-glow: 0 0 0 3px #e6c229;
+  --adar-expressionism-type-h1-size: 48px;
+  --adar-expressionism-type-h1-line-height: 1.1;
+  --adar-expressionism-type-h2-size: 28px;
+  --adar-expressionism-type-h2-line-height: 1.2;
+  --adar-expressionism-type-body-size: 16px;
+  --adar-expressionism-type-body-line-height: 1.5;
+  --adar-expressionism-type-caption-size: 12px;
+  --adar-expressionism-type-caption-line-height: 1.4;
+  --adar-expressionism-motion-easing: cubic-bezier(.36,-.07,.64,1.37);
+  --adar-expressionism-motion-cursor: crosshair;
+  --adar-expressionism-duration-instant: 0ms;
+  --adar-expressionism-duration-fast: 90ms;
+  --adar-expressionism-duration-base: 180ms;
+  --adar-expressionism-duration-slow: 420ms;
+  --adar-expressionism-effects-scanlines: none;
+  --adar-expressionism-effects-vignette: radial-gradient(ellipse at 50% 45%, transparent 18%, rgba(20,20,26,.78) 72%, rgba(20,20,26,.96) 100%);
+  --adar-expressionism-effects-pixelate: auto;
 }
 
 /* Fauvism / Wild Colour / Cut-Paper Planes */
@@ -195,16 +390,40 @@
   --adar-fauvism-danger: #a4161a;
   --adar-fauvism-warning: #f2c14e;
   --adar-fauvism-success: #2a9d8f;
-  --adar-fauvism-font-display: "Fredoka", "Montserrat", "system-ui", "sans-serif";
-  --adar-fauvism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-fauvism-border: #221e1b;
+  --adar-fauvism-divider: #6f6a63;
+  --adar-fauvism-selection: #d7263d;
+  --adar-fauvism-overlay: #221e1b;
+  --adar-fauvism-selection-text: #ffffff;
+  --adar-fauvism-color-scheme: light;
+  --adar-fauvism-font-display: "Fredoka", "Montserrat", system-ui, sans-serif;
+  --adar-fauvism-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-fauvism-font-body: "Fredoka", "Montserrat", system-ui, sans-serif;
   --adar-fauvism-space-xs: 4px;
   --adar-fauvism-space-sm: 8px;
   --adar-fauvism-space-md: 16px;
   --adar-fauvism-space-lg: 32px;
   --adar-fauvism-space-xl: 48px;
   --adar-fauvism-radius: 6px;
-  --adar-fauvism-shadow-hard: none — elevation is an offset colour plane (transform: translate(10px, 10px) on a ::before block), never a box-shadow;
+  --adar-fauvism-shadow-hard: none;
   --adar-fauvism-shadow-glow: none;
+  --adar-fauvism-type-h1-size: 44px;
+  --adar-fauvism-type-h1-line-height: 1.1;
+  --adar-fauvism-type-h2-size: 26px;
+  --adar-fauvism-type-h2-line-height: 1.2;
+  --adar-fauvism-type-body-size: 17px;
+  --adar-fauvism-type-body-line-height: 1.5;
+  --adar-fauvism-type-caption-size: 13px;
+  --adar-fauvism-type-caption-line-height: 1.4;
+  --adar-fauvism-motion-easing: cubic-bezier(.22, 1, .36, 1);
+  --adar-fauvism-motion-cursor: default;
+  --adar-fauvism-duration-instant: 0ms;
+  --adar-fauvism-duration-fast: 160ms;
+  --adar-fauvism-duration-base: 280ms;
+  --adar-fauvism-duration-slow: 480ms;
+  --adar-fauvism-effects-scanlines: none;
+  --adar-fauvism-effects-vignette: radial-gradient(ellipse at 50% 0%, rgba(242,193,78,.08) 0%, rgba(245,239,226,0) 55%);
+  --adar-fauvism-effects-pixelate: auto;
 }
 
 /* Folk Art */
@@ -218,8 +437,15 @@
   --adar-folk-art-danger: #a32e22;
   --adar-folk-art-warning: #e8b32a;
   --adar-folk-art-success: #4f7a4a;
-  --adar-folk-art-font-display: "Fredoka", "Baloo 2", "Chewy", "system-ui", "sans-serif";
-  --adar-folk-art-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-folk-art-border: #2b2b2b;
+  --adar-folk-art-divider: #8b7c66;
+  --adar-folk-art-selection: #e8b32a;
+  --adar-folk-art-overlay: #2b2b2b;
+  --adar-folk-art-selection-text: #2b2b2b;
+  --adar-folk-art-color-scheme: light;
+  --adar-folk-art-font-display: "Fredoka", "Baloo 2", "Chewy", system-ui, sans-serif;
+  --adar-folk-art-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-folk-art-font-body: "Fredoka", "Baloo 2", system-ui, sans-serif;
   --adar-folk-art-space-xs: 4px;
   --adar-folk-art-space-sm: 8px;
   --adar-folk-art-space-md: 16px;
@@ -228,6 +454,24 @@
   --adar-folk-art-radius: 18px;
   --adar-folk-art-shadow-hard: 4px 4px 0 #2b2b2b;
   --adar-folk-art-shadow-glow: 0 0 0 4px #e8b32a;
+  --adar-folk-art-type-h1-size: 40px;
+  --adar-folk-art-type-h1-line-height: 1.1;
+  --adar-folk-art-type-h2-size: 24px;
+  --adar-folk-art-type-h2-line-height: 1.2;
+  --adar-folk-art-type-body-size: 17px;
+  --adar-folk-art-type-body-line-height: 1.5;
+  --adar-folk-art-type-caption-size: 13px;
+  --adar-folk-art-type-caption-line-height: 1.4;
+  --adar-folk-art-motion-easing: cubic-bezier(.22,.61,.36,1);
+  --adar-folk-art-motion-cursor: pointer;
+  --adar-folk-art-duration-instant: 0ms;
+  --adar-folk-art-duration-fast: 160ms;
+  --adar-folk-art-duration-base: 280ms;
+  --adar-folk-art-duration-slow: 700ms;
+  --adar-folk-art-effects-scanlines: none;
+  --adar-folk-art-effects-vignette: radial-gradient(ellipse at 50% 40%, rgba(255,252,243,0) 55%, rgba(239,228,205,.55) 100%);
+  --adar-folk-art-effects-pixelate: auto;
+  --adar-folk-art-effects-paper-grain: repeating-linear-gradient(120deg, rgba(43,43,43,.022) 0 1px, transparent 1px 5px);
 }
 
 /* Game Boy LCD */
@@ -241,8 +485,15 @@
   --adar-gameboy-danger: #0f380f;
   --adar-gameboy-warning: #306230;
   --adar-gameboy-success: #306230;
-  --adar-gameboy-font-display: "Press Start 2P", "VT323", "monospace";
-  --adar-gameboy-font-mono: "VT323", "IBM Plex Mono", "monospace";
+  --adar-gameboy-border: #0f380f;
+  --adar-gameboy-divider: #306230;
+  --adar-gameboy-selection: #0f380f;
+  --adar-gameboy-overlay: #306230;
+  --adar-gameboy-selection-text: #9bbc0f;
+  --adar-gameboy-color-scheme: light;
+  --adar-gameboy-font-display: "Press Start 2P", "VT323", monospace;
+  --adar-gameboy-font-mono: "VT323", "IBM Plex Mono", monospace;
+  --adar-gameboy-font-body: "VT323", "IBM Plex Mono", monospace;
   --adar-gameboy-space-xs: 4px;
   --adar-gameboy-space-sm: 8px;
   --adar-gameboy-space-md: 16px;
@@ -251,6 +502,24 @@
   --adar-gameboy-radius: 0;
   --adar-gameboy-shadow-hard: 4px 4px 0 #306230;
   --adar-gameboy-shadow-glow: 0 0 6px #8bac0f;
+  --adar-gameboy-type-h1-size: 20px;
+  --adar-gameboy-type-h1-line-height: 1.1;
+  --adar-gameboy-type-h2-size: 16px;
+  --adar-gameboy-type-h2-line-height: 1.2;
+  --adar-gameboy-type-body-size: 16px;
+  --adar-gameboy-type-body-line-height: 1.2;
+  --adar-gameboy-type-caption-size: 14px;
+  --adar-gameboy-type-caption-line-height: 1.2;
+  --adar-gameboy-motion-easing: steps(4, end);
+  --adar-gameboy-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-gameboy-duration-instant: 0ms;
+  --adar-gameboy-duration-fast: 120ms;
+  --adar-gameboy-duration-base: 240ms;
+  --adar-gameboy-duration-slow: 1000ms;
+  --adar-gameboy-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(15,56,15,0.10) 2px 4px);
+  --adar-gameboy-effects-vignette: radial-gradient(ellipse at center, transparent 55%, rgba(15,56,15,0.28) 100%);
+  --adar-gameboy-effects-pixelate: pixelated;
+  --adar-gameboy-effects-dot-matrix: repeating-radial-gradient(circle at 1px 1px, rgba(15,56,15,0.14) 0 1px, transparent 1px 4px);
 }
 
 /* Goya / Black Paintings */
@@ -264,8 +533,15 @@
   --adar-goya-danger: #8f2222;
   --adar-goya-warning: #a56a2e;
   --adar-goya-success: #6b7f5e;
-  --adar-goya-font-display: "Playfair Display", "Cormorant", "Cormorant Garamond", "Georgia", "serif";
-  --adar-goya-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-goya-border: #8a7a63;
+  --adar-goya-divider: #2a2a28;
+  --adar-goya-selection: #a56a2e;
+  --adar-goya-overlay: #0d0b09;
+  --adar-goya-selection-text: #e8dcc8;
+  --adar-goya-color-scheme: dark;
+  --adar-goya-font-display: "Playfair Display", "Cormorant", "Cormorant Garamond", "Georgia", serif;
+  --adar-goya-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-goya-font-body: "Playfair Display", "Cormorant", "Georgia", serif;
   --adar-goya-space-xs: 4px;
   --adar-goya-space-sm: 8px;
   --adar-goya-space-md: 16px;
@@ -274,6 +550,23 @@
   --adar-goya-radius: 2px;
   --adar-goya-shadow-hard: 0 0 0 1px #2a2a28;
   --adar-goya-shadow-glow: 0 0 48px rgba(232,220,200,.05);
+  --adar-goya-type-h1-size: 56px;
+  --adar-goya-type-h1-line-height: 1.1;
+  --adar-goya-type-h2-size: 32px;
+  --adar-goya-type-h2-line-height: 1.2;
+  --adar-goya-type-body-size: 19px;
+  --adar-goya-type-body-line-height: 1.6;
+  --adar-goya-type-caption-size: 13px;
+  --adar-goya-type-caption-line-height: 1.4;
+  --adar-goya-motion-easing: cubic-bezier(.22,.08,.18,1);
+  --adar-goya-motion-cursor: default;
+  --adar-goya-duration-instant: 0ms;
+  --adar-goya-duration-fast: 480ms;
+  --adar-goya-duration-base: 1200ms;
+  --adar-goya-duration-slow: 2400ms;
+  --adar-goya-effects-scanlines: none;
+  --adar-goya-effects-vignette: radial-gradient(ellipse at 50% 42%, transparent 0%, transparent 26%, rgba(13,11,9,.55) 62%, rgba(0,0,0,.94) 100%);
+  --adar-goya-effects-pixelate: auto;
 }
 
 /* Impressionism — Light & Color */
@@ -287,16 +580,42 @@
   --adar-impressionism-danger: #b5546a;
   --adar-impressionism-warning: #d9a441;
   --adar-impressionism-success: #6f9f78;
-  --adar-impressionism-font-display: "Cormorant", "Playfair Display", "EB Garamond", "Georgia", "serif";
-  --adar-impressionism-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-impressionism-border: #8a8478;
+  --adar-impressionism-divider: #8a8478;
+  --adar-impressionism-selection: #3a3a3a;
+  --adar-impressionism-overlay: #3a3a3a;
+  --adar-impressionism-selection-text: #f7f2e6;
+  --adar-impressionism-color-scheme: light;
+  --adar-impressionism-font-display: "Cormorant", "Playfair Display", "EB Garamond", "Georgia", serif;
+  --adar-impressionism-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-impressionism-font-body: "Cormorant", "EB Garamond", "Playfair Display", "Georgia", serif;
   --adar-impressionism-space-xs: 4px;
   --adar-impressionism-space-sm: 8px;
   --adar-impressionism-space-md: 16px;
   --adar-impressionism-space-lg: 24px;
   --adar-impressionism-space-xl: 40px;
   --adar-impressionism-radius: 10px;
-  --adar-impressionism-shadow-hard: undefined;
+  --adar-impressionism-shadow-hard: none;
   --adar-impressionism-shadow-glow: inset 0 0 32px rgba(246,231,178,.35);
+  --adar-impressionism-type-h1-size: 44px;
+  --adar-impressionism-type-h1-line-height: 1.1;
+  --adar-impressionism-type-h2-size: 26px;
+  --adar-impressionism-type-h2-line-height: 1.2;
+  --adar-impressionism-type-body-size: 17px;
+  --adar-impressionism-type-body-line-height: 1.6;
+  --adar-impressionism-type-caption-size: 13px;
+  --adar-impressionism-type-caption-line-height: 1.4;
+  --adar-impressionism-motion-easing: cubic-bezier(.4,.14,.3,1);
+  --adar-impressionism-motion-cursor: default;
+  --adar-impressionism-duration-instant: 0ms;
+  --adar-impressionism-duration-fast: 240ms;
+  --adar-impressionism-duration-base: 420ms;
+  --adar-impressionism-duration-slow: 900ms;
+  --adar-impressionism-effects-scanlines: none;
+  --adar-impressionism-effects-vignette: radial-gradient(ellipse at 28% 8%, rgba(246,231,178,.38) 0%, rgba(247,242,230,0) 58%), radial-gradient(ellipse at 100% 100%, rgba(168,208,230,.28) 0%, rgba(247,242,230,0) 62%);
+  --adar-impressionism-effects-pixelate: auto;
+  --adar-impressionism-effects-dapple: radial-gradient(circle at 18% 22%, rgba(246,231,178,.55) 0 14px, transparent 15px), radial-gradient(circle at 46% 38%, rgba(246,231,178,.38) 0 22px, transparent 23px), radial-gradient(circle at 72% 14%, rgba(163,201,168,.22) 0 18px, transparent 19px), radial-gradient(circle at 88% 56%, rgba(246,231,178,.30) 0 12px, transparent 13px), radial-gradient(circle at 34% 76%, rgba(184,167,214,.20) 0 20px, transparent 21px);
+  --adar-impressionism-effects-brushstroke-mask: repeating-linear-gradient(96deg, rgba(58,58,58,0.10) 0 14px, transparent 14px 22px);
 }
 
 /* Kandinsky / Synesthetic Abstraction */
@@ -310,8 +629,15 @@
   --adar-kandinsky-danger: #a81f1f;
   --adar-kandinsky-warning: #f4b400;
   --adar-kandinsky-success: #2a7d4f;
-  --adar-kandinsky-font-display: "Montserrat", "Archivo", "Futura", "system-ui", "sans-serif";
-  --adar-kandinsky-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-kandinsky-border: #111111;
+  --adar-kandinsky-divider: #6f6a60;
+  --adar-kandinsky-selection: #1d4ed8;
+  --adar-kandinsky-overlay: #111111;
+  --adar-kandinsky-selection-text: #ffffff;
+  --adar-kandinsky-color-scheme: light;
+  --adar-kandinsky-font-display: "Montserrat", "Archivo", "Futura", system-ui, sans-serif;
+  --adar-kandinsky-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-kandinsky-font-body: "Montserrat", "Archivo", "Futura", system-ui, sans-serif;
   --adar-kandinsky-space-xs: 4px;
   --adar-kandinsky-space-sm: 8px;
   --adar-kandinsky-space-md: 16px;
@@ -320,6 +646,23 @@
   --adar-kandinsky-radius: 0;
   --adar-kandinsky-shadow-hard: 3px 3px 0 #111111;
   --adar-kandinsky-shadow-glow: 0 0 0 3px #f4b400;
+  --adar-kandinsky-type-h1-size: 44px;
+  --adar-kandinsky-type-h1-line-height: 1.1;
+  --adar-kandinsky-type-h2-size: 26px;
+  --adar-kandinsky-type-h2-line-height: 1.2;
+  --adar-kandinsky-type-body-size: 16px;
+  --adar-kandinsky-type-body-line-height: 1.5;
+  --adar-kandinsky-type-caption-size: 12px;
+  --adar-kandinsky-type-caption-line-height: 1.4;
+  --adar-kandinsky-motion-easing: cubic-bezier(.22,.61,.36,1);
+  --adar-kandinsky-motion-cursor: default;
+  --adar-kandinsky-duration-instant: 0ms;
+  --adar-kandinsky-duration-fast: 240ms;
+  --adar-kandinsky-duration-base: 480ms;
+  --adar-kandinsky-duration-slow: 900ms;
+  --adar-kandinsky-effects-scanlines: none;
+  --adar-kandinsky-effects-vignette: radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(17,17,17,.10) 100%);
+  --adar-kandinsky-effects-pixelate: auto;
 }
 
 /* NASA 80s / Worm / Space */
@@ -333,8 +676,15 @@
   --adar-nasa80-danger: #ff2038;
   --adar-nasa80-warning: #e8b23a;
   --adar-nasa80-success: #4ec7a4;
-  --adar-nasa80-font-display: "Space Grotesk", "Orbitron", "Helvetica Neue", "Arial", "sans-serif";
-  --adar-nasa80-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-nasa80-border: #2a6f97;
+  --adar-nasa80-divider: #7d89a6;
+  --adar-nasa80-selection: #ff2038;
+  --adar-nasa80-overlay: #050510;
+  --adar-nasa80-selection-text: #050510;
+  --adar-nasa80-color-scheme: dark;
+  --adar-nasa80-font-display: "Space Grotesk", "Orbitron", "Helvetica Neue", "Arial", sans-serif;
+  --adar-nasa80-font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --adar-nasa80-font-body: "Space Grotesk", "Helvetica Neue", "Arial", sans-serif;
   --adar-nasa80-space-xs: 4px;
   --adar-nasa80-space-sm: 8px;
   --adar-nasa80-space-md: 16px;
@@ -344,6 +694,26 @@
   --adar-nasa80-radius: 0;
   --adar-nasa80-shadow-hard: 8px 8px 0 #02030a;
   --adar-nasa80-shadow-glow: 0 0 12px rgba(255, 32, 56, 0.45);
+  --adar-nasa80-type-h1-size: 32px;
+  --adar-nasa80-type-h1-line-height: 1.1;
+  --adar-nasa80-type-h2-size: 20px;
+  --adar-nasa80-type-h2-line-height: 1.2;
+  --adar-nasa80-type-body-size: 16px;
+  --adar-nasa80-type-body-line-height: 1.5;
+  --adar-nasa80-type-caption-size: 12px;
+  --adar-nasa80-type-caption-line-height: 1.4;
+  --adar-nasa80-motion-easing: cubic-bezier(0.2, 0, 0.2, 1);
+  --adar-nasa80-motion-cursor: steps(2, jump-none) 1.2s infinite;
+  --adar-nasa80-duration-instant: 0ms;
+  --adar-nasa80-duration-fast: 160ms;
+  --adar-nasa80-duration-base: 320ms;
+  --adar-nasa80-duration-slow: 2400ms;
+  --adar-nasa80-effects-scanlines: none;
+  --adar-nasa80-effects-vignette: radial-gradient(ellipse at 50% 0%, rgba(10, 17, 40, 0.9) 0%, rgba(5, 5, 16, 0.98) 70%);
+  --adar-nasa80-effects-pixelate: auto;
+  --adar-nasa80-effects-starfield: radial-gradient(1px 1px at 12% 18%, #e6e8f0 50%, transparent 51%), radial-gradient(1px 1px at 68% 34%, #e6e8f0 50%, transparent 51%), radial-gradient(1.5px 1.5px at 42% 72%, #e6e8f0 50%, transparent 51%), radial-gradient(1px 1px at 88% 61%, #7d89a6 50%, transparent 51%), radial-gradient(1px 1px at 26% 88%, #7d89a6 50%, transparent 51%);
+  --adar-nasa80-effects-blueprint-grid: linear-gradient(to right, rgba(42, 111, 151, 0.18) 1px, transparent 1px), linear-gradient(to bottom, rgba(42, 111, 151, 0.18) 1px, transparent 1px);
+  --adar-nasa80-effects-trajectory: repeating-linear-gradient(to right, rgba(42, 111, 151, 0.15) 0 6px, transparent 6px 10px);
 }
 
 /* Red-Neon Serif / 80s Synth-Horror */
@@ -357,8 +727,15 @@
   --adar-stranger-things-danger: #ff4a3d;
   --adar-stranger-things-warning: #e0a83a;
   --adar-stranger-things-success: #6fbf8b;
-  --adar-stranger-things-font-display: "Cinzel", "Playfair Display", "Cormorant Garamond", "Georgia", "serif";
-  --adar-stranger-things-font-mono: "IBM Plex Mono", "JetBrains Mono", "Courier New", "monospace";
+  --adar-stranger-things-border: #8a7f76;
+  --adar-stranger-things-divider: #8a7f76;
+  --adar-stranger-things-selection: #ff1a1a;
+  --adar-stranger-things-overlay: #050505;
+  --adar-stranger-things-selection-text: #050505;
+  --adar-stranger-things-color-scheme: dark;
+  --adar-stranger-things-font-display: "Cinzel", "Playfair Display", "Cormorant Garamond", "Georgia", serif;
+  --adar-stranger-things-font-mono: "IBM Plex Mono", "JetBrains Mono", "Courier New", monospace;
+  --adar-stranger-things-font-body: "Playfair Display", "Cormorant Garamond", "Georgia", serif;
   --adar-stranger-things-space-xs: 4px;
   --adar-stranger-things-space-sm: 8px;
   --adar-stranger-things-space-md: 16px;
@@ -367,6 +744,25 @@
   --adar-stranger-things-radius: 2px;
   --adar-stranger-things-shadow-hard: 6px 6px 0 #000000;
   --adar-stranger-things-shadow-glow: 0 0 1px #ff6f61, 0 0 8px rgba(255, 26, 26, 0.9), 0 0 28px rgba(255, 26, 26, 0.6), 0 0 64px rgba(179, 0, 0, 0.45);
+  --adar-stranger-things-type-h1-size: 48px;
+  --adar-stranger-things-type-h1-line-height: 1.1;
+  --adar-stranger-things-type-h2-size: 28px;
+  --adar-stranger-things-type-h2-line-height: 1.2;
+  --adar-stranger-things-type-body-size: 17px;
+  --adar-stranger-things-type-body-line-height: 1.6;
+  --adar-stranger-things-type-caption-size: 12px;
+  --adar-stranger-things-type-caption-line-height: 1.4;
+  --adar-stranger-things-motion-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --adar-stranger-things-motion-cursor: steps(2, jump-none) 1.2s infinite;
+  --adar-stranger-things-duration-instant: 0ms;
+  --adar-stranger-things-duration-fast: 240ms;
+  --adar-stranger-things-duration-base: 600ms;
+  --adar-stranger-things-duration-slow: 2400ms;
+  --adar-stranger-things-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 3px, rgba(0, 0, 0, 0.22) 3px 4px);
+  --adar-stranger-things-effects-vignette: radial-gradient(ellipse at center, transparent 30%, rgba(0, 0, 0, 0.72) 100%);
+  --adar-stranger-things-effects-pixelate: auto;
+  --adar-stranger-things-effects-grain: repeating-radial-gradient(circle at 17% 32%, rgba(232, 226, 216, 0.035) 0 1px, transparent 1px 3px), repeating-radial-gradient(circle at 71% 68%, rgba(255, 26, 26, 0.03) 0 1px, transparent 1px 4px);
+  --adar-stranger-things-effects-haze: radial-gradient(ellipse at 50% 0%, rgba(255, 26, 26, 0.16) 0%, transparent 60%);
 }
 
 /* Terminal / CRT */
@@ -380,8 +776,15 @@
   --adar-terminal-danger: #ff3030;
   --adar-terminal-warning: #ffb000;
   --adar-terminal-success: #33ff66;
-  --adar-terminal-font-display: "VT323", "Courier New", "monospace";
-  --adar-terminal-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-terminal-border: #33ff66;
+  --adar-terminal-divider: #1e9944;
+  --adar-terminal-selection: #33ff66;
+  --adar-terminal-overlay: #0a0e0a;
+  --adar-terminal-selection-text: #0a0e0a;
+  --adar-terminal-color-scheme: dark;
+  --adar-terminal-font-display: "VT323", "Courier New", monospace;
+  --adar-terminal-font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --adar-terminal-font-body: "VT323", "IBM Plex Mono", "Courier New", monospace;
   --adar-terminal-space-xs: 8px;
   --adar-terminal-space-sm: 16px;
   --adar-terminal-space-md: 24px;
@@ -390,6 +793,22 @@
   --adar-terminal-radius: 0;
   --adar-terminal-shadow-hard: 0 0 8px rgba(51,255,102,0.6);
   --adar-terminal-shadow-glow: inset 0 0 120px rgba(51,255,102,0.08);
+  --adar-terminal-type-h1-size: 20px;
+  --adar-terminal-type-h1-line-height: 1.1;
+  --adar-terminal-type-h2-size: 16px;
+  --adar-terminal-type-h2-line-height: 1.2;
+  --adar-terminal-type-body-size: 16px;
+  --adar-terminal-type-body-line-height: 1.2;
+  --adar-terminal-type-caption-size: 14px;
+  --adar-terminal-type-caption-line-height: 1.2;
+  --adar-terminal-motion-easing: steps(20, end);
+  --adar-terminal-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-terminal-duration-instant: 0ms;
+  --adar-terminal-duration-fast: 300ms;
+  --adar-terminal-duration-base: 1200ms;
+  --adar-terminal-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(51,255,102,0.04) 2px 3px);
+  --adar-terminal-effects-vignette: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+  --adar-terminal-effects-pixelate: auto;
 }
 
 /* The Incredible Machine */
@@ -403,8 +822,15 @@
   --adar-tim-danger: #c1121f;
   --adar-tim-warning: #ffd23f;
   --adar-tim-success: #52b788;
-  --adar-tim-font-display: "Fredoka", "Baloo 2", "Chewy", "system-ui", "sans-serif";
-  --adar-tim-font-mono: "IBM Plex Mono", "ui-monospace", "monospace";
+  --adar-tim-border: #2b2b2b;
+  --adar-tim-divider: #8a8175;
+  --adar-tim-selection: #ffd23f;
+  --adar-tim-overlay: #2b2b2b;
+  --adar-tim-selection-text: #2b2b2b;
+  --adar-tim-color-scheme: light;
+  --adar-tim-font-display: "Fredoka", "Baloo 2", "Chewy", system-ui, sans-serif;
+  --adar-tim-font-mono: "IBM Plex Mono", ui-monospace, monospace;
+  --adar-tim-font-body: "Fredoka", "Baloo 2", system-ui, sans-serif;
   --adar-tim-space-xs: 4px;
   --adar-tim-space-sm: 8px;
   --adar-tim-space-md: 16px;
@@ -413,6 +839,23 @@
   --adar-tim-radius: 14px;
   --adar-tim-shadow-hard: 6px 6px 0 #2b2b2b;
   --adar-tim-shadow-glow: 0 0 0 4px #ffd23f;
+  --adar-tim-type-h1-size: 32px;
+  --adar-tim-type-h1-line-height: 1.1;
+  --adar-tim-type-h2-size: 22px;
+  --adar-tim-type-h2-line-height: 1.2;
+  --adar-tim-type-body-size: 17px;
+  --adar-tim-type-body-line-height: 1.5;
+  --adar-tim-type-caption-size: 13px;
+  --adar-tim-type-caption-line-height: 1.4;
+  --adar-tim-motion-easing: cubic-bezier(.34,1.56,.64,1);
+  --adar-tim-motion-cursor: grab;
+  --adar-tim-duration-instant: 0ms;
+  --adar-tim-duration-fast: 120ms;
+  --adar-tim-duration-base: 240ms;
+  --adar-tim-duration-slow: 600ms;
+  --adar-tim-effects-scanlines: repeating-linear-gradient(45deg, rgba(43,43,43,.045) 0 2px, transparent 2px 6px);
+  --adar-tim-effects-vignette: radial-gradient(ellipse at 50% 0%, #fffaf0 0%, #f5efe0 70%);
+  --adar-tim-effects-pixelate: auto;
 }
 
 /* Vaporwave / Synthwave */
@@ -426,16 +869,40 @@
   --adar-vaporwave-danger: #ff3b6b;
   --adar-vaporwave-warning: #ffd300;
   --adar-vaporwave-success: #35f0b0;
-  --adar-vaporwave-font-display: "Audiowide", "Orbitron", "Michroma", "sans-serif";
-  --adar-vaporwave-font-mono: "Space Mono", "IBM Plex Mono", "monospace";
+  --adar-vaporwave-border: #f7ecff;
+  --adar-vaporwave-divider: #9d8bd6;
+  --adar-vaporwave-selection: #00e5ff;
+  --adar-vaporwave-overlay: #1a1038;
+  --adar-vaporwave-selection-text: #1a1038;
+  --adar-vaporwave-color-scheme: dark;
+  --adar-vaporwave-font-display: "Audiowide", "Orbitron", "Michroma", sans-serif;
+  --adar-vaporwave-font-mono: "Space Mono", "IBM Plex Mono", monospace;
+  --adar-vaporwave-font-body: "Space Mono", "IBM Plex Mono", monospace;
   --adar-vaporwave-space-xs: 4px;
   --adar-vaporwave-space-sm: 8px;
   --adar-vaporwave-space-md: 16px;
   --adar-vaporwave-space-lg: 24px;
   --adar-vaporwave-space-xl: 40px;
   --adar-vaporwave-radius: 4px;
-  --adar-vaporwave-shadow-hard: 0 0 24px rgba(255,110,199,0.55), 0 0 64px rgba(255,108,66,0.25);
+  --adar-vaporwave-shadow-hard: 0 0 24px rgba(255,110,199,0.55), 0 0 64px rgba(255,140,66,0.25);
   --adar-vaporwave-shadow-glow: 0 0 12px rgba(0,229,255,0.65), 0 0 48px rgba(0,229,255,0.3);
+  --adar-vaporwave-type-h1-size: 32px;
+  --adar-vaporwave-type-h1-line-height: 1.1;
+  --adar-vaporwave-type-h2-size: 20px;
+  --adar-vaporwave-type-h2-line-height: 1.2;
+  --adar-vaporwave-type-body-size: 15px;
+  --adar-vaporwave-type-body-line-height: 1.5;
+  --adar-vaporwave-type-caption-size: 12px;
+  --adar-vaporwave-type-caption-line-height: 1.4;
+  --adar-vaporwave-motion-easing: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --adar-vaporwave-motion-cursor: pulse 2.4s ease-in-out infinite;
+  --adar-vaporwave-duration-instant: 0ms;
+  --adar-vaporwave-duration-fast: 240ms;
+  --adar-vaporwave-duration-base: 600ms;
+  --adar-vaporwave-duration-slow: 2400ms;
+  --adar-vaporwave-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(255,110,199,0.05) 2px 3px, transparent 3px 4px);
+  --adar-vaporwave-effects-vignette: radial-gradient(ellipse at 50% 118%, rgba(255,140,66,0.35) 0%, transparent 52%), radial-gradient(ellipse at center, transparent 42%, rgba(11,6,32,0.78) 100%);
+  --adar-vaporwave-effects-pixelate: auto;
 }
 
 /* Windows 95 Desktop */
@@ -443,14 +910,21 @@
   --adar-win95-background: #008080;
   --adar-win95-surface: #c0c0c0;
   --adar-win95-foreground: #000000;
-  --adar-win95-muted: #808080;
+  --adar-win95-muted: #1a1a1a;
   --adar-win95-primary: #000080;
   --adar-win95-accent: #008080;
   --adar-win95-danger: #ff0000;
   --adar-win95-warning: #808000;
   --adar-win95-success: #008000;
-  --adar-win95-font-display: "W95FA", "MS Sans Serif", "Tahoma", "Verdana", "sans-serif";
-  --adar-win95-font-mono: "Courier New", "Lucida Console", "monospace";
+  --adar-win95-border: #808080;
+  --adar-win95-divider: #808080;
+  --adar-win95-selection: #000080;
+  --adar-win95-overlay: #000000;
+  --adar-win95-selection-text: #ffffff;
+  --adar-win95-color-scheme: light;
+  --adar-win95-font-display: "W95FA", "MS Sans Serif", "Tahoma", "Verdana", sans-serif;
+  --adar-win95-font-mono: "Courier New", "Lucida Console", monospace;
+  --adar-win95-font-body: "W95FA", "MS Sans Serif", "Tahoma", "Verdana", sans-serif;
   --adar-win95-space-xs: 2px;
   --adar-win95-space-sm: 4px;
   --adar-win95-space-md: 8px;
@@ -459,6 +933,22 @@
   --adar-win95-radius: 0;
   --adar-win95-shadow-hard: 2px 2px 0 #000000;
   --adar-win95-shadow-glow: none;
+  --adar-win95-type-h1-size: 18px;
+  --adar-win95-type-h1-line-height: 1.1;
+  --adar-win95-type-h2-size: 14px;
+  --adar-win95-type-h2-line-height: 1.2;
+  --adar-win95-type-body-size: 11px;
+  --adar-win95-type-body-line-height: 1.4;
+  --adar-win95-type-caption-size: 11px;
+  --adar-win95-type-caption-line-height: 1.4;
+  --adar-win95-motion-easing: linear;
+  --adar-win95-motion-cursor: default;
+  --adar-win95-duration-instant: 0ms;
+  --adar-win95-duration-fast: 100ms;
+  --adar-win95-duration-base: 200ms;
+  --adar-win95-effects-scanlines: none;
+  --adar-win95-effects-vignette: none;
+  --adar-win95-effects-pixelate: auto;
 }
 
 /* Neon Console (mix) */
@@ -472,14 +962,37 @@
   --adar-neon-console-danger: #ff3b3b;
   --adar-neon-console-warning: #f7d51d;
   --adar-neon-console-success: #2bff88;
-  --adar-neon-console-font-display: "VT323", "Courier New", "monospace";
-  --adar-neon-console-font-mono: "IBM Plex Mono", "Courier New", "monospace";
+  --adar-neon-console-border: #e9e9ff;
+  --adar-neon-console-divider: #adafbc;
+  --adar-neon-console-selection: #ff2d95;
+  --adar-neon-console-overlay: #0b0b1e;
+  --adar-neon-console-selection-text: #0b0b1e;
+  --adar-neon-console-color-scheme: dark;
+  --adar-neon-console-font-display: "VT323", "Courier New", monospace;
+  --adar-neon-console-font-mono: "IBM Plex Mono", "Courier New", monospace;
+  --adar-neon-console-font-body: "VT323", "IBM Plex Mono", "Courier New", monospace;
   --adar-neon-console-space-xs: 4px;
   --adar-neon-console-space-sm: 8px;
   --adar-neon-console-space-md: 16px;
   --adar-neon-console-space-lg: 24px;
   --adar-neon-console-space-xl: 32px;
   --adar-neon-console-radius: 0;
-  --adar-neon-console-shadow-hard: 8px 8px 0 8px #7c1dfd;
+  --adar-neon-console-shadow-hard: 8px 8px 0 #7c1dfd;
   --adar-neon-console-shadow-glow: 0 0 8px #00e5ff;
+  --adar-neon-console-type-h1-size: 24px;
+  --adar-neon-console-type-h1-line-height: 1.1;
+  --adar-neon-console-type-h2-size: 16px;
+  --adar-neon-console-type-h2-line-height: 1.2;
+  --adar-neon-console-type-body-size: 16px;
+  --adar-neon-console-type-body-line-height: 1.5;
+  --adar-neon-console-type-caption-size: 14px;
+  --adar-neon-console-type-caption-line-height: 1.4;
+  --adar-neon-console-motion-easing: steps(20, end);
+  --adar-neon-console-motion-cursor: steps(2, jump-none) 1s infinite;
+  --adar-neon-console-duration-instant: 0ms;
+  --adar-neon-console-duration-fast: 300ms;
+  --adar-neon-console-duration-base: 1200ms;
+  --adar-neon-console-effects-scanlines: repeating-linear-gradient(to bottom, transparent 0 2px, rgba(51,255,102,0.04) 2px 3px);
+  --adar-neon-console-effects-vignette: radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%);
+  --adar-neon-console-effects-pixelate: auto;
 }

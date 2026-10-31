@@ -8,7 +8,7 @@ Goya's dark late period as an interface: near-black grounds, bone-white highligh
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Goya's dark late period as an interface: near-black grounds, bone-white highligh
 | `danger` | `#8f2222` |
 | `warning` | `#a56a2e` |
 | `success` | `#6b7f5e` |
+| `border` | `#8a7a63` |
+| `divider` | `#2a2a28` |
+| `selection` | `#a56a2e` |
+| `overlay` | `#0d0b09` |
+| `selection-text` | `#e8dcc8` |
+| `color-scheme` | `dark` |
 
 ### Variant: `blackPaintings`
 
@@ -61,7 +67,17 @@ Goya's dark late period as an interface: near-black grounds, bone-white highligh
 ### Typography
 
 - Display: "Playfair Display", "Cormorant", "Cormorant Garamond", "Georgia", "serif"
+- Body: "Playfair Display", "Cormorant", "Georgia", "serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `56px` | 1.1 | — |
+| h2 | `32px` | 1.2 | — |
+| body | `19px` | 1.6 | — |
+| caption | `13px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -76,7 +92,7 @@ Goya's dark late period as an interface: near-black grounds, bone-white highligh
 | motion.durations | `0ms` `480ms` `1200ms` `2400ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 50% 42%, transparent 0%, transparent 26%, rgba(13,11,9,.55) 62%, rgba(0,0,0,.94) 100%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -92,8 +108,19 @@ Goya's dark late period as an interface: near-black grounds, bone-white highligh
 ## Component recipes
 
 - **panel:** background: #16120e; border: 1px solid #2a2a28; border-radius: 2px; padding: 28px; color: #e8dcc8; box-shadow: inset 0 1px 0 rgba(232,220,200,.05), 0 24px 64px rgba(0,0,0,.72); — the panel is a lit object in a dark room: add a top-left falloff with a pseudo-element using radial-gradient(120% 100% at 0% 0%, rgba(232,220,200,.055), transparent 58%) and let the lower right stay near-black; headings are Playfair Display 700 26px with a 1px #8a7a63 rule 12px beneath, and a card that holds an alert may take border-left: 3px solid #6e1414 with no other colour change.
+- **card:** background:#16120e;border:1px solid #2a2a28;border-radius:2px;padding:28px;color:#e8dcc8;box-shadow:inset 0 1px 0 rgba(232,220,200,0.05),0 24px 64px rgba(0,0,0,0.72); a top-left radial falloff (rgba(232,220,200,0.055) → transparent 58%) lights one corner; title = Playfair Display 700 26px with a 1px #8a7a63 rule 12px beneath; body = Playfair/Cormorant 17px/1.6; a card holding an alert may take border-left:3px solid #6e1414.
 - **button:** font: 700 15px/1 'Playfair Display', 'Cormorant', Georgia, serif; letter-spacing: 0.06em; text-transform: uppercase; padding: 14px 26px; border-radius: 2px; background: #a56a2e; color: #0d0b09; border: 1px solid #c08a48; box-shadow: inset 0 1px 0 rgba(232,220,200,.22), 0 8px 24px rgba(0,0,0,.55); transition: background-color 480ms cubic-bezier(.22,.08,.18,1), box-shadow 480ms cubic-bezier(.22,.08,.18,1), color 480ms linear; :hover { background: #c08a48; box-shadow: inset 0 1px 0 rgba(232,220,200,.28), 0 10px 32px rgba(0,0,0,.6); } :active { background: #7a4a1c; } :focus-visible { outline: 1px solid #e8dcc8; outline-offset: 3px; } — primary reads as candlelight on ochre; the destructive variant is #6e1414 with a #f3ecdf label and appears once per view at most; secondary is transparent with a 1px #8a7a63 border and bone text.
 - **input:** font: 400 17px/1.6 'Playfair Display', 'Cormorant', Georgia, serif; color: #e8dcc8; background: #0d0b09; border: 1px solid #2a2a28; border-radius: 2px; padding: 13px 16px; box-shadow: inset 0 2px 10px rgba(0,0,0,.8); :placeholder { color: #8a7a63; font-style: italic; } :focus { border-color: #a56a2e; box-shadow: inset 0 2px 10px rgba(0,0,0,.8), 0 0 0 1px #a56a2e; outline: none; } — label above in 11px IBM Plex Mono uppercase, letter-spacing 0.14em, colour #8a7a63; invalid inputs take border-color #8f2222 plus a 14px italic sentence beneath in #b9a98f that states what is wrong, so the error never depends on the red line alone.
+- **select:** A catalogue dropdown: trigger = Playfair 17px field (background:#0d0b09;border:1px solid #2a2a28;padding:13px 16px;color:#e8dcc8) with an ochre '▾'; the open list is a #0d0b09 panel of Playfair rows separated by 1px #2a2a28 rules; the selected row turns #e8dcc8 with a 3px #6e1414 left bar and a mono index; hover lightens to #e8dcc8 over 480ms.
+- **checkbox:** An engraved plate toggle: 22px square, background:#0d0b09;border:1px solid #2a2a28;border-radius:2px;box-shadow:inset 0 2px 8px rgba(0,0,0,0.85); checked = a 10px #a56a2e square with a bone top highlight; radio = 8px #a56a2e dot; label = IBM Plex Mono 11px uppercase #8a7a63 with 'Off'/'On'; focus-visible = 1px #e8dcc8 outline at 3px offset.
+- **badge:** An inscription chip: display:inline-flex;gap:8px;padding:2px 8px;background:#0d0b09;border:1px solid #2a2a28;border-radius:2px;font:11px/1.4 'IBM Plex Mono';text-transform:uppercase;letter-spacing:0.14em; role = text color (#6b7f5e success, #a56a2e warning, #8f2222 danger, #8a7a63 neutral) with the word spelled out; no fill, no glow.
+- **avatar:** A 40px square plate: background:#16120e;border:1px solid #2a2a28;border-radius:2px;color:#e8dcc8;font:700 18px 'Playfair Display'; initials or an etched glyph; image avatars get a 1px #8a7a63 frame and a faint crosshatch overlay.
+- **nav:** A vertical catalogue rail: items = Playfair 17px/1.4 #b9a98f, padding 12px 16px, border-bottom 1px #2a2a28; hover lightens to #e8dcc8 over 480ms; active = #e8dcc8 with a 3px #6e1414 left bar and a right-aligned mono index; group headers = IBM Plex Mono 11px uppercase #8a7a63 with a full-width hairline above; the horizontal form is allowed.
+- **table:** An etched grid: header = IBM Plex Mono 11px uppercase #8a7a63 over a 1px #2a2a28 rule; body rows = Playfair 17px/1.6 #e8dcc8 separated by 1px #2a2a28 rules; hover = #e8dcc8, selected row = rgba(165,106,46,0.12) wash with a 3px #6e1414 left bar; values in tabular Plex Mono, radius 2px.
+- **dialog:** A chiaroscuro modal: panel recipe with a top-left light falloff and a deep 0 24px 64px shadow; scrim = color-mix(in srgb, var(--overlay) 70%, transparent); title = Playfair Display 700, body = Cormorant 17px/1.6; actions = ochre primary + transparent 1px #8a7a63 secondary; entrance is a 1200ms luminance fade, reduced motion = instant.
+- **toast:** A bottom-right inscription: background:#0d0b09;border:1px solid #2a2a28;padding:10px 14px;font:11px/1.4 'IBM Plex Mono';text-transform:uppercase;letter-spacing:0.14em; prefix the word 'Saved'/'Open'/'Failed' in #6b7f5e/#a56a2e/#8f2222; auto-dismisses with a 1200ms fade; reduced motion keeps it static.
+- **code:** An etched block: background:#0d0b09;border:1px solid #2a2a28;border-radius:2px;padding:16px;font:13px/1.6 'IBM Plex Mono';color:#e8dcc8; preserve whitespace; comments #8a7a63, strings #a56a2e, errors #8f2222; a faint crosshatch may sit behind the block at 3% alpha.
+- **empty:** A centred plate: a single bone-lit focal glyph (a crosshatched circle) above one Cormorant message ('The register is empty.') and a single ochre CTA; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 28px; padding: 0 28px; background: #0d0b09; border-top: 1px solid #2a2a28; font: 500 11px/1.4 'IBM Plex Mono', ui-monospace, monospace; text-transform: uppercase; letter-spacing: 0.14em; color: #8a7a63; left side is a single engraved line of state — plate number, state, timestamp — separated by 1px #2a2a28 rules rather than dots; the right side holds one quiet text action in bone #e8dcc8; the active entry brightens to #e8dcc8 over 1200ms, and any failure word alone turns #8f2222 with a 1px #6e1414 underline.
 - **menu:** a vertical catalogue, no bullets, 2px gap on a #0d0b09 ground: item { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 16px; font: 400 17px/1.4 'Playfair Display', Georgia, serif; color: #b9a98f; border-bottom: 1px solid #2a2a28; } selected row turns #e8dcc8 with a 3px #6e1414 bar on its left edge and a mono index at the right; hover lightens the text to #e8dcc8 over 480ms and draws a 1px #8a7a63 rule under the label; group headers are 11px IBM Plex Mono uppercase, letter-spacing 0.18em, #8a7a63, with a full-width hairline above.
 - **toggle:** engraved plate switch, 64px x 34px: track { background: #0d0b09; border: 1px solid #2a2a28; border-radius: 2px; box-shadow: inset 0 2px 8px rgba(0,0,0,.85); } knob is a 26px square with 1px #8a7a63 border and 2px radius, #2a2a28 when off and #a56a2e when on, translating 30px over 1200ms cubic-bezier(.22,.08,.18,1); when off a faint crosshatch fills the knob, when on the knob takes a bone #e8dcc8 top highlight so it reads as catching light; the state is also written out to the right in 11px Plex Mono uppercase ('Off'/'On', #8a7a63 / #e8dcc8).

@@ -20,6 +20,13 @@
   ],
   "summary": "Plein-air light study: cream canvas, five low-saturation pastels behaving like mixed pigment, broken brushstroke rules, dissolved edges, and a soft dappled-light overlay drifting across a strict underlying grid.",
   "whenToUse": "When the user asks for Impressionism, Monet/Renoir light and color, a plein-air or painterly aesthetic, soft pastel dapple, broken brushstrokes, gallery-calm fine-art atmosphere, or a romantic garden-light interface that still has to stay readable and well-gridded.",
+  "colorScheme": "light",
+  "typeScale": {
+    "h1": { "fontSize": "44px", "lineHeight": 1.1 },
+    "h2": { "fontSize": "26px", "lineHeight": 1.2 },
+    "body": { "fontSize": "17px", "lineHeight": 1.6 },
+    "caption": { "fontSize": "13px", "lineHeight": 1.4 }
+  },
   "colors": {
     "background": "#f7f2e6",
     "surface": "#fdfaf2",
@@ -29,7 +36,12 @@
     "accent": "#b8a7d6",
     "danger": "#b5546a",
     "warning": "#d9a441",
-    "success": "#6f9f78"
+    "success": "#6f9f78",
+    "border": "#8a8478",
+    "divider": "#8a8478",
+    "selection": "#3a3a3a",
+    "overlay": "#3a3a3a",
+    "selectionText": "#f7f2e6"
   },
   "paletteVariants": {
     "impressionist": {
@@ -71,6 +83,7 @@
       "Georgia",
       "serif"
     ],
+    "body": ["Cormorant", "EB Garamond", "Playfair Display", "Georgia", "serif"],
     "mono": [
       "IBM Plex Mono",
       "ui-monospace",
@@ -86,6 +99,7 @@
     "xl": "40px"
   },
   "shadow": {
+    "hard": "none",
     "soft": "0 18px 40px -24px rgba(127,168,201,.45)",
     "lift": "0 16px 30px -16px rgba(90,120,150,.55)",
     "glow": "inset 0 0 32px rgba(246,231,178,.35)",
@@ -103,11 +117,10 @@
   },
   "effects": {
     "scanlines": "none",
-    "pixelate": "none",
+    "pixelate": "auto",
     "vignette": "radial-gradient(ellipse at 28% 8%, rgba(246,231,178,.38) 0%, rgba(247,242,230,0) 58%), radial-gradient(ellipse at 100% 100%, rgba(168,208,230,.28) 0%, rgba(247,242,230,0) 62%)",
     "dapple": "radial-gradient(circle at 18% 22%, rgba(246,231,178,.55) 0 14px, transparent 15px), radial-gradient(circle at 46% 38%, rgba(246,231,178,.38) 0 22px, transparent 23px), radial-gradient(circle at 72% 14%, rgba(163,201,168,.22) 0 18px, transparent 19px), radial-gradient(circle at 88% 56%, rgba(246,231,178,.30) 0 12px, transparent 13px), radial-gradient(circle at 34% 76%, rgba(184,167,214,.20) 0 20px, transparent 21px)",
-    "brushstrokeMask": "repeating-linear-gradient(96deg, #000 0 14px, transparent 14px 22px)",
-    "edgeDissolve": "mask-image: linear-gradient(to bottom, #000 0%, rgba(0,0,0,.55) 78%, transparent 100%)"
+    "brushstrokeMask": "repeating-linear-gradient(96deg, rgba(58,58,58,0.10) 0 14px, transparent 14px 22px)"
   },
   "rules": [
     "Paint in layers, not in fills: every panel is a 2–3 stop gradient of near-neighbour pastels (background → surface → the lightest wash) so the surface looks brushed rather than vector-flat, and no large area is ever one solid hex.",
@@ -121,6 +134,17 @@
     "Leave the brushmarks visible: let the dapple overlay, broken rules, and gradient banding cross component boundaries so the page reads as one painted surface — while the layout grid underneath stays strict, because the softness is in the pigment, never in the alignment."
   ],
   "componentRecipes": {
+    "card": "background:linear-gradient(160deg,#fdfaf2 0%,#f7f2e6 58%,#f2ece0 100%);border:1px solid rgba(58,58,58,0.10);border-radius:10px;padding:28px 32px;color:#3a3a3a;box-shadow:0 18px 40px -24px rgba(127,168,201,0.45),inset 0 0 32px rgba(246,231,178,0.35); a ::after dapple layer at 55% opacity in soft-light sits inside; title = Cormorant 600 30px with a 3px blush dashed underline (14px on/8px off); body = EB Garamond 17px/1.65; below 640px drop the outer shadow and inset glow.",
+    "select": "A sun-dial dropdown: trigger = EB Garamond 17px field (background:#fdfaf2;border:1px solid rgba(58,58,58,0.14);border-radius:10px;padding:13px 16px) with an ink '▾'; the open list is a cream panel of EB Garamond rows; hover fills rgba(168,208,230,0.18); the selected row fills rgba(246,231,178,0.34) with a 3px blush dashed brushstroke on its left edge; no solid bars.",
+    "checkbox": "A 24px soft well: background:#fdfaf2;border:1px solid rgba(58,58,58,0.14);border-radius:10px;box-shadow:inset 0 0 20px rgba(168,208,230,0.12); checked = a 12px #a8d0e6 daub with an ink 10px check; radio = a 10px #b8a7d6 blob; label = EB Garamond 17px #3a3a3a with 'On'/'Off'; focus-visible = 2px #3a3a3a outline at 3px offset.",
+    "badge": "A soft pastel chip: display:inline-flex;gap:8px;padding:4px 12px;border-radius:999px;border:1px solid rgba(58,58,58,0.10);background:#fdfaf2;color:#3a3a3a;font:600 13px/1.2 'EB Garamond'; leading 8px pastel daub in the role color (#a3c9a8/#f6e7b2/#f6c6c0) plus the word; no hard edge.",
+    "avatar": "A 40px soft tile: background:linear-gradient(135deg,#fdfaf2,#f2ece0);border:1px solid rgba(58,58,58,0.10);border-radius:16px;color:#3a3a3a;font:600 16px 'Cormorant'; initials or a daub glyph; image avatars get a 16px radius and a soft-edge dissolve.",
+    "nav": "A vertical studio list: items = EB Garamond 19px #3a3a3a, padding 12px 16px, border-radius 10px, border-left 3px transparent; hover fills rgba(168,208,230,0.18); active = rgba(246,231,178,0.34) fill with a 3px blush dashed brushstroke left edge (12px on/7px off); group headers = Cormorant 600 14px #8a8478 with a 24px broken rule trailing right.",
+    "table": "A dappled grid: header = Cormorant 600 15px Title Case #3a3a3a over a broken 2px rgba(58,58,58,0.14) rule (14px on/8px off); body rows = EB Garamond 17px #3a3a3a separated by 1px rgba(58,58,58,0.08) rules; hover = rgba(168,208,230,0.18) wash, selected row = rgba(246,231,178,0.34) fill with a dashed blush left edge; radius 10px.",
+    "dialog": "A soft-edge modal: panel recipe with the dapple layer and a 0 18px 40px shadow; scrim = color-mix(in srgb, var(--overlay) 45%, transparent); title = Cormorant 600 Title Case, body = EB Garamond; actions = sky-to-sunlight pill + cream secondary; entrance is a 420ms ease-out, reduced motion = instant.",
+    "toast": "A bottom-right soft note: background:#fdfaf2;border:1px solid rgba(58,58,58,0.10);border-radius:10px;padding:12px 16px;font:15px/1.4 'EB Garamond'; leading 8px pastel daub in the role color (#a3c9a8/#f6e7b2/#b5546a) plus the word (Saved, Still wet, Failed); auto-dismisses with a 420ms fade; reduced motion keeps it static.",
+    "code": "A monospace block: background:#fdfaf2;border:1px solid rgba(58,58,58,0.14);border-radius:10px;padding:16px;font:13px/1.6 'IBM Plex Mono';color:#3a3a3a; preserve whitespace; comments #8a8478, strings #7fa8c9, errors #b5546a; no syntax gradients.",
+    "empty": "A centred soft panel: a small dapple glyph (two soft blobs) above one EB Garamond message ('The canvas is still wet and empty.') and a single sky-to-sunlight CTA; the glyph is aria-hidden and the state is written in words.",
     "panel": "background: linear-gradient(160deg, #fdfaf2 0%, #f7f2e6 58%, #f2ece0 100%); border: 1px solid rgba(58,58,58,.10); border-radius: 10px; padding: 28px 32px; color: #3a3a3a; box-shadow: 0 18px 40px -24px rgba(127,168,201,.45), inset 0 0 32px rgba(246,231,178,.35); position: relative; overflow: hidden; — a ::after layer paints effects.dapple at opacity .55 and mix-blend-mode: soft-light with pointer-events: none; the heading inside is 'Cormorant', 'Playfair Display', Georgia, serif 600 30px/1.15 in #3a3a3a with a 3px #f6c6c0 underline masked to 14px-on/8px-off dashes; below 640px drop the outer shadow and the inset glow and keep the gradient and the broken underline.",
     "button": "font: 500 17px/1 'Cormorant', 'Playfair Display', Georgia, serif; letter-spacing: 0.01em; padding: 13px 26px; border-radius: 999px; background: linear-gradient(135deg, #a8d0e6 0%, #b6cfd9 62%, #f6e7b2 138%); color: #3a3a3a; border: 1px solid rgba(58,58,58,.10); box-shadow: 0 10px 24px -14px rgba(90,120,150,.55); transition: transform 240ms cubic-bezier(.4,.14,.3,1), box-shadow 240ms cubic-bezier(.4,.14,.3,1), filter 240ms linear; :hover { transform: translateY(-2px); filter: brightness(1.03) saturate(1.06); box-shadow: 0 16px 30px -16px rgba(90,120,150,.55); } :active { transform: translateY(0); box-shadow: 0 6px 14px -10px rgba(90,120,150,.50); } :focus-visible { outline: 2px solid #3a3a3a; outline-offset: 3px; } — secondary variant: background #fdfaf2, border 1px solid rgba(58,58,58,.14), color #3a3a3a with a lavender #b8a7d6 wash on hover; disabled: background #f2ece0, color #8a8478, no transform, no shadow, cursor default.",
     "input": "font: 400 17px/1.6 'EB Garamond', Georgia, serif; color: #3a3a3a; background: #fdfaf2; border: 1px solid rgba(58,58,58,.14); border-radius: 10px; padding: 13px 16px; box-shadow: inset 0 1px 0 rgba(255,255,255,.60), inset 0 0 20px rgba(168,208,230,.12); :placeholder { color: #8a8478; font-style: italic; } :focus { border-color: rgba(90,120,150,.45); box-shadow: inset 0 0 20px rgba(246,231,178,.35), 0 0 0 3px rgba(168,208,230,.35); outline: none; } — invalid: border-color #b5546a plus an italic EB Garamond sentence below in #b5546a, 'This line is still wet — try again.', so the error never relies on hue alone; the field never turns a saturated red.",

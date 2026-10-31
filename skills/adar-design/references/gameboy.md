@@ -8,7 +8,7 @@ Nintendo DMG handheld: a four-shade olive-green LCD, dot-matrix texture, chunky 
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Nintendo DMG handheld: a four-shade olive-green LCD, dot-matrix texture, chunky 
 | `danger` | `#0f380f` |
 | `warning` | `#306230` |
 | `success` | `#306230` |
+| `border` | `#0f380f` |
+| `divider` | `#306230` |
+| `selection` | `#0f380f` |
+| `overlay` | `#306230` |
+| `selection-text` | `#9bbc0f` |
+| `color-scheme` | `light` |
 
 ### Variant: `dmg`
 
@@ -64,7 +70,17 @@ Nintendo DMG handheld: a four-shade olive-green LCD, dot-matrix texture, chunky 
 ### Typography
 
 - Display: "Press Start 2P", "VT323", "monospace"
+- Body: "VT323", "IBM Plex Mono", "monospace"
 - Mono: "VT323", "IBM Plex Mono", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `20px` | 1.1 | — |
+| h2 | `16px` | 1.2 | — |
+| body | `16px` | 1.2 | — |
+| caption | `14px` | 1.2 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -95,8 +111,19 @@ Nintendo DMG handheld: a four-shade olive-green LCD, dot-matrix texture, chunky 
 ## Component recipes
 
 - **panel:** background: #9bbc0f; border: 4px solid #0f380f; border-radius: 0; padding: 16px 24px; color: #0f380f; box-shadow: inset 0 0 0 4px #8bac0f, 4px 4px 0 #306230; — the inset ring is the LCD bezel step that separates the panel field from its frame; the dotMatrix overlay sits absolutely inside at 100% cover with pointer-events: none. Titles sit in the top-left corner as a Press Start 2P 10px uppercase label with a 4px #306230 underline rule that stops one grid step short of the right edge.
+- **card:** background:#9bbc0f;border:4px solid #0f380f;border-radius:0;padding:16px 24px;color:#0f380f;box-shadow:inset 0 0 0 4px #8bac0f,4px 4px 0 #306230; title = Press Start 2P 10px uppercase #0f380f with a 4px #306230 underline that stops one grid step short; body = VT323 20px/1.4 #0f380f; footer actions are 4px-bordered buttons; the dotMatrix overlay sits inside at 100% cover with pointer-events none.
 - **button:** font: 700 12px/1.4 'Press Start 2P'; text-transform: uppercase; letter-spacing: 0.08em; background: #0f380f; color: #9bbc0f; border: 4px solid #0f380f; border-radius: 0; padding: 12px 16px; box-shadow: 4px 4px 0 #306230; transition: none; :hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #306230; } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #306230; } :focus-visible { outline: 4px solid #306230; outline-offset: 4px; } — secondary variant: #8bac0f background, #0f380f text, 4px #0f380f border; pressed buttons may not change hue, only position.
 - **input:** background: #8bac0f; color: #0f380f; font: 20px/1.4 'VT323'; border: 4px solid #306230; border-radius: 0; padding: 8px 12px; caret-color: #0f380f; box-shadow: inset 4px 4px 0 rgba(15,56,15,0.12); :placeholder { color: #306230; text-transform: uppercase; letter-spacing: 0.05em; font-family: 'Press Start 2P'; font-size: 10px; } :focus { border-color: #0f380f; box-shadow: inset 4px 4px 0 rgba(15,56,15,0.16), 0 0 6px #8bac0f; outline: none; } — invalid state inverts the field to background #0f380f / color #9bbc0f and appends the literal text '!ERROR' in VT323, never a red border.
+- **select:** A monochrome menu row, not a popover: trigger = VT323 20px field (background:#8bac0f;border:4px solid #306230;padding:8px 12px;color:#0f380f) with a blinking '▼'; the open list is a 4px-ruled frame of Press Start 2P rows; the selected row inverts to background #0f380f / text #9bbc0f and prefixes '»'; hover shifts translate(-4px,-4px) with box-shadow 4px 4px 0 #306230.
+- **checkbox:** A 24px square pixel well: background:#8bac0f;border:4px solid #306230;border-radius:0; checked = a 12px #0f380f block centred inside with a 4px #306230 focus ring; radio = a 12px #0f380f dot; label in VT323 20px #0f380f with the state word 'ON'/'OFF'; pressed state only changes position, never hue.
+- **badge:** A 4px-bordered chip: display:inline-flex;gap:8px;padding:4px 10px;background:#8bac0f;border:4px solid;border-radius:0;font:10px/1 'Press Start 2P';text-transform:uppercase;letter-spacing:0.08em; role color = border+text in the four DMG shades only (#0f380f/#306230/#8bac0f/#9bbc0f) with the word spelled out; never a fifth shade.
+- **avatar:** A 32px sprite tile: image-rendering:pixelated; background:#8bac0f;border:4px solid #0f380f;border-radius:0;box-shadow:4px 4px 0 #306230; initials fall back to Press Start 2P 12px #0f380f; integer 2x/3x scale only, and the tile snaps to the 8px grid.
+- **nav:** Horizontal HUD rail: items = Press Start 2P 12px uppercase #0f380f with 4px 16px padding and a 4px #306230 separator; hover inverts to #0f380f on #9bbc0f; the active tab inverts to background #0f380f / text #9bbc0f and prefixes a blinking '»'; the vertical form is the existing menu; no radius and no smooth motion.
+- **table:** A 4px pixel grid: header = Press Start 2P 10px uppercase #0f380f on #8bac0f with a 4px #306230 bottom rule; body rows = VT323 20px/1.4 #0f380f on #9bbc0f separated by 4px #306230 rules; hover inverts the row, the selected row inverts to background #0f380f / text #9bbc0f and prefixes '»'; cell padding 8px 12px.
+- **dialog:** A monochrome modal: background:#9bbc0f;border:4px solid #0f380f;box-shadow:inset 0 0 0 4px #8bac0f,4px 4px 0 #306230; scrim = color-mix(in srgb, var(--overlay) 60%, transparent); title in Press Start 2P, body in VT323, actions are inverted 4px-bordered buttons; entrance is a 240ms steps(4) translate, reduced motion = instant.
+- **toast:** A bottom-right LCD line: background:#8bac0f;border:4px solid;padding:10px 14px;font:VT323 20px/1.2; a 4px left accent in a DMG shade plus the word (OK/WARNING/!ERROR); auto-dismisses in 240ms by collapsing its 4px 4px 0 shadow to 0; reduced motion shows it statically.
+- **code:** A monochrome block: background:#9bbc0f;border:4px solid #0f380f;border-radius:0;padding:16px;font:18px/1.4 'VT323';color:#0f380f; preserve whitespace; comments in #306230, strings in #0f380f, errors marked '!ERROR'; no syntax gradients and no fifth shade.
+- **empty:** A centred LCD panel: an 8-bit sprite glyph drawn in 4px blocks, one VT323 message ('NO SAVES' / 'INSERT CARTRIDGE'), and a single inverted Press Start 2P button; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 32px; display: flex; align-items: center; gap: 24px; padding: 0 16px; background: #8bac0f; border-top: 4px solid #0f380f; border-radius: 0; font: 10px/1 'Press Start 2P'; text-transform: uppercase; letter-spacing: 0.08em; color: #0f380f; segments split by border-left: 4px solid #306230; the live value inverts to a #0f380f block with #9bbc0f text, and the trailing state cell is an 8px wide #0f380f block animated with steps(2, jump-none) 1s infinite.
 - **menu:** vertical list, no radius, no bullets: item { display: block; font: 12px/1.5 'Press Start 2P'; text-transform: uppercase; letter-spacing: 0.05em; padding: 8px 16px 8px 32px; color: #0f380f; } selected item inverts to background #0f380f / color #9bbc0f and prefixes a blinking '»' in the same inverted field at steps(2, jump-none) 1s infinite; hover shifts translate(-4px, -4px) with box-shadow 4px 4px 0 #306230; group separators are 4px dashed #306230, never 1px hairlines, and no menu row may use a third shade.
 

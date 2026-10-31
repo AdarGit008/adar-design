@@ -1,68 +1,32 @@
 #!/usr/bin/env node
-// adar-design generator — single source of truth is data/ (skill.json + modes/*.json).
+// adar-design generator — single source of truth is data/ (skill.json + modes/*.json + mixes/*.json).
 // Emits the entire skills/adar-design/ tree deterministically.
 // Add or edit a mode: create/edit data/modes/<id>.json, then `node scripts/generate.mjs`.
 
 import fs from "node:fs";
 import path from "node:path";
-import { fileURLToPath } from "node:url";
 
-const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
-const DATA = path.join(ROOT, "data");
-const OUT = path.join(ROOT, "skills", "adar-design");
+import {
+  ROOT,
+  DATA,
+  OUT,
+  CANONICAL_RECIPES,
+  COLOR_ROLES,
+  TYPE_TIERS,
+  loadAll,
+  quoteFonts,
+  cssFontList,
+  kebab,
+  selectionText,
+  mixToMode,
+  validate,
+  validEffectImage,
+} from "./lib.mjs";
 
-const skill = JSON.parse(fs.readFileSync(path.join(DATA, "skill.json"), "utf8"));
+const { skill, modes, modeFiles, mixes } = loadAll();
 
-const modeFiles = fs
-  .readdirSync(path.join(DATA, "modes"))
-  .filter((f) => f.endsWith(".json") && f !== "_template.json")
-  .sort();
-
-const modes = modeFiles.map((f) => JSON.parse(fs.readFileSync(path.join(DATA, "modes", f), "utf8")));
-
-const MIXES_DIR = path.join(DATA, "mixes");
-const mixes = fs.existsSync(MIXES_DIR)
-  ? fs.readdirSync(MIXES_DIR)
-      .filter((f) => f.endsWith(".json") && f !== "_template.json")
-      .sort()
-      .map((f) => JSON.parse(fs.readFileSync(path.join(MIXES_DIR, f), "utf8")))
-  : [];
-
-// ---- validation -----------------------------------------------------------
-const REQUIRED = [
-  "id", "name", "order", "aliases", "summary", "whenToUse",
-  "colors", "paletteVariants", "fonts", "radius", "spacing", "shadow", "motion",
-  "effects", "rules", "componentRecipes", "copywriting", "do", "dont",
-  "accessibility", "signatureElement", "attribution", "prose",
-];
-const errors = [];
-for (const m of modes) {
-  for (const k of REQUIRED) {
-    if (m[k] === undefined) errors.push(`mode ${m.id ?? "?"}: missing required key "${k}"`);
-  }
-  if (!/^[a-z0-9-]+$/.test(m.id || "")) errors.push(`mode ${m.id}: id must be lowercase-hyphen`);
-  if (modeFiles.map((f) => f.replace(".json", "")).filter((x) => x === m.id).length !== 1)
-    errors.push(`mode ${m.id}: id must equal its filename`);
-  for (const role of ["background", "surface", "foreground", "primary", "accent"]) {
-    if (m.colors && !/^#([0-9a-fA-F]{6})$/.test(m.colors[role] || ""))
-      errors.push(`mode ${m.id}: colors.${role} must be a #RRGGBB hex`);
-  }
-}
-const GROUP_KEYS = (skill.mixing && skill.mixing.groups) || {};
-const modeById = Object.fromEntries(modes.map((m) => [m.id, m]));
-for (const mix of mixes) {
-  for (const k of ["id", "name", "order", "base", "overrides", "summary", "signatureElement"]) {
-    if (mix[k] === undefined) errors.push(`mix ${mix.id ?? "?"}: missing required key "${k}"`);
-  }
-  if (!/^[a-z0-9-]+$/.test(mix.id || "")) errors.push(`mix ${mix.id}: id must be lowercase-hyphen`);
-  if (!modeById[mix.base] && !mixes.some((x) => x.id === mix.base))
-    errors.push(`mix ${mix.id}: base "${mix.base}" is not a known mode or mix`);
-  for (const [group, src] of Object.entries(mix.overrides || {})) {
-    if (!(group in GROUP_KEYS)) errors.push(`mix ${mix.id}: unknown override group "${group}"`);
-    else if (!modeById[src]) errors.push(`mix ${mix.id}: override "${group}" -> "${src}" is not a known mode`);
-  }
-}
-if (skill.description.length > 1024) errors.push("skill.description exceeds 1024 chars");
+// ---- validation (shared with lint.mjs) ------------------------------------
+const errors = validate({ skill, modes, modeFiles, mixes });
 if (errors.length) {
   console.error("VALIDATION FAILED:\n- " + errors.join("\n- "));
   process.exit(1);
@@ -78,7 +42,62 @@ const write = (rel, content) => {
 const esc = (s) => String(s).replace(/\|/g, "\\|").replace(/\n/g, " ");
 const yq = (s) => `"${String(s).replace(/\\/g, "\\\\").replace(/"/g, '\\"')}"`; // YAML double-quoted scalar
 const list = (arr) => (arr || []).map((x) => `- ${x}`).join("\n");
-const quoteFonts = (fonts) => fonts.map((f) => `"${f}"`).join(", ");
+
+const GROUP_KEYS = (skill.mixing && skill.mixing.groups) || {};
+const modeById = Object.fromEntries(modes.map((m) => [m.id, m]));
+
+function colorTable(m) {
+  const rows = COLOR_ROLES.map((k) => `| \`${k}\` | \`${m.colors[k]}\` |`);
+  rows.push(`| \`selection-text\` | \`${selectionText(m)}\` |`);
+  rows.push(`| \`color-scheme\` | \`${m.colorScheme}\` |`);
+  return rows.join("\n");
+}
+
+function typeScaleTable(m) {
+  const rows = TYPE_TIERS.map((tier) => {
+    const t = m.typeScale[tier];
+    const notes = [
+      t.fontWeight ? `weight ${t.fontWeight}` : "",
+      t.letterSpacing ? `tracking ${t.letterSpacing}` : "",
+      t.textTransform && t.textTransform !== "none" ? t.textTransform : "",
+    ].filter(Boolean).join(", ");
+    return `| ${tier} | \`${t.fontSize}\` | ${t.lineHeight} | ${notes || "—"} |`;
+  });
+  return `| Tier | Size | Line-height | Notes |\n|---|---|---|---|\n${rows.join("\n")}`;
+}
+
+function recipeList(m) {
+  const keys = [
+    ...CANONICAL_RECIPES,
+    ...Object.keys(m.componentRecipes || {}).filter((k) => !CANONICAL_RECIPES.includes(k)),
+  ];
+  return keys.map((k) => `- **${k}:** ${m.componentRecipes[k]}`).join("\n");
+}
+
+function copywritingBlock(c) {
+  return [
+    `- Voice: ${c.voice}`,
+    `- Case: ${Object.entries(c.case || {}).map(([k, v]) => `${k}=${v}`).join(", ")}`,
+    `- Prefixes: ${(c.prefixes || []).join(" ")}`,
+    `- Verb table: ${Object.entries(c.verbs || {}).map(([k, v]) => `${k}→${v}`).join("; ")}`,
+    `- Avoid: ${(c.avoid || []).join(", ")}`,
+  ].join("\n");
+}
+
+function resolvedSections(r) {
+  return [
+    `### Color scheme\n\n- Color scheme: \`${r.colorScheme}\``,
+    `### Colors\n\n| Role | Value |\n|---|---|\n${colorTable(r)}`,
+    `### Typography\n\n- Display: ${quoteFonts(r.fonts.display)}\n- Body: ${quoteFonts(r.fonts.body)}\n- Mono: ${quoteFonts(r.fonts.mono)}`,
+    `### Type scale\n\n${typeScaleTable(r)}`,
+    `### Rules\n\n${list(r.rules)}`,
+    `### Component recipes\n\n${recipeList(r)}`,
+    `### Copywriting\n\n${copywritingBlock(r.copywriting)}`,
+    `### Do\n\n${list(r.do)}`,
+    `### Don't\n\n${list(r.dont)}`,
+    `### Accessibility\n\n${list(r.accessibility)}`,
+  ].join("\n\n");
+}
 
 // ---- SKILL.md -------------------------------------------------------------
 const modeIndex = modes
@@ -136,7 +155,7 @@ This skill implements ${modes.length} visual modes. Pick one base mode per surfa
 |---|---|---|
 ${modeIndex}
 
-To implement a mode, read its reference file: \`references/<mode>.md\` (full spec: tokens, rules, component recipes, copywriting, accessibility) and \`references/designs/<mode>.DESIGN.md\` (Google DESIGN.md schema, lintable). The machine-readable registries are \`tokens.json\` and \`tokens.css\` (all modes, namespaced \`--adar-<mode>-*\`).
+To implement a mode, read its reference file: \`references/<mode>.md\` (full spec: tokens, rules, component recipes, copywriting, accessibility) and \`references/designs/<mode>.DESIGN.md\` (Google DESIGN.md schema, lintable). The machine-readable registries are \`tokens.json\` and \`tokens.css\` (all modes, namespaced \`--adar-<mode>-*\`). A screenshotable visual preview lives in \`gallery.html\` (open it and switch modes with the selector or \`?mode=<id>\`).
 
 ## Work-style rules (all modes)
 
@@ -161,10 +180,6 @@ for (const m of modes) {
     })
     .join("\n");
 
-  const colors = Object.entries(m.colors)
-    .map(([k, v]) => `| \`${k}\` | \`${v}\` |`)
-    .join("\n");
-
   const refBody = `# ${m.name} — reference
 
 ${m.summary}
@@ -175,18 +190,23 @@ ${m.summary}
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
-${colors}
+${colorTable(m)}
 
 ${variants}
 
 ### Typography
 
 - Display: ${quoteFonts(m.fonts.display)}
+- Body: ${quoteFonts(m.fonts.body)}
 - Mono: ${quoteFonts(m.fonts.mono)}
+
+### Type scale
+
+${typeScaleTable(m)}
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -209,15 +229,11 @@ ${list(m.rules)}
 
 ## Component recipes
 
-${Object.entries(m.componentRecipes).map(([k, v]) => `- **${k}:** ${v}`).join("\n")}
+${recipeList(m)}
 
 ## Copywriting
 
-- Voice: ${m.copywriting.voice}
-- Case: ${Object.entries(m.copywriting.case).map(([k, v]) => `${k}=${v}`).join(", ")}
-- Prefixes: ${(m.copywriting.prefixes || []).join(" ")}
-- Verb table: ${Object.entries(m.copywriting.verbs || {}).map(([k, v]) => `${k}→${v}`).join("; ")}
-- Avoid: ${(m.copywriting.avoid || []).join(", ")}
+${copywritingBlock(m.copywriting)}
 
 ## Do
 
@@ -239,34 +255,38 @@ ${m.attribution.map((a) => `- ${a.name} — ${a.url} (${a.license})`).join("\n")
 
   // Google-spec DESIGN.md
   const g = m.prose || {};
-  const radius = /^\d+$/.test(m.radius) ? m.radius + "px" : m.radius; // Dimension needs px/em/rem
-  const designFm = `---\nversion: alpha\nname: ${m.name}\ncolors:\n${Object.entries(m.colors).map(([k, v]) => `  ${k}: "${v}"`).join("\n")}\ntypography:\n  h1:\n    fontFamily: ${m.fonts.display[0]}\n    fontSize: 32px\n    fontWeight: 700\n  body:\n    fontFamily: ${m.fonts.mono[0]}\n    fontSize: 16px\n    fontWeight: 400\n    lineHeight: 1.5\nrounded:\n  none: ${radius}\nspacing:\n${Object.entries(m.spacing).map(([k, v]) => `  ${k}: ${v}`).join("\n")}\ncomponents:\n  button-primary:\n    backgroundColor: "{colors.primary}"\n    textColor: "{colors.background}"\n    rounded: "{rounded.none}"\n  panel:\n    backgroundColor: "{colors.surface}"\n    textColor: "{colors.foreground}"\n    rounded: "{rounded.none}"\n  text-muted:\n    textColor: "{colors.muted}"\n  accent:\n    textColor: "{colors.accent}"\n  danger:\n    textColor: "{colors.danger}"\n  warning:\n    textColor: "{colors.warning}"\n  success:\n    textColor: "{colors.success}"\n---\n`;
+  const radius = /^\d+$/.test(m.radius) ? m.radius + "px" : m.radius;
+  const designColors = COLOR_ROLES.map((k) => `  ${k}: "${m.colors[k]}"`).join("\n");
+  const componentMap = [
+    ["panel", "{colors.surface}", "{colors.foreground}"],
+    ["card", "{colors.surface}", "{colors.foreground}"],
+    ["button-primary", "{colors.primary}", "{colors.background}"],
+    ["button-secondary", "{colors.surface}", "{colors.foreground}"],
+    ["input", "{colors.background}", "{colors.foreground}"],
+    ["select", "{colors.background}", "{colors.foreground}"],
+    ["checkbox", "{colors.surface}", "{colors.foreground}"],
+    ["badge", "{colors.primary}", "{colors.background}"],
+    ["avatar", "{colors.surface}", "{colors.foreground}"],
+    ["nav", "{colors.surface}", "{colors.foreground}"],
+    ["table", "{colors.surface}", "{colors.foreground}"],
+    ["dialog", "{colors.surface}", "{colors.foreground}"],
+    ["toast", "{colors.surface}", "{colors.foreground}"],
+    ["code", "{colors.background}", "{colors.foreground}"],
+    ["empty", "{colors.surface}", "{colors.foreground}"],
+    ["statusbar", "{colors.surface}", "{colors.foreground}"],
+  ]
+    .map(([name, bg, fg]) => `  ${name}:\n    backgroundColor: "${bg}"\n    textColor: "${fg}"\n    rounded: "{rounded.none}"`)
+    .join("\n");
+
+  const designFm = `---\nversion: alpha\nname: ${m.name}\ncolors:\n${designColors}\n  selectionText: "${selectionText(m)}"\ntypography:\n  h1:\n    fontFamily: "${m.fonts.display[0]}"\n    fontSize: ${m.typeScale.h1.fontSize}\n    fontWeight: ${m.typeScale.h1.fontWeight ?? 700}\n  h2:\n    fontFamily: "${m.fonts.display[0]}"\n    fontSize: ${m.typeScale.h2.fontSize}\n    fontWeight: ${m.typeScale.h2.fontWeight ?? 700}\n  body:\n    fontFamily: "${m.fonts.body[0]}"\n    fontSize: ${m.typeScale.body.fontSize}\n    fontWeight: ${m.typeScale.body.fontWeight ?? 400}\n    lineHeight: ${m.typeScale.body.lineHeight}\n  caption:\n    fontFamily: "${m.fonts.body[0]}"\n    fontSize: ${m.typeScale.caption.fontSize}\n    fontWeight: ${m.typeScale.caption.fontWeight ?? 400}\nrounded:\n  none: ${radius}\nspacing:\n${Object.entries(m.spacing).map(([k, v]) => `  ${k}: ${v}`).join("\n")}\ncomponents:\n${componentMap}\n  text-muted:\n    textColor: "{colors.muted}"\n  accent:\n    textColor: "{colors.accent}"\n  danger:\n    textColor: "{colors.danger}"\n  warning:\n    textColor: "{colors.warning}"\n  success:\n    textColor: "{colors.success}"\n---\n`;
+
   const designBody = `## Overview\n\n${g.overview}\n\n## Colors\n\n${g.colors}\n\n## Typography\n\n${g.typography}\n\n## Layout\n\n${g.layout}\n\n## Elevation & Depth\n\n${g.elevation}\n\n## Shapes\n\n${g.shapes}\n\n## Components\n\n${g.components}\n\n## Do's and Don'ts\n\n${g.dosDonts}\n`;
   write(`references/designs/${m.id}.DESIGN.md`, designFm + "\n" + designBody);
 }
 
 // ---- mix resolution + references -------------------------------------------
-function mixToMode(id, seen = new Set()) {
-  if (seen.has(id)) return null;
-  seen.add(id);
-  if (modeById[id]) return modeById[id];
-  const mix = mixes.find((x) => x.id === id);
-  if (!mix) return null;
-  const base = mixToMode(mix.base, seen);
-  if (!base) return null;
-  const out = JSON.parse(JSON.stringify(base));
-  for (const [group, srcId] of Object.entries(mix.overrides || {})) {
-    const src = modeById[srcId];
-    if (!src) return null;
-    for (const k of (Array.isArray(GROUP_KEYS[group]) ? GROUP_KEYS[group] : [group])) {
-      out[k] = src[k];
-    }
-  }
-  return out;
-}
-
 for (const mix of mixes) {
-  const resolved = mixToMode(mix.id);
+  const resolved = mixToMode(mix.id, modeById, mixes, GROUP_KEYS);
   const overrides = Object.entries(mix.overrides || {}).map(([g, s]) => `- \`${g}\` ← \`${s}\``).join("\n") || "- none";
   const sourceRows = Object.keys(GROUP_KEYS)
     .map((g) => `| \`${g}\` | \`${(mix.overrides || {})[g] || mix.base}\` |`)
@@ -291,51 +311,96 @@ ${sourceRows}
 
 ## Resolved tokens
 
-### Colors
-
-| Role | Value |
-|---|---|
-${Object.entries(resolved.colors).map(([k, v]) => `| \`${k}\` | \`${v}\` |`).join("\n")}
-
-### Type & shape
-
-- Display: ${quoteFonts(resolved.fonts.display)}
-- Mono: ${quoteFonts(resolved.fonts.mono)}
-- Radius: \`${resolved.radius}\`
-- Shadow hard: \`${resolved.shadow.hard}\`
-- Shadow glow: \`${resolved.shadow.glow}\`
-- Motion easing: \`${resolved.motion.easing}\`
+${resolvedSections(resolved)}
 `;
   write(`references/mixes/${mix.id}.md`, mixBody);
 }
 
 // ---- consolidated registries ----------------------------------------------
+function cssBlock(p, label, m) {
+  const lines = [];
+  for (const role of COLOR_ROLES) lines.push(`  --adar-${p}-${role}: ${m.colors[role]};`);
+  lines.push(`  --adar-${p}-selection-text: ${selectionText(m)};`);
+  lines.push(`  --adar-${p}-color-scheme: ${m.colorScheme};`);
+  lines.push(`  --adar-${p}-font-display: ${cssFontList(m.fonts.display)};`);
+  lines.push(`  --adar-${p}-font-mono: ${cssFontList(m.fonts.mono)};`);
+  lines.push(`  --adar-${p}-font-body: ${cssFontList(m.fonts.body)};`);
+  for (const [k, v] of Object.entries(m.spacing)) lines.push(`  --adar-${p}-space-${k}: ${v};`);
+  lines.push(`  --adar-${p}-radius: ${m.radius};`);
+  lines.push(`  --adar-${p}-shadow-hard: ${m.shadow.hard};`);
+  lines.push(`  --adar-${p}-shadow-glow: ${m.shadow.glow};`);
+  for (const tier of TYPE_TIERS) {
+    const t = m.typeScale[tier];
+    lines.push(`  --adar-${p}-type-${tier}-size: ${t.fontSize};`);
+    lines.push(`  --adar-${p}-type-${tier}-line-height: ${t.lineHeight};`);
+    if (t.fontWeight !== undefined) lines.push(`  --adar-${p}-type-${tier}-weight: ${t.fontWeight};`);
+    if (t.letterSpacing !== undefined) lines.push(`  --adar-${p}-type-${tier}-letter-spacing: ${t.letterSpacing};`);
+    if (t.textTransform !== undefined) lines.push(`  --adar-${p}-type-${tier}-transform: ${t.textTransform};`);
+  }
+  lines.push(`  --adar-${p}-motion-easing: ${m.motion.easing};`);
+  lines.push(`  --adar-${p}-motion-cursor: ${m.motion.cursor};`);
+  const DUR = ["instant", "fast", "base", "slow", "slowest"];
+  (m.motion.durations || []).forEach((d, i) => {
+    if (DUR[i]) lines.push(`  --adar-${p}-duration-${DUR[i]}: ${d};`);
+  });
+  lines.push(`  --adar-${p}-effects-scanlines: ${m.effects.scanlines};`);
+  lines.push(`  --adar-${p}-effects-vignette: ${m.effects.vignette};`);
+  lines.push(`  --adar-${p}-effects-pixelate: ${m.effects.pixelate};`);
+  for (const [k, v] of Object.entries(m.effects)) {
+    if (["scanlines", "vignette", "pixelate"].includes(k)) continue;
+    if (!validEffectImage(v)) continue;
+    lines.push(`  --adar-${p}-effects-${kebab(k)}: ${v};`);
+  }
+  return `/* ${label} */\n:root {\n${lines.join("\n")}\n}`;
+}
+
+function resolvedColors(m) {
+  const colors = {};
+  for (const role of COLOR_ROLES) colors[role] = m.colors[role];
+  colors.selectionText = selectionText(m);
+  return colors;
+}
+
 const cssVars = [];
 const jsonModes = {};
 for (const m of modes) {
   const p = m.id;
-  const colorVars = Object.entries(m.colors).map(([k, v]) => `  --adar-${p}-${k}: ${v};`).join("\n");
-  const fontVars = `  --adar-${p}-font-display: ${quoteFonts(m.fonts.display)};\n  --adar-${p}-font-mono: ${quoteFonts(m.fonts.mono)};`;
-  const spacingVars = Object.entries(m.spacing).map(([k, v]) => `  --adar-${p}-space-${k}: ${v};`).join("\n");
-  cssVars.push(`/* ${m.name} */\n:root {\n${colorVars}\n${fontVars}\n${spacingVars}\n  --adar-${p}-radius: ${m.radius};\n  --adar-${p}-shadow-hard: ${m.shadow.hard};\n  --adar-${p}-shadow-glow: ${m.shadow.glow};\n}`);
-  jsonModes[p] = { name: m.name, summary: m.summary, aliases: m.aliases, colors: m.colors, paletteVariants: m.paletteVariants, fonts: m.fonts, radius: m.radius, spacing: m.spacing, shadow: m.shadow, motion: m.motion, effects: m.effects };
+  cssVars.push(cssBlock(p, m.name, m));
+  jsonModes[p] = {
+    name: m.name,
+    summary: m.summary,
+    aliases: m.aliases,
+    colorScheme: m.colorScheme,
+    colors: resolvedColors(m),
+    paletteVariants: m.paletteVariants,
+    fonts: m.fonts,
+    typeScale: m.typeScale,
+    radius: m.radius,
+    spacing: m.spacing,
+    shadow: m.shadow,
+    motion: m.motion,
+    effects: m.effects,
+  };
 }
 
 const jsonMixes = {};
 for (const mix of mixes) {
-  const r = mixToMode(mix.id);
-  const p = mix.id;
-  const colorVars = Object.entries(r.colors).map(([k, v]) => `  --adar-${p}-${k}: ${v};`).join("\n");
-  const fontVars = `  --adar-${p}-font-display: ${quoteFonts(r.fonts.display)};\n  --adar-${p}-font-mono: ${quoteFonts(r.fonts.mono)};`;
-  const spacingVars = Object.entries(r.spacing).map(([k, v]) => `  --adar-${p}-space-${k}: ${v};`).join("\n");
-  cssVars.push(`/* ${mix.name} (mix) */\n:root {\n${colorVars}\n${fontVars}\n${spacingVars}\n  --adar-${p}-radius: ${r.radius};\n  --adar-${p}-shadow-hard: ${r.shadow.hard};\n  --adar-${p}-shadow-glow: ${r.shadow.glow};\n}`);
-  jsonMixes[mix.id] = { name: mix.name, summary: mix.summary, base: mix.base, overrides: mix.overrides || {}, signatureElement: mix.signatureElement, resolved: { colors: r.colors, paletteVariants: r.paletteVariants, fonts: r.fonts, radius: r.radius, spacing: r.spacing, shadow: r.shadow, motion: r.motion, effects: r.effects } };
+  const r = mixToMode(mix.id, modeById, mixes, GROUP_KEYS);
+  cssVars.push(cssBlock(mix.id, `${mix.name} (mix)`, r));
+  jsonMixes[mix.id] = {
+    name: mix.name,
+    summary: mix.summary,
+    base: mix.base,
+    overrides: mix.overrides || {},
+    signatureElement: mix.signatureElement,
+    resolved: { ...r, colors: resolvedColors(r) },
+  };
 }
 
 write("tokens.css", `/* adar-design tokens — generated. Edit data/ (modes + mixes), run node scripts/generate.mjs */\n\n${cssVars.join("\n\n")}\n`);
 write("tokens.json", JSON.stringify({ name: skill.name, version: skill.version, description: skill.description, modes: jsonModes, mixes: jsonMixes }, null, 2) + "\n");
 
-const tokensMd = `# Token registry — all modes\n\nMachine-readable sources: \`tokens.json\` (nested) and \`tokens.css\` (\`--adar-<mode>-*\` CSS variables).\n\n${modes.map((m) => `## ${m.name} (\`${m.id}\`)\n\n${Object.entries(m.colors).map(([k, v]) => `- \`${k}\`: \`${v}\``).join("\n")}\n`).join("\n")}`;
+const tokensMd = `# Token registry — all modes\n\nMachine-readable sources: \`tokens.json\` (nested) and \`tokens.css\` (\`--adar-<mode>-*\` CSS variables).\n\n${modes.map((m) => `## ${m.name} (\`${m.id}\`)\n\n${COLOR_ROLES.map((k) => `- \`${k}\`: \`${m.colors[k]}\``).join("\n")}\n- \`selection-text\`: \`${selectionText(m)}\`\n- \`color-scheme\`: \`${m.colorScheme}\`\n`).join("\n")}`;
 write("references/tokens.md", tokensMd);
 
 console.log(`\nGenerated ${modes.length} mode(s): ${modes.map((m) => m.id).join(", ")}${mixes.length ? ` · ${mixes.length} mix(es): ${mixes.map((x) => x.id).join(", ")}` : ""}`);

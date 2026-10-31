@@ -1,0 +1,2365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton:wght@400;700&family=Archivo:wght@400;700&family=Archivo+Black:wght@400;700&family=Audiowide:wght@400;700&family=Baloo+2:wght@400;700&family=Chakra+Petch:wght@400;700&family=Chewy:wght@400;700&family=Cinzel:wght@400;700&family=Cormorant:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=EB+Garamond:wght@400;700&family=Fredoka:wght@400;700&family=IBM+Plex+Mono:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Michroma:wght@400;700&family=Montserrat:wght@400;700&family=Orbitron:wght@400;700&family=Oswald:wght@400;700&family=Playfair+Display:wght@400;700&family=Press+Start+2P:wght@400;700&family=Rajdhani:wght@400;700&family=Share+Tech+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&family=VT323:wght@400;700&display=swap" rel="stylesheet">
+<title>adar-design gallery</title>
+<link rel="stylesheet" href="tokens.css">
+<style>
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+body { font-family: var(--font-body, system-ui, sans-serif); background: var(--bg); color: var(--fg); }
+.mode { position: relative; min-height: 100vh; background: var(--bg); color: var(--fg); }
+.mode-caption { position: relative; z-index: 5; padding: var(--space-sm) var(--space-md); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); border-bottom: 1px solid var(--divider); }
+.app { position: relative; z-index: 5; max-width: 1080px; margin: 0 auto; padding: var(--space-lg) var(--space-md) calc(var(--space-xl) + 96px); }
+.shell-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--space-md); display: flex; align-items: center; gap: var(--space-md); }
+.gallery-bar { position: sticky; top: 0; z-index: 70; padding: var(--space-sm) 0; background: var(--surface); border-bottom: 1px solid var(--border); font-family: var(--font-display); }
+.gallery-title { font-weight: 700; }
+.gallery-bar select { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 8px; }
+.app-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: var(--space-sm) var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
+.logo { font-family: var(--font-display); font-weight: 700; }
+.tabs { display: flex; gap: var(--space-sm); }
+.tab { padding: 4px 10px; border: 1px solid transparent; border-radius: var(--radius); }
+.tab.active { background: var(--selection); color: var(--selection-text); }
+.hero { padding: var(--space-xl) 0; }
+.hero h1 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h1); line-height: 1.1; }
+.lead { margin: 0; font-size: var(--body); color: var(--muted); max-width: 60ch; }
+.cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-md); }
+.card { background: var(--surface); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md); box-shadow: var(--shadow-hard); }
+.card-title { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h2); }
+.card-body { margin: 0 0 var(--space-md); font-size: var(--body); }
+.btn { font-family: var(--font-display); font-size: var(--caption); padding: 8px 16px; border: 1px solid var(--border); border-radius: var(--radius); cursor: pointer; transition: all var(--dur-fast, 150ms) var(--ease); }
+.btn-primary { background: var(--primary); color: var(--bg); box-shadow: var(--shadow-hard); }
+.btn-secondary { background: var(--surface); color: var(--fg); }
+.block { margin-top: var(--space-xl); }
+.block h2 { font-family: var(--font-display); font-size: var(--h2); }
+.table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.table th, .table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--divider); font-size: var(--body); }
+.table th { font-family: var(--font-display); font-weight: 700; color: var(--muted); background: var(--surface); }
+.table .num { text-align: right; font-variant-numeric: tabular-nums; }
+.table tr.selected td { background: var(--selection); color: var(--selection-text); }
+.form { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: flex-end; }
+.field { display: flex; flex-direction: column; gap: 4px; font-size: var(--caption); color: var(--muted); }
+.input, .select { background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: var(--body); font-family: var(--font-body); }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: var(--body); }
+.checkbox, .radio { accent-color: var(--primary); width: 18px; height: 18px; margin: 0; flex: 0 0 auto; }
+.actions { display: flex; gap: var(--space-sm); }
+.badge-row { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--fg); font-size: var(--caption); line-height: 1.2; }
+.badge::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 999px; background: var(--success); }
+.badge-warning::before { background: var(--warning); }
+.badge-danger::before { background: var(--danger); }
+.toast { display: inline-block; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--radius); font-size: var(--body); box-shadow: var(--shadow-hard); }
+.dialog { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: var(--space-md); background: color-mix(in srgb, var(--overlay) 55%, transparent); }
+.dialog-panel { max-width: 420px; width: 100%; padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
+.dialog-panel h2 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h2); }
+.empty { margin-top: var(--space-md); padding: var(--space-lg); text-align: center; background: var(--surface); border: 1px dashed var(--divider); border-radius: var(--radius); color: var(--fg); font-size: var(--body); }
+.empty-text { margin: 0; }
+.empty .btn { margin-top: var(--space-sm); }
+.code { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md) var(--space-md) var(--space-lg); font-family: var(--font-mono); font-size: var(--caption); line-height: 1.5; white-space: pre; overflow-x: auto; }
+.avatar-row { display: flex; gap: var(--space-sm); margin-top: var(--space-md); }
+.avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-display); font-size: var(--caption); }
+.signature { margin-top: var(--space-xl); padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
+.sig-label { font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.sig-body { margin-top: var(--space-sm); font-size: var(--body); }
+.statusbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 65; padding: var(--space-sm) 0; background: var(--surface); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); }
+.cursor { color: var(--primary); display: inline-block; }
+@keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.fx { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.fx-scanlines { z-index: 60; opacity: .6; }
+.fx-vignette { opacity: 1; }
+@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } .app-nav { flex-wrap: wrap; } .shell-inner { flex-wrap: wrap; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body[data-mode="arcade"] {
+  --bg: var(--adar-arcade-background);
+  --surface: var(--adar-arcade-surface);
+  --fg: var(--adar-arcade-foreground);
+  --muted: var(--adar-arcade-muted);
+  --primary: var(--adar-arcade-primary);
+  --accent: var(--adar-arcade-accent);
+  --danger: var(--adar-arcade-danger);
+  --warning: var(--adar-arcade-warning);
+  --success: var(--adar-arcade-success);
+  --border: var(--adar-arcade-border);
+  --divider: var(--adar-arcade-divider);
+  --selection: var(--adar-arcade-selection);
+  --selection-text: var(--adar-arcade-selection-text);
+  --overlay: var(--adar-arcade-overlay);
+  --font-display: var(--adar-arcade-font-display);
+  --font-body: var(--adar-arcade-font-body);
+  --font-mono: var(--adar-arcade-font-mono);
+  --h1: var(--adar-arcade-type-h1-size);
+  --h2: var(--adar-arcade-type-h2-size);
+  --body: var(--adar-arcade-type-body-size);
+  --caption: var(--adar-arcade-type-caption-size);
+  --radius: var(--adar-arcade-radius);
+  --shadow-hard: var(--adar-arcade-shadow-hard);
+  --shadow-glow: var(--adar-arcade-shadow-glow);
+  --ease: var(--adar-arcade-motion-easing);
+  --dur-instant: var(--adar-arcade-duration-instant);
+  --dur-fast: var(--adar-arcade-duration-fast);
+  --dur-base: var(--adar-arcade-duration-base);
+  --dur-slow: var(--adar-arcade-duration-slow);
+  --space-xs: var(--adar-arcade-space-xs);
+  --space-sm: var(--adar-arcade-space-sm);
+  --space-md: var(--adar-arcade-space-md);
+  --space-lg: var(--adar-arcade-space-lg);
+  --space-xl: var(--adar-arcade-space-xl);
+  color-scheme: var(--adar-arcade-color-scheme);
+}
+
+body[data-mode="atari-sierra"] {
+  --bg: var(--adar-atari-sierra-background);
+  --surface: var(--adar-atari-sierra-surface);
+  --fg: var(--adar-atari-sierra-foreground);
+  --muted: var(--adar-atari-sierra-muted);
+  --primary: var(--adar-atari-sierra-primary);
+  --accent: var(--adar-atari-sierra-accent);
+  --danger: var(--adar-atari-sierra-danger);
+  --warning: var(--adar-atari-sierra-warning);
+  --success: var(--adar-atari-sierra-success);
+  --border: var(--adar-atari-sierra-border);
+  --divider: var(--adar-atari-sierra-divider);
+  --selection: var(--adar-atari-sierra-selection);
+  --selection-text: var(--adar-atari-sierra-selection-text);
+  --overlay: var(--adar-atari-sierra-overlay);
+  --font-display: var(--adar-atari-sierra-font-display);
+  --font-body: var(--adar-atari-sierra-font-body);
+  --font-mono: var(--adar-atari-sierra-font-mono);
+  --h1: var(--adar-atari-sierra-type-h1-size);
+  --h2: var(--adar-atari-sierra-type-h2-size);
+  --body: var(--adar-atari-sierra-type-body-size);
+  --caption: var(--adar-atari-sierra-type-caption-size);
+  --radius: var(--adar-atari-sierra-radius);
+  --shadow-hard: var(--adar-atari-sierra-shadow-hard);
+  --shadow-glow: var(--adar-atari-sierra-shadow-glow);
+  --ease: var(--adar-atari-sierra-motion-easing);
+  --dur-instant: var(--adar-atari-sierra-duration-instant);
+  --dur-fast: var(--adar-atari-sierra-duration-fast);
+  --dur-base: var(--adar-atari-sierra-duration-base);
+  --dur-slow: var(--adar-atari-sierra-duration-slow);
+  --space-xs: var(--adar-atari-sierra-space-xs);
+  --space-sm: var(--adar-atari-sierra-space-sm);
+  --space-md: var(--adar-atari-sierra-space-md);
+  --space-lg: var(--adar-atari-sierra-space-lg);
+  --space-xl: var(--adar-atari-sierra-space-xl);
+  color-scheme: var(--adar-atari-sierra-color-scheme);
+}
+
+body[data-mode="bauhaus"] {
+  --bg: var(--adar-bauhaus-background);
+  --surface: var(--adar-bauhaus-surface);
+  --fg: var(--adar-bauhaus-foreground);
+  --muted: var(--adar-bauhaus-muted);
+  --primary: var(--adar-bauhaus-primary);
+  --accent: var(--adar-bauhaus-accent);
+  --danger: var(--adar-bauhaus-danger);
+  --warning: var(--adar-bauhaus-warning);
+  --success: var(--adar-bauhaus-success);
+  --border: var(--adar-bauhaus-border);
+  --divider: var(--adar-bauhaus-divider);
+  --selection: var(--adar-bauhaus-selection);
+  --selection-text: var(--adar-bauhaus-selection-text);
+  --overlay: var(--adar-bauhaus-overlay);
+  --font-display: var(--adar-bauhaus-font-display);
+  --font-body: var(--adar-bauhaus-font-body);
+  --font-mono: var(--adar-bauhaus-font-mono);
+  --h1: var(--adar-bauhaus-type-h1-size);
+  --h2: var(--adar-bauhaus-type-h2-size);
+  --body: var(--adar-bauhaus-type-body-size);
+  --caption: var(--adar-bauhaus-type-caption-size);
+  --radius: var(--adar-bauhaus-radius);
+  --shadow-hard: var(--adar-bauhaus-shadow-hard);
+  --shadow-glow: var(--adar-bauhaus-shadow-glow);
+  --ease: var(--adar-bauhaus-motion-easing);
+  --dur-instant: var(--adar-bauhaus-duration-instant);
+  --dur-fast: var(--adar-bauhaus-duration-fast);
+  --dur-base: var(--adar-bauhaus-duration-base);
+  --dur-slow: var(--adar-bauhaus-duration-slow);
+  --space-xs: var(--adar-bauhaus-space-xs);
+  --space-sm: var(--adar-bauhaus-space-sm);
+  --space-md: var(--adar-bauhaus-space-md);
+  --space-lg: var(--adar-bauhaus-space-lg);
+  --space-xl: var(--adar-bauhaus-space-xl);
+  color-scheme: var(--adar-bauhaus-color-scheme);
+}
+
+body[data-mode="bios"] {
+  --bg: var(--adar-bios-background);
+  --surface: var(--adar-bios-surface);
+  --fg: var(--adar-bios-foreground);
+  --muted: var(--adar-bios-muted);
+  --primary: var(--adar-bios-primary);
+  --accent: var(--adar-bios-accent);
+  --danger: var(--adar-bios-danger);
+  --warning: var(--adar-bios-warning);
+  --success: var(--adar-bios-success);
+  --border: var(--adar-bios-border);
+  --divider: var(--adar-bios-divider);
+  --selection: var(--adar-bios-selection);
+  --selection-text: var(--adar-bios-selection-text);
+  --overlay: var(--adar-bios-overlay);
+  --font-display: var(--adar-bios-font-display);
+  --font-body: var(--adar-bios-font-body);
+  --font-mono: var(--adar-bios-font-mono);
+  --h1: var(--adar-bios-type-h1-size);
+  --h2: var(--adar-bios-type-h2-size);
+  --body: var(--adar-bios-type-body-size);
+  --caption: var(--adar-bios-type-caption-size);
+  --radius: var(--adar-bios-radius);
+  --shadow-hard: var(--adar-bios-shadow-hard);
+  --shadow-glow: var(--adar-bios-shadow-glow);
+  --ease: var(--adar-bios-motion-easing);
+  --dur-instant: var(--adar-bios-duration-instant);
+  --dur-fast: var(--adar-bios-duration-fast);
+  --dur-base: var(--adar-bios-duration-base);
+
+  --space-xs: var(--adar-bios-space-xs);
+  --space-sm: var(--adar-bios-space-sm);
+  --space-md: var(--adar-bios-space-md);
+  --space-lg: var(--adar-bios-space-lg);
+  --space-xl: var(--adar-bios-space-xl);
+  color-scheme: var(--adar-bios-color-scheme);
+}
+
+body[data-mode="c64"] {
+  --bg: var(--adar-c64-background);
+  --surface: var(--adar-c64-surface);
+  --fg: var(--adar-c64-foreground);
+  --muted: var(--adar-c64-muted);
+  --primary: var(--adar-c64-primary);
+  --accent: var(--adar-c64-accent);
+  --danger: var(--adar-c64-danger);
+  --warning: var(--adar-c64-warning);
+  --success: var(--adar-c64-success);
+  --border: var(--adar-c64-border);
+  --divider: var(--adar-c64-divider);
+  --selection: var(--adar-c64-selection);
+  --selection-text: var(--adar-c64-selection-text);
+  --overlay: var(--adar-c64-overlay);
+  --font-display: var(--adar-c64-font-display);
+  --font-body: var(--adar-c64-font-body);
+  --font-mono: var(--adar-c64-font-mono);
+  --h1: var(--adar-c64-type-h1-size);
+  --h2: var(--adar-c64-type-h2-size);
+  --body: var(--adar-c64-type-body-size);
+  --caption: var(--adar-c64-type-caption-size);
+  --radius: var(--adar-c64-radius);
+  --shadow-hard: var(--adar-c64-shadow-hard);
+  --shadow-glow: var(--adar-c64-shadow-glow);
+  --ease: var(--adar-c64-motion-easing);
+  --dur-instant: var(--adar-c64-duration-instant);
+  --dur-fast: var(--adar-c64-duration-fast);
+  --dur-base: var(--adar-c64-duration-base);
+  --dur-slow: var(--adar-c64-duration-slow);
+  --space-xs: var(--adar-c64-space-xs);
+  --space-sm: var(--adar-c64-space-sm);
+  --space-md: var(--adar-c64-space-md);
+  --space-lg: var(--adar-c64-space-lg);
+  --space-xl: var(--adar-c64-space-xl);
+  color-scheme: var(--adar-c64-color-scheme);
+}
+
+body[data-mode="cubism"] {
+  --bg: var(--adar-cubism-background);
+  --surface: var(--adar-cubism-surface);
+  --fg: var(--adar-cubism-foreground);
+  --muted: var(--adar-cubism-muted);
+  --primary: var(--adar-cubism-primary);
+  --accent: var(--adar-cubism-accent);
+  --danger: var(--adar-cubism-danger);
+  --warning: var(--adar-cubism-warning);
+  --success: var(--adar-cubism-success);
+  --border: var(--adar-cubism-border);
+  --divider: var(--adar-cubism-divider);
+  --selection: var(--adar-cubism-selection);
+  --selection-text: var(--adar-cubism-selection-text);
+  --overlay: var(--adar-cubism-overlay);
+  --font-display: var(--adar-cubism-font-display);
+  --font-body: var(--adar-cubism-font-body);
+  --font-mono: var(--adar-cubism-font-mono);
+  --h1: var(--adar-cubism-type-h1-size);
+  --h2: var(--adar-cubism-type-h2-size);
+  --body: var(--adar-cubism-type-body-size);
+  --caption: var(--adar-cubism-type-caption-size);
+  --radius: var(--adar-cubism-radius);
+  --shadow-hard: var(--adar-cubism-shadow-hard);
+  --shadow-glow: var(--adar-cubism-shadow-glow);
+  --ease: var(--adar-cubism-motion-easing);
+  --dur-instant: var(--adar-cubism-duration-instant);
+  --dur-fast: var(--adar-cubism-duration-fast);
+  --dur-base: var(--adar-cubism-duration-base);
+  --dur-slow: var(--adar-cubism-duration-slow);
+  --space-xs: var(--adar-cubism-space-xs);
+  --space-sm: var(--adar-cubism-space-sm);
+  --space-md: var(--adar-cubism-space-md);
+  --space-lg: var(--adar-cubism-space-lg);
+  --space-xl: var(--adar-cubism-space-xl);
+  color-scheme: var(--adar-cubism-color-scheme);
+}
+
+body[data-mode="cyberpunk"] {
+  --bg: var(--adar-cyberpunk-background);
+  --surface: var(--adar-cyberpunk-surface);
+  --fg: var(--adar-cyberpunk-foreground);
+  --muted: var(--adar-cyberpunk-muted);
+  --primary: var(--adar-cyberpunk-primary);
+  --accent: var(--adar-cyberpunk-accent);
+  --danger: var(--adar-cyberpunk-danger);
+  --warning: var(--adar-cyberpunk-warning);
+  --success: var(--adar-cyberpunk-success);
+  --border: var(--adar-cyberpunk-border);
+  --divider: var(--adar-cyberpunk-divider);
+  --selection: var(--adar-cyberpunk-selection);
+  --selection-text: var(--adar-cyberpunk-selection-text);
+  --overlay: var(--adar-cyberpunk-overlay);
+  --font-display: var(--adar-cyberpunk-font-display);
+  --font-body: var(--adar-cyberpunk-font-body);
+  --font-mono: var(--adar-cyberpunk-font-mono);
+  --h1: var(--adar-cyberpunk-type-h1-size);
+  --h2: var(--adar-cyberpunk-type-h2-size);
+  --body: var(--adar-cyberpunk-type-body-size);
+  --caption: var(--adar-cyberpunk-type-caption-size);
+  --radius: var(--adar-cyberpunk-radius);
+  --shadow-hard: var(--adar-cyberpunk-shadow-hard);
+  --shadow-glow: var(--adar-cyberpunk-shadow-glow);
+  --ease: var(--adar-cyberpunk-motion-easing);
+  --dur-instant: var(--adar-cyberpunk-duration-instant);
+  --dur-fast: var(--adar-cyberpunk-duration-fast);
+  --dur-base: var(--adar-cyberpunk-duration-base);
+  --dur-slow: var(--adar-cyberpunk-duration-slow);
+  --dur-slowest: var(--adar-cyberpunk-duration-slowest);
+  --space-xs: var(--adar-cyberpunk-space-xs);
+  --space-sm: var(--adar-cyberpunk-space-sm);
+  --space-md: var(--adar-cyberpunk-space-md);
+  --space-lg: var(--adar-cyberpunk-space-lg);
+  --space-xl: var(--adar-cyberpunk-space-xl);
+  color-scheme: var(--adar-cyberpunk-color-scheme);
+}
+
+body[data-mode="expressionism"] {
+  --bg: var(--adar-expressionism-background);
+  --surface: var(--adar-expressionism-surface);
+  --fg: var(--adar-expressionism-foreground);
+  --muted: var(--adar-expressionism-muted);
+  --primary: var(--adar-expressionism-primary);
+  --accent: var(--adar-expressionism-accent);
+  --danger: var(--adar-expressionism-danger);
+  --warning: var(--adar-expressionism-warning);
+  --success: var(--adar-expressionism-success);
+  --border: var(--adar-expressionism-border);
+  --divider: var(--adar-expressionism-divider);
+  --selection: var(--adar-expressionism-selection);
+  --selection-text: var(--adar-expressionism-selection-text);
+  --overlay: var(--adar-expressionism-overlay);
+  --font-display: var(--adar-expressionism-font-display);
+  --font-body: var(--adar-expressionism-font-body);
+  --font-mono: var(--adar-expressionism-font-mono);
+  --h1: var(--adar-expressionism-type-h1-size);
+  --h2: var(--adar-expressionism-type-h2-size);
+  --body: var(--adar-expressionism-type-body-size);
+  --caption: var(--adar-expressionism-type-caption-size);
+  --radius: var(--adar-expressionism-radius);
+  --shadow-hard: var(--adar-expressionism-shadow-hard);
+  --shadow-glow: var(--adar-expressionism-shadow-glow);
+  --ease: var(--adar-expressionism-motion-easing);
+  --dur-instant: var(--adar-expressionism-duration-instant);
+  --dur-fast: var(--adar-expressionism-duration-fast);
+  --dur-base: var(--adar-expressionism-duration-base);
+  --dur-slow: var(--adar-expressionism-duration-slow);
+  --space-xs: var(--adar-expressionism-space-xs);
+  --space-sm: var(--adar-expressionism-space-sm);
+  --space-md: var(--adar-expressionism-space-md);
+  --space-lg: var(--adar-expressionism-space-lg);
+  --space-xl: var(--adar-expressionism-space-xl);
+  color-scheme: var(--adar-expressionism-color-scheme);
+}
+
+body[data-mode="fauvism"] {
+  --bg: var(--adar-fauvism-background);
+  --surface: var(--adar-fauvism-surface);
+  --fg: var(--adar-fauvism-foreground);
+  --muted: var(--adar-fauvism-muted);
+  --primary: var(--adar-fauvism-primary);
+  --accent: var(--adar-fauvism-accent);
+  --danger: var(--adar-fauvism-danger);
+  --warning: var(--adar-fauvism-warning);
+  --success: var(--adar-fauvism-success);
+  --border: var(--adar-fauvism-border);
+  --divider: var(--adar-fauvism-divider);
+  --selection: var(--adar-fauvism-selection);
+  --selection-text: var(--adar-fauvism-selection-text);
+  --overlay: var(--adar-fauvism-overlay);
+  --font-display: var(--adar-fauvism-font-display);
+  --font-body: var(--adar-fauvism-font-body);
+  --font-mono: var(--adar-fauvism-font-mono);
+  --h1: var(--adar-fauvism-type-h1-size);
+  --h2: var(--adar-fauvism-type-h2-size);
+  --body: var(--adar-fauvism-type-body-size);
+  --caption: var(--adar-fauvism-type-caption-size);
+  --radius: var(--adar-fauvism-radius);
+  --shadow-hard: var(--adar-fauvism-shadow-hard);
+  --shadow-glow: var(--adar-fauvism-shadow-glow);
+  --ease: var(--adar-fauvism-motion-easing);
+  --dur-instant: var(--adar-fauvism-duration-instant);
+  --dur-fast: var(--adar-fauvism-duration-fast);
+  --dur-base: var(--adar-fauvism-duration-base);
+  --dur-slow: var(--adar-fauvism-duration-slow);
+  --space-xs: var(--adar-fauvism-space-xs);
+  --space-sm: var(--adar-fauvism-space-sm);
+  --space-md: var(--adar-fauvism-space-md);
+  --space-lg: var(--adar-fauvism-space-lg);
+  --space-xl: var(--adar-fauvism-space-xl);
+  color-scheme: var(--adar-fauvism-color-scheme);
+}
+
+body[data-mode="folk-art"] {
+  --bg: var(--adar-folk-art-background);
+  --surface: var(--adar-folk-art-surface);
+  --fg: var(--adar-folk-art-foreground);
+  --muted: var(--adar-folk-art-muted);
+  --primary: var(--adar-folk-art-primary);
+  --accent: var(--adar-folk-art-accent);
+  --danger: var(--adar-folk-art-danger);
+  --warning: var(--adar-folk-art-warning);
+  --success: var(--adar-folk-art-success);
+  --border: var(--adar-folk-art-border);
+  --divider: var(--adar-folk-art-divider);
+  --selection: var(--adar-folk-art-selection);
+  --selection-text: var(--adar-folk-art-selection-text);
+  --overlay: var(--adar-folk-art-overlay);
+  --font-display: var(--adar-folk-art-font-display);
+  --font-body: var(--adar-folk-art-font-body);
+  --font-mono: var(--adar-folk-art-font-mono);
+  --h1: var(--adar-folk-art-type-h1-size);
+  --h2: var(--adar-folk-art-type-h2-size);
+  --body: var(--adar-folk-art-type-body-size);
+  --caption: var(--adar-folk-art-type-caption-size);
+  --radius: var(--adar-folk-art-radius);
+  --shadow-hard: var(--adar-folk-art-shadow-hard);
+  --shadow-glow: var(--adar-folk-art-shadow-glow);
+  --ease: var(--adar-folk-art-motion-easing);
+  --dur-instant: var(--adar-folk-art-duration-instant);
+  --dur-fast: var(--adar-folk-art-duration-fast);
+  --dur-base: var(--adar-folk-art-duration-base);
+  --dur-slow: var(--adar-folk-art-duration-slow);
+  --space-xs: var(--adar-folk-art-space-xs);
+  --space-sm: var(--adar-folk-art-space-sm);
+  --space-md: var(--adar-folk-art-space-md);
+  --space-lg: var(--adar-folk-art-space-lg);
+  --space-xl: var(--adar-folk-art-space-xl);
+  color-scheme: var(--adar-folk-art-color-scheme);
+}
+
+body[data-mode="gameboy"] {
+  --bg: var(--adar-gameboy-background);
+  --surface: var(--adar-gameboy-surface);
+  --fg: var(--adar-gameboy-foreground);
+  --muted: var(--adar-gameboy-muted);
+  --primary: var(--adar-gameboy-primary);
+  --accent: var(--adar-gameboy-accent);
+  --danger: var(--adar-gameboy-danger);
+  --warning: var(--adar-gameboy-warning);
+  --success: var(--adar-gameboy-success);
+  --border: var(--adar-gameboy-border);
+  --divider: var(--adar-gameboy-divider);
+  --selection: var(--adar-gameboy-selection);
+  --selection-text: var(--adar-gameboy-selection-text);
+  --overlay: var(--adar-gameboy-overlay);
+  --font-display: var(--adar-gameboy-font-display);
+  --font-body: var(--adar-gameboy-font-body);
+  --font-mono: var(--adar-gameboy-font-mono);
+  --h1: var(--adar-gameboy-type-h1-size);
+  --h2: var(--adar-gameboy-type-h2-size);
+  --body: var(--adar-gameboy-type-body-size);
+  --caption: var(--adar-gameboy-type-caption-size);
+  --radius: var(--adar-gameboy-radius);
+  --shadow-hard: var(--adar-gameboy-shadow-hard);
+  --shadow-glow: var(--adar-gameboy-shadow-glow);
+  --ease: var(--adar-gameboy-motion-easing);
+  --dur-instant: var(--adar-gameboy-duration-instant);
+  --dur-fast: var(--adar-gameboy-duration-fast);
+  --dur-base: var(--adar-gameboy-duration-base);
+  --dur-slow: var(--adar-gameboy-duration-slow);
+  --space-xs: var(--adar-gameboy-space-xs);
+  --space-sm: var(--adar-gameboy-space-sm);
+  --space-md: var(--adar-gameboy-space-md);
+  --space-lg: var(--adar-gameboy-space-lg);
+  --space-xl: var(--adar-gameboy-space-xl);
+  color-scheme: var(--adar-gameboy-color-scheme);
+}
+
+body[data-mode="goya"] {
+  --bg: var(--adar-goya-background);
+  --surface: var(--adar-goya-surface);
+  --fg: var(--adar-goya-foreground);
+  --muted: var(--adar-goya-muted);
+  --primary: var(--adar-goya-primary);
+  --accent: var(--adar-goya-accent);
+  --danger: var(--adar-goya-danger);
+  --warning: var(--adar-goya-warning);
+  --success: var(--adar-goya-success);
+  --border: var(--adar-goya-border);
+  --divider: var(--adar-goya-divider);
+  --selection: var(--adar-goya-selection);
+  --selection-text: var(--adar-goya-selection-text);
+  --overlay: var(--adar-goya-overlay);
+  --font-display: var(--adar-goya-font-display);
+  --font-body: var(--adar-goya-font-body);
+  --font-mono: var(--adar-goya-font-mono);
+  --h1: var(--adar-goya-type-h1-size);
+  --h2: var(--adar-goya-type-h2-size);
+  --body: var(--adar-goya-type-body-size);
+  --caption: var(--adar-goya-type-caption-size);
+  --radius: var(--adar-goya-radius);
+  --shadow-hard: var(--adar-goya-shadow-hard);
+  --shadow-glow: var(--adar-goya-shadow-glow);
+  --ease: var(--adar-goya-motion-easing);
+  --dur-instant: var(--adar-goya-duration-instant);
+  --dur-fast: var(--adar-goya-duration-fast);
+  --dur-base: var(--adar-goya-duration-base);
+  --dur-slow: var(--adar-goya-duration-slow);
+  --space-xs: var(--adar-goya-space-xs);
+  --space-sm: var(--adar-goya-space-sm);
+  --space-md: var(--adar-goya-space-md);
+  --space-lg: var(--adar-goya-space-lg);
+  --space-xl: var(--adar-goya-space-xl);
+  color-scheme: var(--adar-goya-color-scheme);
+}
+
+body[data-mode="impressionism"] {
+  --bg: var(--adar-impressionism-background);
+  --surface: var(--adar-impressionism-surface);
+  --fg: var(--adar-impressionism-foreground);
+  --muted: var(--adar-impressionism-muted);
+  --primary: var(--adar-impressionism-primary);
+  --accent: var(--adar-impressionism-accent);
+  --danger: var(--adar-impressionism-danger);
+  --warning: var(--adar-impressionism-warning);
+  --success: var(--adar-impressionism-success);
+  --border: var(--adar-impressionism-border);
+  --divider: var(--adar-impressionism-divider);
+  --selection: var(--adar-impressionism-selection);
+  --selection-text: var(--adar-impressionism-selection-text);
+  --overlay: var(--adar-impressionism-overlay);
+  --font-display: var(--adar-impressionism-font-display);
+  --font-body: var(--adar-impressionism-font-body);
+  --font-mono: var(--adar-impressionism-font-mono);
+  --h1: var(--adar-impressionism-type-h1-size);
+  --h2: var(--adar-impressionism-type-h2-size);
+  --body: var(--adar-impressionism-type-body-size);
+  --caption: var(--adar-impressionism-type-caption-size);
+  --radius: var(--adar-impressionism-radius);
+  --shadow-hard: var(--adar-impressionism-shadow-hard);
+  --shadow-glow: var(--adar-impressionism-shadow-glow);
+  --ease: var(--adar-impressionism-motion-easing);
+  --dur-instant: var(--adar-impressionism-duration-instant);
+  --dur-fast: var(--adar-impressionism-duration-fast);
+  --dur-base: var(--adar-impressionism-duration-base);
+  --dur-slow: var(--adar-impressionism-duration-slow);
+  --space-xs: var(--adar-impressionism-space-xs);
+  --space-sm: var(--adar-impressionism-space-sm);
+  --space-md: var(--adar-impressionism-space-md);
+  --space-lg: var(--adar-impressionism-space-lg);
+  --space-xl: var(--adar-impressionism-space-xl);
+  color-scheme: var(--adar-impressionism-color-scheme);
+}
+
+body[data-mode="kandinsky"] {
+  --bg: var(--adar-kandinsky-background);
+  --surface: var(--adar-kandinsky-surface);
+  --fg: var(--adar-kandinsky-foreground);
+  --muted: var(--adar-kandinsky-muted);
+  --primary: var(--adar-kandinsky-primary);
+  --accent: var(--adar-kandinsky-accent);
+  --danger: var(--adar-kandinsky-danger);
+  --warning: var(--adar-kandinsky-warning);
+  --success: var(--adar-kandinsky-success);
+  --border: var(--adar-kandinsky-border);
+  --divider: var(--adar-kandinsky-divider);
+  --selection: var(--adar-kandinsky-selection);
+  --selection-text: var(--adar-kandinsky-selection-text);
+  --overlay: var(--adar-kandinsky-overlay);
+  --font-display: var(--adar-kandinsky-font-display);
+  --font-body: var(--adar-kandinsky-font-body);
+  --font-mono: var(--adar-kandinsky-font-mono);
+  --h1: var(--adar-kandinsky-type-h1-size);
+  --h2: var(--adar-kandinsky-type-h2-size);
+  --body: var(--adar-kandinsky-type-body-size);
+  --caption: var(--adar-kandinsky-type-caption-size);
+  --radius: var(--adar-kandinsky-radius);
+  --shadow-hard: var(--adar-kandinsky-shadow-hard);
+  --shadow-glow: var(--adar-kandinsky-shadow-glow);
+  --ease: var(--adar-kandinsky-motion-easing);
+  --dur-instant: var(--adar-kandinsky-duration-instant);
+  --dur-fast: var(--adar-kandinsky-duration-fast);
+  --dur-base: var(--adar-kandinsky-duration-base);
+  --dur-slow: var(--adar-kandinsky-duration-slow);
+  --space-xs: var(--adar-kandinsky-space-xs);
+  --space-sm: var(--adar-kandinsky-space-sm);
+  --space-md: var(--adar-kandinsky-space-md);
+  --space-lg: var(--adar-kandinsky-space-lg);
+  --space-xl: var(--adar-kandinsky-space-xl);
+  color-scheme: var(--adar-kandinsky-color-scheme);
+}
+
+body[data-mode="nasa80"] {
+  --bg: var(--adar-nasa80-background);
+  --surface: var(--adar-nasa80-surface);
+  --fg: var(--adar-nasa80-foreground);
+  --muted: var(--adar-nasa80-muted);
+  --primary: var(--adar-nasa80-primary);
+  --accent: var(--adar-nasa80-accent);
+  --danger: var(--adar-nasa80-danger);
+  --warning: var(--adar-nasa80-warning);
+  --success: var(--adar-nasa80-success);
+  --border: var(--adar-nasa80-border);
+  --divider: var(--adar-nasa80-divider);
+  --selection: var(--adar-nasa80-selection);
+  --selection-text: var(--adar-nasa80-selection-text);
+  --overlay: var(--adar-nasa80-overlay);
+  --font-display: var(--adar-nasa80-font-display);
+  --font-body: var(--adar-nasa80-font-body);
+  --font-mono: var(--adar-nasa80-font-mono);
+  --h1: var(--adar-nasa80-type-h1-size);
+  --h2: var(--adar-nasa80-type-h2-size);
+  --body: var(--adar-nasa80-type-body-size);
+  --caption: var(--adar-nasa80-type-caption-size);
+  --radius: var(--adar-nasa80-radius);
+  --shadow-hard: var(--adar-nasa80-shadow-hard);
+  --shadow-glow: var(--adar-nasa80-shadow-glow);
+  --ease: var(--adar-nasa80-motion-easing);
+  --dur-instant: var(--adar-nasa80-duration-instant);
+  --dur-fast: var(--adar-nasa80-duration-fast);
+  --dur-base: var(--adar-nasa80-duration-base);
+  --dur-slow: var(--adar-nasa80-duration-slow);
+  --space-xs: var(--adar-nasa80-space-xs);
+  --space-sm: var(--adar-nasa80-space-sm);
+  --space-md: var(--adar-nasa80-space-md);
+  --space-lg: var(--adar-nasa80-space-lg);
+  --space-xl: var(--adar-nasa80-space-xl);
+  color-scheme: var(--adar-nasa80-color-scheme);
+}
+
+body[data-mode="stranger-things"] {
+  --bg: var(--adar-stranger-things-background);
+  --surface: var(--adar-stranger-things-surface);
+  --fg: var(--adar-stranger-things-foreground);
+  --muted: var(--adar-stranger-things-muted);
+  --primary: var(--adar-stranger-things-primary);
+  --accent: var(--adar-stranger-things-accent);
+  --danger: var(--adar-stranger-things-danger);
+  --warning: var(--adar-stranger-things-warning);
+  --success: var(--adar-stranger-things-success);
+  --border: var(--adar-stranger-things-border);
+  --divider: var(--adar-stranger-things-divider);
+  --selection: var(--adar-stranger-things-selection);
+  --selection-text: var(--adar-stranger-things-selection-text);
+  --overlay: var(--adar-stranger-things-overlay);
+  --font-display: var(--adar-stranger-things-font-display);
+  --font-body: var(--adar-stranger-things-font-body);
+  --font-mono: var(--adar-stranger-things-font-mono);
+  --h1: var(--adar-stranger-things-type-h1-size);
+  --h2: var(--adar-stranger-things-type-h2-size);
+  --body: var(--adar-stranger-things-type-body-size);
+  --caption: var(--adar-stranger-things-type-caption-size);
+  --radius: var(--adar-stranger-things-radius);
+  --shadow-hard: var(--adar-stranger-things-shadow-hard);
+  --shadow-glow: var(--adar-stranger-things-shadow-glow);
+  --ease: var(--adar-stranger-things-motion-easing);
+  --dur-instant: var(--adar-stranger-things-duration-instant);
+  --dur-fast: var(--adar-stranger-things-duration-fast);
+  --dur-base: var(--adar-stranger-things-duration-base);
+  --dur-slow: var(--adar-stranger-things-duration-slow);
+  --space-xs: var(--adar-stranger-things-space-xs);
+  --space-sm: var(--adar-stranger-things-space-sm);
+  --space-md: var(--adar-stranger-things-space-md);
+  --space-lg: var(--adar-stranger-things-space-lg);
+  --space-xl: var(--adar-stranger-things-space-xl);
+  color-scheme: var(--adar-stranger-things-color-scheme);
+}
+
+body[data-mode="terminal"] {
+  --bg: var(--adar-terminal-background);
+  --surface: var(--adar-terminal-surface);
+  --fg: var(--adar-terminal-foreground);
+  --muted: var(--adar-terminal-muted);
+  --primary: var(--adar-terminal-primary);
+  --accent: var(--adar-terminal-accent);
+  --danger: var(--adar-terminal-danger);
+  --warning: var(--adar-terminal-warning);
+  --success: var(--adar-terminal-success);
+  --border: var(--adar-terminal-border);
+  --divider: var(--adar-terminal-divider);
+  --selection: var(--adar-terminal-selection);
+  --selection-text: var(--adar-terminal-selection-text);
+  --overlay: var(--adar-terminal-overlay);
+  --font-display: var(--adar-terminal-font-display);
+  --font-body: var(--adar-terminal-font-body);
+  --font-mono: var(--adar-terminal-font-mono);
+  --h1: var(--adar-terminal-type-h1-size);
+  --h2: var(--adar-terminal-type-h2-size);
+  --body: var(--adar-terminal-type-body-size);
+  --caption: var(--adar-terminal-type-caption-size);
+  --radius: var(--adar-terminal-radius);
+  --shadow-hard: var(--adar-terminal-shadow-hard);
+  --shadow-glow: var(--adar-terminal-shadow-glow);
+  --ease: var(--adar-terminal-motion-easing);
+  --dur-instant: var(--adar-terminal-duration-instant);
+  --dur-fast: var(--adar-terminal-duration-fast);
+  --dur-base: var(--adar-terminal-duration-base);
+
+  --space-xs: var(--adar-terminal-space-xs);
+  --space-sm: var(--adar-terminal-space-sm);
+  --space-md: var(--adar-terminal-space-md);
+  --space-lg: var(--adar-terminal-space-lg);
+  --space-xl: var(--adar-terminal-space-xl);
+  color-scheme: var(--adar-terminal-color-scheme);
+}
+
+body[data-mode="tim"] {
+  --bg: var(--adar-tim-background);
+  --surface: var(--adar-tim-surface);
+  --fg: var(--adar-tim-foreground);
+  --muted: var(--adar-tim-muted);
+  --primary: var(--adar-tim-primary);
+  --accent: var(--adar-tim-accent);
+  --danger: var(--adar-tim-danger);
+  --warning: var(--adar-tim-warning);
+  --success: var(--adar-tim-success);
+  --border: var(--adar-tim-border);
+  --divider: var(--adar-tim-divider);
+  --selection: var(--adar-tim-selection);
+  --selection-text: var(--adar-tim-selection-text);
+  --overlay: var(--adar-tim-overlay);
+  --font-display: var(--adar-tim-font-display);
+  --font-body: var(--adar-tim-font-body);
+  --font-mono: var(--adar-tim-font-mono);
+  --h1: var(--adar-tim-type-h1-size);
+  --h2: var(--adar-tim-type-h2-size);
+  --body: var(--adar-tim-type-body-size);
+  --caption: var(--adar-tim-type-caption-size);
+  --radius: var(--adar-tim-radius);
+  --shadow-hard: var(--adar-tim-shadow-hard);
+  --shadow-glow: var(--adar-tim-shadow-glow);
+  --ease: var(--adar-tim-motion-easing);
+  --dur-instant: var(--adar-tim-duration-instant);
+  --dur-fast: var(--adar-tim-duration-fast);
+  --dur-base: var(--adar-tim-duration-base);
+  --dur-slow: var(--adar-tim-duration-slow);
+  --space-xs: var(--adar-tim-space-xs);
+  --space-sm: var(--adar-tim-space-sm);
+  --space-md: var(--adar-tim-space-md);
+  --space-lg: var(--adar-tim-space-lg);
+  --space-xl: var(--adar-tim-space-xl);
+  color-scheme: var(--adar-tim-color-scheme);
+}
+
+body[data-mode="vaporwave"] {
+  --bg: var(--adar-vaporwave-background);
+  --surface: var(--adar-vaporwave-surface);
+  --fg: var(--adar-vaporwave-foreground);
+  --muted: var(--adar-vaporwave-muted);
+  --primary: var(--adar-vaporwave-primary);
+  --accent: var(--adar-vaporwave-accent);
+  --danger: var(--adar-vaporwave-danger);
+  --warning: var(--adar-vaporwave-warning);
+  --success: var(--adar-vaporwave-success);
+  --border: var(--adar-vaporwave-border);
+  --divider: var(--adar-vaporwave-divider);
+  --selection: var(--adar-vaporwave-selection);
+  --selection-text: var(--adar-vaporwave-selection-text);
+  --overlay: var(--adar-vaporwave-overlay);
+  --font-display: var(--adar-vaporwave-font-display);
+  --font-body: var(--adar-vaporwave-font-body);
+  --font-mono: var(--adar-vaporwave-font-mono);
+  --h1: var(--adar-vaporwave-type-h1-size);
+  --h2: var(--adar-vaporwave-type-h2-size);
+  --body: var(--adar-vaporwave-type-body-size);
+  --caption: var(--adar-vaporwave-type-caption-size);
+  --radius: var(--adar-vaporwave-radius);
+  --shadow-hard: var(--adar-vaporwave-shadow-hard);
+  --shadow-glow: var(--adar-vaporwave-shadow-glow);
+  --ease: var(--adar-vaporwave-motion-easing);
+  --dur-instant: var(--adar-vaporwave-duration-instant);
+  --dur-fast: var(--adar-vaporwave-duration-fast);
+  --dur-base: var(--adar-vaporwave-duration-base);
+  --dur-slow: var(--adar-vaporwave-duration-slow);
+  --space-xs: var(--adar-vaporwave-space-xs);
+  --space-sm: var(--adar-vaporwave-space-sm);
+  --space-md: var(--adar-vaporwave-space-md);
+  --space-lg: var(--adar-vaporwave-space-lg);
+  --space-xl: var(--adar-vaporwave-space-xl);
+  color-scheme: var(--adar-vaporwave-color-scheme);
+}
+
+body[data-mode="win95"] {
+  --bg: var(--adar-win95-background);
+  --surface: var(--adar-win95-surface);
+  --fg: var(--adar-win95-foreground);
+  --muted: var(--adar-win95-muted);
+  --primary: var(--adar-win95-primary);
+  --accent: var(--adar-win95-accent);
+  --danger: var(--adar-win95-danger);
+  --warning: var(--adar-win95-warning);
+  --success: var(--adar-win95-success);
+  --border: var(--adar-win95-border);
+  --divider: var(--adar-win95-divider);
+  --selection: var(--adar-win95-selection);
+  --selection-text: var(--adar-win95-selection-text);
+  --overlay: var(--adar-win95-overlay);
+  --font-display: var(--adar-win95-font-display);
+  --font-body: var(--adar-win95-font-body);
+  --font-mono: var(--adar-win95-font-mono);
+  --h1: var(--adar-win95-type-h1-size);
+  --h2: var(--adar-win95-type-h2-size);
+  --body: var(--adar-win95-type-body-size);
+  --caption: var(--adar-win95-type-caption-size);
+  --radius: var(--adar-win95-radius);
+  --shadow-hard: var(--adar-win95-shadow-hard);
+  --shadow-glow: var(--adar-win95-shadow-glow);
+  --ease: var(--adar-win95-motion-easing);
+  --dur-instant: var(--adar-win95-duration-instant);
+  --dur-fast: var(--adar-win95-duration-fast);
+  --dur-base: var(--adar-win95-duration-base);
+
+  --space-xs: var(--adar-win95-space-xs);
+  --space-sm: var(--adar-win95-space-sm);
+  --space-md: var(--adar-win95-space-md);
+  --space-lg: var(--adar-win95-space-lg);
+  --space-xl: var(--adar-win95-space-xl);
+  color-scheme: var(--adar-win95-color-scheme);
+}
+
+body[data-mode="neon-console"] {
+  --bg: var(--adar-neon-console-background);
+  --surface: var(--adar-neon-console-surface);
+  --fg: var(--adar-neon-console-foreground);
+  --muted: var(--adar-neon-console-muted);
+  --primary: var(--adar-neon-console-primary);
+  --accent: var(--adar-neon-console-accent);
+  --danger: var(--adar-neon-console-danger);
+  --warning: var(--adar-neon-console-warning);
+  --success: var(--adar-neon-console-success);
+  --border: var(--adar-neon-console-border);
+  --divider: var(--adar-neon-console-divider);
+  --selection: var(--adar-neon-console-selection);
+  --selection-text: var(--adar-neon-console-selection-text);
+  --overlay: var(--adar-neon-console-overlay);
+  --font-display: var(--adar-neon-console-font-display);
+  --font-body: var(--adar-neon-console-font-body);
+  --font-mono: var(--adar-neon-console-font-mono);
+  --h1: var(--adar-neon-console-type-h1-size);
+  --h2: var(--adar-neon-console-type-h2-size);
+  --body: var(--adar-neon-console-type-body-size);
+  --caption: var(--adar-neon-console-type-caption-size);
+  --radius: var(--adar-neon-console-radius);
+  --shadow-hard: var(--adar-neon-console-shadow-hard);
+  --shadow-glow: var(--adar-neon-console-shadow-glow);
+  --ease: var(--adar-neon-console-motion-easing);
+  --dur-instant: var(--adar-neon-console-duration-instant);
+  --dur-fast: var(--adar-neon-console-duration-fast);
+  --dur-base: var(--adar-neon-console-duration-base);
+
+  --space-xs: var(--adar-neon-console-space-xs);
+  --space-sm: var(--adar-neon-console-space-sm);
+  --space-md: var(--adar-neon-console-space-md);
+  --space-lg: var(--adar-neon-console-space-lg);
+  --space-xl: var(--adar-neon-console-space-xl);
+  color-scheme: var(--adar-neon-console-color-scheme);
+}
+
+body[data-mode="arcade"] .mode:not([data-mode="arcade"]) { display: none; }
+body[data-mode="atari-sierra"] .mode:not([data-mode="atari-sierra"]) { display: none; }
+body[data-mode="bauhaus"] .mode:not([data-mode="bauhaus"]) { display: none; }
+body[data-mode="bios"] .mode:not([data-mode="bios"]) { display: none; }
+body[data-mode="c64"] .mode:not([data-mode="c64"]) { display: none; }
+body[data-mode="cubism"] .mode:not([data-mode="cubism"]) { display: none; }
+body[data-mode="cyberpunk"] .mode:not([data-mode="cyberpunk"]) { display: none; }
+body[data-mode="expressionism"] .mode:not([data-mode="expressionism"]) { display: none; }
+body[data-mode="fauvism"] .mode:not([data-mode="fauvism"]) { display: none; }
+body[data-mode="folk-art"] .mode:not([data-mode="folk-art"]) { display: none; }
+body[data-mode="gameboy"] .mode:not([data-mode="gameboy"]) { display: none; }
+body[data-mode="goya"] .mode:not([data-mode="goya"]) { display: none; }
+body[data-mode="impressionism"] .mode:not([data-mode="impressionism"]) { display: none; }
+body[data-mode="kandinsky"] .mode:not([data-mode="kandinsky"]) { display: none; }
+body[data-mode="nasa80"] .mode:not([data-mode="nasa80"]) { display: none; }
+body[data-mode="stranger-things"] .mode:not([data-mode="stranger-things"]) { display: none; }
+body[data-mode="terminal"] .mode:not([data-mode="terminal"]) { display: none; }
+body[data-mode="tim"] .mode:not([data-mode="tim"]) { display: none; }
+body[data-mode="vaporwave"] .mode:not([data-mode="vaporwave"]) { display: none; }
+body[data-mode="win95"] .mode:not([data-mode="win95"]) { display: none; }
+body[data-mode="neon-console"] .mode:not([data-mode="neon-console"]) { display: none; }
+
+body[data-mode="arcade"] .fx-scanlines { background-image: var(--adar-arcade-effects-scanlines); }
+body[data-mode="arcade"] .fx-vignette { background-image: var(--adar-arcade-effects-vignette); }
+body[data-mode="arcade"] img, body[data-mode="arcade"] .avatar, body[data-mode="arcade"] .sprite { image-rendering: var(--adar-arcade-effects-pixelate); }
+body[data-mode="atari-sierra"] .fx-scanlines { background-image: var(--adar-atari-sierra-effects-scanlines); }
+body[data-mode="atari-sierra"] .fx-vignette { background-image: var(--adar-atari-sierra-effects-vignette); }
+body[data-mode="atari-sierra"] .fx-slice-stack { background-image: var(--adar-atari-sierra-effects-slice-stack); }
+body[data-mode="atari-sierra"] .fx-slice-stack-hairline { background-image: var(--adar-atari-sierra-effects-slice-stack-hairline); }
+body[data-mode="atari-sierra"] img, body[data-mode="atari-sierra"] .avatar, body[data-mode="atari-sierra"] .sprite { image-rendering: var(--adar-atari-sierra-effects-pixelate); }
+body[data-mode="bauhaus"] .fx-scanlines { background-image: var(--adar-bauhaus-effects-scanlines); }
+body[data-mode="bauhaus"] .fx-vignette { background-image: var(--adar-bauhaus-effects-vignette); }
+body[data-mode="bauhaus"] .fx-grid { background-image: var(--adar-bauhaus-effects-grid); }
+body[data-mode="bauhaus"] img, body[data-mode="bauhaus"] .avatar, body[data-mode="bauhaus"] .sprite { image-rendering: var(--adar-bauhaus-effects-pixelate); }
+body[data-mode="bios"] .fx-scanlines { background-image: var(--adar-bios-effects-scanlines); }
+body[data-mode="bios"] .fx-vignette { background-image: var(--adar-bios-effects-vignette); }
+body[data-mode="bios"] img, body[data-mode="bios"] .avatar, body[data-mode="bios"] .sprite { image-rendering: var(--adar-bios-effects-pixelate); }
+body[data-mode="c64"] .fx-scanlines { background-image: var(--adar-c64-effects-scanlines); }
+body[data-mode="c64"] .fx-vignette { background-image: var(--adar-c64-effects-vignette); }
+body[data-mode="c64"] img, body[data-mode="c64"] .avatar, body[data-mode="c64"] .sprite { image-rendering: var(--adar-c64-effects-pixelate); }
+body[data-mode="cubism"] .fx-scanlines { background-image: var(--adar-cubism-effects-scanlines); }
+body[data-mode="cubism"] .fx-vignette { background-image: var(--adar-cubism-effects-vignette); }
+body[data-mode="cubism"] img, body[data-mode="cubism"] .avatar, body[data-mode="cubism"] .sprite { image-rendering: var(--adar-cubism-effects-pixelate); }
+body[data-mode="cyberpunk"] .fx-scanlines { background-image: var(--adar-cyberpunk-effects-scanlines); }
+body[data-mode="cyberpunk"] .fx-vignette { background-image: var(--adar-cyberpunk-effects-vignette); }
+body[data-mode="cyberpunk"] img, body[data-mode="cyberpunk"] .avatar, body[data-mode="cyberpunk"] .sprite { image-rendering: var(--adar-cyberpunk-effects-pixelate); }
+body[data-mode="expressionism"] .fx-scanlines { background-image: var(--adar-expressionism-effects-scanlines); }
+body[data-mode="expressionism"] .fx-vignette { background-image: var(--adar-expressionism-effects-vignette); }
+body[data-mode="expressionism"] img, body[data-mode="expressionism"] .avatar, body[data-mode="expressionism"] .sprite { image-rendering: var(--adar-expressionism-effects-pixelate); }
+body[data-mode="fauvism"] .fx-scanlines { background-image: var(--adar-fauvism-effects-scanlines); }
+body[data-mode="fauvism"] .fx-vignette { background-image: var(--adar-fauvism-effects-vignette); }
+body[data-mode="fauvism"] img, body[data-mode="fauvism"] .avatar, body[data-mode="fauvism"] .sprite { image-rendering: var(--adar-fauvism-effects-pixelate); }
+body[data-mode="folk-art"] .fx-scanlines { background-image: var(--adar-folk-art-effects-scanlines); }
+body[data-mode="folk-art"] .fx-vignette { background-image: var(--adar-folk-art-effects-vignette); }
+body[data-mode="folk-art"] .fx-paper-grain { background-image: var(--adar-folk-art-effects-paper-grain); }
+body[data-mode="folk-art"] img, body[data-mode="folk-art"] .avatar, body[data-mode="folk-art"] .sprite { image-rendering: var(--adar-folk-art-effects-pixelate); }
+body[data-mode="gameboy"] .fx-scanlines { background-image: var(--adar-gameboy-effects-scanlines); }
+body[data-mode="gameboy"] .fx-vignette { background-image: var(--adar-gameboy-effects-vignette); }
+body[data-mode="gameboy"] .fx-dot-matrix { background-image: var(--adar-gameboy-effects-dot-matrix); }
+body[data-mode="gameboy"] img, body[data-mode="gameboy"] .avatar, body[data-mode="gameboy"] .sprite { image-rendering: var(--adar-gameboy-effects-pixelate); }
+body[data-mode="goya"] .fx-scanlines { background-image: var(--adar-goya-effects-scanlines); }
+body[data-mode="goya"] .fx-vignette { background-image: var(--adar-goya-effects-vignette); }
+body[data-mode="goya"] img, body[data-mode="goya"] .avatar, body[data-mode="goya"] .sprite { image-rendering: var(--adar-goya-effects-pixelate); }
+body[data-mode="impressionism"] .fx-scanlines { background-image: var(--adar-impressionism-effects-scanlines); }
+body[data-mode="impressionism"] .fx-vignette { background-image: var(--adar-impressionism-effects-vignette); }
+body[data-mode="impressionism"] .fx-dapple { background-image: var(--adar-impressionism-effects-dapple); }
+body[data-mode="impressionism"] .fx-brushstroke-mask { background-image: var(--adar-impressionism-effects-brushstroke-mask); }
+body[data-mode="impressionism"] img, body[data-mode="impressionism"] .avatar, body[data-mode="impressionism"] .sprite { image-rendering: var(--adar-impressionism-effects-pixelate); }
+body[data-mode="kandinsky"] .fx-scanlines { background-image: var(--adar-kandinsky-effects-scanlines); }
+body[data-mode="kandinsky"] .fx-vignette { background-image: var(--adar-kandinsky-effects-vignette); }
+body[data-mode="kandinsky"] img, body[data-mode="kandinsky"] .avatar, body[data-mode="kandinsky"] .sprite { image-rendering: var(--adar-kandinsky-effects-pixelate); }
+body[data-mode="nasa80"] .fx-scanlines { background-image: var(--adar-nasa80-effects-scanlines); }
+body[data-mode="nasa80"] .fx-vignette { background-image: var(--adar-nasa80-effects-vignette); }
+body[data-mode="nasa80"] .fx-starfield { background-image: var(--adar-nasa80-effects-starfield); }
+body[data-mode="nasa80"] .fx-blueprint-grid { background-image: var(--adar-nasa80-effects-blueprint-grid); }
+body[data-mode="nasa80"] .fx-trajectory { background-image: var(--adar-nasa80-effects-trajectory); }
+body[data-mode="nasa80"] img, body[data-mode="nasa80"] .avatar, body[data-mode="nasa80"] .sprite { image-rendering: var(--adar-nasa80-effects-pixelate); }
+body[data-mode="stranger-things"] .fx-scanlines { background-image: var(--adar-stranger-things-effects-scanlines); }
+body[data-mode="stranger-things"] .fx-vignette { background-image: var(--adar-stranger-things-effects-vignette); }
+body[data-mode="stranger-things"] .fx-grain { background-image: var(--adar-stranger-things-effects-grain); }
+body[data-mode="stranger-things"] .fx-haze { background-image: var(--adar-stranger-things-effects-haze); }
+body[data-mode="stranger-things"] img, body[data-mode="stranger-things"] .avatar, body[data-mode="stranger-things"] .sprite { image-rendering: var(--adar-stranger-things-effects-pixelate); }
+body[data-mode="terminal"] .fx-scanlines { background-image: var(--adar-terminal-effects-scanlines); }
+body[data-mode="terminal"] .fx-vignette { background-image: var(--adar-terminal-effects-vignette); }
+body[data-mode="terminal"] img, body[data-mode="terminal"] .avatar, body[data-mode="terminal"] .sprite { image-rendering: var(--adar-terminal-effects-pixelate); }
+body[data-mode="tim"] .fx-scanlines { background-image: var(--adar-tim-effects-scanlines); }
+body[data-mode="tim"] .fx-vignette { background-image: var(--adar-tim-effects-vignette); }
+body[data-mode="tim"] img, body[data-mode="tim"] .avatar, body[data-mode="tim"] .sprite { image-rendering: var(--adar-tim-effects-pixelate); }
+body[data-mode="vaporwave"] .fx-scanlines { background-image: var(--adar-vaporwave-effects-scanlines); }
+body[data-mode="vaporwave"] .fx-vignette { background-image: var(--adar-vaporwave-effects-vignette); }
+body[data-mode="vaporwave"] img, body[data-mode="vaporwave"] .avatar, body[data-mode="vaporwave"] .sprite { image-rendering: var(--adar-vaporwave-effects-pixelate); }
+body[data-mode="win95"] .fx-scanlines { background-image: var(--adar-win95-effects-scanlines); }
+body[data-mode="win95"] .fx-vignette { background-image: var(--adar-win95-effects-vignette); }
+body[data-mode="win95"] img, body[data-mode="win95"] .avatar, body[data-mode="win95"] .sprite { image-rendering: var(--adar-win95-effects-pixelate); }
+body[data-mode="neon-console"] .fx-scanlines { background-image: var(--adar-neon-console-effects-scanlines); }
+body[data-mode="neon-console"] .fx-vignette { background-image: var(--adar-neon-console-effects-vignette); }
+body[data-mode="neon-console"] img, body[data-mode="neon-console"] .avatar, body[data-mode="neon-console"] .sprite { image-rendering: var(--adar-neon-console-effects-pixelate); }
+
+body[data-mode="arcade"] .cursor { animation: blink var(--adar-arcade-motion-cursor); }
+body[data-mode="atari-sierra"] .cursor { animation: blink var(--adar-atari-sierra-motion-cursor); }
+body[data-mode="bauhaus"] .cursor { animation: none; }
+body[data-mode="bios"] .cursor { animation: blink var(--adar-bios-motion-cursor); }
+body[data-mode="c64"] .cursor { animation: blink var(--adar-c64-motion-cursor); }
+body[data-mode="cubism"] .cursor { animation: none; }
+body[data-mode="cyberpunk"] .cursor { animation: blink var(--adar-cyberpunk-motion-cursor); }
+body[data-mode="expressionism"] .cursor { animation: none; }
+body[data-mode="fauvism"] .cursor { animation: none; }
+body[data-mode="folk-art"] .cursor { animation: none; }
+body[data-mode="gameboy"] .cursor { animation: blink var(--adar-gameboy-motion-cursor); }
+body[data-mode="goya"] .cursor { animation: none; }
+body[data-mode="impressionism"] .cursor { animation: none; }
+body[data-mode="kandinsky"] .cursor { animation: none; }
+body[data-mode="nasa80"] .cursor { animation: blink var(--adar-nasa80-motion-cursor); }
+body[data-mode="stranger-things"] .cursor { animation: blink var(--adar-stranger-things-motion-cursor); }
+body[data-mode="terminal"] .cursor { animation: blink var(--adar-terminal-motion-cursor); }
+body[data-mode="tim"] .cursor { animation: none; }
+body[data-mode="vaporwave"] .cursor { animation: var(--adar-vaporwave-motion-cursor); }
+body[data-mode="win95"] .cursor { animation: none; }
+body[data-mode="neon-console"] .cursor { animation: blink var(--adar-neon-console-motion-cursor); }
+</style>
+</head>
+<body data-mode="arcade">
+<header class="gallery-bar">
+  <div class="shell-inner">
+    <span class="gallery-title">adar-design gallery</span>
+    <select id="mode-select" aria-label="Choose mode">
+<option value="arcade">80s Arcade</option>
+<option value="atari-sierra">Atari / Sierra Logo Treatment</option>
+<option value="bauhaus">Bauhaus / Functional Geometry</option>
+<option value="bios">BIOS / POST / Text-mode</option>
+<option value="c64">Commodore 64 / PETSCII</option>
+<option value="cubism">Cubism</option>
+<option value="cyberpunk">Cyberpunk / Neon Noir</option>
+<option value="expressionism">Expressionism</option>
+<option value="fauvism">Fauvism / Wild Colour / Cut-Paper Planes</option>
+<option value="folk-art">Folk Art</option>
+<option value="gameboy">Game Boy LCD</option>
+<option value="goya">Goya / Black Paintings</option>
+<option value="impressionism">Impressionism — Light &amp; Color</option>
+<option value="kandinsky">Kandinsky / Synesthetic Abstraction</option>
+<option value="nasa80">NASA 80s / Worm / Space</option>
+<option value="stranger-things">Red-Neon Serif / 80s Synth-Horror</option>
+<option value="terminal">Terminal / CRT</option>
+<option value="tim">The Incredible Machine</option>
+<option value="vaporwave">Vaporwave / Synthwave</option>
+<option value="win95">Windows 95 Desktop</option>
+<option value="neon-console">Neon Console (mix)</option>
+    </select>
+  </div>
+</header>
+<main>
+<section class="mode" data-mode="arcade">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">arcade — 80s Arcade</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">arcade</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design 80s Arcade</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "arcade";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The pixel-border panel (4px solid border wrapped in stacked offset rings) and the press-physics button (hard offset shadow that collapses on :active)</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>arcade</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="atari-sierra">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-slice-stack" aria-hidden="true"></div>
+  <div class="fx fx-slice-stack-hairline" aria-hidden="true"></div>
+  <div class="mode-caption">atari-sierra — Atari / Sierra Logo Treatment</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">atari-sierra</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Atari / Sierra Logo Treatment</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "atari-sierra";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The horizontal-slice thickness-gradient wordmark and divider: a title or rule cut into five stacked bands whose heights step thick-to-thin (8/6/4/3/2px) in red-orange-yellow-green-blue, each band plate-shifted 1px like slices off a printed logo.</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>atari-sierra</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="bauhaus">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-grid" aria-hidden="true"></div>
+  <div class="mode-caption">bauhaus — Bauhaus / Functional Geometry</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">bauhaus</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Bauhaus / Functional Geometry</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "bauhaus";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The primary-shape composition: a red #e23c2e circle, a blue #1b5fa8 square, and a yellow #f2c014 equilateral triangle set on the same strict grid baseline — three flat shapes, no gradients, that alone identify the mode</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>bauhaus</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="bios">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">bios — BIOS / POST / Text-mode</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">bios</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design BIOS / POST / Text-mode</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "bios";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The POST memory count-up (0000 → N KB) plus the bottom function-key strip (1Help 2Menu … 10Quit)</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>bios</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="c64">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">c64 — Commodore 64 / PETSCII</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">c64</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Commodore 64 / PETSCII</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "c64";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The bright blue border frame (#3f3fff with a #2f2fff inner edge) wrapping a 40x25 PETSCII screen of #a0a0ff bitmap type on #0000aa, closed out by a reverse-video status strip and a blinking block cursor</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>c64</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="cubism">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">cubism — Cubism</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">cubism</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Cubism</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "cubism";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The fractured plane: a single form rebuilt from offset charcoal-edged quadrilaterals in ochre, olive, warm gray, and blue-gray, its facets showing two viewpoints at once and never resolving into one outline</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>cubism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="cyberpunk">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">cyberpunk — Cyberpunk / Neon Noir</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">cyberpunk</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Cyberpunk / Neon Noir</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "cyberpunk";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The glitchy neon HUD: chamfered near-black panels outlined in 1px magenta or cyan with a 12px outer glow, over a grain-and-scanline black field, with an 80ms–160ms RGB-split flash on hover and focus</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>cyberpunk</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="expressionism">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">expressionism — Expressionism</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">expressionism</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Expressionism</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "expressionism";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The wavy, hand-distorted brushstroke band: a torn 2–3px edge (feTurbulence clip-path or wavering rule) that carries blood red into acid yellow across the deep blue field and quivers along section boundaries while the type inside stays straight</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>expressionism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="fauvism">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">fauvism — Fauvism / Wild Colour / Cut-Paper Planes</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">fauvism</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Fauvism / Wild Colour / Cut-Paper Planes</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "fauvism";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">the signature block: position: relative; background: #f5efe2; border: 3px solid #221e1b; border-radius: 6px; a solid second-hue rectangle sits either behind it (::before, transform: translate(10px, 10px)) or beside it as a full-height 8px–48px vertical band; planes may bleed past the container edge by up to 32px and may be clipped by an organic border-radius (64px 6px 64px 6px) when the shape is decorative; a plane never sits behind running text without first clearing to #fbf6ec, and two planes never overlap a third colour except where a contour separates them.</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>fauvism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="folk-art">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-paper-grain" aria-hidden="true"></div>
+  <div class="mode-caption">folk-art — Folk Art</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">folk-art</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Folk Art</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "folk-art";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The hand-painted decorative border: a 3px ink rule with an inset cream ring, an optional dashed echo, and small painted petal/leaf/berry motifs stopping at the rounded corners — the frame that makes every panel read as a made object rather than a div</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>folk-art</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="gameboy">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-dot-matrix" aria-hidden="true"></div>
+  <div class="mode-caption">gameboy — Game Boy LCD</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">gameboy</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Game Boy LCD</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "gameboy";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The four-shade LCD dot-matrix screen: an inverted-state HUD and hard-offset panels sitting under a repeating pixel grid inside the #8bac0f bezel</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>gameboy</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="goya">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">goya — Goya / Black Paintings</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">goya</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Goya / Black Paintings</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "goya";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">A chiaroscuro figure emerging from a near-black ground: one bone-lit focal shape cut by etched crosshatch, with the heavy vignette closing the frame around it</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>goya</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="impressionism">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-dapple" aria-hidden="true"></div>
+  <div class="fx fx-brushstroke-mask" aria-hidden="true"></div>
+  <div class="mode-caption">impressionism — Impressionism — Light &amp; Color</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">impressionism</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Impressionism — Light &amp; Color</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "impressionism";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">Sun-dappled light: broken brushstroke bands of sky, blush, leaf, lavender, and sunlight layered over a cream canvas, crossed by a soft warm dapple overlay that drifts like light through leaves — with every edge dissolved and every rule left visibly brushy</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>impressionism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="kandinsky">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">kandinsky — Kandinsky / Synesthetic Abstraction</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">kandinsky</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Kandinsky / Synesthetic Abstraction</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "kandinsky";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The circles-and-arcs composition: a cluster of overlapping ink-stroked circles, quarter-arcs, and ruled line-segments in red, yellow, and blue drifting slowly across a warm cream ground, as if the canvas were sounding a chord</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>kandinsky</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="nasa80">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-starfield" aria-hidden="true"></div>
+  <div class="fx fx-blueprint-grid" aria-hidden="true"></div>
+  <div class="fx fx-trajectory" aria-hidden="true"></div>
+  <div class="mode-caption">nasa80 — NASA 80s / Worm / Space</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">nasa80</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design NASA 80s / Worm / Space</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "nasa80";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The red worm wordmark set over a starlight starfield on a 1px blueprint grid — red mark, white dust, blue technical lines, and a lot of black between them</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>nasa80</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="stranger-things">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="fx fx-grain" aria-hidden="true"></div>
+  <div class="fx fx-haze" aria-hidden="true"></div>
+  <div class="mode-caption">stranger-things — Red-Neon Serif / 80s Synth-Horror</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">stranger-things</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Red-Neon Serif / 80s Synth-Horror</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "stranger-things";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The signature: font: 700 clamp(48px, 9vw, 120px)/0.95 'Cinzel', 'Playfair Display', 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; color: #ff1a1a; background: #050505; text-shadow: 0 0 1px #ff6f61, 0 0 8px rgba(255, 26, 26, 0.9), 0 0 28px rgba(255, 26, 26, 0.6), 0 0 64px rgba(179, 0, 0, 0.45); — sit it in the upper third with 32–56px beneath and a caption line in 13px #8a7f76 Plex Mono. The flicker keyframe dips opacity to 0.92 twice per 2400ms cycle, never below 0.9, and is disabled under prefers-reduced-motion.</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>stranger-things</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="terminal">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">terminal — Terminal / CRT</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">terminal</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Terminal / CRT</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "terminal";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">h1 { font: 400 clamp(32px, 6vw, 72px)/1.1 &quot;VT323&quot;, &quot;Courier New&quot;, monospace; color: #33ff66; letter-spacing: 0.02em; text-shadow: 0 0 8px rgba(51,255,102,0.6); margin: 0; } preceded by a prompt line (user@host:~/dir$ in #1e9944) and closed with a block cursor ::after { content: &quot;\2588&quot;; animation: blink steps(2, jump-none) 1s infinite; } reveal the line with a typewriter clip: width 0 → 100%, animation steps(20, end) 1200ms, overflow: hidden; white-space: nowrap.</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>terminal</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="tim">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">tim — The Incredible Machine</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">tim</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design The Incredible Machine</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "tim";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The contraption canvas: a dashed-rail workbench where cream cards, 3px ink-stroked crayon parts, and lever/ramp/ball/pulley motifs show one action visibly cranking the next</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>tim</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="vaporwave">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">vaporwave — Vaporwave / Synthwave</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">vaporwave</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Vaporwave / Synthwave</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "vaporwave";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The sunset grid horizon — striped sun disc half-sunk on the horizon above a cyan perspective grid plane — crowned by the chrome-gradient wordmark</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>vaporwave</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="win95">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">win95 — Windows 95 Desktop</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">win95</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Windows 95 Desktop</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "win95";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The beveled 2px button inside a navy #000080 title bar, sitting on the teal #008080 desktop</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>win95</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+<section class="mode" data-mode="neon-console">
+  <div class="fx fx-scanlines" aria-hidden="true"></div>
+  <div class="fx fx-vignette" aria-hidden="true"></div>
+  <div class="mode-caption">neon-console — Neon Console (mix)</div>
+  <div class="app">
+    <nav class="app-nav">
+      <span class="logo">neon-console</span>
+      <div class="tabs"><span class="tab active">Overview</span><span class="tab">Data</span><span class="tab">Settings</span></div>
+    </nav>
+    <header class="hero">
+      <h1>Adar Design Neon Console (mix)</h1>
+      <p class="lead">A finished app surface rendered from this mode's body type, type scale, complete color roles, motion, and effects.</p>
+    </header>
+    <section class="cards">
+      <article class="card"><h2 class="card-title">Panel one</h2><p class="card-body">Data-bearing surface with the mode's edge and elevation signature.</p><button class="btn btn-primary">Action</button></article>
+      <article class="card"><h2 class="card-title">Panel two</h2><p class="card-body">Same component, same tokens — only the mode changes below.</p><button class="btn btn-secondary">Secondary</button></article>
+      <article class="card"><h2 class="card-title">Panel three</h2><p class="card-body">Every mode renders this exact layout for comparison.</p><button class="btn btn-primary">Action</button></article>
+    </section>
+    <section class="block">
+      <h2>Data table</h2>
+      <table class="table">
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
+        <tbody>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
+        </tbody>
+      </table>
+    </section>
+    <section class="block">
+      <h2>Form</h2>
+      <div class="form">
+        <label class="field"><span>Name</span><input class="input" placeholder="Enter value"></label>
+        <label class="field"><span>Option</span><select class="select"><option>One</option><option selected>Two</option><option>Three</option></select></label>
+        <label class="check"><input type="checkbox" class="checkbox" checked><span>Checkbox</span></label>
+        <label class="check"><input type="radio" class="radio" name="r"><span>Radio</span></label>
+        <div class="actions"><button class="btn btn-primary">Save</button><button class="btn btn-secondary">Cancel</button></div>
+      </div>
+    </section>
+    <section class="block">
+      <h2>Feedback</h2>
+      <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
+      <div class="toast">Saved successfully.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
+    </section>
+    <section class="block">
+      <h2>Code + avatars</h2>
+      <pre class="code">const mode = "neon-console";
+render(app, mode);</pre>
+      <div class="avatar-row"><span class="avatar">A</span><span class="avatar">B</span><span class="avatar">C</span></div>
+    </section>
+    <section class="signature">
+      <div class="sig-label">Signature element</div>
+      <div class="sig-body">The pixel-border panel (4px solid border wrapped in stacked offset rings) and the press-physics button (hard offset shadow that collapses on :active)</div>
+    </section>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>neon-console</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
+  </div>
+</section>
+</main>
+<script>
+(function () {
+  var sel = document.getElementById("mode-select");
+  var params = new URLSearchParams(location.search);
+  var mode = params.get("mode");
+  var valid = Array.prototype.some.call(sel.options, function (o) { return o.value === mode; });
+  if (!valid) mode = "arcade";
+  document.body.dataset.mode = mode;
+  sel.value = mode;
+  document.title = "adar-design gallery — " + mode;
+  sel.addEventListener("change", function () {
+    document.body.dataset.mode = sel.value;
+    var url = new URL(location.href);
+    url.searchParams.set("mode", sel.value);
+    history.replaceState(null, "", url);
+    document.title = "adar-design gallery — " + sel.value;
+  });
+})();
+</script>
+</body>
+</html>

@@ -8,7 +8,7 @@ Phosphor-green CRT terminal: green monospace on near-black green-cast glass, sca
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Phosphor-green CRT terminal: green monospace on near-black green-cast glass, sca
 | `danger` | `#ff3030` |
 | `warning` | `#ffb000` |
 | `success` | `#33ff66` |
+| `border` | `#33ff66` |
+| `divider` | `#1e9944` |
+| `selection` | `#33ff66` |
+| `overlay` | `#0a0e0a` |
+| `selection-text` | `#0a0e0a` |
+| `color-scheme` | `dark` |
 
 ### Variant: `phosphorGreen`
 
@@ -70,7 +76,17 @@ Phosphor-green CRT terminal: green monospace on near-black green-cast glass, sca
 ### Typography
 
 - Display: "VT323", "Courier New", "monospace"
+- Body: "VT323", "IBM Plex Mono", "Courier New", "monospace"
 - Mono: "IBM Plex Mono", "Courier New", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `20px` | 1.1 | — |
+| h2 | `16px` | 1.2 | — |
+| body | `16px` | 1.2 | — |
+| caption | `14px` | 1.2 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -85,7 +101,7 @@ Phosphor-green CRT terminal: green monospace on near-black green-cast glass, sca
 | motion.durations | `0ms` `300ms` `1200ms` |
 | effects.scanlines | `repeating-linear-gradient(to bottom, transparent 0 2px, rgba(51,255,102,0.04) 2px 3px)` |
 | effects.vignette | `radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.6) 100%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -101,8 +117,19 @@ Phosphor-green CRT terminal: green monospace on near-black green-cast glass, sca
 ## Component recipes
 
 - **panel:** background: #101710; border: 1px solid #33ff66; box-shadow: inset 0 0 120px rgba(51,255,102,0.08); border-radius: 0; padding: 24px; color: #33ff66; font: 16px/1.6 "IBM Plex Mono", "Courier New", monospace; and title it inside an ASCII frame in the same mono face, e.g. ┌─ NETWORK ─────────┐ / │ … │ / └───────────────────┘.
+- **card:** background:#101710;border:1px solid #33ff66;border-radius:0;padding:24px;color:#33ff66;font:16px/1.6 'IBM Plex Mono',monospace;box-shadow:inset 0 0 120px rgba(51,255,102,0.08); title the card inside an ASCII frame ('┌─ CARD ─┐') and open the body with a '$ ' prompt line; a footer action row reads '[ ok ] [ edit ]' in bracketed commands.
 - **button:** font: 16px/1 "IBM Plex Mono", monospace; text-transform: lowercase; background: transparent; color: #33ff66; border: 1px solid #33ff66; border-radius: 0; padding: 8px 16px; text-shadow: 0 0 8px rgba(51,255,102,0.6); transition: none; label it as a bracketed command ([ run ], [ exit ]); :hover/:focus-visible { background: #33ff66; color: #0a0e0a; text-shadow: none; } with outline: 1px solid #ffb000; outline-offset: 2px.
 - **input:** background: #0a0e0a; border: 1px solid #1e9944; border-radius: 0; color: #33ff66; caret-color: #33ff66; font: 16px/1.4 "IBM Plex Mono", monospace; padding: 8px 16px; text-shadow: 0 0 8px rgba(51,255,102,0.6); prefix the field with a literal prompt glyph (user@host:~/dir$ or >) in #1e9944; ::placeholder { color: #1e9944; } :focus { border-color: #33ff66; box-shadow: 0 0 8px rgba(51,255,102,0.6); outline: none; }.
+- **select:** Render as a menu row, not a popover pill: trigger is an input-like line 'select> value' in #33ff66 with a blinking block cursor; the open list is a 1px #1e9944 frame of IBM Plex Mono rows each prefixed by '│'; the selected row inverts to background:#33ff66;color:#0a0e0a and the active item shows '>' in #ffb000; no radius, no animation beyond the cursor blink.
+- **checkbox:** Bracketed glyph toggle: '[x]' or '[ ]' at 16px/1.4 IBM Plex Mono, with the checked 'x' in #33ff66 and the label in #1e9944; focus-visible wraps the pair in outline:1px solid #ffb000 offset 2px; the radio variant renders '(•)' and '()'; state is repeated as '[on]'/'[off]' in text.
+- **badge:** A bracketed status tag: display:inline-block;font:14px/1 'IBM Plex Mono',monospace;padding:2px 8px;color:#0a0e0a;background:#33ff66;border-radius:0;text-transform:lowercase; role words only ([ok], [warn], [err]) with the fill swapped per role (#33ff66/#ffb000/#ff3030); never a filled pill and never color-only.
+- **avatar:** A 32px square cell: background:#0a0e0a;border:1px solid #1e9944;color:#33ff66;font:20px/1 'IBM Plex Mono',monospace; shows two-letter initials or a bracketed glyph ([@]); imagery renders as a monochrome ASCII block with image-rendering:auto and a 1px green frame; radius 0.
+- **nav:** A horizontal prompt rail: items are lowercase IBM Plex Mono 16px links prefixed by a two-space '│'; hover sets background:#33ff66;color:#0a0e0a; the active item keeps the inverse and prefixes '> ' in #ffb000; the vertical form is the existing menu; separators are '──' glyph runs in #1e9944, never underlines or chevrons.
+- **table:** A text grid framed in ASCII: header row of UPPERCASE #33ff66 labels over a '═' rule, body rows of IBM Plex Mono 16px #33ff66 on #0a0e0a with '│' column rules and 1px #1e9944 row rules; hover inverts the row, the selected row inverts to background:#33ff66;color:#0a0e0a and prefixes '>'; numbers align in tabular mono.
+- **dialog:** A modal console box: background:#0a0e0a;border:1px solid #33ff66;border-radius:0;box-shadow:0 0 8px rgba(51,255,102,0.6); title in an ASCII frame ('┌─ CONFIRM ─┐'), scrim as color-mix(in srgb, var(--overlay) 60%, transparent); body opens with '$ ' and actions read '[ run ] [ exit ]'; focus traps inside and the entrance is instant (0ms).
+- **toast:** A single status line pinned bottom-right: background:#0a0e0a;border:1px solid #1e9944;padding:8px 16px;font:14px/1.2 'IBM Plex Mono',monospace; prefix '[ok]'/'[warn]'/'[err]' in #33ff66/#ffb000/#ff3030 followed by the message; auto-clears by printing a new '>' prompt after 1200ms, never a fade.
+- **code:** A preformatted block: background:#0a0e0a;border:1px solid #1e9944;border-radius:0;padding:16px;font:14px/1.5 'IBM Plex Mono',monospace;color:#33ff66;text-shadow:0 0 8px rgba(51,255,102,0.6); preserve whitespace; comments in #1e9944, commands prefixed '$ ' in #ffb000, output in #33ff66.
+- **empty:** A centred ASCII panel: a glyph illustration ('░▒▓' or a box motif) above one line '# no data' in #1e9944 and a single bracketed CTA '[ run ]'; the state is stated in words (EMPTY, NO RESULTS) and there is exactly one action.
 - **statusbar:** position: fixed; bottom: 0; left: 0; right: 0; z-index: 10; display: flex; justify-content: space-between; gap: 16px; background: #0a0e0a; border-top: 1px solid #1e9944; color: #1e9944; font: 14px/1 "IBM Plex Mono", monospace; padding: 8px 16px; content: user@host:~/dir on the left, connection/mode and clock on the right; escalate to #ffb000 for warnings and #ff3030 for failures.
 - **menu:** list-style: none; margin: 0; padding: 0; border: 1px solid #1e9944; border-radius: 0; background: #0a0e0a; each item: font: 16px/1.2 "IBM Plex Mono", monospace; padding: 8px 16px; color: #33ff66; prefixed with a two-space indent and "│" so the list reads as an ASCII column; [aria-selected="true"] { background: #33ff66; color: #0a0e0a; text-shadow: none; } with the shortcut hint right-aligned in #1e9944; no underlines, no chevrons.
 - **hero:** h1 { font: 400 clamp(32px, 6vw, 72px)/1.1 "VT323", "Courier New", monospace; color: #33ff66; letter-spacing: 0.02em; text-shadow: 0 0 8px rgba(51,255,102,0.6); margin: 0; } preceded by a prompt line (user@host:~/dir$ in #1e9944) and closed with a block cursor ::after { content: "\2588"; animation: blink steps(2, jump-none) 1s infinite; } reveal the line with a typewriter clip: width 0 → 100%, animation steps(20, end) 1200ms, overflow: hidden; white-space: nowrap.

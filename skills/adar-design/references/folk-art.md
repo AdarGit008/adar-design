@@ -8,7 +8,7 @@ Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills
 | `danger` | `#a32e22` |
 | `warning` | `#e8b32a` |
 | `success` | `#4f7a4a` |
+| `border` | `#2b2b2b` |
+| `divider` | `#8b7c66` |
+| `selection` | `#e8b32a` |
+| `overlay` | `#2b2b2b` |
+| `selection-text` | `#2b2b2b` |
+| `color-scheme` | `light` |
 
 ### Variant: `painted`
 
@@ -62,7 +68,17 @@ Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills
 ### Typography
 
 - Display: "Fredoka", "Baloo 2", "Chewy", "system-ui", "sans-serif"
+- Body: "Fredoka", "Baloo 2", "system-ui", "sans-serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `40px` | 1.1 | — |
+| h2 | `24px` | 1.2 | — |
+| body | `17px` | 1.5 | — |
+| caption | `13px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -77,7 +93,7 @@ Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills
 | motion.durations | `0ms` `160ms` `280ms` `700ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 50% 40%, rgba(255,252,243,0) 55%, rgba(239,228,205,.55) 100%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -94,12 +110,22 @@ Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills
 ## Component recipes
 
 - **panel:** background: #fffcf3; border: 3px solid #2b2b2b; border-radius: 18px; padding: 28px; color: #2b2b2b; box-shadow: 4px 4px 0 #2b2b2b, inset 0 0 0 3px #f7f0e1; position: relative; — the inset cream ring is the painted border; add ::before with inset: 8px; border: 1px dashed #8b7c66; border-radius: 14px; pointer-events: none for a double painted rule, and a heading that sits on a 10px #e8b32a highlight block behind its last word; below 640px drop the 4px 4px 0 ink drop and keep both rules.
+- **card:** background:#fffcf3;border:3px solid #2b2b2b;border-radius:18px;padding:28px;color:#2b2b2b;box-shadow:4px 4px 0 #2b2b2b,inset 0 0 0 3px #f7f0e1; a ::before dashed #8b7c66 echo sits 8px inset; title = Fredoka 700 20px Title Case with a 10px #e8b32a highlight behind the last word; body = Fredoka 16px/1.6; small petal/leaf motifs stop at the corners.
 - **button:** font: 700 18px/1 'Fredoka', 'Baloo 2', system-ui, sans-serif; padding: 14px 26px; border-radius: 999px; background: #c0392b; color: #fffcf3; border: 3px solid #2b2b2b; box-shadow: 4px 4px 0 #2b2b2b; transition: transform 160ms cubic-bezier(.22,.61,.36,1), box-shadow 160ms cubic-bezier(.22,.61,.36,1), background-color 160ms linear; :hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #2b2b2b; } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #2b2b2b; } :focus-visible { outline: 3px solid #2c5f8a; outline-offset: 3px; } — secondary variant: background #fffcf3, color #2b2b2b, box-shadow 4px 4px 0 #2c5f8a; disabled: background #efe4cd, color #8b7c66, border-color #8b7c66, shadow 0 0 0, no transform, cursor not-allowed.
 - **input:** font: 16px/1.6 'Fredoka', system-ui, sans-serif; color: #2b2b2b; background: #f7f0e1; border: 3px solid #2b2b2b; border-radius: 18px; padding: 12px 18px; box-shadow: inset 0 3px 0 rgba(43,43,43,.10); :placeholder { color: #8b7c66; font-style: normal; } :focus { background: #fffcf3; outline: 3px solid #2c5f8a; outline-offset: 2px; } — numeric fields use 'IBM Plex Mono', ui-monospace, monospace at 16px so ledgers align; invalid: border-color #a32e22 plus a 16px Fredoka sentence below in #a32e22 ('That needs a number here.') and a 6px red painted underline, so the error never depends on hue alone.
+- **select:** A painted dropdown: trigger = Fredoka 16px field (background:#f7f0e1;border:3px solid #2b2b2b;border-radius:18px;padding:12px 18px) with a red '▾'; the open list is a #fffcf3 panel of Fredoka rows with 3px ink borders and 18px radius; the selected row fills #e8b32a with ink text, a 4px #c0392b check, and a petal motif at the left; hover lifts translate(-2px,-2px) with box-shadow 6px 6px 0.
+- **checkbox:** A 26px round well: background:#f7f0e1;border:3px solid #2b2b2b;border-radius:18px;box-shadow:inset 0 3px 0 rgba(43,43,43,0.10); checked = a 12px #4f7a4a painted check inside; radio = a 10px #c0392b dot; label = Fredoka 16px #2b2b2b with 'Yes'/'No'; focus-visible = 3px #2c5f8a outline at 2px offset.
+- **badge:** display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; border: 3px solid #2b2b2b; background: #f7f0e1; color: #2b2b2b; font: 600 14px/1.2 'Fredoka', system-ui, sans-serif; a leading 10px painted dot carries the pigment (#4f7a4a / #e8b32a / #a32e22 / #2c5f8a) and the label always spells the state out — badges never rely on their dot to communicate.
+- **avatar:** A 40px round tile: background:#fffcf3;border:3px solid #2b2b2b;border-radius:999px;color:#2b2b2b;font:700 16px 'Fredoka'; initials or a painted glyph; image avatars get a 3px ink contour and 999px radius.
+- **nav:** A vertical painted rail: items = Fredoka 600 18px #2b2b2b, padding 10px 18px, background #fffcf3, border 3px #2b2b2b, border-radius 18px, box-shadow 4px 4px 0 #2b2b2b; active = #e8b32a fill with a 4px #c0392b check and a petal motif; hover lifts translate(-2px,-2px) with box-shadow 6px 6px 0; group headers = Fredoka 700 13px uppercase #8b7c66 between two 3px dotted rules.
+- **table:** A painted grid: header = Fredoka 700 14px Title Case #2b2b2b over a 3px #2b2b2b rule; body rows = Fredoka 16px #2b2b2b separated by 1px dashed #8b7c66 rules; hover = #fffcf3 lift, selected row = #e8b32a fill with a 4px #c0392b left check and ink text; radius 18px.
+- **dialog:** A painted-border modal: panel recipe with the inset cream ring and dashed echo; scrim = color-mix(in srgb, var(--overlay) 40%, transparent); title = Fredoka 700 Title Case, body = Fredoka; actions = red pill + cream secondary with a blue drop; entrance is a 280ms cubic-bezier(.22,.61,.36,1) lift.
+- **toast:** A bottom-right painted note: background:#fffcf3;border:3px solid #2b2b2b;border-radius:18px;padding:12px 16px;font:15px/1.4 'Fredoka'; leading 10px painted dot in the role color (#4f7a4a/#e8b32a/#a32e22) plus the word (Saved, Needs attention, Failed); auto-dismisses with a 280ms fade; reduced motion keeps it static.
+- **code:** A monospace block: background:#f7f0e1;border:3px solid #2b2b2b;border-radius:18px;padding:16px;font:14px/1.6 'IBM Plex Mono';color:#2b2b2b; preserve whitespace; comments #8b7c66, strings #c0392b, values #2c5f8a; no syntax gradients, and the block keeps the blue focus ring.
+- **empty:** A centred painted panel: a small petal/leaf motif above one Fredoka message ('Nothing painted here yet.') and a single red 'Paint it' CTA; the motif is aria-hidden and the state is written in words.
 - **statusbar:** height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 28px; background: #f7f0e1; border-top: 3px solid #2b2b2b; border-radius: 18px 18px 0 0; font: 15px/1.4 'Fredoka', system-ui, sans-serif; color: #2b2b2b; a 3px dashed #8b7c66 rule runs just under the top border as a painted trim; left side lists states each led by a 10px painted dot — #4f7a4a saved, #e8b32a needs attention, #a32e22 failed, #8b7c66 idle — with the state word beside it; right side pairs the mono count ('12 of 40') with the one primary button.
 - **menu:** vertical list, no bullets, 6px gap: item { display: flex; align-items: center; gap: 12px; padding: 10px 18px; font: 600 18px/1.3 'Fredoka', system-ui, sans-serif; color: #2b2b2b; background: #fffcf3; border: 3px solid #2b2b2b; border-radius: 18px; box-shadow: 4px 4px 0 #2b2b2b; } selected row fills #e8b32a with ink text, gains a 4px #c0392b check mark and a small painted petal motif at its left edge; hover lifts translate(-2px, -2px) to box-shadow 6px 6px 0 #2b2b2b; group headers are Fredoka 700 13px uppercase with letter-spacing 0.14em in #8b7c66 between two 3px dotted rules.
 - **fieldset:** the signature framed block: border: 3px solid #2b2b2b; border-radius: 18px; padding: 24px 28px; background: #fffcf3; legend { font: 700 18px/1 'Fredoka', system-ui, sans-serif; padding: 0 12px; color: #2b2b2b; background: #fffcf3; border: 3px solid #2b2b2b; border-radius: 999px; } with a painted vine drawn behind the legend on the top rule (3px solid #4f7a4a, two 8px #c0392b petal arcs flanking the legend) so the border reads as hand-embellished rather than machine-drawn.
-- **badge:** display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; border: 3px solid #2b2b2b; background: #f7f0e1; color: #2b2b2b; font: 600 14px/1.2 'Fredoka', system-ui, sans-serif; a leading 10px painted dot carries the pigment (#4f7a4a / #e8b32a / #a32e22 / #2c5f8a) and the label always spells the state out — badges never rely on their dot to communicate.
 
 ## Copywriting
 

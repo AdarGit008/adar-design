@@ -8,7 +8,7 @@ Fine-art canvas UI after Kandinsky: warm cream ground, overlapping circles, quar
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Fine-art canvas UI after Kandinsky: warm cream ground, overlapping circles, quar
 | `danger` | `#a81f1f` |
 | `warning` | `#f4b400` |
 | `success` | `#2a7d4f` |
+| `border` | `#111111` |
+| `divider` | `#6f6a60` |
+| `selection` | `#1d4ed8` |
+| `overlay` | `#111111` |
+| `selection-text` | `#ffffff` |
+| `color-scheme` | `light` |
 
 ### Variant: `composition`
 
@@ -63,7 +69,17 @@ Fine-art canvas UI after Kandinsky: warm cream ground, overlapping circles, quar
 ### Typography
 
 - Display: "Montserrat", "Archivo", "Futura", "system-ui", "sans-serif"
+- Body: "Montserrat", "Archivo", "Futura", "system-ui", "sans-serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `44px` | 1.1 | — |
+| h2 | `26px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -78,7 +94,7 @@ Fine-art canvas UI after Kandinsky: warm cream ground, overlapping circles, quar
 | motion.durations | `0ms` `240ms` `480ms` `900ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 50% 45%, transparent 45%, rgba(17,17,17,.10) 100%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -95,11 +111,21 @@ Fine-art canvas UI after Kandinsky: warm cream ground, overlapping circles, quar
 ## Component recipes
 
 - **panel:** background: #fdfaf3; border: 3px solid #111111; border-radius: 0; padding: 32px; color: #111111; box-shadow: 3px 3px 0 #111111; — the panel's top-right corner may hold one 48px motif cluster (a yellow circle at 60% opacity with a blue quarter-arc crossing it) pinned with position: absolute and overflow: hidden, never overlapping text; headings inside are Montserrat 700 28px with 0.02em tracking, and a 12px #d62828 bar sits above the first line as a scored accent; below 640px drop the hard shadow and the motif, keep the 3px stroke.
+- **card:** background:#fdfaf3;border:3px solid #111111;border-radius:0;padding:32px;color:#111111;box-shadow:3px 3px 0 #111111; a 48px motif cluster (yellow circle at 60% opacity crossed by a blue quarter-arc) pins to the top-right corner; title = Montserrat 700 28px with a 12px #d62828 scored bar above the first line; body = Montserrat 16px/1.6.
 - **button:** font: 700 15px/1 'Montserrat', 'Archivo', system-ui, sans-serif; letter-spacing: 0.06em; text-transform: uppercase; padding: 16px 32px; border-radius: 0; background: #d62828; color: #fafafa; border: 3px solid #111111; box-shadow: 3px 3px 0 #111111; transition: transform 240ms cubic-bezier(.22,.61,.36,1), box-shadow 240ms cubic-bezier(.22,.61,.36,1), background-color 240ms linear; :hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 #111111; } :active { transform: translate(3px, 3px); box-shadow: 0 0 0 #111111; } :focus-visible { outline: 3px solid #1d4ed8; outline-offset: 3px; } — secondary: background #fdfaf3, color #111111, with a 3px #1d4ed8 bar on the left edge; disabled: background #f7f2e8, color #6f6a60, border-color #6f6a60, shadow none, no transform.
 - **input:** font: 15px/1.6 'IBM Plex Mono', ui-monospace, monospace; color: #111111; background: #fafafa; border: 3px solid #111111; border-radius: 0; padding: 12px 16px; box-shadow: inset 3px 0 0 #1d4ed8; caret-color: #d62828; :placeholder { color: #6f6a60; font: 400 16px 'Montserrat', system-ui, sans-serif; } :focus { background: #fdfaf3; outline: 3px solid #1d4ed8; outline-offset: 2px; } — invalid: border-color #a81f1f, a small red #d62828 circle with a 3px ink stroke beside the field, and a Montserrat 15px sentence below in #a81f1f ('This line cannot be read yet.') so the state never depends on color alone.
+- **select:** A catalogue dropdown: trigger = IBM Plex Mono 15px field (background:#fafafa;border:3px solid #111111;border-radius:0;padding:12px 16px;box-shadow:inset 3px 0 0 #1d4ed8) with a red '▾'; the open list is a #fdfaf3 panel of Montserrat rows, the selected row fills #f4b400 with a 3px #111111 left bar and its index numeral turns #d62828; hover slides translate(4px,0) with a #1d4ed8 left bar.
+- **checkbox:** A 24px square plate: background:#fafafa;border:3px solid #111111;border-radius:0; checked = a 12px #d62828 square inside; radio = a 10px #1d4ed8 circle; label = Montserrat 16px #111111 with 'On'/'Off'; focus-visible = 3px #1d4ed8 outline at 3px offset.
+- **badge:** catalogue chip, 1–3 words: display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 12px; background: #fafafa; border: 3px solid #111111; border-radius: 0; font: 600 11px/1 'Montserrat', system-ui, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; the leading dot is a 10px circle filled #d62828 / #1d4ed8 / #f4b400 / #2a7d4f by role, struck with the same 3px ink stroke; motion is a 240ms fade on state change, never a pulse.
+- **avatar:** A 40px square plate: background:#fafafa;border:3px solid #111111;border-radius:0;color:#111111;font:700 15px 'Montserrat'; initials or a small motif (circle/arc); image avatars get a 3px ink stroke and 0 radius.
+- **nav:** A vertical catalogue rail (horizontal form allowed): items = Montserrat 500 17px uppercase #111111, letter-spacing 0.04em, padding 12px 16px, border-left 3px transparent; hover slides translate(4px,0) with a #1d4ed8 left bar; active = #f4b400 fill with a 3px #111111 left bar and red index numeral; group headers are Montserrat 700 12px #6f6a60 over a 3px #111111 rule spanning 48px.
+- **table:** A scored data grid: header = Montserrat 700 13px uppercase #111111 over a 3px #111111 rule; body rows = Montserrat 16px #111111 separated by 1px #6f6a60 rules; hover = #1d4ed8 text, selected row = #f4b400 fill with a 3px #111111 left bar; numerals in tabular Plex Mono, radius 0.
+- **dialog:** A museum-plate modal: panel recipe with a 3px ink border and a 48px motif cluster; scrim = color-mix(in srgb, var(--overlay) 50%, transparent); title = Montserrat 700 Title Case, body = Montserrat, actions = red primary + cream secondary with a blue left bar; entrance is a 480ms cubic-bezier(.22,.61,.36,1) fade.
+- **toast:** A bottom-right plate: background:#fafafa;border:3px solid #111111;border-radius:0;padding:10px 14px;font:13px/1.4 'IBM Plex Mono'; a leading 9px outline circle in the role color (#2a7d4f/#f4b400/#a81f1f) plus the word (Signed, Pending, Failed); auto-dismisses with a 480ms fade; reduced motion keeps it static.
+- **code:** A monospace block: background:#fafafa;border:3px solid #111111;border-radius:0;padding:16px;font:14px/1.5 'IBM Plex Mono';color:#111111; preserve whitespace; comments #6f6a60, strings #d62828, values #1d4ed8; no syntax gradients, and the block keeps the blue focus ring.
+- **empty:** A centred panel: a small circles-and-arcs motif above one Montserrat message ('No studies yet') and a single red CTA; the motif is aria-hidden and the state is written in words.
 - **statusbar:** height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 0 32px; background: #f7f2e8; border-top: 3px solid #111111; border-radius: 0; font: 13px/1.4 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.04em; color: #111111; left side lists scored events, each prefixed by a 9px outline circle — #2a7d4f passing, #f4b400 pending, #a81f1f failing, #6f6a60 idle; right side holds a mono plate number ('№ 013') and the single primary button; the live event fades between 0.6 and 1 opacity over 900ms instead of blinking.
 - **menu:** vertical catalogue, no bullets, 8px gap: item { display: flex; align-items: baseline; gap: 16px; padding: 12px 16px; font: 500 17px/1.4 'Montserrat', system-ui, sans-serif; letter-spacing: 0.04em; text-transform: uppercase; color: #111111; background: transparent; border: 0; border-left: 3px solid transparent; } selected row fills #f4b400, gains a 3px #111111 left bar, and its small index numeral turns #d62828; hover slides translate(4px, 0) over 240ms with the left bar in #1d4ed8; group headers are Montserrat 700 12px spaced 0.14em in #6f6a60 with a 3px #111111 rule beneath spanning 48px.
-- **badge:** catalogue chip, 1–3 words: display: inline-flex; align-items: center; gap: 8px; height: 28px; padding: 0 12px; background: #fafafa; border: 3px solid #111111; border-radius: 0; font: 600 11px/1 'Montserrat', system-ui, sans-serif; letter-spacing: 0.12em; text-transform: uppercase; color: #111111; the leading dot is a 10px circle filled #d62828 / #1d4ed8 / #f4b400 / #2a7d4f by role, struck with the same 3px ink stroke; motion is a 240ms fade on state change, never a pulse.
 
 ## Copywriting
 

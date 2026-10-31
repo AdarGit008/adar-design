@@ -8,7 +8,7 @@ Sliced 80s publisher logos: a wordmark or divider cut into horizontal bands that
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Sliced 80s publisher logos: a wordmark or divider cut into horizontal bands that
 | `danger` | `#ff4b3e` |
 | `warning` | `#f08a24` |
 | `success` | `#52b545` |
+| `border` | `#ececee` |
+| `divider` | `#86878f` |
+| `selection` | `#f5c518` |
+| `overlay` | `#0a0a0d` |
+| `selection-text` | `#0a0a0d` |
+| `color-scheme` | `dark` |
 
 ### Variant: `rainbowStripe`
 
@@ -73,7 +79,17 @@ Sliced 80s publisher logos: a wordmark or divider cut into horizontal bands that
 ### Typography
 
 - Display: "Audiowide", "Orbitron", "Space Grotesk", "sans-serif"
+- Body: "Space Mono", "IBM Plex Mono", "monospace"
 - Mono: "Space Mono", "IBM Plex Mono", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `28px` | 1.1 | — |
+| h2 | `18px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -94,6 +110,7 @@ Sliced 80s publisher logos: a wordmark or divider cut into horizontal bands that
 
 - The slice stack is the system: five horizontal bands of decreasing thickness — 8px red #e8402a, 6px orange #f08a24, 4px yellow #f5c518, 3px green #52b545, 2px blue #2f7fe0 (23px total). Never reorder, resample, or re-weight the bands; scale the whole 23px stack by integer factors only.
 - A wordmark is built by slicing letterforms, not by outlining them: split the display text into the same five bands, give each band its own row height and a 1px horizontal plate shift, and let the changing band thickness carry the logo effect. Band spacing stays constant — the thickness is the only variable.
+- Slice each letterform with a per-band clip-path inset (0 0 calc(100% - var(--band-top)) 0) so each band is its own <span> with its own height and a 1px plate offset.
 - Rainbow is structural, never decorative: it appears only as the banded slice stack (wordmark, divider, panel rule, statusbar chip) or as a legitimate 5-stop stripe. No rainbow gradients, no blurred rainbow glows, no rainbow background washes behind body copy.
 - Field is either near-black #0a0a0d or silver #c9cbd1 — pick one per surface. The dark field carries the saturated rainbow; the silver field uses the desaturated silverField variant so the stripes stay legible against #c9cbd1.
 - Type is uppercase geometric display: Audiowide (or Orbitron) for wordmarks, titles, buttons, and section heads at 0.02em–0.08em tracking; Space Mono for body, labels, table data, and numeric readouts at 0.12em tracking when uppercase.
@@ -104,8 +121,19 @@ Sliced 80s publisher logos: a wordmark or divider cut into horizontal bands that
 ## Component recipes
 
 - **panel:** background: #16171c; color: #ececee; border: 0; border-radius: 0; padding: 24px 32px; box-shadow: 6px 6px 0 #000000; — the frame is a 23px slice stack pinned to the top edge: background-image: linear-gradient(to bottom, #e8402a 0 8px, #f08a24 8px 14px, #f5c518 14px 18px, #52b545 18px 21px, #2f7fe0 21px 23px); background-repeat: no-repeat; background-size: 100% 23px; second line uses background-position: top; the body fill is a separate element below the 23px band so the band never repeats behind text. Optional scanline overlay from effects.scanlines at 100% cover with pointer-events: none; below 640px drop the shadow and keep the band.
+- **card:** background:#16171c;color:#ececee;border:0;border-radius:0;padding:24px 32px;box-shadow:6px 6px 0 #000000; a 23px slice stack (8/6/4/3/2 rainbow) pins to the top edge, the header sits below it in Audiowide 14px uppercase #f5c518, body = Space Mono 16px/1.5 #ececee, and a footer action row uses the yellow button; the body fill is a separate element below the band so the stack never repeats behind text.
 - **button:** font: 400 14px/1 'Audiowide'; text-transform: uppercase; letter-spacing: 0.06em; background: #f5c518; color: #0a0a0d; border: 0; border-radius: 0; padding: 12px 20px; box-shadow: 4px 4px 0 #000000; transition: none; :hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #000000; background-image: effects.sliceStackHairline; background-size: 100% 12px; background-repeat: no-repeat; padding-top: 24px; } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #000000; } :focus-visible { outline: 3px solid #2f7fe0; outline-offset: 3px; } — secondary: #16171c fill, #ececee text, 23px slice stack as a 5px left column instead of the top band; destructive swaps fill to #ff4b3e with #0a0a0d text and never uses the rainbow.
 - **input:** background: #0a0a0d; color: #ececee; font: 16px/1.5 'Space Mono'; border: 0; border-bottom: 3px solid #2a2b33; border-radius: 0; padding: 8px 12px; caret-color: #f5c518; :placeholder { color: #86878f; text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; } :focus { border-bottom: 0; background-image: linear-gradient(to bottom, #e8402a 0 5px, #f08a24 5px 8px, #f5c518 8px 10px, #52b545 10px 11px, #2f7fe0 11px 12px); background-repeat: no-repeat; background-position: bottom; background-size: 100% 12px; padding-bottom: 17px; outline: none; } — the focus state swaps the hairline for the full 12px micro-slice; invalid state keeps a 3px #ff4b3e underline plus a Space Mono sentence-case message, never color alone.
+- **select:** A publisher dropdown: trigger = Space Mono 16px field with a 3px #2a2b33 bottom rule that swaps to the 12px micro-slice on focus, value in #ececee with a yellow '▾'; the open list is a 1px #2a2b33 frame on #16171c where the selected row carries the full 23px band on its left edge and hover lightens the label to #ffffff; no radius.
+- **checkbox:** A 20px square plate: background:#0a0a0d;border:0;border-bottom:3px solid #2a2b33;border-radius:0; checked = a 10px #f5c518 square with a 1px #0a0a0d plate offset; radio = 8px #e8402a dot; label in Space Mono 16px #ececee with 'ON'/'OFF'; focus-visible = 3px #2f7fe0 outline at 3px offset.
+- **badge:** A flat slice-chip: display:inline-flex;gap:8px;padding:4px 10px;background:#0a0a0d;border:0;border-radius:0;font:12px/1 'Space Mono';text-transform:uppercase;letter-spacing:0.12em; a 4px left band in the role color (#52b545/#f08a24/#ff4b3e/#f5c518) plus the word; never a rounded pill, never icon-only.
+- **avatar:** A 32px square plate: background:#0a0a0d;border:0;border-radius:0;color:#ececee;font:14px/1 'Audiowide'; initials or a two-letter mark; image avatars get a 23px slice stack as a bottom border and image-rendering:auto; integer scaling only.
+- **nav:** A horizontal publisher rail: items = Audiowide 13px uppercase #ececee, padding 12px 16px 15px; the active item keeps plate #16171c, turns #f5c518, and gains the 12px hairline slice stack as an under-rule plus box-shadow 4px 4px 0 #000000; hover lightens to #ffffff; dropdowns are 1px #2a2b33 frames with the selected row carrying the 23px left band.
+- **table:** A slice-stack data grid: header = Audiowide 12px uppercase #ececee with the 23px band pinned under it as a rule; body rows = Space Mono 16px #ececee separated by 1px #2a2b33 rules; hover = #ffffff, selected row = #f5c518 text with a 4px left band in the rainbow; values tabular, radius 0.
+- **dialog:** A publisher modal: panel recipe with the 23px slice stack on the top edge; scrim = color-mix(in srgb, var(--overlay) 60%, transparent); title = Audiowide uppercase #ececee, body = Space Mono, actions = yellow primary + #16171c secondary with the slice-stack left column; entrance is a 360ms steps(5) band wipe.
+- **toast:** A bottom-right status plate: background:#0a0a0d;border:0;border-bottom:3px solid;padding:12px 16px;font:Space Mono 14px uppercase; a 4px left band in the role color (#52b545/#f08a24/#ff4b3e) plus the word (SAVED, WARNING, ERROR); auto-dismisses with a 360ms steps(5) wipe, reduced motion keeps it static.
+- **code:** A monospace block: background:#0a0a0d;border:0;border-bottom:3px solid #2a2b33;border-radius:0;padding:16px;font:14px/1.5 'Space Mono';color:#ececee; preserve whitespace; comments #86878f, strings #f5c518, errors #ff4b3e; the block keeps the 12px micro-slice focus rule.
+- **empty:** A centred panel with a small 23px slice-stack glyph above one Space Mono message ('NO SAVES' / 'EMPTY SLOT') and a single yellow primary CTA; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 28px; display: flex; align-items: center; gap: 24px; padding: 0 16px; background: #0a0a0d; border-top: 1px solid #2a2b33; font: 12px/1 'Space Mono'; text-transform: uppercase; letter-spacing: 0.12em; color: #ececee; the leading cell is a 23px wide vertical slice stack (columns rotate the rainbow: #e8402a 0 8px, #f08a24 8px 14px, #f5c518 14px 18px, #52b545 18px 21px, #2f7fe0 21px 23px) with no label inside; segments separated by 1px #2a2b33 rules; live value in #f5c518, warning #f08a24, critical #ff4b3e; the blinking block cursor is 8px wide and animates steps(2, jump-none) 1s infinite.
 - **menu:** horizontal rail: item { display: inline-block; font: 400 13px/1 'Audiowide'; text-transform: uppercase; letter-spacing: 0.08em; padding: 12px 16px 15px; color: #ececee; border-radius: 0; } the selected item keeps its plate #16171c, turns #f5c518, and gains the 12px hairline slice stack as an under-rule (background-position: bottom, background-size: 100% 12px, no-repeat) plus box-shadow 4px 4px 0 #000000; hover only lightens the label to #ffffff and never animates; group separators are 1px #2a2b33 vertical rules, and dropdowns are 1px #2a2b33 frames on #16171c with the selected row carrying the full 23px band on its left edge.
 

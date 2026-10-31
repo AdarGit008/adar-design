@@ -14,6 +14,13 @@
   ],
   "summary": "Commodore 64 home computer: a chunky 40x25 PETSCII screen of light-blue bitmap type on deep blue, wrapped in the bright blue border frame, with a locked 16-color hardware palette.",
   "whenToUse": "When the user asks for Commodore 64, C64, PETSCII, breadbin-era home computer, BASIC/LOAD\"*\",8,1 screen, or a chunky blue 320x200 8-bit aesthetic.",
+  "colorScheme": "dark",
+  "typeScale": {
+    "h1": { "fontSize": "16px", "lineHeight": 1.1 },
+    "h2": { "fontSize": "16px", "lineHeight": 1.2 },
+    "body": { "fontSize": "16px", "lineHeight": 1.2 },
+    "caption": { "fontSize": "16px", "lineHeight": 1.2 }
+  },
   "colors": {
     "background": "#0000aa",
     "surface": "#2e2c9b",
@@ -23,7 +30,11 @@
     "accent": "#3f3fff",
     "danger": "#c46c71",
     "warning": "#edf171",
-    "success": "#a9ff9f"
+    "success": "#a9ff9f",
+    "border": "#a0a0ff",
+    "divider": "#6a6ab8",
+    "selection": "#c6c6ff",
+    "overlay": "#0000aa"
   },
   "paletteVariants": {
     "screen": {
@@ -74,6 +85,7 @@
       "Courier New",
       "monospace"
     ],
+    "body": ["C64 Pro Mono", "Pet Me 64", "IBM Plex Mono", "Courier New", "monospace"],
     "mono": [
       "C64 Pro Mono",
       "Pet Me 64",
@@ -120,6 +132,17 @@
     "Every screen carries PETSCII chrome: a top line of the product name plus a rule, a bottom status/prompt line ending in a blinking block cursor, and reverse-video framing on any raised panel."
   ],
   "componentRecipes": {
+    "card": "background:#0000aa;border:4px solid #a0a0ff;border-radius:0;padding:16px 24px;color:#a0a0ff;font:16px/16px 'C64 Pro Mono';box-shadow:0 0 0 4px #2f2fff,8px 8px 0 #000066; title = reverse-video run (background:#a0a0ff;color:#0000aa) on the top edge; body = sentence-case #a0a0ff; a footer action line reads 'RETURN OK' with the key in inverse video; the whole card sits inside the #3f3fff border frame.",
+    "select": "A PETSCII field, not a popover: render 'SELECT> VALUE' with the value in #c6c6ff and a blinking 8x16 block caret; the open list is a '=' ruled frame of 16px/16px rows where the selected row is inverse video (background:#a0a0ff;color:#0000aa) and prefixes '>'; hover brightens to #c6c6ff; no radius, no animation beyond the caret blink.",
+    "checkbox": "Bracket cells drawn in PETSCII: '[X]'/'[ ]' at 16px/16px 'C64 Pro Mono'; checked = #c6c6ff 'X' with label #a0a0ff; focus inverts the bracket pair to background:#a0a0ff;color:#0000aa; radio variant swaps 'X' for a filled 8x8 block; the state word (ON/OFF) always accompanies the glyph.",
+    "badge": "A reverse-video chip: display:inline-block;padding:2px 8px;background:#a0a0ff;color:#0000aa;border:4px solid #2f2fff;border-radius:0;font:16px/16px 'C64 Pro Mono';text-transform:uppercase; role words (OK/WARNING/ERROR) tint the fill to #a9ff9f/#edf171/#c46c71 with #0000aa text; never rounded and never icon-only.",
+    "avatar": "A 32px square bitmap tile: background:#0000aa;border:4px solid #2f2fff;border-radius:0;color:#c6c6ff;font:20px/1 'C64 Pro Mono'; initials or a PETSCII glyph; pixel art renders at 32px with image-rendering:pixelated and integer scaling only.",
+    "nav": "A horizontal PETSCII rail: items 16px/16px uppercase 'C64 Pro Mono' #a0a0ff with 4px 16px padding; hover brightens to #c6c6ff; the active item is inverse video (background:#a0a0ff;color:#0000aa) and prefixes '>'; the vertical form is the existing menu; group separators are full-width '=' runs, never hairlines.",
+    "table": "A PETSCII grid: header row = UPPERCASE #c6c6ff on #2e2c9b with a '=' rule beneath; body rows = 16px/16px #a0a0ff on #0000aa separated by 4px #3f3fff rules; hover brightens to #c6c6ff, selected row = inverse video (background:#a0a0ff;color:#0000aa) with '>' prefix; numbers align in the fixed cell.",
+    "dialog": "A modal PETSCII panel inside the border frame: background:#0000aa;border:4px solid #a0a0ff;box-shadow:0 0 0 4px #2f2fff,8px 8px 0 #000066; scrim = the solid #0000aa overlay at full opacity; title in reverse video, body 16px/16px, and a 'PRESS RETURN TO CONFIRM' line; entrance is 0ms.",
+    "toast": "A bottom-right PETSCII line: background:#2e2c9b;border:4px solid #3f3fff;padding:8px 16px;font:16px/16px 'C64 Pro Mono'; prefixed by 'OK'/'WARNING'/'?ERROR' in #a9ff9f/#edf171/#c46c71; auto-clears by blanking the line in 300ms steps, and reduced motion shows it statically.",
+    "code": "A preformatted PETSCII block: background:#0000aa;border:4px solid #3f3fff;border-radius:0;padding:16px;font:16px/16px 'C64 Pro Mono';color:#a0a0ff; preserve whitespace; BASIC keywords in #c6c6ff, strings in #a9ff9f, errors in #c46c71; no syntax gradients.",
+    "empty": "A centred PETSCII panel: a block-glyph illustration above one line 'READY.' plus 'NO DATA' in #c6c6ff and a single inverse-video CTA ('LOAD'); the motif is aria-hidden and the state is written in words.",
     "panel": "background: #0000aa; border: 4px solid #a0a0ff; border-radius: 0; padding: 16px 24px; color: #a0a0ff; font: 16px/16px 'C64 Pro Mono'; box-shadow: 0 0 0 4px #2f2fff, 8px 8px 0 #000066; — the title is a reverse-video run on the top edge: display:inline-block; background: #a0a0ff; color: #0000aa; padding: 0 8px; text-transform: uppercase; margin-top: -24px; and the panel sits inside the #3f3fff border frame, never flush to the viewport.",
     "button": "font: 16px/16px 'C64 Pro Mono'; text-transform: uppercase; background: #a0a0ff; color: #0000aa; border: 4px solid #2f2fff; border-radius: 0; padding: 8px 16px; box-shadow: 4px 4px 0 #000066, 0 0 0 4px #0000aa; letter-spacing: 0.04em; transition: none; :hover { background: #c6c6ff; } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #000066, 0 0 0 4px #0000aa; } :focus-visible { outline: 4px solid #c6c6ff; outline-offset: 4px; } — secondary variant is the inverse pair: background: #0000aa; color: #a0a0ff; border-color: #a0a0ff.",
     "input": "The field is a PETSCII cell run, not a modern box: background: #0000aa; color: #c6c6ff; font: 16px/16px 'C64 Pro Mono'; border: 4px solid #3f3fff; border-radius: 0; padding: 8px 16px; caret-color: transparent; box-shadow: inset 0 0 0 4px #2e2c9b; :placeholder { color: #6a6ab8; text-transform: uppercase; } :focus { border-color: #a0a0ff; outline: 4px solid #c6c6ff; outline-offset: 2px; } — draw the caret yourself as a one-cell 8x16 block in #c6c6ff animated steps(2, jump-none) 1s infinite; an invalid value keeps #c46c71 text and appends the literal ' ?SYNTAX ERROR' on the next line rather than recoloring the border alone.",

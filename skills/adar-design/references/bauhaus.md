@@ -8,7 +8,7 @@ Bauhaus school interface: cream ground, primary red/blue/yellow with black rules
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Bauhaus school interface: cream ground, primary red/blue/yellow with black rules
 | `danger` | `#b3241b` |
 | `warning` | `#f2c014` |
 | `success` | `#123f70` |
+| `border` | `#141414` |
+| `divider` | `#5f5a50` |
+| `selection` | `#1b5fa8` |
+| `overlay` | `#141414` |
+| `selection-text` | `#ffffff` |
+| `color-scheme` | `light` |
 
 ### Variant: `bauhaus`
 
@@ -60,7 +66,17 @@ Bauhaus school interface: cream ground, primary red/blue/yellow with black rules
 ### Typography
 
 - Display: "Archivo", "Josefin Sans", "Helvetica Neue", "Arial", "system-ui", "sans-serif"
+- Body: "Archivo", "Helvetica Neue", "Arial", "system-ui", "sans-serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `48px` | 1.1 | — |
+| h2 | `28px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -75,7 +91,7 @@ Bauhaus school interface: cream ground, primary red/blue/yellow with black rules
 | motion.durations | `0ms` `120ms` `200ms` `400ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `none` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -92,8 +108,19 @@ Bauhaus school interface: cream ground, primary red/blue/yellow with black rules
 ## Component recipes
 
 - **panel:** background: #ffffff; border: 2px solid #141414; border-radius: 0; padding: 32px; color: #141414; box-shadow: 8px 8px 0 #141414; — the heading sits above a 2px #141414 bottom rule with 16px of space beneath it, and one 24px primary shape (red #e23c2e circle, blue #1b5fa8 square, or yellow #f2c014 triangle) is pinned at the top-left as the panel's index mark, no more than one shape per panel; the panel rests on the cream ground #f2efe6 rather than floating, and there is no inner shadow, gradient, or rounded corner anywhere in it.
+- **card:** background:#ffffff;border:2px solid #141414;border-radius:0;padding:32px;color:#141414;box-shadow:8px 8px 0 #141414; a 24px primary shape (red circle, blue square, or yellow triangle) pins top-left as the index mark; heading = Archivo 700 lowercase over a 2px #141414 rule; body = Archivo 16px/1.5; one accent plus ink only.
 - **button:** font: 700 14px/1 'Archivo', 'Josefin Sans', system-ui, sans-serif; text-transform: lowercase; letter-spacing: 0.02em; background: #e23c2e; color: #f2efe6; border: 2px solid #141414; border-radius: 0; padding: 16px 24px; box-shadow: 4px 4px 0 #141414; transition: transform 120ms cubic-bezier(0.2,0,0,1), box-shadow 120ms cubic-bezier(0.2,0,0,1), background-color 120ms linear; :hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 #141414; } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #141414; } :focus-visible { outline: 2px solid #1b5fa8; outline-offset: 3px; } — secondary variant: background #ffffff, color #141414, box-shadow 4px 4px 0 #1b5fa8; disabled: background #f2efe6, color #5f5a50, border-color #5f5a50, box-shadow none, and no transform on press.
 - **input:** background: #ffffff; color: #141414; font: 16px/1.5 'IBM Plex Mono', ui-monospace, monospace; border: 2px solid #141414; border-radius: 0; padding: 12px 16px; caret-color: #e23c2e; box-shadow: inset 0 0 0 1px #f2efe6; :placeholder { color: #5f5a50; text-transform: lowercase; font: 14px/1.5 'Archivo', system-ui, sans-serif; } :focus { outline: 2px solid #1b5fa8; outline-offset: 2px; } — label above in 11px 'IBM Plex Mono' lowercase at 0.16em letter-spacing in #5f5a50, plus a 4px blue #1b5fa8 square before it as the field mark; invalid state sets border-color #b3241b and pairs a small solid triangle glyph with a sentence below ('this field needs a value.') in #b3241b, so the error never rests on the red border alone.
+- **select:** A geometric dropdown: trigger = IBM Plex Mono 16px field (background:#ffffff;border:2px solid #141414;padding:12px 16px) with a red '▾'; the open list is a #ffffff panel of Archivo rows over 2px #141414 bottom rules, each leading with a 12px shape; selected row inverts to #141414 with #f2efe6 text and a yellow #f2c014 shape; hover steps the shape 4px right.
+- **checkbox:** A 24px square switch: background:#ffffff;border:2px solid #141414;border-radius:0; checked = 12px #1b5fa8 square inside; radio = 10px #e23c2e circle; label = Archivo 14px lowercase with 'on'/'off' repeated; focus-visible = 2px #1b5fa8 outline at 3px offset.
+- **badge:** A flat role chip: display:inline-flex;gap:8px;height:24px;padding:0 10px;background:#f2efe6;border:2px solid #141414;border-radius:0;font:600 11px/1 'Archivo';text-transform:lowercase; leading 8px shape (circle/square/triangle) in the role color (#123f70 success, #f2c014 warning, #b3241b danger, #1b5fa8 neutral) plus the word.
+- **avatar:** A 40px square: background:#f2efe6;border:2px solid #141414;border-radius:0;color:#141414;font:700 16px 'Archivo'; initials or a primitive glyph (circle/square/triangle); image avatars get a 2px ink stroke and 0 radius.
+- **nav:** A horizontal grid rail: items = Archivo 600 16px lowercase #141414, padding 12px 16px, border-bottom 2px #141414; each row leads with a 12px shape; active item fills #141414 with #f2efe6 text and a yellow #f2c014 shape; hover steps the shape 4px right; group headers = IBM Plex Mono 11px lowercase #5f5a50 over a 2px #1b5fa8 left rule.
+- **table:** A gridded table: header = Archivo 700 13px lowercase #141414 over a 2px #141414 rule; body rows = Archivo 16px #141414 separated by 2px #141414 rules; hover = #1b5fa8 text, selected row = #141414 fill with #f2efe6 text and a yellow #f2c014 leading shape; numerals in tabular Plex Mono, radius 0.
+- **dialog:** A functional modal: panel recipe with a 2px ink border, 8px hard shadow, and one 24px index shape; scrim = color-mix(in srgb, var(--overlay) 40%, transparent); title = Archivo 700 lowercase, body = Archivo; actions = red primary + white secondary with a blue shadow; entrance is a 200ms cubic-bezier(0.2,0,0,1) translation.
+- **toast:** A bottom-right plate: background:#ffffff;border:2px solid #141414;border-radius:0;padding:10px 14px;font:14px/1.4 'Archivo'; leading 8px shape in the role color (#123f70/#f2c014/#b3241b) plus the word (saved, review, error); auto-dismisses with a 200ms fade; reduced motion keeps it static.
+- **code:** A monospace block: background:#f2efe6;border:2px solid #141414;border-radius:0;padding:16px;font:14px/1.5 'IBM Plex Mono';color:#141414; preserve whitespace; comments #5f5a50, strings #e23c2e, values #1b5fa8; no syntax gradients, and the block keeps the blue focus ring.
+- **empty:** A centred panel: a primary-shape composition (circle + square + triangle) above one Archivo message ('nothing here.') and a single red CTA; the motif is aria-hidden and the state is written in words.
 - **statusbar:** height: 40px; display: flex; align-items: center; justify-content: space-between; gap: 32px; padding: 0 24px; background: #f2efe6; border-top: 2px solid #141414; border-radius: 0; font: 12px/1 'IBM Plex Mono', monospace; text-transform: lowercase; letter-spacing: 0.04em; color: #141414; leading segment is the mode label prefixed by a 12px red #e23c2e circle; state is printed as shape plus word — filled ink square 'saved', blue square 'running', yellow triangle 'review', red circle 'live' — and numerals are tabular; segments are separated by 1px rules of rgba(20,20,20,.2), the only sub-2px line permitted and only inside this bar.
 - **menu:** vertical list, no bullets, no radius: item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; font: 600 16px/1.3 'Archivo', system-ui, sans-serif; text-transform: lowercase; color: #141414; background: #f2efe6; border-bottom: 2px solid #141414; } each row leads with a 12px shape that names its section; the selected row fills #141414 with #f2efe6 text and its leading shape switches to yellow #f2c014, and hover only steps the shape 4px right instead of lifting the row — no shadow, no translate, no rounded highlight; group headers are 11px 'IBM Plex Mono' lowercase at 0.16em in #5f5a50 over a 2px #1b5fa8 left rule.
 - **toggle:** square switch, 48px x 48px: plate { background: #ffffff; border: 2px solid #141414; border-radius: 0; display: grid; place-items: center; } the inner 24px square is empty (background #f2efe6, 2px #141414 stroke) when off and fills solid #1b5fa8 when on, sliding 0 → 12px inline-start over 120ms cubic-bezier(0.2,0,0,1) with no spring or overshoot; the label sits to the right in 14px 'Archivo' lowercase and the state is repeated as text ('on'/'off') for screen readers — no rounded track, no knob, no glow.

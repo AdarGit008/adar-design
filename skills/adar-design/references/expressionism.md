@@ -8,7 +8,7 @@ Early-20th-century Expressionism as cloth: a near-black ground over deep blue, b
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Early-20th-century Expressionism as cloth: a near-black ground over deep blue, b
 | `danger` | `#c0392b` |
 | `warning` | `#e6c229` |
 | `success` | `#4f7a6f` |
+| `border` | `#e8e4dc` |
+| `divider` | `#9aa3b8` |
+| `selection` | `#e6c229` |
+| `overlay` | `#14141a` |
+| `selection-text` | `#14141a` |
+| `color-scheme` | `dark` |
 
 ### Variant: `brucke`
 
@@ -60,7 +66,17 @@ Early-20th-century Expressionism as cloth: a near-black ground over deep blue, b
 ### Typography
 
 - Display: "Oswald", "Archivo Black", "Anton", "system-ui", "sans-serif"
+- Body: "Oswald", "system-ui", "sans-serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `48px` | 1.1 | — |
+| h2 | `28px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -75,7 +91,7 @@ Early-20th-century Expressionism as cloth: a near-black ground over deep blue, b
 | motion.durations | `0ms` `90ms` `180ms` `420ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 50% 45%, transparent 18%, rgba(20,20,26,.78) 72%, rgba(20,20,26,.96) 100%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -91,8 +107,19 @@ Early-20th-century Expressionism as cloth: a near-black ground over deep blue, b
 ## Component recipes
 
 - **panel:** background: #1b2a4a; color: #e8e4dc; border: 2px solid #14141a; border-radius: 2px; padding: 31px; box-shadow: 8px 8px 0 #14141a; clip-path: url(#brushEdge) /* feTurbulence baseFrequency='.018 .026' numOctaves='2' displacement scale 4, applied to the panel's ::before stroke layer, never to the content box */; — a 6px #b22222 band sits on the panel's left edge at 60% opacity with a torn lower end, and the heading inside is Oswald 700 uppercase 26px with a 3px #e6c229 underline that visibly wavers ±2px; below 640px the hard shadow drops to 4px 4px 0 and the brush distortion stays.
+- **card:** background:#1b2a4a;color:#e8e4dc;border:2px solid #14141a;border-radius:2px;padding:31px;box-shadow:8px 8px 0 #14141a;clip-path:url(#brushEdge) on the stroke layer; a 6px #b22222 band runs down the left edge at 60% opacity with a torn lower end; title = Oswald 700 uppercase 26px with a 3px #e6c229 underline that wavers ±2px; body = IBM Plex Mono 15px/1.55.
 - **button:** font: 700 17px/1 'Oswald', 'Archivo Black', system-ui, sans-serif; text-transform: uppercase; letter-spacing: -0.01em; padding: 15px 27px; border-radius: 2px; background: #b22222; color: #e8e4dc; border: 2px solid #14141a; box-shadow: 6px 6px 0 #14141a; transform: rotate(-0.6deg); transition: transform 90ms cubic-bezier(.36,-.07,.64,1.37), box-shadow 90ms cubic-bezier(.36,-.07,.64,1.37), background-color 90ms linear; :hover { transform: rotate(-0.6deg) translate(-1px,-2px); box-shadow: 8px 8px 0 #14141a; background: #c22a24; } :active { transform: rotate(-0.6deg) translate(6px,6px); box-shadow: 0 0 0 #14141a; } :focus-visible { outline: 3px solid #e6c229; outline-offset: 3px; } — secondary: transparent-on-#1b2a4a with #e8e4dc text and a 2px #e8e4dc stroke; disabled: #2e4468 fill, #9aa3b8 label, shadow collapsed, rotate(0); under prefers-reduced-motion the rotation and jitter are removed.
 - **input:** font: 15px/1.55 'IBM Plex Mono', ui-monospace, monospace; color: #e8e4dc; background: #14141a; border: 2px solid #9aa3b8; border-radius: 2px; padding: 13px 15px; box-shadow: inset 0 0 0 1px rgba(20,20,26,.9), -6px 4px 18px rgba(20,20,26,.55); :placeholder { color: #9aa3b8; font: 400 15px 'IBM Plex Mono', monospace; } :focus { border-color: #e6c229; outline: 3px solid #e6c229; outline-offset: 2px; background: #101018; } — invalid: border-color #c0392b plus a 15px sentence below in #c0392b ('This will not hold. Say it again, plainly.') so the error never rests on the red stroke alone; the field's edge may waver 1px, the text inside never does.
+- **select:** A distorted dropdown: trigger = IBM Plex Mono 15px field (background:#14141a;border:2px solid #9aa3b8;padding:13px 15px;color:#e8e4dc) with an acid '▾'; the open list is a #1b2a4a panel with 2px #14141a edges; the selected row fills #b22222 with #e8e4dc text and a 3px #e6c229 left band with a torn bottom; hover lifts translate(-1px,-2px) with box-shadow 6px 6px 0 #14141a; text stays straight.
+- **checkbox:** A 24px woodcut toggle: background:#14141a;border:2px solid #14141a;border-radius:2px;box-shadow:inset 0 0 0 2px #2e4468; checked = 12px #b22222 block; radio = 10px #e6c229 dot; label = Oswald 700 13px uppercase #e8e4dc with 'Open'/'Shut'; focus-visible = 3px #e6c229 outline at 3px offset.
+- **badge:** A rough-edged chip: display:inline-flex;gap:8px;padding:4px 10px;background:#14141a;border:2px solid #2e4468;border-radius:2px;font:13px/1.4 'IBM Plex Mono';text-transform:uppercase; role color = the leading 9px block (#4f7a6f/#e6c229/#c0392b) plus the word in #e8e4dc; the edge may waver 1px, the text never does.
+- **avatar:** A 40px block: background:#1b2a4a;border:2px solid #14141a;border-radius:2px;color:#e8e4dc;font:700 18px 'Oswald'; initials or a rough glyph; image avatars get a distorted 2px edge and a slight rotate(-0.6deg).
+- **nav:** A vertical rail: items = Oswald 600 17px uppercase #e8e4dc, padding 11px 19px, background #1b2a4a, border 2px #14141a, box-shadow 4px 4px 0 #14141a; active = #b22222 fill with a 3px #e6c229 left band; hover lifts translate(-1px,-2px) with box-shadow 6px 6px 0; group headers = Oswald 700 12px uppercase #9aa3b8; text stays straight while edges waver.
+- **table:** A strained grid: header = Oswald 700 13px uppercase #e8e4dc over a 3px #b22222 rule that wavers ±2px; body rows = IBM Plex Mono 15px #e8e4dc separated by 1px #9aa3b8 rules; hover = #e6c229 text, selected row = #b22222 fill with a 3px #e6c229 left band; numerals in tabular mono, radius 2px.
+- **dialog:** A distorted modal: panel recipe with a torn clip-path edge and 8px hard shadow; scrim = color-mix(in srgb, var(--overlay) 60%, transparent); title = Oswald uppercase with a wavering acid underline, body = Plex Mono; actions = blood primary + bone-stroke secondary; entrance is a 180ms overshoot, reduced motion = instant.
+- **toast:** A bottom-right note: background:#14141a;border:2px solid #2e4468;padding:10px 14px;font:13px/1.4 'IBM Plex Mono'; leading 9px block in the role color (#4f7a6f/#e6c229/#c0392b) plus the word (Settled, Unresolved, Failed); auto-dismisses with a 180ms fade; reduced motion keeps it static.
+- **code:** A monospace block: background:#101018;border:2px solid #9aa3b8;border-radius:2px;padding:16px;font:14px/1.55 'IBM Plex Mono';color:#e8e4dc; preserve whitespace; comments #9aa3b8, strings #e6c229, errors #c0392b; no syntax gradients, text never distorts.
+- **empty:** A centred panel: a rough brushstroke glyph (a torn band) above one Plex Mono message ('This will not hold. It is empty.') and a single blood CTA; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 19px; padding: 0 19px; background: #14141a; border-top: 3px solid #b22222; border-radius: 0; font: 13px/1.4 'IBM Plex Mono', monospace; letter-spacing: 0.03em; color: #e8e4dc; left side carries a running mono line of state notes each led by a 9px block — #4f7a6f settled, #e6c229 unresolved, #c0392b failed, #9aa3b8 dormant — with the newest note fading in over 180ms; the right side holds a single mono counter and one blood-red primary action; the border-top deliberately wavers 1–2px so the bar looks drawn rather than ruled.
 - **menu:** vertical list, no bullets, 6px gap: item { display: flex; align-items: center; gap: 13px; padding: 11px 19px; font: 600 17px/1.3 'Oswald', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.01em; color: #e8e4dc; background: #1b2a4a; border: 2px solid #14141a; border-radius: 2px; box-shadow: 4px 4px 0 #14141a; } selected row fills #b22222 with #e8e4dc text and gains a 3px #e6c229 left band that runs 88% of the row height with a torn bottom edge; hover lifts transform: translate(-1px,-2px) with box-shadow 6px 6px 0 #14141a; group headers are Oswald 700 12px uppercase with 0.14em tracking in #9aa3b8 on the near-black ground, no stroke.
 - **toggle:** woodcut switch, 74px x 40px: track { background: #14141a; border: 2px solid #14141a; border-radius: 2px; padding: 3px; box-shadow: inset 0 0 0 2px #2e4468; } knob is a 28px block, radius 2px, #2e4468 when off and #b22222 when on, translating 34px over 180ms cubic-bezier(.36,-.07,.64,1.37) with a 1px vertical wobble at the midpoint; the track carries a 3px acid #e6c229 score line that shortens as the knob travels; label sits above in Oswald 700 13px uppercase and the state is repeated as text ('Open'/'Shut') for screen readers.

@@ -1,11 +1,17 @@
 {
   "name": "adar-design",
-  "version": "0.1.0",
-  "description": "Pi skill: a retro design system with three selectable modes — BIOS/POST/text-mode, 80s arcade, and terminal/CRT — delivered as a Google DESIGN.md schema plus machine-readable tokens.",
-  "keywords": ["pi-package", "skill", "design-system", "design-tokens", "retro", "bios", "arcade", "terminal", "crt"],
+  "version": "0.4.0",
+  "description": "Pi skill: the Adar Design retro design system — twenty selectable visual modes plus composable mixes, delivered as a Google DESIGN.md schema, machine-readable tokens, references, and a generated gallery preview.",
+  "keywords": ["pi-package", "skill", "design-system", "design-tokens", "retro", "bios", "arcade", "terminal", "crt", "vaporwave", "win95", "c64", "gameboy", "cyberpunk", "fine-art"],
   "license": "MIT",
+  "engines": {
+    "node": ">=14"
+  },
   "scripts": {
-    "generate": "node scripts/generate.mjs"
+    "generate": "node scripts/generate.mjs",
+    "gallery": "node scripts/gallery.mjs",
+    "build": "node scripts/generate.mjs && node scripts/gallery.mjs",
+    "lint": "node scripts/lint.mjs"
   },
   "pi": {
     "skills": ["./skills/adar-design"]

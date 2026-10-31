@@ -16,6 +16,13 @@
   ],
   "summary": "Synthwave sunset: deep purple night ground, hot pink/cyan/yellow neon, a striped sunset sun over a cyan perspective grid, and a chrome-gradient wordmark.",
   "whenToUse": "When the user asks for vaporwave, synthwave, outrun, retrowave, 80s Miami/neon, chrome wordmark, sunset gradient, or VHS-era retro-futurist aesthetics.",
+  "colorScheme": "dark",
+  "typeScale": {
+    "h1": { "fontSize": "32px", "lineHeight": 1.1 },
+    "h2": { "fontSize": "20px", "lineHeight": 1.2 },
+    "body": { "fontSize": "15px", "lineHeight": 1.5 },
+    "caption": { "fontSize": "12px", "lineHeight": 1.4 }
+  },
   "colors": {
     "background": "#1a1038",
     "surface": "#2a1b52",
@@ -25,7 +32,11 @@
     "accent": "#00e5ff",
     "danger": "#ff3b6b",
     "warning": "#ffd300",
-    "success": "#35f0b0"
+    "success": "#35f0b0",
+    "border": "#f7ecff",
+    "divider": "#9d8bd6",
+    "selection": "#00e5ff",
+    "overlay": "#1a1038"
   },
   "paletteVariants": {
     "sunset": {
@@ -75,6 +86,7 @@
       "Michroma",
       "sans-serif"
     ],
+    "body": ["Space Mono", "IBM Plex Mono", "monospace"],
     "mono": [
       "Space Mono",
       "IBM Plex Mono",
@@ -90,7 +102,7 @@
     "xl": "40px"
   },
   "shadow": {
-    "hard": "0 0 24px rgba(255,110,199,0.55), 0 0 64px rgba(255,108,66,0.25)",
+    "hard": "0 0 24px rgba(255,110,199,0.55), 0 0 64px rgba(255,140,66,0.25)",
     "glow": "0 0 12px rgba(0,229,255,0.65), 0 0 48px rgba(0,229,255,0.3)"
   },
   "motion": {
@@ -105,7 +117,7 @@
   },
   "effects": {
     "scanlines": "repeating-linear-gradient(to bottom, transparent 0 2px, rgba(255,110,199,0.05) 2px 3px, transparent 3px 4px)",
-    "pixelate": "none",
+    "pixelate": "auto",
     "vignette": "radial-gradient(ellipse at 50% 118%, rgba(255,140,66,0.35) 0%, transparent 52%), radial-gradient(ellipse at center, transparent 42%, rgba(11,6,32,0.78) 100%)"
   },
   "rules": [
@@ -119,6 +131,17 @@
     "Motion is a slow drift, never a stutter: 600ms easing for state changes, a 2.4s pulse for live glow, and an optional 24s linear scroll on the grid or scanline overlay — always disabled under prefers-reduced-motion."
   ],
   "componentRecipes": {
+    "card": "background:linear-gradient(180deg,#2a1b52 0%,#1a1038 100%);color:#f7ecff;border:1px solid rgba(247,236,255,0.18);border-radius:4px;padding:24px 40px;box-shadow:inset 0 1px 0 rgba(247,236,255,0.22),0 0 24px rgba(255,110,199,0.35); title = Audiowide 14px uppercase #ffd300, body = Space Mono 15px/1.6 #f7ecff; the optional sunset footer strip (linear-gradient(180deg,#3b1b6b,#ff6ec7,#ff8c42,#ffd300)) may sit below 160px with the striped sun centred; no chrome beyond the wordmark.",
+    "select": "A neon dropdown: trigger is a Space Mono 15px field (background:rgba(26,16,56,0.85);border:1px solid rgba(247,236,255,0.22);border-radius:4px;padding:10px 14px;color:#f7ecff) with a cyan '▾'; the open menu is a panel at 4px radius, 36px rows, active row = 2px #00e5ff left rule with #00e5ff text; hover glows text-shadow 0 0 12px rgba(0,229,255,0.75); no hard shadows.",
+    "checkbox": "A 22px square neon toggle: background:rgba(26,16,56,0.85);border:1px solid #9d8bd6;border-radius:4px; checked = solid #00e5ff fill with a 10px #1a1038 check, plus box-shadow:0 0 12px rgba(0,229,255,0.65); radio variant = a 10px #ff6ec7 dot inside the same well; label in Space Mono 15px #f7ecff with the state written 'ON'/'OFF'.",
+    "badge": "A 4px-radius neon chip: display:inline-flex;align-items:center;gap:8px;padding:4px 10px;background:#1a1038;border:1px solid;border-radius:4px;font:12px/1 'Space Mono',monospace;letter-spacing:0.14em;text-transform:uppercase; role = border+text (#35f0b0 success, #ffd300 warning, #ff3b6b danger, #00e5ff neutral) with the word spelled out; glow 0 0 12px in the role hue.",
+    "avatar": "A 40px square: background:linear-gradient(180deg,#2a1b52,#1a1038);border:1px solid rgba(247,236,255,0.18);border-radius:4px;color:#f7ecff;font:700 14px 'Audiowide'; initials or a two-letter wordmark; photo avatars get a 1px #ff6ec7 inner ring and no rounded crop beyond 4px.",
+    "nav": "Horizontal Audiowide rail: items 13px uppercase, letter-spacing 0.1em, color #9d8bd6, padding 10px 16px, border-radius 4px; hover = #f7ecff with cyan text-shadow; active = linear-gradient(180deg,#ff8c42,#ffd300) fill, #1a1038 text, box-shadow 0 0 18px rgba(255,140,66,0.6); the vertical form reuses the menu dropdown; separators are 1px rgba(255,110,199,0.35) rules.",
+    "table": "A neon grid on #1a1038: header row = Audiowide 12px uppercase #00e5ff over a 1px rgba(247,236,255,0.14) rule; body rows = Space Mono 14px/1.6 #f7ecff separated by 1px rgba(247,236,255,0.10) rules; hover warms to #ffd300, selected row = rgba(0,229,255,0.12) fill with a 2px #00e5ff left rule; values tabular, radius 4px, no zebra glow.",
+    "dialog": "A neon modal: panel recipe with an extra 0 0 24px rgba(255,110,199,0.55) bloom; scrim = color-mix(in srgb, var(--overlay) 60%, transparent); title = Audiowide uppercase #ffd300, body = Space Mono, actions = the gradient button plus a cyan-outline secondary; entrance is a 600ms cubic-bezier(0.22,0.61,0.36,1) fade with no slide past 4px.",
+    "toast": "A bottom-right neon alert: background:#1a1038;border:1px solid;border-radius:4px;padding:12px 16px;font:Space Mono 14px; a 4px left accent in the role color (#35f0b0/#ffd300/#ff3b6b) with its word (ARCHIVED/ON AIR/SIGNAL LOST); auto-dismisses with a 240ms fade and reduced motion keeps it static.",
+    "code": "A terminal-adjacent block: background:rgba(26,16,56,0.85);border:1px solid rgba(247,236,255,0.22);border-radius:4px;padding:16px;font:14px/1.6 'Space Mono',monospace;color:#f7ecff; preserve whitespace; comments #9d8bd6, strings #ffd300, errors #ff3b6b; a cyan caret line '>_' marks the prompt.",
+    "empty": "A centred panel with a small striped-sun glyph (circle cut by 1px #1a1038 bands) above one Space Mono message ('NO SIGNAL' / 'SIDE B IS EMPTY') and a single pink-to-orange CTA; the glyph is aria-hidden and the state is written in words.",
     "panel": "background: linear-gradient(180deg, #2a1b52 0%, #1a1038 100%); color: #f7ecff; border: 1px solid rgba(247,236,255,0.18); border-radius: 4px; padding: 24px 40px; box-shadow: inset 0 1px 0 rgba(247,236,255,0.22), 0 0 24px rgba(255,110,199,0.35); backdrop-filter: none; — the top inset highlight is the glassy rim. Hero variant: give it a sunset footer strip (background: linear-gradient(180deg, #1a1038 0%, #3b1b6b 32%, #ff6ec7 62%, #ff8c42 82%, #ffd300 100%)) at least 160px tall with the striped sun centred and a cyan grid plane bleeding out below; overlay effects.scanlines at 100% cover with pointer-events: none, opacity 0.6.",
     "button": "font: 700 14px/1 'Audiowide', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; background: linear-gradient(180deg, #ff6ec7 0%, #ff8c42 100%); color: #1a1038; border: 1px solid rgba(255,211,0,0.65); border-radius: 4px; padding: 12px 24px; box-shadow: 0 0 18px rgba(255,110,199,0.5), inset 0 1px 0 rgba(255,255,255,0.45); transition: box-shadow 240ms cubic-bezier(0.22,0.61,0.36,1), transform 240ms cubic-bezier(0.22,0.61,0.36,1); :hover { box-shadow: 0 0 28px rgba(255,110,199,0.75), 0 0 56px rgba(255,140,66,0.35), inset 0 1px 0 rgba(255,255,255,0.55); transform: translateY(-1px); } :active { transform: translateY(1px); box-shadow: 0 0 12px rgba(255,110,199,0.45), inset 0 2px 6px rgba(26,16,56,0.45); } :focus-visible { outline: 2px solid #00e5ff; outline-offset: 3px; } — secondary variant: transparent fill, 1px #00e5ff border, #00e5ff text, cyan glow on hover.",
     "input": "background: rgba(26,16,56,0.85); color: #f7ecff; font: 15px/1.6 'Space Mono', monospace; border: 1px solid rgba(247,236,255,0.22); border-radius: 4px; padding: 10px 14px; caret-color: #00e5ff; box-shadow: inset 0 1px 0 rgba(247,236,255,0.12); transition: border-color 240ms, box-shadow 240ms; :placeholder { color: #9d8bd6; } :focus { border-color: #00e5ff; box-shadow: 0 0 12px rgba(0,229,255,0.65), 0 0 48px rgba(0,229,255,0.3), inset 0 1px 0 rgba(247,236,255,0.12); outline: none; } — invalid state: 1px #ff3b6b border plus a Space Mono message below prefixed 'SIGNAL LOST:', cyan caret retained so the field never goes fully red.",

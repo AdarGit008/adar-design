@@ -13,6 +13,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff3b3b`
 - `warning`: `#f7d51d`
 - `success`: `#2bff88`
+- `border`: `#e9e9ff`
+- `divider`: `#adafbc`
+- `selection`: `#ff2d95`
+- `overlay`: `#0b0b1e`
+- `selection-text`: `#0b0b1e`
+- `color-scheme`: `dark`
 
 ## Atari / Sierra Logo Treatment (`atari-sierra`)
 
@@ -25,6 +31,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff4b3e`
 - `warning`: `#f08a24`
 - `success`: `#52b545`
+- `border`: `#ececee`
+- `divider`: `#86878f`
+- `selection`: `#f5c518`
+- `overlay`: `#0a0a0d`
+- `selection-text`: `#0a0a0d`
+- `color-scheme`: `dark`
 
 ## Bauhaus / Functional Geometry (`bauhaus`)
 
@@ -37,6 +49,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#b3241b`
 - `warning`: `#f2c014`
 - `success`: `#123f70`
+- `border`: `#141414`
+- `divider`: `#5f5a50`
+- `selection`: `#1b5fa8`
+- `overlay`: `#141414`
+- `selection-text`: `#ffffff`
+- `color-scheme`: `light`
 
 ## BIOS / POST / Text-mode (`bios`)
 
@@ -49,6 +67,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#fc5454`
 - `warning`: `#a85400`
 - `success`: `#00aa00`
+- `border`: `#a8a8a8`
+- `divider`: `#555555`
+- `selection`: `#fcfc54`
+- `overlay`: `#0000aa`
+- `selection-text`: `#0000a8`
+- `color-scheme`: `dark`
 
 ## Commodore 64 / PETSCII (`c64`)
 
@@ -61,6 +85,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#c46c71`
 - `warning`: `#edf171`
 - `success`: `#a9ff9f`
+- `border`: `#a0a0ff`
+- `divider`: `#6a6ab8`
+- `selection`: `#c6c6ff`
+- `overlay`: `#0000aa`
+- `selection-text`: `#0000aa`
+- `color-scheme`: `dark`
 
 ## Cubism (`cubism`)
 
@@ -73,6 +103,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#8f3b2f`
 - `warning`: `#9a7b2e`
 - `success`: `#6b6b3e`
+- `border`: `#2a2a28`
+- `divider`: `#8a7f6f`
+- `selection`: `#5b6b7a`
+- `overlay`: `#2a2a28`
+- `selection-text`: `#ffffff`
+- `color-scheme`: `light`
 
 ## Cyberpunk / Neon Noir (`cyberpunk`)
 
@@ -85,6 +121,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff0055`
 - `warning`: `#ffe600`
 - `success`: `#00ff9c`
+- `border`: `#00ffff`
+- `divider`: `#6b6b85`
+- `selection`: `#ff00ff`
+- `overlay`: `#0a0a0f`
+- `selection-text`: `#0a0a0f`
+- `color-scheme`: `dark`
 
 ## Expressionism (`expressionism`)
 
@@ -97,6 +139,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#c0392b`
 - `warning`: `#e6c229`
 - `success`: `#4f7a6f`
+- `border`: `#e8e4dc`
+- `divider`: `#9aa3b8`
+- `selection`: `#e6c229`
+- `overlay`: `#14141a`
+- `selection-text`: `#14141a`
+- `color-scheme`: `dark`
 
 ## Fauvism / Wild Colour / Cut-Paper Planes (`fauvism`)
 
@@ -109,6 +157,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#a4161a`
 - `warning`: `#f2c14e`
 - `success`: `#2a9d8f`
+- `border`: `#221e1b`
+- `divider`: `#6f6a63`
+- `selection`: `#d7263d`
+- `overlay`: `#221e1b`
+- `selection-text`: `#ffffff`
+- `color-scheme`: `light`
 
 ## Folk Art (`folk-art`)
 
@@ -121,6 +175,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#a32e22`
 - `warning`: `#e8b32a`
 - `success`: `#4f7a4a`
+- `border`: `#2b2b2b`
+- `divider`: `#8b7c66`
+- `selection`: `#e8b32a`
+- `overlay`: `#2b2b2b`
+- `selection-text`: `#2b2b2b`
+- `color-scheme`: `light`
 
 ## Game Boy LCD (`gameboy`)
 
@@ -133,6 +193,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#0f380f`
 - `warning`: `#306230`
 - `success`: `#306230`
+- `border`: `#0f380f`
+- `divider`: `#306230`
+- `selection`: `#0f380f`
+- `overlay`: `#306230`
+- `selection-text`: `#9bbc0f`
+- `color-scheme`: `light`
 
 ## Goya / Black Paintings (`goya`)
 
@@ -145,6 +211,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#8f2222`
 - `warning`: `#a56a2e`
 - `success`: `#6b7f5e`
+- `border`: `#8a7a63`
+- `divider`: `#2a2a28`
+- `selection`: `#a56a2e`
+- `overlay`: `#0d0b09`
+- `selection-text`: `#e8dcc8`
+- `color-scheme`: `dark`
 
 ## Impressionism — Light & Color (`impressionism`)
 
@@ -157,6 +229,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#b5546a`
 - `warning`: `#d9a441`
 - `success`: `#6f9f78`
+- `border`: `#8a8478`
+- `divider`: `#8a8478`
+- `selection`: `#3a3a3a`
+- `overlay`: `#3a3a3a`
+- `selection-text`: `#f7f2e6`
+- `color-scheme`: `light`
 
 ## Kandinsky / Synesthetic Abstraction (`kandinsky`)
 
@@ -169,6 +247,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#a81f1f`
 - `warning`: `#f4b400`
 - `success`: `#2a7d4f`
+- `border`: `#111111`
+- `divider`: `#6f6a60`
+- `selection`: `#1d4ed8`
+- `overlay`: `#111111`
+- `selection-text`: `#ffffff`
+- `color-scheme`: `light`
 
 ## NASA 80s / Worm / Space (`nasa80`)
 
@@ -181,6 +265,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff2038`
 - `warning`: `#e8b23a`
 - `success`: `#4ec7a4`
+- `border`: `#2a6f97`
+- `divider`: `#7d89a6`
+- `selection`: `#ff2038`
+- `overlay`: `#050510`
+- `selection-text`: `#050510`
+- `color-scheme`: `dark`
 
 ## Red-Neon Serif / 80s Synth-Horror (`stranger-things`)
 
@@ -193,6 +283,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff4a3d`
 - `warning`: `#e0a83a`
 - `success`: `#6fbf8b`
+- `border`: `#8a7f76`
+- `divider`: `#8a7f76`
+- `selection`: `#ff1a1a`
+- `overlay`: `#050505`
+- `selection-text`: `#050505`
+- `color-scheme`: `dark`
 
 ## Terminal / CRT (`terminal`)
 
@@ -205,6 +301,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff3030`
 - `warning`: `#ffb000`
 - `success`: `#33ff66`
+- `border`: `#33ff66`
+- `divider`: `#1e9944`
+- `selection`: `#33ff66`
+- `overlay`: `#0a0e0a`
+- `selection-text`: `#0a0e0a`
+- `color-scheme`: `dark`
 
 ## The Incredible Machine (`tim`)
 
@@ -217,6 +319,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#c1121f`
 - `warning`: `#ffd23f`
 - `success`: `#52b788`
+- `border`: `#2b2b2b`
+- `divider`: `#8a8175`
+- `selection`: `#ffd23f`
+- `overlay`: `#2b2b2b`
+- `selection-text`: `#2b2b2b`
+- `color-scheme`: `light`
 
 ## Vaporwave / Synthwave (`vaporwave`)
 
@@ -229,6 +337,12 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff3b6b`
 - `warning`: `#ffd300`
 - `success`: `#35f0b0`
+- `border`: `#f7ecff`
+- `divider`: `#9d8bd6`
+- `selection`: `#00e5ff`
+- `overlay`: `#1a1038`
+- `selection-text`: `#1a1038`
+- `color-scheme`: `dark`
 
 ## Windows 95 Desktop (`win95`)
 
@@ -241,3 +355,9 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `danger`: `#ff0000`
 - `warning`: `#808000`
 - `success`: `#008000`
+- `border`: `#808080`
+- `divider`: `#808080`
+- `selection`: `#000080`
+- `overlay`: `#000000`
+- `selection-text`: `#ffffff`
+- `color-scheme`: `light`

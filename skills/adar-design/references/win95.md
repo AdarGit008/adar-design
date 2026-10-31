@@ -8,7 +8,7 @@ Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy 
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy 
 | `danger` | `#ff0000` |
 | `warning` | `#808000` |
 | `success` | `#008000` |
+| `border` | `#808080` |
+| `divider` | `#808080` |
+| `selection` | `#000080` |
+| `overlay` | `#000000` |
+| `selection-text` | `#ffffff` |
+| `color-scheme` | `light` |
 
 ### Variant: `win95`
 
@@ -89,7 +95,17 @@ Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy 
 ### Typography
 
 - Display: "W95FA", "MS Sans Serif", "Tahoma", "Verdana", "sans-serif"
+- Body: "W95FA", "MS Sans Serif", "Tahoma", "Verdana", "sans-serif"
 - Mono: "Courier New", "Lucida Console", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `18px` | 1.1 | — |
+| h2 | `14px` | 1.2 | — |
+| body | `11px` | 1.4 | — |
+| caption | `11px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -104,10 +120,11 @@ Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy 
 | motion.durations | `0ms` `100ms` `200ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `none` |
-| effects.pixelate | `none — keep image-rendering: auto and scale icons by integer factors only (16/32/48px)` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
+- Keep image-rendering: auto and scale icons by integer factors only (16/32/48px).
 - Bevel is the only depth in the system: every raised surface is a 2px outset — border-color: #ffffff #000000 #000000 #ffffff with box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080 — and every sunken well is the exact inverse (#808080/#ffffff/#000000 plus inset #000000 and #dfdfdf). There is no blur, no glow, and no other elevation token.
 - Press by swapping the bevel, not by translating: :active reverses highlight and shadow and shifts the label 1px right and 1px down via padding, so the control reads as physically depressed rather than animated.
 - Silver #c0c0c0 is the only chrome color — windows, toolbars, menus, buttons, scrollbars, and statusbars are all #c0c0c0 lit by #ffffff/#dfdfdf and shaded by #808080/#000000. Teal #008080 is the desktop field only and never appears inside a window.
@@ -120,8 +137,19 @@ Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy 
 ## Component recipes
 
 - **panel:** background: #c0c0c0; border: 2px solid; border-color: #dfdfdf #000000 #000000 #dfdfdf; box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080; border-radius: 0; padding: 3px; color: #000000; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; — title bar: height: 18px; display: flex; align-items: center; justify-content: space-between; padding: 0 2px 0 4px; background: #000080; color: #ffffff; font-weight: 700; with 16px beveled Minimize/Maximize/Close buttons at the right (each: background: #c0c0c0; border: 1px solid; border-color: #ffffff #000000 #000000 #ffffff; box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080;); client area: margin: 2px; background: #ffffff; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf; — inactive window: title bar #808080 with #c0c0c0 text, nothing else changes.
+- **card:** A window: background:#c0c0c0;border:2px solid;border-color:#dfdfdf #000000 #000000 #dfdfdf;box-shadow:inset 1px 1px 0 #ffffff,inset -1px -1px 0 #808080;border-radius:0;padding:3px; title bar 18px navy #000080 with #ffffff bold 11px text and 16px beveled buttons; client area = white sunken well with a group-box frame, body = 11px black W95FA; a footer row holds 23px buttons.
 - **button:** height: 23px; min-width: 75px; padding: 0 12px; background: #c0c0c0; color: #000000; font: 11px/1 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; border: 2px solid; border-color: #ffffff #000000 #000000 #ffffff; box-shadow: inset 1px 1px 0 #dfdfdf, inset -1px -1px 0 #808080; border-radius: 0; :active { border-color: #000000 #ffffff #ffffff #000000; box-shadow: inset 1px 1px 0 #808080, inset -1px -1px 0 #dfdfdf; padding: 1px 11px 0 13px; } :focus-visible { outline: 1px dotted #000000; outline-offset: -4px; } :disabled { color: #808080; text-shadow: 1px 1px 0 #ffffff; cursor: not-allowed; } — default button: repeat the same bevel inside a 1px #000000 outline at 1px offset.
 - **input:** height: 21px; background: #ffffff; color: #000000; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; padding: 1px 3px; border: 2px solid; border-color: #808080 #ffffff #ffffff #808080; box-shadow: inset 1px 1px 0 #000000, inset -1px -1px 0 #dfdfdf; border-radius: 0; caret-color: #000000; :focus { outline: none; } ::selection { background: #000080; color: #ffffff; } — read-only and disabled: background: #c0c0c0; color: #808080; the sunken bevel stays; there are no placeholders in this era — put a static black label to the left of the field instead.
+- **select:** A 21px combo box: field = white sunken well (border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px 0 #000000,inset -1px -1px 0 #dfdfdf) with 11px black text and a 16px beveled drop arrow; the open list is a raised #c0c0c0 popup with 19px rows, navy #000080 selection with #ffffff text, and a 20px gutter for the bitmap check; no blur, no radius, no animation.
+- **checkbox:** A 13px sunken well (border-color:#808080 #ffffff #ffffff #808080) on #c0c0c0 with a black 7px bitmap check when checked and the 1px dotted #000000 focus marquee inset -4px; label is 11px black W95FA; radio = a 12px sunken circle with a 4px navy #000080 dot; disabled flattens the bevel and greys the label.
+- **badge:** A 2px-beveled status chip: display:inline-flex;align-items:center;gap:4px;padding:2px 6px;background:#c0c0c0;border:1px solid;border-color:#ffffff #000000 #000000 #ffffff;border-radius:0;font:11px/1.4 'W95FA'; the role color lives in the 8px status square (#008000 success, #808000 warning, #ff0000 danger, #000080 neutral) plus the word in black; never rounded, never icon-only.
+- **avatar:** A 32px square bitmap tile: background:#c0c0c0;border:2px solid;border-color:#ffffff #000000 #000000 #ffffff;border-radius:0; initials in 11px black W95FA; photo avatars are 16/32/48px bitmap images scaled by integer factors only (image-rendering:auto), with no rounding and no anti-aliased edge.
+- **nav:** A 20px menu-bar strip directly under the title bar: background:#c0c0c0;items 11px black W95FA with underlined mnemonics and padding 3px 6px; hover or open inverts to background:#000080;color:#ffffff; the vertical form is the existing menu dropdown with 19px rows, a 20px gutter, and grooved separators.
+- **table:** A grid inside a white sunken well: header row = 11px bold black W95FA on #c0c0c0 with a 1px groove (#808080 over #ffffff) under it; body rows = 11px black on #ffffff separated by 1px #c0c0c0 rules; hover = #000080 selection with #ffffff text; selected row inverts to navy; cell padding 2px 4px, square corners, no zebra fill.
+- **dialog:** A modal window: full chrome (2px outer bevel, 3px frame, 18px navy title bar, menu bar, white sunken client well); scrim is solid #000000 (overlay) at ~40% with no blur; one sentence of 11px black helper text plus OK/Cancel 23px buttons, the default button outlined 1px black at 1px offset; focus is trapped and the 1px dotted marquee moves with Tab.
+- **toast:** A 23px balloon-style status line: background:#ffffe1 (tooltip/info), border:1px solid #000000, border-radius:0, font:11px/1.4 'W95FA', padding 2px 6px; message prefixed by the word (Warning/Error/Info) in 11px black; it appears in 0ms, persists, and closes via a beveled 'X', never auto-animates.
+- **code:** A sunken monospace well: background:#ffffff;border:2px solid;border-color:#808080 #ffffff #ffffff #808080;box-shadow:inset 1px 1px 0 #000000,inset -1px -1px 0 #dfdfdf;border-radius:0;padding:4px;font:11px/1.4 'Courier New',monospace;color:#000000; preserve whitespace; syntax is plain black with bold #000080 keywords only — no color themes.
+- **empty:** A centred window client area: a 32px bitmap icon (16-color system glyph) above one 11px black sentence ('This folder is empty.') and a single 23px beveled button (OK); the icon is aria-hidden and the state is named in words; no illustration beyond the system icon.
 - **statusbar:** a 22px strip docked at the bottom of the client area with three sunken segments: display: flex; gap: 2px; padding: 2px; background: #c0c0c0; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; color: #000000; each segment { height: 18px; padding: 1px 4px; border: 1px solid; border-color: #808080 #ffffff #ffffff #808080; } — content is static status text ('3 object(s)', '1.44MB free'), and the trailing 20px CAPS/NUM/SCRL indicator cells are sunken squares that show their 3-letter label in #000000 when on and #808080 when off.
 - **menu:** menu bar: 20px strip directly under the title bar, background: #c0c0c0; display: flex; font: 11px/1.4 'W95FA', 'MS Sans Serif', Tahoma, Verdana, sans-serif; item { padding: 3px 6px; color: #000000; } with the mnemonic letter underlined (text-decoration: underline); hover or open inverts to background: #000080; color: #ffffff; the dropdown is a #c0c0c0 popup with the raised bevel (border: 2px solid; border-color: #dfdfdf #000000 #000000 #dfdfdf; box-shadow: inset 1px 1px 0 #ffffff, inset -1px -1px 0 #808080; padding: 2px), 19px rows, a 20px gutter for the bitmap check/radio glyph, accelerator keys right-aligned in #000000, submenu parents showing a right-pointing arrow, and separators as a groove (border-top: 1px solid #808080; border-bottom: 1px solid #ffffff).
 

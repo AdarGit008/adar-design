@@ -8,7 +8,7 @@ Analytic-cubist canvas: a warm cream ground broken into offset charcoal-edged pl
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Analytic-cubist canvas: a warm cream ground broken into offset charcoal-edged pl
 | `danger` | `#8f3b2f` |
 | `warning` | `#9a7b2e` |
 | `success` | `#6b6b3e` |
+| `border` | `#2a2a28` |
+| `divider` | `#8a7f6f` |
+| `selection` | `#5b6b7a` |
+| `overlay` | `#2a2a28` |
+| `selection-text` | `#ffffff` |
+| `color-scheme` | `light` |
 
 ### Variant: `cubism`
 
@@ -78,7 +84,17 @@ Analytic-cubist canvas: a warm cream ground broken into offset charcoal-edged pl
 ### Typography
 
 - Display: "Archivo Black", "Archivo", "Arial Narrow", "system-ui", "sans-serif"
+- Body: "Archivo", "Arial Narrow", "system-ui", "sans-serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `40px` | 1.1 | — |
+| h2 | `24px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -93,7 +109,7 @@ Analytic-cubist canvas: a warm cream ground broken into offset charcoal-edged pl
 | motion.durations | `0ms` `160ms` `240ms` `480ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 30% 15%, transparent 55%, rgba(42,42,40,.06) 100%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -110,8 +126,19 @@ Analytic-cubist canvas: a warm cream ground broken into offset charcoal-edged pl
 ## Component recipes
 
 - **panel:** position: relative; background: #f5f1e8; color: #2a2a28; border: 2px solid #2a2a28; border-radius: 0; padding: 24px; clip-path: polygon(0 10px, 10px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%); box-shadow: 6px 6px 0 #8a7f6f; — add one offset ::before plane behind it: background #b08d57, clip-path: polygon(0 0, 100% 0, 100% 100%, 24% 100%, 0 62%), transform: translate(-12px, 10px), z-index: -1, opacity 1 (never translucent); a panel that is the catalogue subject gets a second blue-gray #5b6b7a facet pinned to its top-right corner at 18% width; heading inside is Archivo Black 24px/1.05 Title Case with the first word shifted left 8px; below 640px keep the 2px edge and drop the hard offset.
+- **card:** A fractured card: position:relative;background:#f5f1e8;border:2px solid #2a2a28;border-radius:0;padding:24px;clip-path:polygon(0 10px,10px 0,100% 0,100% calc(100% - 20px),calc(100% - 20px) 100%,0 100%);box-shadow:6px 6px 0 #8a7f6f; an offset ::before plane in #b08d57 (clip-path polygon(0 0,100% 0,100% 100%,24% 100%,0 62%), translate(-12px,10px)) sits behind; title = Archivo Black 24px Title Case with the first word shifted left 8px; body = Archivo 16px/1.55.
 - **button:** font: 700 16px/1 'Archivo Black', 'Archivo', system-ui, sans-serif; text-transform: uppercase; letter-spacing: 0.04em; padding: 14px 24px 14px 20px; background: #b08d57; color: #2a2a28; border: 2px solid #2a2a28; border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% 100%, 14px 100%, 0 calc(100% - 14px)); box-shadow: 6px 6px 0 #2a2a28; transition: transform 160ms cubic-bezier(.4,0,.2,1), background-color 160ms linear; :hover { background: #c19a63; transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #2a2a28; } :active { background: #9a7a49; transform: translate(4px, 4px); box-shadow: 2px 2px 0 #2a2a28; } :focus-visible { outline: 2px solid #5b6b7a; outline-offset: 4px; } — secondary variant: background #efe9dc, color #2a2a28, box-shadow 6px 6px 0 #8a7f6f; disabled: background #d9cfba, color #8a7f6f, border-color #8a7f6f, box-shadow 0 0 0, no clip-path change and no transform.
 - **input:** font: 16px/1.5 'IBM Plex Mono', ui-monospace, monospace; color: #2a2a28; background: #efe9dc; border: 2px solid #2a2a28; border-left-width: 10px; border-left-color: #8a7f6f; border-radius: 0; padding: 12px 16px; clip-path: polygon(0 0, 100% 0, 100% 100%, 10px 100%, 0 calc(100% - 10px)); box-shadow: none; :placeholder { color: #8a7f6f; font: 400 14px 'Archivo', system-ui, sans-serif; letter-spacing: 0.02em; } :focus { background: #f5f1e8; border-left-color: #5b6b7a; outline: 2px solid #5b6b7a; outline-offset: 2px; } — invalid: border-color #8f3b2f with a 16px Archivo sentence below in #8f3b2f ('This field needs a value.') plus a 2px #8f3b2f edge, so the error never depends on color alone.
+- **select:** A faceted dropdown: trigger = IBM Plex Mono 16px field (background:#efe9dc;border:2px solid #2a2a28;border-left-width:10px;border-left-color:#8a7f6f;clip-path) with a charcoal '▾'; the open list is a faceted panel where the selected row fills #b08d57 with a 10px charcoal triangle marker and hover shifts background to #e8e1d2; no radius.
+- **checkbox:** A 24px faceted toggle: background:#d9cfba;border:2px solid #2a2a28;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%); checked = 12px #6b6b3e parallelogram inside; radio = 10px #5b6b7a triangle; label = Archivo 14px Title Case with 'Off'/'On'; focus-visible = 2px #5b6b7a outline at 4px offset.
+- **badge:** A faceted chip: display:inline-flex;gap:8px;padding:4px 10px;background:#d9cfba;border:2px solid #2a2a28;border-radius:0;clip-path:polygon(0 0,100% 0,100% calc(100% - 6px),calc(100% - 6px) 100%,0 100%);font:700 12px 'Archivo';text-transform:uppercase; role color = the leading 8px parallelogram (#6b6b3e/#9a7b2e/#8f3b2f/#5b6b7a) plus the word in charcoal.
+- **avatar:** A 40px faceted tile: background:#d9cfba;border:2px solid #2a2a28;border-radius:0;clip-path:polygon(0 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%);color:#2a2a28;font:700 16px 'Archivo Black'; initials or a two-viewpoint glyph; image avatars get a charcoal edge and an offset #b08d57 plane.
+- **nav:** A vertical facet list: items = Archivo Black 17px #2a2a28, padding 12px 20px, background #f5f1e8, border 2px #2a2a28, clip-path chamfer; active = #b08d57 fill with a 10px charcoal triangle marker on the left edge; hover = #e8e1d2 background and translate(-4px,0); group headers = IBM Plex Mono 12px uppercase #8a7f6f with a 2px underline stopping at 40% width.
+- **table:** A fractured grid: header = Archivo Black 14px Title Case #2a2a28 over a 2px #2a2a28 rule; body rows = Archivo 16px #2a2a28 separated by 1px #8a7f6f rules; hover = #e8e1d2 wash, selected row = #b08d57 fill with a 10px charcoal left triangle; numerals in tabular Plex Mono, radius 0.
+- **dialog:** A split-plane modal: panel recipe with an offset ::before plane and a second blue-gray facet at the top-right; scrim = color-mix(in srgb, var(--overlay) 40%, transparent); title = Archivo Black Title Case split across two lines, body = Archivo; actions = ochre primary + cream secondary; entrance is a 240ms cubic-bezier(.4,0,.2,1) re-cut.
+- **toast:** A bottom-right facet: background:#f5f1e8;border:2px solid #2a2a28;border-radius:0;clip-path chamfer;padding:10px 14px;font:13px/1.4 'IBM Plex Mono'; leading 8px parallelogram in the role color (#6b6b3e/#9a7b2e/#8f3b2f) plus the word (Settled, In progress, Failed); auto-dismisses with a 240ms fade; reduced motion keeps it static.
+- **code:** A monospace block: background:#efe9dc;border:2px solid #2a2a28;border-left-width:10px;border-left-color:#8a7f6f;border-radius:0;padding:16px;font:14px/1.5 'IBM Plex Mono';color:#2a2a28; preserve whitespace; comments #8a7f6f, strings #8f3b2f, values #5b6b7a; no syntax gradients.
+- **empty:** A centred faceted panel: a two-viewpoint glyph (disc plus its rim) above one Archivo message ('This study is empty.') and a single ochre CTA; the motif is aria-hidden and the state is written in words.
 - **statusbar:** height: 48px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 24px; background: #efe9dc; border-top: 2px solid #2a2a28; border-radius: 0; font: 13px/1.4 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.04em; color: #2a2a28; the left block is a row of mono labels separated by 2px #2a2a28 vertical rules and each preceded by an 8px clip-path parallelogram in the state color — #6b6b3e settled, #b08d57 in progress, #8f3b2f failed, #8a7f6f idle; the right block is a catalogue counter (e.g. 'PL. 014 / 038') plus the single primary action; the in-progress marker shifts its clip-path 3° over 240ms cubic-bezier(.4,0,.2,1) once, no looping pulse.
 - **menu:** vertical facet list, no bullets, 4px gap: item { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 12px 20px; font: 700 17px/1.3 'Archivo Black', 'Archivo Narrow', system-ui, sans-serif; letter-spacing: 0.02em; color: #2a2a28; background: #f5f1e8; border: 2px solid #2a2a28; border-radius: 0; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); } the selected item fills #b08d57 and gains a 10px charcoal triangle marker in clip-path on its left edge, hover shifts background to #e8e1d2 and translates the row translate(-4px, 0); group headers are IBM Plex Mono 12px uppercase with letter-spacing 0.16em on the cream ground with a 2px #8a7f6f underline that stops at 40% width.
 - **toggle:** faceted switch, 76px x 36px: track { background: #d9cfba; border: 2px solid #2a2a28; border-radius: 0; padding: 0; clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%); } knob is a 30px tall parallelogram with a 2px #2a2a28 edge, #5b6b7a when off and #6b6b3e when on, sliding 34px over 240ms cubic-bezier(.4,0,.2,1) with a 3° skew that stays constant so the knob reads as a cut facet; label sits above in Archivo 700 14px Title Case and the state is repeated as text ('Off'/'On') beside the track for screen readers.

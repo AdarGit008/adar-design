@@ -8,7 +8,7 @@ Neon-noir cyberpunk: a near-black #0a0a0f field under hot magenta and cyan glow,
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Neon-noir cyberpunk: a near-black #0a0a0f field under hot magenta and cyan glow,
 | `danger` | `#ff0055` |
 | `warning` | `#ffe600` |
 | `success` | `#00ff9c` |
+| `border` | `#00ffff` |
+| `divider` | `#6b6b85` |
+| `selection` | `#ff00ff` |
+| `overlay` | `#0a0a0f` |
+| `selection-text` | `#0a0a0f` |
+| `color-scheme` | `dark` |
 
 ### Variant: `neonNoir`
 
@@ -79,7 +85,17 @@ Neon-noir cyberpunk: a near-black #0a0a0f field under hot magenta and cyan glow,
 ### Typography
 
 - Display: "Orbitron", "Rajdhani", "Chakra Petch", "sans-serif"
+- Body: "Space Mono", "Share Tech Mono", "IBM Plex Mono", "monospace"
 - Mono: "Space Mono", "Share Tech Mono", "IBM Plex Mono", "Courier New", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `28px` | 1.1 | — |
+| h2 | `18px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -110,8 +126,19 @@ Neon-noir cyberpunk: a near-black #0a0a0f field under hot magenta and cyan glow,
 ## Component recipes
 
 - **panel:** wrapper { filter: drop-shadow(0 0 12px rgba(255,0,255,0.45)); } panel { background: #14141f; border: 1px solid #ff00ff; border-radius: 2px; padding: 16px 24px; color: #e8e8f0; box-shadow: inset 0 1px 0 rgba(0,255,255,0.14), 4px 4px 0 #000000; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px)); } — the 12px chamfer on two opposite corners is the HUD tell; the glow lives on the wrapper because clip-path clips box-shadow. Header bar is 32px tall, 1px #2a2a3d bottom rule, label 11px 'Share Tech Mono' uppercase #00ffff at 0.14em tracking plus a 6px #00ff9c dot; the scanline overlay is an absolutely positioned child at 100% cover. Below 640px drop the clip-path and the wrapper glow, keep the 1px border and the offset black shadow.
+- **card:** A chamfered HUD card: background:#14141f;border:1px solid #ff00ff;border-radius:2px;padding:16px 24px;color:#e8e8f0;clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px)); box-shadow:inset 0 1px 0 rgba(0,255,255,0.14),4px 4px 0 #000000; wrapper drop-shadow 0 0 12px rgba(255,0,255,0.45); header = 11px Share Tech Mono uppercase #00ffff with a 6px #00ff9c dot, body = Space Mono 14px/1.5, footer actions are outlined neon buttons.
 - **button:** font: 700 13px/1 'Orbitron'; text-transform: uppercase; letter-spacing: 0.12em; background: #ff00ff; color: #0a0a0f; border: 1px solid #ff00ff; border-radius: 2px; padding: 12px 20px; box-shadow: 4px 4px 0 #000000, 0 0 16px rgba(255,0,255,0.55); transition: box-shadow 80ms linear, transform 80ms linear; :hover { box-shadow: 4px 4px 0 #000000, 0 0 28px rgba(255,0,255,0.85); } :active { transform: translate(4px, 4px); box-shadow: 0 0 0 #000000, 0 0 10px rgba(255,0,255,0.8); } :focus-visible { outline: 2px solid #00ffff; outline-offset: 2px; } — secondary variant: transparent background, #00ffff text and 1px cyan border with cyan glow; ghost variant: no fill, #6b6b85 border that turns #ff00ff on hover. The label may run one short glitch cycle on hover, never on every frame.
 - **input:** background: #0a0a0f; color: #e8e8f0; font: 14px/1.5 'Space Mono'; border: 1px solid #2a2a3d; border-left: 2px solid #00ffff; border-radius: 2px; padding: 10px 14px; caret-color: #ff00ff; :placeholder { color: #6b6b85; font-family: 'Share Tech Mono'; text-transform: uppercase; letter-spacing: 0.08em; } :focus { border-color: #00ffff; box-shadow: 0 0 12px rgba(0,255,255,0.40), inset 0 0 12px rgba(0,255,255,0.08); outline: none; } — invalid state swaps the left rail and border to #ff0055, keeps the entered value visible, and appends a 'ERR:' prefix plus a sentence-case message in Share Tech Mono, so color is never the only signal; disabled drops to #2a2a3d border and #6b6b85 text with no glow.
+- **select:** A HUD dropdown: trigger is a Space Mono 14px field with a 2px cyan left rail and a blinking '▮' caret in #ff00ff; the open list is a 2px-radius panel of Rajdhani rows with two-digit indices; the active row sets border-left:2px solid #ff00ff, background linear-gradient(90deg,rgba(255,0,255,0.16),transparent 70%), and #ff00ff text; hover shifts to #00ffff with a cyan glow.
+- **checkbox:** A 20px square HUD toggle: background:#0a0a0f;border:1px solid #2a2a3d;border-left:2px solid #00ffff;border-radius:2px; checked = 10px #ff00ff core with a 0 0 8px magenta glow; radio = 8px #00ffff dot; label in Space Mono 14px #e8e8f0 with 'ACTIVE'/'IDLE' text; focus-visible keeps a 2px cyan outline.
+- **badge:** A chamfered status chip: display:inline-flex;gap:8px;padding:4px 10px;background:#0a0a0f;border:1px solid;border-radius:2px;font:11px/1 'Share Tech Mono';text-transform:uppercase;letter-spacing:0.10em; role = border+text (#00ff9c success, #ffe600 warning, #ff0055 danger, #00ffff neutral) with the word spelled out; clip-path chamfers one corner and a 0 0 12px glow in the role hue.
+- **avatar:** A 36px square ID plate: background:#0a0a0f;border:1px solid #2a2a3d;border-radius:2px;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px)); initials in Share Tech Mono 12px #00ffff; image avatars get a duotone magenta/cyan pass and image-rendering:pixelated.
+- **nav:** Horizontal HUD tabs: Rajdhani 12px uppercase #e8e8f0, letter-spacing 0.10em, padding 10px 16px 10px 24px, border-left 2px transparent; hover = #00ffff with a cyan glow on the left rail; active = 2px solid #ff00ff left rail plus rgba(255,0,255,0.16) wash and #ff00ff text, with a right-aligned two-digit Share Tech Mono index; the vertical form reuses the menu.
+- **table:** A telemetry grid: header = Share Tech Mono 11px uppercase #00ffff on #0a0a0f over a 1px #2a2a3d rule; body rows = Space Mono 14px #e8e8f0 separated by 1px #2a2a3d rules; hover = cyan 12px glow on the row, selected row = rgba(255,0,255,0.16) fill with a 2px #ff00ff left rule and #ff00ff text; values tabular, radius 2px.
+- **dialog:** A chamfered modal: panel recipe with wrapper drop-shadow 0 0 16px rgba(255,0,255,0.55); scrim = color-mix(in srgb, var(--overlay) 60%, transparent); header = Share Tech Mono uppercase label + 6px #00ff9c status dot; body = Space Mono; actions = magenta primary + cyan-outline secondary; entrance is an 80ms RGB-split then settle; focus traps inside.
+- **toast:** Bottom-right HUD alert: background:#0a0a0f;border:1px solid;border-radius:2px;padding:10px 14px;font:Share Tech Mono 11px uppercase; a 2px left rail in the role color (#00ff9c/#ffe600/#ff0055) plus the word (COMMIT, WARN, ERR); auto-dismisses in 160ms with a single glitch cycle, and reduced motion keeps it static.
+- **code:** A terminal-fragment block: background:#0a0a0f;border:1px solid #2a2a3d;border-left:2px solid #00ffff;border-radius:2px;padding:16px;font:Space Mono 13px/1.6;color:#e8e8f0; preserve whitespace; prompt '>_' in #ff00ff, strings #00ff9c, warnings #ffe600; no syntax gradients, one glitch accent per block.
+- **empty:** A centred HUD panel: a 24px glitch glyph (RGB-split square) above one Share Tech Mono message ('NO SIGNAL' / 'EMPTY BUFFER') and a single magenta CTA; the glyph is aria-hidden, the state is written in words, and the panel keeps the chamfered 1px frame.
 - **statusbar:** height: 28px; display: flex; align-items: center; gap: 20px; padding: 0 16px; background: #0a0a0f; border-top: 1px solid #2a2a3d; font: 11px/1 'Share Tech Mono'; text-transform: uppercase; letter-spacing: 0.10em; color: #6b6b85; segments separated by 1px #2a2a3d rules; live values in #00ffff, success and throughput in #00ff9c, warnings in #ffe600, critical in #ff0055; the leading link indicator is a 6px #00ff9c square pulsing with steps(2, jump-none) 1.2s infinite; fixed to the bottom 28px of the viewport with the grain layer above it at pointer-events: none.
 - **menu:** vertical list, 2px radius, no bullets: item { display: block; font: 600 12px/1.5 'Rajdhani'; text-transform: uppercase; letter-spacing: 0.10em; padding: 10px 16px 10px 40px; color: #e8e8f0; border-left: 2px solid transparent; } each item carries a right-aligned two-digit index in 'Share Tech Mono' at #6b6b85; selected item sets border-left: 2px solid #ff00ff, background: linear-gradient(90deg, rgba(255,0,255,0.16), transparent 70%), color: #ff00ff, and prefixes a '#ff00ff' '▌' block; hover shifts color to #00ffff and adds a 0 0 12px cyan glow to the left rail; group separators are 1px dashed #2a2a3d with a 11px uppercase #6b6b85 label.
 

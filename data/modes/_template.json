@@ -5,6 +5,13 @@
   "aliases": ["bios", "post", "dos", "vga", "cga", "3270", "mainframe", "text-mode"],
   "summary": "One-sentence description of the aesthetic.",
   "whenToUse": "When the user asks for ... (routing sentence).",
+  "colorScheme": "dark",
+  "typeScale": {
+    "h1": { "fontSize": "16px", "lineHeight": 1.1 },
+    "h2": { "fontSize": "16px", "lineHeight": 1.2 },
+    "body": { "fontSize": "16px", "lineHeight": 1.2 },
+    "caption": { "fontSize": "16px", "lineHeight": 1.2 }
+  },
   "colors": {
     "background": "#0000a8",
     "surface": "#0000aa",
@@ -14,7 +21,11 @@
     "accent": "#00a8a8",
     "danger": "#fc5454",
     "warning": "#a85400",
-    "success": "#00aa00"
+    "success": "#00aa00",
+    "border": "#a8a8a8",
+    "divider": "#555555",
+    "selection": "#fcfc54",
+    "overlay": "#0000aa"
   },
   "paletteVariants": {
     "post": {"background": "#0000a8", "foreground": "#a8a8a8", "bright": "#fcfcfc", "highlight": "#fcfc54", "info": "#00a8a8", "error": "#aa0000", "errorBright": "#fc5454", "warn": "#a85400", "black": "#000000"},
@@ -22,15 +33,33 @@
   },
   "fonts": {
     "display": ["Web437 IBM VGA 9x16", "Px437 IBM VGA 9x16", "Perfect DOS VGA 437", "monospace"],
+    "body": ["IBM Plex Mono", "Courier New", "monospace"],
     "mono": ["IBM Plex Mono", "Courier New", "monospace"]
   },
   "radius": "0",
   "spacing": {"xs": "4px", "sm": "8px", "md": "16px", "lg": "24px", "xl": "32px"},
   "shadow": {"hard": "10px 10px 0 #000000", "glow": "0 0 4px currentColor"},
   "motion": {"easing": "steps(2, end)", "cursor": "steps(2, jump-none) 1s infinite", "durations": ["0ms", "300ms", "1200ms"]},
-  "effects": {"scanlines": "repeating-linear-gradient(to bottom, transparent 0 1px, rgba(0,0,0,.18) 1px 2px)", "pixelate": "pixelated", "vignette": "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%)"},
+  "effects": {"scanlines": "repeating-linear-gradient(to bottom, transparent 0 1px, rgba(0,0,0,.18) 1px 2px)", "pixelate": "auto", "vignette": "radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,.6) 100%)"},
   "rules": ["Array of hard work-style rules, one string each."],
-  "componentRecipes": {"panel": "recipe", "button": "recipe", "input": "recipe", "statusbar": "recipe", "menu": "recipe"},
+  "componentRecipes": {
+    "panel": "recipe",
+    "card": "recipe",
+    "button": "recipe",
+    "input": "recipe",
+    "select": "recipe",
+    "checkbox": "recipe",
+    "badge": "recipe",
+    "avatar": "recipe",
+    "nav": "recipe",
+    "table": "recipe",
+    "dialog": "recipe",
+    "toast": "recipe",
+    "code": "recipe",
+    "empty": "recipe",
+    "statusbar": "recipe",
+    "menu": "recipe"
+  },
   "copywriting": {
     "voice": "terse, technical, authoritative",
     "case": {"headers": "UPPERCASE", "commands": "lowercase", "body": "sentence case"},

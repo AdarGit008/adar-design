@@ -11,16 +11,29 @@ colors:
   danger: "#c0392b"
   warning: "#e6c229"
   success: "#4f7a6f"
+  border: "#e8e4dc"
+  divider: "#9aa3b8"
+  selection: "#e6c229"
+  overlay: "#14141a"
+  selectionText: "#14141a"
 typography:
   h1:
-    fontFamily: Oswald
-    fontSize: 32px
+    fontFamily: "Oswald"
+    fontSize: 48px
+    fontWeight: 700
+  h2:
+    fontFamily: "Oswald"
+    fontSize: 28px
     fontWeight: 700
   body:
-    fontFamily: IBM Plex Mono
+    fontFamily: "Oswald"
     fontSize: 16px
     fontWeight: 400
     lineHeight: 1.5
+  caption:
+    fontFamily: "Oswald"
+    fontSize: 12px
+    fontWeight: 400
 rounded:
   none: 2px
 spacing:
@@ -30,11 +43,67 @@ spacing:
   lg: 31px
   xl: 47px
 components:
+  panel:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  card:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
   button-primary:
     backgroundColor: "{colors.primary}"
     textColor: "{colors.background}"
     rounded: "{rounded.none}"
-  panel:
+  button-secondary:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  input:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  select:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  checkbox:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  badge:
+    backgroundColor: "{colors.primary}"
+    textColor: "{colors.background}"
+    rounded: "{rounded.none}"
+  avatar:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  nav:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  table:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  dialog:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  toast:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  code:
+    backgroundColor: "{colors.background}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  empty:
+    backgroundColor: "{colors.surface}"
+    textColor: "{colors.foreground}"
+    rounded: "{rounded.none}"
+  statusbar:
     backgroundColor: "{colors.surface}"
     textColor: "{colors.foreground}"
     rounded: "{rounded.none}"

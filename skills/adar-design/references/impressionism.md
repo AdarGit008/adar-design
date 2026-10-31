@@ -8,7 +8,7 @@ Plein-air light study: cream canvas, five low-saturation pastels behaving like m
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Plein-air light study: cream canvas, five low-saturation pastels behaving like m
 | `danger` | `#b5546a` |
 | `warning` | `#d9a441` |
 | `success` | `#6f9f78` |
+| `border` | `#8a8478` |
+| `divider` | `#8a8478` |
+| `selection` | `#3a3a3a` |
+| `overlay` | `#3a3a3a` |
+| `selection-text` | `#f7f2e6` |
+| `color-scheme` | `light` |
 
 ### Variant: `impressionist`
 
@@ -65,7 +71,17 @@ Plein-air light study: cream canvas, five low-saturation pastels behaving like m
 ### Typography
 
 - Display: "Cormorant", "Playfair Display", "EB Garamond", "Georgia", "serif"
+- Body: "Cormorant", "EB Garamond", "Playfair Display", "Georgia", "serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `44px` | 1.1 | — |
+| h2 | `26px` | 1.2 | — |
+| body | `17px` | 1.6 | — |
+| caption | `13px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -73,14 +89,14 @@ Plein-air light study: cream canvas, five low-saturation pastels behaving like m
 |---|---|
 | radius | `10px` |
 | spacing | `xs=4px` `sm=8px` `md=16px` `lg=24px` `xl=40px` |
-| shadow.hard | `undefined` |
+| shadow.hard | `none` |
 | shadow.glow | `inset 0 0 32px rgba(246,231,178,.35)` |
 | motion.easing | `cubic-bezier(.4,.14,.3,1)` |
 | motion.cursor | `default` |
 | motion.durations | `0ms` `240ms` `420ms` `900ms` |
 | effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 28% 8%, rgba(246,231,178,.38) 0%, rgba(247,242,230,0) 58%), radial-gradient(ellipse at 100% 100%, rgba(168,208,230,.28) 0%, rgba(247,242,230,0) 62%)` |
-| effects.pixelate | `none` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -97,8 +113,19 @@ Plein-air light study: cream canvas, five low-saturation pastels behaving like m
 ## Component recipes
 
 - **panel:** background: linear-gradient(160deg, #fdfaf2 0%, #f7f2e6 58%, #f2ece0 100%); border: 1px solid rgba(58,58,58,.10); border-radius: 10px; padding: 28px 32px; color: #3a3a3a; box-shadow: 0 18px 40px -24px rgba(127,168,201,.45), inset 0 0 32px rgba(246,231,178,.35); position: relative; overflow: hidden; — a ::after layer paints effects.dapple at opacity .55 and mix-blend-mode: soft-light with pointer-events: none; the heading inside is 'Cormorant', 'Playfair Display', Georgia, serif 600 30px/1.15 in #3a3a3a with a 3px #f6c6c0 underline masked to 14px-on/8px-off dashes; below 640px drop the outer shadow and the inset glow and keep the gradient and the broken underline.
+- **card:** background:linear-gradient(160deg,#fdfaf2 0%,#f7f2e6 58%,#f2ece0 100%);border:1px solid rgba(58,58,58,0.10);border-radius:10px;padding:28px 32px;color:#3a3a3a;box-shadow:0 18px 40px -24px rgba(127,168,201,0.45),inset 0 0 32px rgba(246,231,178,0.35); a ::after dapple layer at 55% opacity in soft-light sits inside; title = Cormorant 600 30px with a 3px blush dashed underline (14px on/8px off); body = EB Garamond 17px/1.65; below 640px drop the outer shadow and inset glow.
 - **button:** font: 500 17px/1 'Cormorant', 'Playfair Display', Georgia, serif; letter-spacing: 0.01em; padding: 13px 26px; border-radius: 999px; background: linear-gradient(135deg, #a8d0e6 0%, #b6cfd9 62%, #f6e7b2 138%); color: #3a3a3a; border: 1px solid rgba(58,58,58,.10); box-shadow: 0 10px 24px -14px rgba(90,120,150,.55); transition: transform 240ms cubic-bezier(.4,.14,.3,1), box-shadow 240ms cubic-bezier(.4,.14,.3,1), filter 240ms linear; :hover { transform: translateY(-2px); filter: brightness(1.03) saturate(1.06); box-shadow: 0 16px 30px -16px rgba(90,120,150,.55); } :active { transform: translateY(0); box-shadow: 0 6px 14px -10px rgba(90,120,150,.50); } :focus-visible { outline: 2px solid #3a3a3a; outline-offset: 3px; } — secondary variant: background #fdfaf2, border 1px solid rgba(58,58,58,.14), color #3a3a3a with a lavender #b8a7d6 wash on hover; disabled: background #f2ece0, color #8a8478, no transform, no shadow, cursor default.
 - **input:** font: 400 17px/1.6 'EB Garamond', Georgia, serif; color: #3a3a3a; background: #fdfaf2; border: 1px solid rgba(58,58,58,.14); border-radius: 10px; padding: 13px 16px; box-shadow: inset 0 1px 0 rgba(255,255,255,.60), inset 0 0 20px rgba(168,208,230,.12); :placeholder { color: #8a8478; font-style: italic; } :focus { border-color: rgba(90,120,150,.45); box-shadow: inset 0 0 20px rgba(246,231,178,.35), 0 0 0 3px rgba(168,208,230,.35); outline: none; } — invalid: border-color #b5546a plus an italic EB Garamond sentence below in #b5546a, 'This line is still wet — try again.', so the error never relies on hue alone; the field never turns a saturated red.
+- **select:** A sun-dial dropdown: trigger = EB Garamond 17px field (background:#fdfaf2;border:1px solid rgba(58,58,58,0.14);border-radius:10px;padding:13px 16px) with an ink '▾'; the open list is a cream panel of EB Garamond rows; hover fills rgba(168,208,230,0.18); the selected row fills rgba(246,231,178,0.34) with a 3px blush dashed brushstroke on its left edge; no solid bars.
+- **checkbox:** A 24px soft well: background:#fdfaf2;border:1px solid rgba(58,58,58,0.14);border-radius:10px;box-shadow:inset 0 0 20px rgba(168,208,230,0.12); checked = a 12px #a8d0e6 daub with an ink 10px check; radio = a 10px #b8a7d6 blob; label = EB Garamond 17px #3a3a3a with 'On'/'Off'; focus-visible = 2px #3a3a3a outline at 3px offset.
+- **badge:** A soft pastel chip: display:inline-flex;gap:8px;padding:4px 12px;border-radius:999px;border:1px solid rgba(58,58,58,0.10);background:#fdfaf2;color:#3a3a3a;font:600 13px/1.2 'EB Garamond'; leading 8px pastel daub in the role color (#a3c9a8/#f6e7b2/#f6c6c0) plus the word; no hard edge.
+- **avatar:** A 40px soft tile: background:linear-gradient(135deg,#fdfaf2,#f2ece0);border:1px solid rgba(58,58,58,0.10);border-radius:16px;color:#3a3a3a;font:600 16px 'Cormorant'; initials or a daub glyph; image avatars get a 16px radius and a soft-edge dissolve.
+- **nav:** A vertical studio list: items = EB Garamond 19px #3a3a3a, padding 12px 16px, border-radius 10px, border-left 3px transparent; hover fills rgba(168,208,230,0.18); active = rgba(246,231,178,0.34) fill with a 3px blush dashed brushstroke left edge (12px on/7px off); group headers = Cormorant 600 14px #8a8478 with a 24px broken rule trailing right.
+- **table:** A dappled grid: header = Cormorant 600 15px Title Case #3a3a3a over a broken 2px rgba(58,58,58,0.14) rule (14px on/8px off); body rows = EB Garamond 17px #3a3a3a separated by 1px rgba(58,58,58,0.08) rules; hover = rgba(168,208,230,0.18) wash, selected row = rgba(246,231,178,0.34) fill with a dashed blush left edge; radius 10px.
+- **dialog:** A soft-edge modal: panel recipe with the dapple layer and a 0 18px 40px shadow; scrim = color-mix(in srgb, var(--overlay) 45%, transparent); title = Cormorant 600 Title Case, body = EB Garamond; actions = sky-to-sunlight pill + cream secondary; entrance is a 420ms ease-out, reduced motion = instant.
+- **toast:** A bottom-right soft note: background:#fdfaf2;border:1px solid rgba(58,58,58,0.10);border-radius:10px;padding:12px 16px;font:15px/1.4 'EB Garamond'; leading 8px pastel daub in the role color (#a3c9a8/#f6e7b2/#b5546a) plus the word (Saved, Still wet, Failed); auto-dismisses with a 420ms fade; reduced motion keeps it static.
+- **code:** A monospace block: background:#fdfaf2;border:1px solid rgba(58,58,58,0.14);border-radius:10px;padding:16px;font:13px/1.6 'IBM Plex Mono';color:#3a3a3a; preserve whitespace; comments #8a8478, strings #7fa8c9, errors #b5546a; no syntax gradients.
+- **empty:** A centred soft panel: a small dapple glyph (two soft blobs) above one EB Garamond message ('The canvas is still wet and empty.') and a single sky-to-sunlight CTA; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 52px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 24px; background: linear-gradient(90deg, #f7f2e6 0%, #f2ece0 100%); border-top: 2px solid rgba(58,58,58,.10); border-image: repeating-linear-gradient(90deg, #f6c6c0 0 14px, transparent 14px 22px) 1; font: 13px/1.4 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: 0.02em; color: #3a3a3a; — the left side is a studio note in italic EB Garamond 15px #8a8478 ('Study in morning light, 09:40'), the right side is mono data (canvas size, revision, drying time) in #3a3a3a; a fresh change is prefixed by an 8px pastel daub — #a3c9a8 saved, #f6e7b2 still wet, #b5546a failed — and the daub brightens 6% over 420ms when its state changes.
 - **menu:** vertical studio list, no bullets, 6px gap: item { display: flex; align-items: center; gap: 12px; padding: 12px 16px; font: 400 19px/1.4 'EB Garamond', Georgia, serif; color: #3a3a3a; background: transparent; border-radius: 10px; border-left: 3px solid transparent; transition: background-color 240ms cubic-bezier(.4,.14,.3,1), color 240ms linear; } hover fills rgba(168,208,230,.18) with no transform; the selected row fills rgba(246,231,178,.34), keeps ink text, and paints its left edge with a 3px blush #f6c6c0 dashed brushstroke (12px on / 7px off) instead of a solid bar; group headers are Cormorant 600 14px Title Case in #8a8478 with a 24px broken rule trailing to the right, and item icons are single-color daubs, never emoji.
 - **toggle:** a sun dial, 76px x 40px: track { background: linear-gradient(90deg, #dfeef6 0%, #f6e7b2 100%); border: 1px solid rgba(58,58,58,.10); border-radius: 999px; padding: 3px; box-shadow: inset 0 0 18px rgba(246,231,178,.45); } the 30px knob is a soft blob (border-radius: 48% 52% 55% 45% / 52% 46% 54% 48%) in #fdfaf2 with a 1px rgba(58,58,58,.10) edge and a 0 6px 14px -10px rgba(90,120,150,.55) contact shadow, translating 36px over 240ms cubic-bezier(.4,.14,.3,1); the track's warm half brightens 5% when the knob is on, the label sits above in EB Garamond italic 15px ('Dappled'), and the state is repeated as text ('On'/'Off') for screen readers.

@@ -8,7 +8,7 @@ Deep-space interface: starfield black, a red worm wordmark, thin geometric type,
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@ Deep-space interface: starfield black, a red worm wordmark, thin geometric type,
 | `danger` | `#ff2038` |
 | `warning` | `#e8b23a` |
 | `success` | `#4ec7a4` |
+| `border` | `#2a6f97` |
+| `divider` | `#7d89a6` |
+| `selection` | `#ff2038` |
+| `overlay` | `#050510` |
+| `selection-text` | `#050510` |
+| `color-scheme` | `dark` |
 
 ### Variant: `wormsign`
 
@@ -67,7 +73,17 @@ Deep-space interface: starfield black, a red worm wordmark, thin geometric type,
 ### Typography
 
 - Display: "Space Grotesk", "Orbitron", "Helvetica Neue", "Arial", "sans-serif"
+- Body: "Space Grotesk", "Helvetica Neue", "Arial", "sans-serif"
 - Mono: "IBM Plex Mono", "Courier New", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `32px` | 1.1 | — |
+| h2 | `20px` | 1.2 | — |
+| body | `16px` | 1.5 | — |
+| caption | `12px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -80,9 +96,9 @@ Deep-space interface: starfield black, a red worm wordmark, thin geometric type,
 | motion.easing | `cubic-bezier(0.2, 0, 0.2, 1)` |
 | motion.cursor | `steps(2, jump-none) 1.2s infinite` |
 | motion.durations | `0ms` `160ms` `320ms` `2400ms` |
-| effects.scanlines | `undefined` |
+| effects.scanlines | `none` |
 | effects.vignette | `radial-gradient(ellipse at 50% 0%, rgba(10, 17, 40, 0.9) 0%, rgba(5, 5, 16, 0.98) 70%)` |
-| effects.pixelate | `undefined` |
+| effects.pixelate | `auto` |
 
 ## Work-style rules
 
@@ -98,8 +114,19 @@ Deep-space interface: starfield black, a red worm wordmark, thin geometric type,
 ## Component recipes
 
 - **panel:** background: #0a1128; border: 1px solid rgba(42, 111, 151, 0.35); border-radius: 0; padding: 24px 32px; color: #e6e8f0; box-shadow: 8px 8px 0 #02030a; — a 1px #2a6f97 top rule and a mono 11px uppercase caption (#7d89a6, letter-spacing 0.18em) sit in the top-left like a blueprint callout; optional CSS blueprint grid overlay (effects.blueprintGrid at background-size 24px 24px) at 0.35 opacity, pointer-events: none.
+- **card:** background:#0a1128;border:1px solid rgba(42,111,151,0.35);border-radius:0;padding:24px 32px;color:#e6e8f0;box-shadow:8px 8px 0 #02030a; a 1px #2a6f97 top rule and an 11px uppercase #7d89a6 callout caption sit top-left; title = Space Grotesk 300 uppercase #e6e8f0, body = IBM Plex Mono 13px/1.5; the optional blueprint grid overlay (24px 24px) sits at 0.35 opacity.
 - **button:** font: 500 12px/1 'IBM Plex Mono'; text-transform: uppercase; letter-spacing: 0.16em; background: #ff2038; color: #050510; border: 0; border-radius: 0; padding: 14px 24px; box-shadow: 0 0 0 1px #ff2038, 8px 8px 0 #02030a; transition: transform 160ms cubic-bezier(0.2,0,0.2,1), box-shadow 160ms; :hover { transform: translate(-2px, -2px); box-shadow: 0 0 0 1px #ff2038, 0 0 12px rgba(255,32,56,0.45), 10px 10px 0 #02030a; } :active { transform: translate(6px, 6px); box-shadow: 0 0 0 1px #ff2038, 0 0 0 #02030a; } :focus-visible { outline: 2px solid #2a6f97; outline-offset: 4px; } — secondary variant: transparent background, 1px #2a6f97 border, #e6e8f0 mono label, hover border #e6e8f0.
 - **input:** background: #050510; color: #e6e8f0; font: 13px/1.5 'IBM Plex Mono'; letter-spacing: 0.04em; border: 1px solid #2a6f97; border-radius: 0; padding: 12px 16px; caret-color: #ff2038; box-shadow: inset 0 -1px 0 rgba(42,111,151,0.5); :placeholder { color: #7d89a6; text-transform: uppercase; letter-spacing: 0.18em; font-size: 11px; } :focus { border-color: #e6e8f0; box-shadow: inset 0 -1px 0 #ff2038, 0 0 0 1px rgba(230,232,240,0.25); outline: none; } — label above in 11px mono uppercase #7d89a6 at 0.18em; invalid state sets border-color #ff2038 and appends a mono 11px 'ERR ' prefixed message below, always with the word, not color alone.
+- **select:** A flight-data dropdown: trigger = IBM Plex Mono 13px field (background:#050510;border:1px solid #2a6f97;padding:12px 16px;color:#e6e8f0) with a red '▾'; the open list is a #050510 panel of 12px uppercase mono rows with blue numeric indices; active row = #e6e8f0 with a 2px #ff2038 left rule and '01' index in #2a6f97; hover lifts the label to #e6e8f0 without layout shift.
+- **checkbox:** A 20px square data-toggle: background:#050510;border:1px solid #2a6f97;border-radius:0; checked = 10px #ff2038 core with a 1px #e6e8f0 star dot; radio = 8px #4ec7a4 dot; label = IBM Plex Mono 12px uppercase #7d89a6 with 'ON'/'OFF'; focus-visible = 2px #2a6f97 outline at 4px offset.
+- **badge:** A square status chip: display:inline-flex;gap:8px;padding:4px 10px;background:#0a1128;border:1px solid #2a6f97;border-radius:0;font:11px/1 'IBM Plex Mono';text-transform:uppercase;letter-spacing:0.18em; role = border+text (#4ec7a4 nominal, #e8b23a caution, #ff2038 alert, #7d89a6 idle) with the word spelled out; no rounded pill, never icon-only.
+- **avatar:** A 32px square ID plate: background:#0a1128;border:1px solid rgba(42,111,151,0.35);border-radius:0;color:#e6e8f0;font:500 12px 'Space Grotesk'; initials or a two-letter code; image avatars get a 1px blueprint frame and image-rendering:auto, no rounding.
+- **nav:** A horizontal mission rail: items = IBM Plex Mono 12px uppercase #7d89a6, letter-spacing 0.16em, padding 12px 20px, border-bottom 1px rgba(42,111,151,0.2); hover lifts the label to #e6e8f0; active = #e6e8f0 with a 2px #ff2038 left rule and a blue '01' index; the vertical form reuses the menu; separators are 1px dashed rgba(42,111,151,0.35).
+- **table:** A telemetry grid: header = IBM Plex Mono 11px uppercase #7d89a6 over a 1px rgba(42,111,151,0.35) rule; body rows = IBM Plex Mono 13px #e6e8f0 separated by 1px rgba(42,111,151,0.20) rules; hover = #e6e8f0, selected row = rgba(255,32,56,0.10) fill with a 2px #ff2038 left rule and tabular values; radius 0.
+- **dialog:** A mission-control modal: panel recipe with a blueprint grid overlay and a callout caption; scrim = color-mix(in srgb, var(--overlay) 70%, transparent); title = Space Grotesk uppercase #e6e8f0 with one red #ff2038 mark, body = Plex Mono; actions = red primary + 1px #2a6f97 secondary; entrance is a 320ms ease-out, reduced motion = instant.
+- **toast:** A bottom-right data line: background:#0a1128;border:1px solid #2a6f97;padding:10px 14px;font:11px/1 'IBM Plex Mono';text-transform:uppercase;letter-spacing:0.18em; prefix 'NOMINAL'/'CAUTION'/'ALERT' in #4ec7a4/#e8b23a/#ff2038; auto-dismisses with a 320ms fade; reduced motion keeps it static.
+- **code:** A flight-data block: background:#050510;border:1px solid #2a6f97;border-radius:0;padding:16px;font:13px/1.5 'IBM Plex Mono';color:#e6e8f0; preserve whitespace; comments #7d89a6, values #4ec7a4, alerts #ff2038; no syntax gradients, tabular numerals throughout.
+- **empty:** A centred blueprint panel: a small constellation glyph (1px starfield dots) above one IBM Plex Mono message ('NO DATA' / 'NO SIGNAL ACQUIRED') and a single red CTA; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 40px; display: flex; align-items: center; gap: 32px; padding: 0 24px; background: #0a1128; border-top: 1px solid rgba(42,111,151,0.35); font: 11px/1 'IBM Plex Mono'; text-transform: uppercase; letter-spacing: 0.18em; color: #7d89a6; values in #e6e8f0 with tabular numerals; segments split by border-left: 1px solid rgba(42,111,151,0.35); live telemetry in #4ec7a4, alert in #ff2038 plus the word 'ALERT'; a 6px #e6e8f0 star dot leads the strip and pulses at steps(2, jump-none) 1.2s infinite.
 - **menu:** horizontal or vertical list on #050510, no radius, no bullets: item { display: block; font: 12px/1 'IBM Plex Mono'; text-transform: uppercase; letter-spacing: 0.16em; padding: 12px 20px; color: #7d89a6; border-bottom: 1px solid rgba(42,111,151,0.2); } active item in #e6e8f0 with a 2px #ff2038 left rule and a mono index ('01', '02') in #2a6f97; hover lifts the label to #e6e8f0 without moving the layout; group separators are 1px dashed rgba(42,111,151,0.35) with a 11px uppercase mono caption above.
 

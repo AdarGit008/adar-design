@@ -8,7 +8,7 @@
 
 ## Design tokens
 
-### Colors (primary roles)
+### Colors (all roles)
 
 | Role | Value |
 |---|---|
@@ -21,6 +21,12 @@
 | `danger` | `#c1121f` |
 | `warning` | `#ffd23f` |
 | `success` | `#52b788` |
+| `border` | `#2b2b2b` |
+| `divider` | `#8a8175` |
+| `selection` | `#ffd23f` |
+| `overlay` | `#2b2b2b` |
+| `selection-text` | `#2b2b2b` |
+| `color-scheme` | `light` |
 
 ### Variant: `crayon`
 
@@ -63,7 +69,17 @@
 ### Typography
 
 - Display: "Fredoka", "Baloo 2", "Chewy", "system-ui", "sans-serif"
+- Body: "Fredoka", "Baloo 2", "system-ui", "sans-serif"
 - Mono: "IBM Plex Mono", "ui-monospace", "monospace"
+
+### Type scale
+
+| Tier | Size | Line-height | Notes |
+|---|---|---|---|
+| h1 | `32px` | 1.1 | — |
+| h2 | `22px` | 1.2 | — |
+| body | `17px` | 1.5 | — |
+| caption | `13px` | 1.4 | — |
 
 ### Spacing / radius / shadow / motion / effects
 
@@ -94,8 +110,19 @@
 ## Component recipes
 
 - **panel:** background: #fffaf0; border: 3px solid #2b2b2b; border-radius: 14px; padding: 24px; color: #2b2b2b; box-shadow: 6px 6px 0 #2b2b2b; — panels that are steps in a sequence get border-left: 8px dotted #2b2b2b and a 32px yellow #ffd23f circle holding the step number; the heading inside is Fredoka 700 24px Title Case with a 6px #ffd23f highlight block behind its last word; drop the hard shadow below 640px and keep the 3px ink border.
+- **card:** background:#fffaf0;border:3px solid #2b2b2b;border-radius:14px;padding:24px;color:#2b2b2b;box-shadow:6px 6px 0 #2b2b2b; if it is a machine step, add border-left:8px dotted #2b2b2b and a 32px #ffd23f circle with the step number; title = Fredoka 700 24px Title Case with a 6px #ffd23f highlight behind the last word; body = Fredoka 16px/1.5.
 - **button:** font: 700 18px/1 'Fredoka', 'Baloo 2', system-ui, sans-serif; padding: 14px 24px; border-radius: 999px; background: #e63946; color: #f5efe0; border: 3px solid #2b2b2b; box-shadow: 6px 6px 0 #2b2b2b; transition: transform 120ms cubic-bezier(.34,1.56,.64,1), box-shadow 120ms cubic-bezier(.34,1.56,.64,1), background-color 120ms linear; :hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0 #2b2b2b; } :active { transform: translate(6px, 6px); box-shadow: 0 0 0 #2b2b2b; } :focus-visible { outline: 3px solid #2d7dd2; outline-offset: 3px; } — secondary variant: background #fffaf0, color #2b2b2b, box-shadow 6px 6px 0 #ffd23f; disabled: background #f5efe0, color #8a8175, shadow 0 0 0, no transform.
 - **input:** font: 16px/1.5 'IBM Plex Mono', ui-monospace, monospace; color: #2b2b2b; background: #f5efe0; border: 3px solid #2b2b2b; border-radius: 14px; padding: 12px 16px; box-shadow: inset 0 3px 0 rgba(43,43,43,.12); :placeholder { color: #8a8175; font: 400 16px 'Fredoka', system-ui, sans-serif; } :focus { background: #fffaf0; outline: 3px solid #2d7dd2; outline-offset: 2px; } — invalid: border-color #c1121f plus a 16px Fredoka sentence below in #c1121f ('That part does not fit here.') so the error never relies on the red stroke alone.
+- **select:** A part-tray dropdown: trigger = IBM Plex Mono 16px field (background:#f5efe0;border:3px solid #2b2b2b;border-radius:14px;padding:12px 16px) with a crayon '▾' in #2d7dd2; the open list is a 14px-radius part tray of Fredoka rows, the selected row fills #ffd23f with ink text and swaps its drag-handle dots to #e63946; hover lifts translate(-2px,-2px) with box-shadow 6px 6px 0 #2b2b2b.
+- **checkbox:** A 24px square part: background:#f5efe0;border:3px solid #2b2b2b;border-radius:14px;box-shadow:inset 0 3px 0 rgba(43,43,43,0.12); checked = a 12px #52b788 check inside; radio = a 10px #e63946 ball; label in Fredoka 16px #2b2b2b with 'On'/'Off'; focus-visible = 3px #2d7dd2 outline at 2px offset.
+- **badge:** A crayon chip: display:inline-flex;gap:8px;padding:4px 12px;border-radius:999px;border:3px solid #2b2b2b;background:#fffaf0;color:#2b2b2b;font:600 14px/1.2 'Fredoka'; a leading 10px crayon dot in the role color (#52b788/#ffd23f/#c1121f/#2d7dd2) and the word spelled out; never color-only.
+- **avatar:** A 40px round part: background:#fffaf0;border:3px solid #2b2b2b;border-radius:999px;color:#2b2b2b;font:700 16px 'Fredoka'; initials or a machine-part glyph (ball/gear); image avatars get a 3px ink stroke and 999px radius.
+- **nav:** A horizontal workbench rail: items = Fredoka 600 16px Title Case #2b2b2b, padding 10px 16px, border-radius 14px; hover lifts translate(-2px,-2px) with box-shadow 4px 4px 0 #2b2b2b; active item fills #ffd23f with ink text and a 4px #e63946 left dot; the vertical form reuses the part-tray menu; separators are 3px dotted #8a8175 rules.
+- **table:** A machine-log grid: header = Fredoka 700 14px Title Case #2b2b2b over a 3px #2b2b2b rule; body rows = IBM Plex Mono 14px #2b2b2b separated by 1px #8a8175 rules; hover lifts the row, the selected row fills #ffd23f with ink text and a 4px #e63946 left rule; values tabular, radius 14px.
+- **dialog:** A machine-step modal: panel recipe with border-left:8px dotted #2b2b2b and a step-number circle; scrim = color-mix(in srgb, var(--overlay) 60%, transparent); title = Fredoka 700 Title Case, body = Fredoka, actions = red primary + cream secondary; entrance overshoots once (cubic-bezier(.34,1.56,.64,1)) over 240ms, reduced motion = instant.
+- **toast:** A dropped-part alert: background:#fffaf0;border:3px solid #2b2b2b;border-radius:14px;padding:12px 16px;font:14px/1.4 'IBM Plex Mono'; a 4px left crayon band in the role color (#52b788/#ffd23f/#c1121f) plus the word (Passed, Warning, Failed); it lands with one 120ms overshoot and auto-dismisses; reduced motion keeps it static.
+- **code:** A machine-data block: background:#f5efe0;border:3px solid #2b2b2b;border-radius:14px;padding:16px;font:14px/1.5 'IBM Plex Mono';color:#2b2b2b; preserve whitespace; comments #8a8175, strings #c1121f, values #2d7dd2; no syntax gradients, and the block keeps the blue focus ring.
+- **empty:** A centred workbench panel: a small crayon contraption glyph (ball + ramp) above one Fredoka message ('Nothing rigged yet') and a single red 'Assemble' CTA; the glyph is aria-hidden and the state is written in words.
 - **statusbar:** height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 0 24px; background: #f5efe0; border-top: 3px solid #2b2b2b; border-radius: 14px 14px 0 0; font: 14px/1.4 'IBM Plex Mono', monospace; letter-spacing: 0.04em; color: #2b2b2b; left side is a machine log of entries each prefixed by a 10px crayon dot — #52b788 passed, #ffd23f warning, #c1121f failed, #8a8175 idle; right side holds a mono part counter and the single primary 'Test run' button; the entry currently executing pulses scale(1) → scale(1.08) over 600ms with cubic-bezier(.34,1.56,.64,1).
 - **menu:** vertical part tray, no bullets, 8px gap: item { display: flex; align-items: center; gap: 12px; padding: 10px 16px; font: 600 18px/1.3 'Fredoka', system-ui, sans-serif; color: #2b2b2b; background: #fffaf0; border: 3px solid #2b2b2b; border-radius: 14px; box-shadow: 4px 4px 0 #2b2b2b; } selected row fills #ffd23f with ink text, its drag-handle dots turn #e63946, and its icon swaps to the filled part; hover lifts transform: translate(-2px, -2px) with box-shadow 6px 6px 0 #2b2b2b; group headers are Fredoka 700 13px uppercase with letter-spacing 0.12em on the cream ground with no stroke.
 - **toggle:** lever switch, 72px x 40px: track { background: #f5efe0; border: 3px solid #2b2b2b; border-radius: 999px; padding: 3px; box-shadow: inset 0 3px 0 rgba(43,43,43,.12); } knob is a 28px ball with a 3px ink stroke, #2d7dd2 when off and #52b788 when on, translating 32px over 240ms cubic-bezier(.34,1.56,.64,1); the track carries two 4px dotted #8a8175 rail marks so it reads as a machine part instead of a phone switch; label sits above in Fredoka 700 14px Title Case and the state is repeated as text ('On'/'Off') for screen readers.

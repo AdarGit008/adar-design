@@ -1,15 +1,15 @@
 ---
 name: adar-design
-description: "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode."
+description: "Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable token-group mixes. Each mode is a finished app surface: a body typeface, four-tier type scale, light/dark scheme, 13-role colors, motion/effects tokens, and a 15-component vocabulary. Preview every mode in skills/adar-design/gallery.html. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode."
 license: MIT
 metadata:
-  version: 0.3.0
+  version: 0.4.0
   modes: arcade, atari-sierra, bauhaus, bios, c64, cubism, cyberpunk, expressionism, fauvism, folk-art, gameboy, goya, impressionism, kandinsky, nasa80, stranger-things, terminal, tim, vaporwave, win95
 ---
 
 # adar-design
 
-Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable mixes that override whole token groups. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode.
+Apply the Adar Design retro design system when building, theming, or restyling websites and UI. Selectable visual modes — retro: BIOS/POST/text-mode, 80s Arcade, Terminal/CRT, Vaporwave, Windows 95, Commodore 64, Game Boy, Cyberpunk, Stranger Things, Atari/Sierra, The Incredible Machine, 80s NASA; fine art: Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, Folk-art, Impressionism — plus composable token-group mixes. Each mode is a finished app surface: a body typeface, four-tier type scale, light/dark scheme, 13-role colors, motion/effects tokens, and a 15-component vocabulary. Preview every mode in skills/adar-design/gallery.html. Use when the user asks for a retro, underground, 80s, arcade, neon, terminal, hacker, CRT, BIOS, DOS, VGA, text-mode, vaporwave, synthwave, win95, C64, gameboy, cyberpunk, 80s, space, 90s-game, or fine-art / art-movement (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism) look. Invoke /skill:adar-design <mode> to force a mode.
 
 ## When to use
 
@@ -18,6 +18,8 @@ Apply the Adar Design retro design system when building, theming, or restyling w
 - The user names BIOS, POST screen, VGA, CGA, 3270 mainframe, DOS shell, NES/8-bit arcade, phosphor terminal, vaporwave, Windows 95, Commodore 64, Game Boy, cyberpunk, or a 90s game explicitly
 - The user asks for a fine-art / art-movement look (Kandinsky, Goya, Bauhaus, Cubism, Expressionism, Fauvism, folk art, Impressionism)
 - The user asks to mix two or more of the modes' token groups on one surface
+- The user wants a finished, holistic app surface — full component set, type scale, light/dark scheme, and motion + effects tokens
+- The user wants to preview or compare every visual mode at once (open skills/adar-design/gallery.html or switch modes with ?mode=)
 
 ## Choose a mode
 
@@ -46,7 +48,7 @@ This skill implements 20 visual modes. Pick one base mode per surface, or mix mo
 | `folk-art` | Folk Art | Naive hand-painted folk art: warm cream ground, flat red/blue/green/yellow fills, ink brush strokes, decorative floral and geometric borders, and lettering that looks painted by a careful amateur. |
 | `impressionism` | Impressionism — Light & Color | Plein-air light study: cream canvas, five low-saturation pastels behaving like mixed pigment, broken brushstroke rules, dissolved edges, and a soft dappled-light overlay drifting across a strict underlying grid. |
 
-To implement a mode, read its reference file: `references/<mode>.md` (full spec: tokens, rules, component recipes, copywriting, accessibility) and `references/designs/<mode>.DESIGN.md` (Google DESIGN.md schema, lintable). The machine-readable registries are `tokens.json` and `tokens.css` (all modes, namespaced `--adar-<mode>-*`).
+To implement a mode, read its reference file: `references/<mode>.md` (full spec: tokens, rules, component recipes, copywriting, accessibility) and `references/designs/<mode>.DESIGN.md` (Google DESIGN.md schema, lintable). The machine-readable registries are `tokens.json` and `tokens.css` (all modes, namespaced `--adar-<mode>-*`). A screenshotable visual preview lives in `gallery.html` (open it and switch modes with the selector or `?mode=<id>`).
 
 ## Work-style rules (all modes)
 
@@ -63,7 +65,8 @@ Precedence: **overrides > base > cross-cutting rules**. Override whole groups on
 
 **Override-able groups**
 
-- `colors` → `colors`
+- `colors` → `colors`, `colorScheme`
+- `typeScale` → `typeScale`
 - `paletteVariants` → `paletteVariants`
 - `fonts` → `fonts`
 - `radius` → `radius`

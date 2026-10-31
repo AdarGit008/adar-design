@@ -15,7 +15,7 @@ Windows 95 classic desktop GUI: teal #008080 field, silver #c0c0c0 chrome, navy 
 | `background` | `#008080` |
 | `surface` | `#c0c0c0` |
 | `foreground` | `#000000` |
-| `muted` | `#808080` |
+| `muted` | `#1a1a1a` |
 | `primary` | `#000080` |
 | `accent` | `#008080` |
 | `danger` | `#ff0000` |

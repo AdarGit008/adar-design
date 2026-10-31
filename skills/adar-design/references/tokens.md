@@ -349,7 +349,7 @@ Machine-readable sources: `tokens.json` (nested) and `tokens.css` (`--adar-<mode
 - `background`: `#008080`
 - `surface`: `#c0c0c0`
 - `foreground`: `#000000`
-- `muted`: `#808080`
+- `muted`: `#1a1a1a`
 - `primary`: `#000080`
 - `accent`: `#008080`
 - `danger`: `#ff0000`

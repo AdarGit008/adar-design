@@ -87,7 +87,7 @@
 |---|---|
 | radius | `0` |
 | spacing | `xs=4px` `sm=8px` `md=16px` `lg=24px` `xl=32px` |
-| shadow.hard | `8px 8px 0 8px #7c1dfd` |
+| shadow.hard | `8px 8px 0 #7c1dfd` |
 | shadow.glow | `0 0 8px #00e5ff` |
 | motion.easing | `steps(8, end)` |
 | motion.cursor | `steps(2, jump-none) 1s infinite` |

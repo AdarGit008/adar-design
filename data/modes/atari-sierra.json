@@ -110,8 +110,8 @@
     ]
   },
   "effects": {
-    "sliceStack": "linear-gradient(to bottom, #e8402a 0 8px, #f08a24 8px 14px, #f5c518 14px 18px, #52b545 18px 21px, #2f7fe0 21px 23px)",
-    "sliceStackHairline": "linear-gradient(to bottom, #e8402a 0 5px, #f08a24 5px 8px, #f5c518 8px 10px, #52b545 10px 11px, #2f7fe0 11px 12px)",
+    "sliceStack": "linear-gradient(to bottom, #e8402a 0 8px, #f08a24 8px 14px, #f5c518 14px 18px, #52b545 18px 21px, #2f7fe0 21px 23px, transparent 23px)",
+    "sliceStackHairline": "linear-gradient(to bottom, #e8402a 0 5px, #f08a24 5px 8px, #f5c518 8px 10px, #52b545 10px 11px, #2f7fe0 11px 12px, transparent 12px)",
     "scanlines": "repeating-linear-gradient(to bottom, transparent 0 2px, rgba(0,0,0,0.22) 2px 3px)",
     "pixelate": "pixelated",
     "vignette": "radial-gradient(ellipse at 50% 40%, transparent 45%, rgba(0,0,0,0.65) 100%)"

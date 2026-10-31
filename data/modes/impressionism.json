@@ -120,7 +120,7 @@
     "pixelate": "auto",
     "vignette": "radial-gradient(ellipse at 28% 8%, rgba(246,231,178,.38) 0%, rgba(247,242,230,0) 58%), radial-gradient(ellipse at 100% 100%, rgba(168,208,230,.28) 0%, rgba(247,242,230,0) 62%)",
     "dapple": "radial-gradient(circle at 18% 22%, rgba(246,231,178,.55) 0 14px, transparent 15px), radial-gradient(circle at 46% 38%, rgba(246,231,178,.38) 0 22px, transparent 23px), radial-gradient(circle at 72% 14%, rgba(163,201,168,.22) 0 18px, transparent 19px), radial-gradient(circle at 88% 56%, rgba(246,231,178,.30) 0 12px, transparent 13px), radial-gradient(circle at 34% 76%, rgba(184,167,214,.20) 0 20px, transparent 21px)",
-    "brushstrokeMask": "repeating-linear-gradient(96deg, #000 0 14px, transparent 14px 22px)"
+    "brushstrokeMask": "repeating-linear-gradient(96deg, rgba(58,58,58,0.10) 0 14px, transparent 14px 22px)"
   },
   "rules": [
     "Paint in layers, not in fills: every panel is a 2–3 stop gradient of near-neighbour pastels (background → surface → the lightest wash) so the surface looks brushed rather than vector-flat, and no large area is ever one solid hex.",

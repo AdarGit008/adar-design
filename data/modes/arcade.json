@@ -86,7 +86,7 @@
     "xl": "32px"
   },
   "shadow": {
-    "hard": "8px 8px 0 8px #7c1dfd",
+    "hard": "8px 8px 0 #7c1dfd",
     "glow": "0 0 8px #00e5ff"
   },
   "motion": {

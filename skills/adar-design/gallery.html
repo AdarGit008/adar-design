@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Anton:wght@400;700&family=Archivo:wght@400;700&family=Archivo+Black:wght@400;700&family=Audiowide:wght@400;700&family=Baloo+2:wght@400;700&family=Chakra+Petch:wght@400;700&family=Chewy:wght@400;700&family=Cinzel:wght@400;700&family=Cormorant:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=EB+Garamond:wght@400;700&family=Fredoka:wght@400;700&family=IBM+Plex+Mono:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Josefin+Sans:wght@400;700&family=Michroma:wght@400;700&family=Montserrat:wght@400;700&family=Orbitron:wght@400;700&family=Oswald:wght@400;700&family=Playfair+Display:wght@400;700&family=Press+Start+2P:wght@400;700&family=Rajdhani:wght@400;700&family=Share+Tech+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&family=Space+Mono:wght@400;700&family=VT323:wght@400;700&display=swap" rel="stylesheet">
 <title>adar-design gallery</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
@@ -11,9 +13,10 @@
 html, body { margin: 0; padding: 0; }
 body { font-family: var(--font-body, system-ui, sans-serif); background: var(--bg); color: var(--fg); }
 .mode { position: relative; min-height: 100vh; background: var(--bg); color: var(--fg); }
-.mode-caption { padding: var(--space-sm) var(--space-md); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); border-bottom: 1px solid var(--divider); }
-.app { max-width: 1080px; margin: 0 auto; padding: var(--space-lg) var(--space-md) calc(var(--space-xl) + 48px); }
-.gallery-bar { position: sticky; top: 0; z-index: 70; display: flex; align-items: center; gap: var(--space-md); padding: var(--space-sm) var(--space-md); background: var(--surface); border-bottom: 1px solid var(--border); font-family: var(--font-display); }
+.mode-caption { position: relative; z-index: 5; padding: var(--space-sm) var(--space-md); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); border-bottom: 1px solid var(--divider); }
+.app { position: relative; z-index: 5; max-width: 1080px; margin: 0 auto; padding: var(--space-lg) var(--space-md) calc(var(--space-xl) + 96px); }
+.shell-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--space-md); display: flex; align-items: center; gap: var(--space-md); }
+.gallery-bar { position: sticky; top: 0; z-index: 70; padding: var(--space-sm) 0; background: var(--surface); border-bottom: 1px solid var(--border); font-family: var(--font-display); }
 .gallery-title { font-weight: 700; }
 .gallery-bar select { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 8px; }
 .app-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: var(--space-sm) var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
@@ -35,39 +38,41 @@ body { font-family: var(--font-body, system-ui, sans-serif); background: var(--b
 .block h2 { font-family: var(--font-display); font-size: var(--h2); }
 .table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .table th, .table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--divider); font-size: var(--body); }
-.table th { font-family: var(--font-display); background: var(--surface); }
+.table th { font-family: var(--font-display); font-weight: 700; color: var(--muted); background: var(--surface); }
+.table .num { text-align: right; font-variant-numeric: tabular-nums; }
 .table tr.selected td { background: var(--selection); color: var(--selection-text); }
 .form { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: flex-end; }
 .field { display: flex; flex-direction: column; gap: 4px; font-size: var(--caption); color: var(--muted); }
 .input, .select { background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: var(--body); font-family: var(--font-body); }
-.check { display: flex; align-items: center; gap: 6px; font-size: var(--body); }
-.checkbox, .radio { accent-color: var(--primary); width: 1.1em; height: 1.1em; }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: var(--body); }
+.checkbox, .radio { accent-color: var(--primary); width: 18px; height: 18px; margin: 0; flex: 0 0 auto; }
 .actions { display: flex; gap: var(--space-sm); }
 .badge-row { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
-.badge { padding: 3px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--fg); font-size: var(--caption); }
-.badge-success { border-color: var(--success); color: var(--success); }
-.badge-warning { border-color: var(--warning); color: var(--warning); }
-.badge-danger { border-color: var(--danger); color: var(--danger); }
-.toast { display: inline-block; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--radius); font-size: var(--body); box-shadow: var(--shadow-glow); }
-.dialog-wrap { position: relative; margin-top: var(--space-md); }
-.scrim { position: absolute; inset: 0; background: color-mix(in srgb, var(--overlay) 60%, transparent); border-radius: var(--radius); }
-.dialog { position: relative; max-width: 420px; margin: 0 auto; padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
-.dialog h2 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h2); }
-.empty { margin-top: var(--space-md); padding: var(--space-lg); text-align: center; background: var(--surface); border: 1px dashed var(--divider); border-radius: var(--radius); color: var(--muted); }
-.code { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md); font-family: var(--font-mono); font-size: var(--caption); white-space: pre; overflow-x: auto; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--fg); font-size: var(--caption); line-height: 1.2; }
+.badge::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 999px; background: var(--success); }
+.badge-warning::before { background: var(--warning); }
+.badge-danger::before { background: var(--danger); }
+.toast { display: inline-block; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--radius); font-size: var(--body); box-shadow: var(--shadow-hard); }
+.dialog { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: var(--space-md); background: color-mix(in srgb, var(--overlay) 55%, transparent); }
+.dialog-panel { max-width: 420px; width: 100%; padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
+.dialog-panel h2 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h2); }
+.empty { margin-top: var(--space-md); padding: var(--space-lg); text-align: center; background: var(--surface); border: 1px dashed var(--divider); border-radius: var(--radius); color: var(--fg); font-size: var(--body); }
+.empty-text { margin: 0; }
+.empty .btn { margin-top: var(--space-sm); }
+.code { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md) var(--space-md) var(--space-lg); font-family: var(--font-mono); font-size: var(--caption); line-height: 1.5; white-space: pre; overflow-x: auto; }
 .avatar-row { display: flex; gap: var(--space-sm); margin-top: var(--space-md); }
 .avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-display); font-size: var(--caption); }
 .signature { margin-top: var(--space-xl); padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
 .sig-label { font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 .sig-body { margin-top: var(--space-sm); font-size: var(--body); }
-.statusbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 65; display: flex; align-items: center; gap: var(--space-md); padding: 8px var(--space-md); background: var(--surface); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); }
+.statusbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 65; padding: var(--space-sm) 0; background: var(--surface); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); }
 .cursor { color: var(--primary); display: inline-block; }
 @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-.fx { position: absolute; inset: 0; pointer-events: none; z-index: 60; }
-.fx-scanlines { opacity: .6; }
+.fx { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.fx-scanlines { z-index: 60; opacity: .6; }
 .fx-vignette { opacity: 1; }
-@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } .app-nav { flex-wrap: wrap; } }
+@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } .app-nav { flex-wrap: wrap; } .shell-inner { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -994,8 +999,9 @@ body[data-mode="neon-console"] .cursor { animation: blink var(--adar-neon-consol
 </head>
 <body data-mode="arcade">
 <header class="gallery-bar">
-  <span class="gallery-title">adar-design gallery</span>
-  <select id="mode-select" aria-label="Choose mode">
+  <div class="shell-inner">
+    <span class="gallery-title">adar-design gallery</span>
+    <select id="mode-select" aria-label="Choose mode">
 <option value="arcade">80s Arcade</option>
 <option value="atari-sierra">Atari / Sierra Logo Treatment</option>
 <option value="bauhaus">Bauhaus / Functional Geometry</option>
@@ -1017,7 +1023,8 @@ body[data-mode="neon-console"] .cursor { animation: blink var(--adar-neon-consol
 <option value="vaporwave">Vaporwave / Synthwave</option>
 <option value="win95">Windows 95 Desktop</option>
 <option value="neon-console">Neon Console (mix)</option>
-  </select>
+    </select>
+  </div>
 </header>
 <main>
 <section class="mode" data-mode="arcade">
@@ -1041,12 +1048,12 @@ body[data-mode="neon-console"] .cursor { animation: blink var(--adar-neon-consol
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1064,11 +1071,7 @@ body[data-mode="neon-console"] .cursor { animation: blink var(--adar-neon-consol
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1080,7 +1083,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The pixel-border panel (4px solid border wrapped in stacked offset rings) and the press-physics button (hard offset shadow that collapses on :active)</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>arcade</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>arcade</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="atari-sierra">
@@ -1106,12 +1112,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1129,11 +1135,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1145,7 +1147,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The horizontal-slice thickness-gradient wordmark and divider: a title or rule cut into five stacked bands whose heights step thick-to-thin (8/6/4/3/2px) in red-orange-yellow-green-blue, each band plate-shifted 1px like slices off a printed logo.</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>atari-sierra</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>atari-sierra</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="bauhaus">
@@ -1170,12 +1175,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1193,11 +1198,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1209,7 +1210,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The primary-shape composition: a red #e23c2e circle, a blue #1b5fa8 square, and a yellow #f2c014 equilateral triangle set on the same strict grid baseline — three flat shapes, no gradients, that alone identify the mode</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>bauhaus</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>bauhaus</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="bios">
@@ -1233,12 +1237,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1256,11 +1260,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1272,7 +1272,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The POST memory count-up (0000 → N KB) plus the bottom function-key strip (1Help 2Menu … 10Quit)</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>bios</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>bios</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="c64">
@@ -1296,12 +1299,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1319,11 +1322,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1335,7 +1334,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The bright blue border frame (#3f3fff with a #2f2fff inner edge) wrapping a 40x25 PETSCII screen of #a0a0ff bitmap type on #0000aa, closed out by a reverse-video status strip and a blinking block cursor</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>c64</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>c64</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="cubism">
@@ -1359,12 +1361,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1382,11 +1384,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1398,7 +1396,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The fractured plane: a single form rebuilt from offset charcoal-edged quadrilaterals in ochre, olive, warm gray, and blue-gray, its facets showing two viewpoints at once and never resolving into one outline</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>cubism</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>cubism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="cyberpunk">
@@ -1422,12 +1423,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1445,11 +1446,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1461,7 +1458,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The glitchy neon HUD: chamfered near-black panels outlined in 1px magenta or cyan with a 12px outer glow, over a grain-and-scanline black field, with an 80ms–160ms RGB-split flash on hover and focus</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>cyberpunk</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>cyberpunk</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="expressionism">
@@ -1485,12 +1485,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1508,11 +1508,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1524,7 +1520,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The wavy, hand-distorted brushstroke band: a torn 2–3px edge (feTurbulence clip-path or wavering rule) that carries blood red into acid yellow across the deep blue field and quivers along section boundaries while the type inside stays straight</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>expressionism</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>expressionism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="fauvism">
@@ -1548,12 +1547,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1571,11 +1570,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1587,7 +1582,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">the signature block: position: relative; background: #f5efe2; border: 3px solid #221e1b; border-radius: 6px; a solid second-hue rectangle sits either behind it (::before, transform: translate(10px, 10px)) or beside it as a full-height 8px–48px vertical band; planes may bleed past the container edge by up to 32px and may be clipped by an organic border-radius (64px 6px 64px 6px) when the shape is decorative; a plane never sits behind running text without first clearing to #fbf6ec, and two planes never overlap a third colour except where a contour separates them.</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>fauvism</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>fauvism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="folk-art">
@@ -1612,12 +1610,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1635,11 +1633,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1651,7 +1645,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The hand-painted decorative border: a 3px ink rule with an inset cream ring, an optional dashed echo, and small painted petal/leaf/berry motifs stopping at the rounded corners — the frame that makes every panel read as a made object rather than a div</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>folk-art</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>folk-art</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="gameboy">
@@ -1676,12 +1673,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1699,11 +1696,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1715,7 +1708,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The four-shade LCD dot-matrix screen: an inverted-state HUD and hard-offset panels sitting under a repeating pixel grid inside the #8bac0f bezel</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>gameboy</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>gameboy</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="goya">
@@ -1739,12 +1735,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1762,11 +1758,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1778,7 +1770,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">A chiaroscuro figure emerging from a near-black ground: one bone-lit focal shape cut by etched crosshatch, with the heavy vignette closing the frame around it</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>goya</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>goya</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="impressionism">
@@ -1804,12 +1799,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1827,11 +1822,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1843,7 +1834,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">Sun-dappled light: broken brushstroke bands of sky, blush, leaf, lavender, and sunlight layered over a cream canvas, crossed by a soft warm dapple overlay that drifts like light through leaves — with every edge dissolved and every rule left visibly brushy</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>impressionism</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>impressionism</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="kandinsky">
@@ -1867,12 +1861,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1890,11 +1884,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1906,7 +1896,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The circles-and-arcs composition: a cluster of overlapping ink-stroked circles, quarter-arcs, and ruled line-segments in red, yellow, and blue drifting slowly across a warm cream ground, as if the canvas were sounding a chord</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>kandinsky</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>kandinsky</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="nasa80">
@@ -1933,12 +1926,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -1956,11 +1949,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -1972,7 +1961,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The red worm wordmark set over a starlight starfield on a 1px blueprint grid — red mark, white dust, blue technical lines, and a lot of black between them</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>nasa80</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>nasa80</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="stranger-things">
@@ -1998,12 +1990,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -2021,11 +2013,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -2037,7 +2025,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The signature: font: 700 clamp(48px, 9vw, 120px)/0.95 'Cinzel', 'Playfair Display', 'Cormorant Garamond', Georgia, serif; text-transform: uppercase; letter-spacing: 0.06em; color: #ff1a1a; background: #050505; text-shadow: 0 0 1px #ff6f61, 0 0 8px rgba(255, 26, 26, 0.9), 0 0 28px rgba(255, 26, 26, 0.6), 0 0 64px rgba(179, 0, 0, 0.45); — sit it in the upper third with 32–56px beneath and a caption line in 13px #8a7f76 Plex Mono. The flicker keyframe dips opacity to 0.92 twice per 2400ms cycle, never below 0.9, and is disabled under prefers-reduced-motion.</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>stranger-things</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>stranger-things</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="terminal">
@@ -2061,12 +2052,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -2084,11 +2075,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -2100,7 +2087,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">h1 { font: 400 clamp(32px, 6vw, 72px)/1.1 &quot;VT323&quot;, &quot;Courier New&quot;, monospace; color: #33ff66; letter-spacing: 0.02em; text-shadow: 0 0 8px rgba(51,255,102,0.6); margin: 0; } preceded by a prompt line (user@host:~/dir$ in #1e9944) and closed with a block cursor ::after { content: &quot;\2588&quot;; animation: blink steps(2, jump-none) 1s infinite; } reveal the line with a typewriter clip: width 0 → 100%, animation steps(20, end) 1200ms, overflow: hidden; white-space: nowrap.</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>terminal</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>terminal</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="tim">
@@ -2124,12 +2114,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -2147,11 +2137,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -2163,7 +2149,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The contraption canvas: a dashed-rail workbench where cream cards, 3px ink-stroked crayon parts, and lever/ramp/ball/pulley motifs show one action visibly cranking the next</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>tim</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>tim</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="vaporwave">
@@ -2187,12 +2176,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -2210,11 +2199,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -2226,7 +2211,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The sunset grid horizon — striped sun disc half-sunk on the horizon above a cyan perspective grid plane — crowned by the chrome-gradient wordmark</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>vaporwave</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>vaporwave</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="win95">
@@ -2250,12 +2238,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -2273,11 +2261,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -2289,7 +2273,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The beveled 2px button inside a navy #000080 title bar, sitting on the teal #008080 desktop</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>win95</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>win95</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 <section class="mode" data-mode="neon-console">
@@ -2313,12 +2300,12 @@ render(app, mode);</pre>
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -2336,11 +2323,7 @@ render(app, mode);</pre>
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -2352,7 +2335,10 @@ render(app, mode);</pre>
       <div class="sig-label">Signature element</div>
       <div class="sig-body">The pixel-border panel (4px solid border wrapped in stacked offset rings) and the press-physics button (hard offset shadow that collapses on :active)</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>neon-console</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>neon-console</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>
 </main>

@@ -77,6 +77,36 @@ function signatureRecipe(m) {
   return found ? m.componentRecipes[found] : m.signatureElement;
 }
 
+const GOOGLE_FAMILIES = new Set([
+  "Anton", "Archivo", "Archivo Black", "Audiowide", "Baloo 2", "Chakra Petch",
+  "Chewy", "Cinzel", "Cormorant", "Cormorant Garamond", "EB Garamond", "Fredoka",
+  "IBM Plex Mono", "JetBrains Mono", "Josefin Sans", "Michroma", "Montserrat",
+  "Orbitron", "Oswald", "Playfair Display", "Press Start 2P", "Rajdhani",
+  "Share Tech Mono", "Space Grotesk", "Space Mono", "VT323",
+]);
+
+function googleFontsLinks() {
+  const families = [];
+  const seen = new Set();
+  for (const e of entries) {
+    for (const k of ["display", "body", "mono"]) {
+      for (const fam of e.resolved.fonts?.[k] || []) {
+        if (GOOGLE_FAMILIES.has(fam) && !seen.has(fam)) {
+          seen.add(fam);
+          families.push(fam);
+        }
+      }
+    }
+  }
+  families.sort();
+  const qs = families
+    .map((f) => `family=${f.replace(/ /g, "+")}:wght@400;700`)
+    .join("&");
+  return qs
+    ? `<link rel="preconnect" href="https://fonts.gstatic.com">\n<link href="https://fonts.googleapis.com/css2?${qs}&display=swap" rel="stylesheet">`
+    : "";
+}
+
 // ---- CSS -------------------------------------------------------------------
 const mappingCss = entries
   .map((e) => {
@@ -135,9 +165,10 @@ const baseCss = `
 html, body { margin: 0; padding: 0; }
 body { font-family: var(--font-body, system-ui, sans-serif); background: var(--bg); color: var(--fg); }
 .mode { position: relative; min-height: 100vh; background: var(--bg); color: var(--fg); }
-.mode-caption { padding: var(--space-sm) var(--space-md); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); border-bottom: 1px solid var(--divider); }
-.app { max-width: 1080px; margin: 0 auto; padding: var(--space-lg) var(--space-md) calc(var(--space-xl) + 48px); }
-.gallery-bar { position: sticky; top: 0; z-index: 70; display: flex; align-items: center; gap: var(--space-md); padding: var(--space-sm) var(--space-md); background: var(--surface); border-bottom: 1px solid var(--border); font-family: var(--font-display); }
+.mode-caption { position: relative; z-index: 5; padding: var(--space-sm) var(--space-md); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); border-bottom: 1px solid var(--divider); }
+.app { position: relative; z-index: 5; max-width: 1080px; margin: 0 auto; padding: var(--space-lg) var(--space-md) calc(var(--space-xl) + 96px); }
+.shell-inner { max-width: 1080px; margin: 0 auto; padding: 0 var(--space-md); display: flex; align-items: center; gap: var(--space-md); }
+.gallery-bar { position: sticky; top: 0; z-index: 70; padding: var(--space-sm) 0; background: var(--surface); border-bottom: 1px solid var(--border); font-family: var(--font-display); }
 .gallery-title { font-weight: 700; }
 .gallery-bar select { font: inherit; color: var(--fg); background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 4px 8px; }
 .app-nav { display: flex; align-items: center; justify-content: space-between; gap: var(--space-md); padding: var(--space-sm) var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
@@ -159,39 +190,41 @@ body { font-family: var(--font-body, system-ui, sans-serif); background: var(--b
 .block h2 { font-family: var(--font-display); font-size: var(--h2); }
 .table { width: 100%; border-collapse: collapse; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
 .table th, .table td { text-align: left; padding: 8px 12px; border-bottom: 1px solid var(--divider); font-size: var(--body); }
-.table th { font-family: var(--font-display); background: var(--surface); }
+.table th { font-family: var(--font-display); font-weight: 700; color: var(--muted); background: var(--surface); }
+.table .num { text-align: right; font-variant-numeric: tabular-nums; }
 .table tr.selected td { background: var(--selection); color: var(--selection-text); }
 .form { display: flex; flex-wrap: wrap; gap: var(--space-md); align-items: flex-end; }
 .field { display: flex; flex-direction: column; gap: 4px; font-size: var(--caption); color: var(--muted); }
 .input, .select { background: var(--bg); color: var(--fg); border: 1px solid var(--border); border-radius: var(--radius); padding: 8px 12px; font-size: var(--body); font-family: var(--font-body); }
-.check { display: flex; align-items: center; gap: 6px; font-size: var(--body); }
-.checkbox, .radio { accent-color: var(--primary); width: 1.1em; height: 1.1em; }
+.check { display: inline-flex; align-items: center; gap: 6px; font-size: var(--body); }
+.checkbox, .radio { accent-color: var(--primary); width: 18px; height: 18px; margin: 0; flex: 0 0 auto; }
 .actions { display: flex; gap: var(--space-sm); }
 .badge-row { display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); }
-.badge { padding: 3px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--fg); font-size: var(--caption); }
-.badge-success { border-color: var(--success); color: var(--success); }
-.badge-warning { border-color: var(--warning); color: var(--warning); }
-.badge-danger { border-color: var(--danger); color: var(--danger); }
-.toast { display: inline-block; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--radius); font-size: var(--body); box-shadow: var(--shadow-glow); }
-.dialog-wrap { position: relative; margin-top: var(--space-md); }
-.scrim { position: absolute; inset: 0; background: color-mix(in srgb, var(--overlay) 60%, transparent); border-radius: var(--radius); }
-.dialog { position: relative; max-width: 420px; margin: 0 auto; padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
-.dialog h2 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h2); }
-.empty { margin-top: var(--space-md); padding: var(--space-lg); text-align: center; background: var(--surface); border: 1px dashed var(--divider); border-radius: var(--radius); color: var(--muted); }
-.code { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md); font-family: var(--font-mono); font-size: var(--caption); white-space: pre; overflow-x: auto; }
+.badge { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border-radius: var(--radius); border: 1px solid var(--border); background: var(--surface); color: var(--fg); font-size: var(--caption); line-height: 1.2; }
+.badge::before { content: ""; flex: 0 0 auto; width: 8px; height: 8px; border-radius: 999px; background: var(--success); }
+.badge-warning::before { background: var(--warning); }
+.badge-danger::before { background: var(--danger); }
+.toast { display: inline-block; padding: 10px 16px; background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--success); border-radius: var(--radius); font-size: var(--body); box-shadow: var(--shadow-hard); }
+.dialog { position: fixed; inset: 0; z-index: 80; display: flex; align-items: center; justify-content: center; padding: var(--space-md); background: color-mix(in srgb, var(--overlay) 55%, transparent); }
+.dialog-panel { max-width: 420px; width: 100%; padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
+.dialog-panel h2 { margin: 0 0 var(--space-sm); font-family: var(--font-display); font-size: var(--h2); }
+.empty { margin-top: var(--space-md); padding: var(--space-lg); text-align: center; background: var(--surface); border: 1px dashed var(--divider); border-radius: var(--radius); color: var(--fg); font-size: var(--body); }
+.empty-text { margin: 0; }
+.empty .btn { margin-top: var(--space-sm); }
+.code { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: var(--space-md) var(--space-md) var(--space-lg); font-family: var(--font-mono); font-size: var(--caption); line-height: 1.5; white-space: pre; overflow-x: auto; }
 .avatar-row { display: flex; gap: var(--space-sm); margin-top: var(--space-md); }
 .avatar { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-family: var(--font-display); font-size: var(--caption); }
 .signature { margin-top: var(--space-xl); padding: var(--space-md); background: var(--surface); border: 1px solid var(--border); border-left: 4px solid var(--primary); border-radius: var(--radius); box-shadow: var(--shadow-hard); }
 .sig-label { font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
 .sig-body { margin-top: var(--space-sm); font-size: var(--body); }
-.statusbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 65; display: flex; align-items: center; gap: var(--space-md); padding: 8px var(--space-md); background: var(--surface); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); }
+.statusbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 65; padding: var(--space-sm) 0; background: var(--surface); border-top: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--caption); color: var(--muted); }
 .cursor { color: var(--primary); display: inline-block; }
 @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
 @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-.fx { position: absolute; inset: 0; pointer-events: none; z-index: 60; }
-.fx-scanlines { opacity: .6; }
+.fx { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.fx-scanlines { z-index: 60; opacity: .6; }
 .fx-vignette { opacity: 1; }
-@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } .app-nav { flex-wrap: wrap; } }
+@media (max-width: 720px) { .cards { grid-template-columns: 1fr; } .app-nav { flex-wrap: wrap; } .shell-inner { flex-wrap: wrap; } }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
@@ -224,12 +257,12 @@ ${effectLayers}
     <section class="block">
       <h2>Data table</h2>
       <table class="table">
-        <thead><tr><th>ID</th><th>Name</th><th>Status</th><th>Value</th></tr></thead>
+        <thead><tr><th class="num">ID</th><th>Name</th><th>Status</th><th class="num">Value</th></tr></thead>
         <tbody>
-          <tr><td>001</td><td>Alpha</td><td>Active</td><td>12</td></tr>
-          <tr class="selected"><td>002</td><td>Bravo</td><td>Selected</td><td>34</td></tr>
-          <tr><td>003</td><td>Charlie</td><td>Idle</td><td>56</td></tr>
-          <tr><td>004</td><td>Delta</td><td>Done</td><td>78</td></tr>
+          <tr><td class="num">001</td><td>Alpha</td><td>Active</td><td class="num">12</td></tr>
+          <tr class="selected"><td class="num">002</td><td>Bravo</td><td>Selected</td><td class="num">34</td></tr>
+          <tr><td class="num">003</td><td>Charlie</td><td>Idle</td><td class="num">56</td></tr>
+          <tr><td class="num">004</td><td>Delta</td><td>Done</td><td class="num">78</td></tr>
         </tbody>
       </table>
     </section>
@@ -247,11 +280,7 @@ ${effectLayers}
       <h2>Feedback</h2>
       <div class="badge-row"><span class="badge badge-success">Success</span><span class="badge badge-warning">Warning</span><span class="badge badge-danger">Danger</span></div>
       <div class="toast">Saved successfully.</div>
-      <div class="dialog-wrap">
-        <div class="scrim" aria-hidden="true"></div>
-        <div class="dialog" role="dialog" aria-label="Confirm"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
-      </div>
-      <div class="empty">Nothing here yet — one message and one CTA.</div>
+      <div class="empty"><p class="empty-text">Nothing here yet — one message and one CTA.</p><button class="btn btn-primary">Create</button></div>
     </section>
     <section class="block">
       <h2>Code + avatars</h2>
@@ -262,7 +291,10 @@ ${effectLayers}
       <div class="sig-label">Signature element</div>
       <div class="sig-body">${esc(signature)}</div>
     </section>
-    <footer class="statusbar"><span>Ready</span><span>${esc(id)}</span><span class="cursor">█</span></footer>
+    <footer class="statusbar"><div class="shell-inner"><span>Ready</span><span>${esc(id)}</span><span class="cursor">█</span></div></footer>
+  </div>
+  <div class="dialog" role="dialog" aria-modal="true" aria-label="Confirm">
+    <div class="dialog-panel"><h2>Confirm</h2><p>This dialog is rendered open, with the scrim drawn from the overlay token.</p><div class="actions"><button class="btn btn-primary">OK</button><button class="btn btn-secondary">Cancel</button></div></div>
   </div>
 </section>`;
 }
@@ -276,6 +308,7 @@ const html = `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+${googleFontsLinks()}
 <title>adar-design gallery</title>
 <link rel="stylesheet" href="tokens.css">
 <style>
@@ -291,10 +324,12 @@ ${cursorCss}
 </head>
 <body data-mode="arcade">
 <header class="gallery-bar">
-  <span class="gallery-title">adar-design gallery</span>
-  <select id="mode-select" aria-label="Choose mode">
+  <div class="shell-inner">
+    <span class="gallery-title">adar-design gallery</span>
+    <select id="mode-select" aria-label="Choose mode">
 ${options}
-  </select>
+    </select>
+  </div>
 </header>
 <main>
 ${entries.map(sectionHtml).join("\n")}

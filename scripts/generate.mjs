@@ -15,6 +15,7 @@ import {
   TYPE_TIERS,
   loadAll,
   quoteFonts,
+  cssFontList,
   kebab,
   selectionText,
   mixToMode,
@@ -321,9 +322,9 @@ function cssBlock(p, label, m) {
   for (const role of COLOR_ROLES) lines.push(`  --adar-${p}-${role}: ${m.colors[role]};`);
   lines.push(`  --adar-${p}-selection-text: ${selectionText(m)};`);
   lines.push(`  --adar-${p}-color-scheme: ${m.colorScheme};`);
-  lines.push(`  --adar-${p}-font-display: ${quoteFonts(m.fonts.display)};`);
-  lines.push(`  --adar-${p}-font-mono: ${quoteFonts(m.fonts.mono)};`);
-  lines.push(`  --adar-${p}-font-body: ${quoteFonts(m.fonts.body)};`);
+  lines.push(`  --adar-${p}-font-display: ${cssFontList(m.fonts.display)};`);
+  lines.push(`  --adar-${p}-font-mono: ${cssFontList(m.fonts.mono)};`);
+  lines.push(`  --adar-${p}-font-body: ${cssFontList(m.fonts.body)};`);
   for (const [k, v] of Object.entries(m.spacing)) lines.push(`  --adar-${p}-space-${k}: ${v};`);
   lines.push(`  --adar-${p}-radius: ${m.radius};`);
   lines.push(`  --adar-${p}-shadow-hard: ${m.shadow.hard};`);

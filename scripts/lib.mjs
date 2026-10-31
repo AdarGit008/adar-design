@@ -63,6 +63,19 @@ export function quoteFonts(fonts) {
   return (fonts || []).map((f) => `"${f}"`).join(", ");
 }
 
+const GENERIC_FAMILIES = new Set([
+  "sans-serif", "serif", "monospace", "system-ui", "ui-monospace", "ui-serif",
+  "ui-sans-serif", "cursive", "fantasy", "emoji", "math", "fangsong",
+]);
+
+// CSS font-family list: quote real family names, but leave generic keywords bare
+// so `font-family: ... , sans-serif` still resolves to the generic fallback.
+export function cssFontList(fonts) {
+  return (fonts || [])
+    .map((f) => (GENERIC_FAMILIES.has(String(f).toLowerCase()) ? f : `"${f}"`))
+    .join(", ");
+}
+
 export function kebab(s) {
   return String(s).replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
 }
